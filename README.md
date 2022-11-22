@@ -3,12 +3,16 @@
 | !["Go"](_assets/logo-golang.png?raw=true "Go") | !["Docker"](_assets/logo-docker.png?raw=true "Docker") | !["Kubernetes"](_assets/logo-k8s.png?raw=true "Kubernetes") |
 |:-------------|:-------------:|:-------------|
 
+## Summary
+
+This repository is a work in progress, but I'll do my best to keep the Master branch in a working state. Initially, this project was to create a boilerplate for containerizing Go binaries for use a K8s cluster. For now, just origanizing my notes in order to be able to replicate this process from end-to-end. The idea is to keep this narrow and succinct and be able to use this as a simple boilerplate for Go containers.
+
 ## To Do
 
 - [x] Dockerize, multi-stage binary build
-- [x] Sysinfo for API data example
-- [x] Fiber: API
-- [x] Usage in [Kubernetes](https://kubernetes.io/) (See: [blob/master/k8s/K8S-README.md](blob/master/k8s/K8S-README.md))
+- [x] [Sysinfo](https://github.com/shirou/gopsutil) collecting system information
+- [x] [Fiber](https://docs.gofiber.io/): Simple Rest API for demonstration
+- [x] Usage in [Kubernetes](https://kubernetes.io/) (See: [_k8s/K8S_README.md](../../blob/master/_k8s/K8S_README.md))
 - [ ] TLS? In single container or via K8s?
 
 ## Prerequisites
@@ -25,10 +29,6 @@ Required for Kubernetes itegration:
 * Apache Benchmark (For Ubuntu, it's part of the Apache2 Utilities package, e.g.: `apt-get install apache2-utils `)
 
 While the idea is to get this up and running quickly, it is not a deep dive into Go, Docker, or K8S. Basic knowledge of these technologies is required.
-
-## Summary
-
-This repository is a work in progress, but I'll do my best to keep the Master branch in a working state. Initially, this project was to create a boilerplate for containerizing Go binaries for use a K8s cluster.
 
 ## App
 

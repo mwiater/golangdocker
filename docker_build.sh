@@ -9,4 +9,4 @@ for i in *.go **/*.go ; do
   echo "Formatted: $i"
 done;
 
-docker build -t mattwiater/golangdocker --pull .
+docker build -t mattwiater/golangdocker .

@@ -1,7 +1,7 @@
 # Golangdocker
 
-| !["Go"](_assets/logo-golang.png?raw=true "Go") | !["Docker"](_assets/logo-docker.png?raw=true "Docker") | !["Kubernetes"](_assets/logo-k8s.png?raw=true "Kubernetes") |
-|:-------------|:-------------:|:-------------|
+| !["Go"](_assets/logo-golang.png?raw=true "Go") | !["Docker"](_assets/logo-docker.png?raw=true "Docker") | !["Fiber"](_assets/logo-golang-fiber.png?raw=true "Fiber") | !["Kubernetes"](_assets/logo-k8s.png?raw=true "Kubernetes") |
+|:-------------:|:-------------:|:-------------:|:-------------:|
 
 ## Summary
 

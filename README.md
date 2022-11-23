@@ -7,6 +7,11 @@
 
 This repository is a work in progress, but I'll do my best to keep the Master branch in a working state. Initially, this project was to create a boilerplate for containerizing Go binaries for use a K8s cluster. For now, just origanizing my notes in order to be able to replicate this process from end-to-end. The idea is to keep this narrow and succinct and be able to use this as a simple boilerplate for Go containers.
 
+## Assumptions
+
+* IP Addresses: For the most part, disregard the hard-coded IP addresses in here (e.g.: my K8s cluster and VM IPs (192.168.*.*)). You'll have to sub in your own for your particular envionment. Right now, laziness!
+* I'm noticing a few instances where I'm using both `container` and `pod` to mean the same thing. Until I make them more consistent, assume they are interchangeable. A pod is basiically a container in in K8s context. While a `pod` can technically have multiple containers, for this demonstration, assume a 1:1 relationship.
+
 ## To Do
 
 - [x] Dockerize, multi-stage binary build
@@ -31,6 +36,33 @@ Required for Kubernetes itegration:
 While the idea is to get this up and running quickly, it is not a deep dive into Go, Docker, or K8S. Basic knowledge of these technologies is required.
 
 ## App
+
+### Build
+
+The build command uses the local [Dockerfile](../../blob/master/Dockerfile) to build the image. Substitute your own Docker image tag for mine wherever you see it (`mattwiater/golangdocker`), e.g.: `{your-docker-hub-account-username/golangdocker}`
+
+`docker build -t mattwiater/golangdocker .`
+
+### Run
+
+Start the container in an interactive shell, with the host port `5000` (the machine you're running Docker on) mapping to the container port (the port the app is running on within the Docker container) `5000` for simplicity. The app is currently hardcoded to listen on port `5000` via: `err := app.Listen(":5000")`
+
+`docker run -it -p 5000:5000 --rm mattwiater/golangdocker`
+
+You should see teh default Fiber message, e.g.:
+
+```
+ ┌───────────────────────────────────────────────────┐
+ │                   Fiber v2.40.0                   │
+ │               http://127.0.0.1:5000               │
+ │       (bound on host 0.0.0.0 and port 5000)       │
+ │                                                   │
+ │ Handlers ............ 14  Processes ........... 1 │
+ │ Prefork ....... Disabled  PID ................. 1 │
+ └───────────────────────────────────────────────────┘
+```
+
+On your host machine, you can now access the container via `http://{your-host-ip-address}:5000`
 
 Our build is simple, just a compiled Go binary that runs in a container. This binary collects local resources/stats for display as JSON via these API Endpoints using [Fiber](https://docs.gofiber.io/):
 
@@ -83,14 +115,6 @@ COPY --from=app /go/bin/golangdocker /golangdocker
 COPY --from=alpine:latest /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 ENTRYPOINT ["/golangdocker"]
 ```
-
-## [TO DO] Build
-
-`docker build -t mattwiater/golangdocker .`
-
-## [TO DO] Run
-
-`docker run -it -p 5000:5000 --rm mattwiater/golangdocker`
 
 ## [TO DO] Scripts
 

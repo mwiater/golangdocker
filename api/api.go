@@ -2,6 +2,7 @@ package api
 
 import (
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/monitor"
 	"github.com/mattwiater/golangdocker/sysinfo"
 )
 
@@ -55,6 +56,11 @@ func readLoadInfo(c *fiber.Ctx) error {
 
 func SetupRoute() *fiber.App {
 	app := *fiber.New()
+
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.SendString("Welcome to Go Fiber API")
+	})
+	app.Get("/api/metrics", monitor.New(monitor.Config{Title: "golangdocker Metrics Page"}))
 
 	app.Get("/api/v1", readAPIIndex)
 	app.Get("/api/v1/mem", readMemInfo)

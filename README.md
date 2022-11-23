@@ -18,6 +18,8 @@ This repository is a work in progress, but I'll do my best to keep the Master br
 - [x] [Sysinfo](https://github.com/shirou/gopsutil) collecting system information
 - [x] [Fiber](https://docs.gofiber.io/): Simple Rest API for demonstration
 - [x] Usage in [Kubernetes](https://kubernetes.io/) (See: [_k8s/K8S_README.md](../../blob/master/_k8s/K8S_README.md))
+- [ ] Add `/metrics` endpoint with [default Fiber middleware](https://docs.gofiber.io/api/middleware/monitor)
+- [ ] Setup logger instead of current debugging console output
 - [ ] TLS? In single container or via K8s?
 
 ## Prerequisites
@@ -36,6 +38,12 @@ Required for Kubernetes itegration:
 While the idea is to get this up and running quickly, it is not a deep dive into Go, Docker, or K8S. Basic knowledge of these technologies is required.
 
 ## App
+
+### Testing
+
+while developing/testing the app, you can run it natively (not in a Docker container) via:
+
+`go run main.go`
 
 ### Build
 
@@ -67,12 +75,13 @@ On your host machine, you can now access the container via `http://{your-host-ip
 Our build is simple, just a compiled Go binary that runs in a container. This binary collects local resources/stats for display as JSON via these API Endpoints using [Fiber](https://docs.gofiber.io/):
 
 ```
-http://192.168.0.99:5000/api/v1
-http://192.168.0.99:5000/api/v1/mem
-http://192.168.0.99:5000/api/v1/cpu
-http://192.168.0.99:5000/api/v1/host
-http://192.168.0.99:5000/api/v1/net
-http://192.168.0.99:5000/api/v1/load
+http://192.168.0.91:5000/api/v1
+http://192.168.0.91:5000/api/metrics
+http://192.168.0.91:5000/api/v1/mem
+http://192.168.0.91:5000/api/v1/cpu
+http://192.168.0.91:5000/api/v1/host
+http://192.168.0.91:5000/api/v1/net
+http://192.168.0.91:5000/api/v1/load
 ```
 
 This walkthrough is not meant to be groundbreaking by any means, but rather to get something minimal, working, and useful up and running quickly.

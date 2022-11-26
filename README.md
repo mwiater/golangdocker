@@ -46,17 +46,39 @@ while developing/testing the app, you can run it natively (not in a Docker conta
 
 `go run main.go`
 
+Or, for convenience and formatting, run: `bash go_run.sh`
+
+Site will be available at: http://192.168.0.91:5000/api/v1 (substitute your own IP address)
+
+This step should be completed first before running via Docker to ensure everything is working properly.
+
 ### Build
 
-The build command uses the local [Dockerfile](../../blob/master/Dockerfile) to build the image. Substitute your own Docker image tag for mine wherever you see it (`mattwiater/golangdocker`), e.g.: `{your-docker-hub-account-username/golangdocker}`
+NOTE: The steps will refer to the docker image: `mattwiater/golangdocker`. You should change these steps to match your own image name, e.g.: e.g.: `{your-docker-hub-account-username}/golangdocker`
+
+The build command uses the local [Dockerfile](../../blob/master/Dockerfile) to build the image. Substitute your own Docker image tag for mine wherever you see it (`mattwiater/golangdocker`), e.g.: `{your-docker-hub-account-username}/golangdocker`
 
 `docker build -t mattwiater/golangdocker .`
+
+Or, for convenience, run: `docker_build.sh '{your-docker-hub-account-username}'` This will locally build the Docker image: `{your-docker-hub-account-username}/golangdocker`.
+
+Once you have built your image successfully, check the output of `docker images` #=>
+
+```
+REPOSITORY                TAG       IMAGE ID       CREATED          SIZE
+mattwiater/golangdocker   latest    053f21052659   10 minutes ago   10.7MB
+...
+```
+
+You should see your tagged image in the list, similar to the output above.
 
 ### Run
 
 Start the container in an interactive shell, with the host port `5000` (the machine you're running Docker on) mapping to the container port (the port the app is running on within the Docker container) `5000` for simplicity. The app is currently hardcoded to listen on port `5000` via: `err := app.Listen(":5000")`
 
 `docker run -it -p 5000:5000 --rm mattwiater/golangdocker`
+
+Or, for convenience, run: `docker_run.sh '{your-docker-hub-account-username}'` This will execute the Docker image: `{your-docker-hub-account-username}/golangdocker`.
 
 You should see teh default Fiber message, e.g.:
 

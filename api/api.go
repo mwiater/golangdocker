@@ -2,6 +2,7 @@ package api
 
 import (
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/monitor"
 	"github.com/mattwiater/golangdocker/sysinfo"
 )
@@ -56,6 +57,12 @@ func readLoadInfo(c *fiber.Ctx) error {
 
 func SetupRoute() *fiber.App {
 	app := *fiber.New()
+
+	app.Use(logger.New(logger.Config{
+		Format:     "[${time}] ${method}:${path}: ${status} (${latency}) | Bytes In: ${bytesReceived} Bytes Out: ${bytesSent}\n",
+		TimeFormat: "2006-01-02T15:04:05",
+		TimeZone:   "America/Los_Angeles",
+	}))
 
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("Welcome to Go Fiber API")

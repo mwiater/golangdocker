@@ -10,6 +10,7 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/mattwiater/golangdocker/common"
+	// "github.com/mattwiater/golangdocker/config"
 	"github.com/shirou/gopsutil/v3/cpu"
 	"github.com/shirou/gopsutil/v3/host"
 	"github.com/shirou/gopsutil/v3/load"
@@ -57,7 +58,8 @@ func FileSys() (errors int) {
 	return
 }
 
-func GetAPIRoutes(app *fiber.App) []string {
+func GetAPIRoutes(c *fiber.Ctx) []string {
+	app := c.App()
 	routes := app.GetRoutes()
 	routePaths := []string{}
 	for _, route := range routes {
@@ -66,7 +68,8 @@ func GetAPIRoutes(app *fiber.App) []string {
 	routePaths = common.UniqueSlice(routePaths)
 	sort.Sort(sort.StringSlice(routePaths))
 	routePathsJSON, _ := json.Marshal(routePaths)
-	if debug {
+
+	if (c.Locals("debug") == true) {
 		fmt.Printf("\n\n%s API Routes:\n\n", common.ConsoleInfo("[ ★ INFO ]"))
 		common.PrettyPrintJSONToConsole(routePathsJSON)
 	}
@@ -74,13 +77,14 @@ func GetAPIRoutes(app *fiber.App) []string {
 	return routePaths
 }
 
-func GetMemInfo() *mem.VirtualMemoryStat {
+func GetMemInfo(c *fiber.Ctx) *mem.VirtualMemoryStat {
 	memInfo, _ := mem.VirtualMemory()
 	memInfoBytes, err := json.Marshal(memInfo)
 	if err != nil {
 		fmt.Println("ERR", err)
 	}
-	if debug {
+
+	if (c.Locals("debug") == true) {
 		fmt.Printf("\n\n%s Memory Info:\n\n", common.ConsoleInfo("[ ★ INFO ]"))
 		common.PrettyPrintJSONToConsole(memInfoBytes)
 	}
@@ -88,13 +92,14 @@ func GetMemInfo() *mem.VirtualMemoryStat {
 	return memInfo
 }
 
-func GetCPUInfo() []cpu.InfoStat {
+func GetCPUInfo(c *fiber.Ctx) []cpu.InfoStat {
 	cpuInfo, _ := cpu.Info()
 	cpuInfoBytes, err := json.Marshal(cpuInfo)
 	if err != nil {
 		fmt.Println("ERR", err)
 	}
-	if debug {
+
+	if (c.Locals("debug") == true) {
 		fmt.Printf("\n\n%s CPU Info:\n\n", common.ConsoleInfo("[ ★ INFO ]"))
 		common.PrettyPrintJSONToConsole(cpuInfoBytes)
 	}
@@ -102,13 +107,14 @@ func GetCPUInfo() []cpu.InfoStat {
 	return cpuInfo
 }
 
-func GetHostInfo() *host.InfoStat {
+func GetHostInfo(c *fiber.Ctx) *host.InfoStat {
 	hostInfo, _ := host.Info()
 	hostInfoBytes, err := json.Marshal(hostInfo)
 	if err != nil {
 		fmt.Println("ERR", err)
 	}
-	if debug {
+
+	if (c.Locals("debug") == true) {
 		fmt.Printf("\n\n%s Host Info:\n\n", common.ConsoleInfo("[ ★ INFO ]"))
 		common.PrettyPrintJSONToConsole(hostInfoBytes)
 	}
@@ -116,13 +122,14 @@ func GetHostInfo() *host.InfoStat {
 	return hostInfo
 }
 
-func GetNetInfo() []net.InterfaceStat {
+func GetNetInfo(c *fiber.Ctx) []net.InterfaceStat {
 	netInfo, _ := net.Interfaces()
 	netInfoBytes, err := json.Marshal(netInfo)
 	if err != nil {
 		fmt.Println("ERR", err)
 	}
-	if debug {
+
+	if (c.Locals("debug") == true) {
 		fmt.Printf("\n\n%s Net Info:\n\n", common.ConsoleInfo("[ ★ INFO ]"))
 		common.PrettyPrintJSONToConsole(netInfoBytes)
 	}
@@ -130,13 +137,13 @@ func GetNetInfo() []net.InterfaceStat {
 	return netInfo
 }
 
-func GetLoadInfo() *load.AvgStat {
+func GetLoadInfo(c *fiber.Ctx) *load.AvgStat {
 	loadInfo, _ := load.Avg()
 	loadInfoBytes, err := json.Marshal(loadInfo)
 	if err != nil {
 		fmt.Println("ERR", err)
 	}
-	if debug {
+	if (c.Locals("debug") == true) {
 		fmt.Printf("\n\n%s Load Info:\n\n", common.ConsoleInfo("[ ★ INFO ]"))
 		common.PrettyPrintJSONToConsole(loadInfoBytes)
 	}

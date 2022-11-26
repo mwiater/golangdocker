@@ -2,12 +2,19 @@ package main
 
 import (
 	"log"
+	"strconv"
 
 	"github.com/mattwiater/golangdocker/api"
+	"github.com/mattwiater/golangdocker/config"
 )
 
 func main() {
-	app := api.SetupRoute()
+	cfg, err := config.AppConfig("./config/appConfig.yml")
+	if err != nil {
+			log.Fatal(err)
+	}
 
-	log.Fatal(app.Listen(":5000"))
+	app := api.SetupRoute(cfg)
+
+	log.Fatal(app.Listen(":"+strconv.Itoa(cfg.Server.Port)))
 }

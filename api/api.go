@@ -4,11 +4,12 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/monitor"
+	"github.com/mattwiater/golangdocker/config"
 	"github.com/mattwiater/golangdocker/sysinfo"
 )
 
 func readAPIIndex(c *fiber.Ctx) error {
-	apiRoutes := sysinfo.GetAPIRoutes(c.App())
+	apiRoutes := sysinfo.GetAPIRoutes(c)
 	c.Status(200).JSON(&fiber.Map{
 		"apiRoutes": apiRoutes,
 	})
@@ -16,7 +17,7 @@ func readAPIIndex(c *fiber.Ctx) error {
 }
 
 func readMemInfo(c *fiber.Ctx) error {
-	memInfo := sysinfo.GetMemInfo()
+	memInfo := sysinfo.GetMemInfo(c)
 	c.Status(200).JSON(&fiber.Map{
 		"memInfo": memInfo,
 	})
@@ -24,7 +25,7 @@ func readMemInfo(c *fiber.Ctx) error {
 }
 
 func readCPUInfo(c *fiber.Ctx) error {
-	cpuInfo := sysinfo.GetCPUInfo()
+	cpuInfo := sysinfo.GetCPUInfo(c)
 	c.Status(200).JSON(&fiber.Map{
 		"cpuInfo": cpuInfo,
 	})
@@ -32,7 +33,7 @@ func readCPUInfo(c *fiber.Ctx) error {
 }
 
 func readHostInfo(c *fiber.Ctx) error {
-	hostInfo := sysinfo.GetHostInfo()
+	hostInfo := sysinfo.GetHostInfo(c)
 	c.Status(200).JSON(&fiber.Map{
 		"hostInfo": hostInfo,
 	})
@@ -40,7 +41,7 @@ func readHostInfo(c *fiber.Ctx) error {
 }
 
 func readNetInfo(c *fiber.Ctx) error {
-	netInfo := sysinfo.GetNetInfo()
+	netInfo := sysinfo.GetNetInfo(c)
 	c.Status(200).JSON(&fiber.Map{
 		"netInfo": netInfo,
 	})
@@ -48,15 +49,21 @@ func readNetInfo(c *fiber.Ctx) error {
 }
 
 func readLoadInfo(c *fiber.Ctx) error {
-	loadInfo := sysinfo.GetLoadInfo()
+	loadInfo := sysinfo.GetLoadInfo(c)
 	c.Status(200).JSON(&fiber.Map{
 		"loadInfo": loadInfo,
 	})
 	return nil
 }
 
-func SetupRoute() *fiber.App {
+func SetupRoute(cfg *config.Config) *fiber.App {
 	app := *fiber.New()
+
+	app.Use(func(c *fiber.Ctx) error {
+		c.Locals("port", cfg.Server.Port)
+		c.Locals("debug", cfg.Options.Debug)
+		return c.Next()
+	})
 
 	app.Use(logger.New(logger.Config{
 		Format:     "[${time}] ${method}:${path}: ${status} (${latency}) | Bytes In: ${bytesReceived} Bytes Out: ${bytesSent}\n",

@@ -40,6 +40,45 @@ While the idea is to get this up and running quickly, it is not a deep dive into
 
 ## App
 
+### Config
+
+There is a simple app config pattern using: `./config/appConfig.yml`
+
+```
+# config.yml
+
+server:
+  port: 5000
+options:
+  debug: false
+```
+
+Keeping this simple for now, just want to have a boilerplate config pattern within the app for future use.
+
+* Port: The Port that the app listens on, deafult: `5000`
+* Debug: More console output on API requests, deafult: `false`
+
+For `debug`, this will print out the JSON response to the console, depending on the endpoint requested. For `/api/v1/host`, you get something like this:
+
+```
+[ ★ INFO ] Host Info:
+{
+        "hostname": "mjw-udoo-01",
+        "uptime": 11093,
+        "bootTime": 1669484114,
+        "procs": 176,
+        "os": "linux",
+        "platform": "ubuntu",
+        "platformFamily": "debian",
+        "platformVersion": "20.04",
+        "kernelVersion": "5.4.0-110-generic",
+        "kernelArch": "x86_64",
+        "virtualizationSystem": "kvm",
+        "virtualizationRole": "host",
+        "hostId": "3a114467-105a-48a5-9419-32654a9b2076"
+}
+```
+
 ### Testing
 
 while developing/testing the app, you can run it natively (not in a Docker container) via:
@@ -52,7 +91,7 @@ Site will be available at: http://192.168.0.91:5000/api/v1 (substitute your own 
 
 This step should be completed first before running via Docker to ensure everything is working properly.
 
-### Build
+### Building the Docker container
 
 NOTE: The steps will refer to the docker image: `mattwiater/golangdocker`. You should change these steps to match your own image name, e.g.: e.g.: `{your-docker-hub-account-username}/golangdocker`
 
@@ -89,9 +128,9 @@ COPY --from=alpine:latest /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 ENTRYPOINT ["/golangdocker"]
 ```
 
-### Run
+### Running the Docker container
 
-Start the container in an interactive shell, with the host port `5000` (the machine you're running Docker on) mapping to the container port (the port the app is running on within the Docker container) `5000` for simplicity. The app is currently hardcoded to listen on port `5000` via: `err := app.Listen(":5000")`
+Start the container in an interactive shell, with the host port `5000` (the machine you're running Docker on) mapping to the container port (the port the app is running on within the Docker container) `5000` for simplicity. The app is Port if configured here: `./config/appConfig.yml`
 
 `docker run -it -p 5000:5000 --rm mattwiater/golangdocker`
 
@@ -115,13 +154,13 @@ On your host machine, you can now access the container via `http://{your-host-ip
 Our build is simple, just a compiled Go binary that runs in a container. This binary collects local resources/stats for display as JSON via these API Endpoints using [Fiber](https://docs.gofiber.io/):
 
 ```
-http://192.168.0.91:5000/api/v1
-http://192.168.0.91:5000/api/metrics
-http://192.168.0.91:5000/api/v1/mem
-http://192.168.0.91:5000/api/v1/cpu
-http://192.168.0.91:5000/api/v1/host
-http://192.168.0.91:5000/api/v1/net
-http://192.168.0.91:5000/api/v1/load
+http://{your-host-ip-address}:5000/api/v1
+http://{your-host-ip-address}:5000/api/metrics
+http://{your-host-ip-address}:5000/api/v1/mem
+http://{your-host-ip-address}:5000/api/v1/cpu
+http://{your-host-ip-address}:5000/api/v1/host
+http://{your-host-ip-address}:5000/api/v1/net
+http://{your-host-ip-address}:5000/api/v1/load
 ```
 
 This walkthrough is not meant to be groundbreaking by any means, but rather to get something minimal, working, and useful up and running quickly.

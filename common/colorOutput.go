@@ -18,5 +18,6 @@ var ConsoleFailure = color.New(color.Bold, color.FgWhite, color.BgRed).SprintFun
 func PrettyPrintJSONToConsole(b []byte) {
 	var out bytes.Buffer
 	json.Indent(&out, b, "", "\t")
+	out.Write([]byte("\n\n"))
 	out.WriteTo(os.Stdout)
 }

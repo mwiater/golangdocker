@@ -1,0 +1,6 @@
+# config.yml
+
+server:
+  port: 5000
+options:
+  debug: false

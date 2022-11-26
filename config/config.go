@@ -30,7 +30,7 @@ func AppConfig(configPath string) (*Config, error) {
 	// Open config file
 	file, err := os.Open(configPath)
 	if err != nil {
-			return nil, err
+		return nil, err
 	}
 	defer file.Close()
 
@@ -39,7 +39,7 @@ func AppConfig(configPath string) (*Config, error) {
 
 	// Start YAML decoding from file
 	if err := d.Decode(&config); err != nil {
-			return nil, err
+		return nil, err
 	}
 
 	return config, nil
@@ -50,10 +50,10 @@ func AppConfig(configPath string) (*Config, error) {
 func ValidateConfigPath(path string) error {
 	s, err := os.Stat(path)
 	if err != nil {
-			log.Fatal("Config file path error:", err)
+		log.Fatal("Config file path error:", err)
 	}
 	if s.IsDir() {
-			log.Fatal("'%s' is a directory, not a normal file", path)
+		log.Fatal("'%s' is a directory, not a normal file", path)
 	}
 	return nil
 }

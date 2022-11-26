@@ -11,10 +11,10 @@ import (
 func main() {
 	cfg, err := config.AppConfig("./config/appConfig.yml")
 	if err != nil {
-			log.Fatal(err)
+		log.Fatal(err)
 	}
 
 	app := api.SetupRoute(cfg)
 
-	log.Fatal(app.Listen(":"+strconv.Itoa(cfg.Server.Port)))
+	log.Fatal(app.Listen(":" + strconv.Itoa(cfg.Server.Port)))
 }

@@ -69,7 +69,7 @@ func GetAPIRoutes(c *fiber.Ctx) []string {
 	sort.Sort(sort.StringSlice(routePaths))
 	routePathsJSON, _ := json.Marshal(routePaths)
 
-	if (c.Locals("debug") == true) {
+	if c.Locals("debug") == true {
 		fmt.Printf("\n\n%s API Routes:\n\n", common.ConsoleInfo("[ ★ INFO ]"))
 		common.PrettyPrintJSONToConsole(routePathsJSON)
 	}
@@ -84,7 +84,7 @@ func GetMemInfo(c *fiber.Ctx) *mem.VirtualMemoryStat {
 		fmt.Println("ERR", err)
 	}
 
-	if (c.Locals("debug") == true) {
+	if c.Locals("debug") == true {
 		fmt.Printf("\n\n%s Memory Info:\n\n", common.ConsoleInfo("[ ★ INFO ]"))
 		common.PrettyPrintJSONToConsole(memInfoBytes)
 	}
@@ -99,7 +99,7 @@ func GetCPUInfo(c *fiber.Ctx) []cpu.InfoStat {
 		fmt.Println("ERR", err)
 	}
 
-	if (c.Locals("debug") == true) {
+	if c.Locals("debug") == true {
 		fmt.Printf("\n\n%s CPU Info:\n\n", common.ConsoleInfo("[ ★ INFO ]"))
 		common.PrettyPrintJSONToConsole(cpuInfoBytes)
 	}
@@ -114,7 +114,7 @@ func GetHostInfo(c *fiber.Ctx) *host.InfoStat {
 		fmt.Println("ERR", err)
 	}
 
-	if (c.Locals("debug") == true) {
+	if c.Locals("debug") == true {
 		fmt.Printf("\n\n%s Host Info:\n\n", common.ConsoleInfo("[ ★ INFO ]"))
 		common.PrettyPrintJSONToConsole(hostInfoBytes)
 	}
@@ -129,7 +129,7 @@ func GetNetInfo(c *fiber.Ctx) []net.InterfaceStat {
 		fmt.Println("ERR", err)
 	}
 
-	if (c.Locals("debug") == true) {
+	if c.Locals("debug") == true {
 		fmt.Printf("\n\n%s Net Info:\n\n", common.ConsoleInfo("[ ★ INFO ]"))
 		common.PrettyPrintJSONToConsole(netInfoBytes)
 	}
@@ -143,7 +143,7 @@ func GetLoadInfo(c *fiber.Ctx) *load.AvgStat {
 	if err != nil {
 		fmt.Println("ERR", err)
 	}
-	if (c.Locals("debug") == true) {
+	if c.Locals("debug") == true {
 		fmt.Printf("\n\n%s Load Info:\n\n", common.ConsoleInfo("[ ★ INFO ]"))
 		common.PrettyPrintJSONToConsole(loadInfoBytes)
 	}

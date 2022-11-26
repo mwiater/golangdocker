@@ -20,7 +20,8 @@ This repository is a work in progress, but I'll do my best to keep the Master br
 - [x] Usage in [Kubernetes](https://kubernetes.io/) (See: [_k8s/K8S_README.md](../../blob/master/_k8s/K8S_README.md))
 - [x] Add `/metrics` endpoint with [default Fiber middleware](https://docs.gofiber.io/api/middleware/monitor)
 - [x] Setup logger instead of current debugging console output (started in [api/api.go](../../blob/master/api/api.go#L61) logger config)
-- [ ] Need config pattern for app config vars: .env, .yaml, etc. Not many vars at the moment, but it would be beneficial to have a standardized config with defaults so that they are defined and editable. E.g.: `debug` ([sysinfo/sysinfo.go](../../blob/master/sysinfo/sysinfo.go#L20))...
+- [x] Need config pattern for app config vars: .env, .yaml, etc. 
+- [ ] K8s: Use version tagging instead of `:latest` to provide an example of rolling updates.
 - [ ] TLS? In single container or via K8s?
 
 ## Prerequisites

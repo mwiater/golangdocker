@@ -72,6 +72,23 @@ mattwiater/golangdocker   latest    053f21052659   10 minutes ago   10.7MB
 
 You should see your tagged image in the list, similar to the output above.
 
+## Docker Build Notes
+
+Using [multi-stage builds](https://docs.docker.com/build/building/multi-stage/#use-multi-stage-builds), we will use a very simple `Dockerfile` to containerize our app.
+
+```
+FROM golang:alpine as app
+WORKDIR /go/src/app
+COPY . .
+RUN apk add git
+RUN CGO_ENABLED=0 go install -ldflags '-extldflags "-static"' -tags timetzdata
+
+FROM scratch
+COPY --from=app /go/bin/golangdocker /golangdocker
+COPY --from=alpine:latest /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+ENTRYPOINT ["/golangdocker"]
+```
+
 ### Run
 
 Start the container in an interactive shell, with the host port `5000` (the machine you're running Docker on) mapping to the container port (the port the app is running on within the Docker container) `5000` for simplicity. The app is currently hardcoded to listen on port `5000` via: `err := app.Listen(":5000")`
@@ -129,23 +146,6 @@ hostInfo: {
   hostId: "12345678-1234-5678-90ab-cddeefaabbcc"
   }
 }
-```
-
-## Docker
-
-Using [multi-stage builds](https://docs.docker.com/build/building/multi-stage/#use-multi-stage-builds), we will use a very simple `Dockerfile` to containerize our app.
-
-```
-FROM golang:alpine as app
-WORKDIR /go/src/app
-COPY . .
-RUN apk add git
-RUN CGO_ENABLED=0 go install -ldflags '-extldflags "-static"' -tags timetzdata
-
-FROM scratch
-COPY --from=app /go/bin/golangdocker /golangdocker
-COPY --from=alpine:latest /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-ENTRYPOINT ["/golangdocker"]
 ```
 
 ## [TO DO] Scripts

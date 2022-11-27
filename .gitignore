@@ -1,2 +1,4 @@
 certs/*.crt
 certs/*.key
+venom*.log
+build/*

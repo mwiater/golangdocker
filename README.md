@@ -20,7 +20,8 @@ This repository is a work in progress, but I'll do my best to keep the Master br
 - [x] Usage in [Kubernetes](https://kubernetes.io/) (See: [_k8s/K8S_README.md](../../blob/master/_k8s/K8S_README.md))
 - [x] Add `/metrics` endpoint with [default Fiber middleware](https://docs.gofiber.io/api/middleware/monitor)
 - [x] Setup logger instead of current debugging console output (started in [api/api.go](../../blob/master/api/api.go#L61) logger config)
-- [x] Need config pattern for app config vars: .env, .yaml, etc. 
+- [x] Need config pattern for app config vars: .env, .yaml, etc. Need to use `embed` since we're dealing with a binary executable
+- [ ] Tests: unit/coverage. Started, need to test mode specific result targets.
 - [ ] K8s: Use version tagging instead of `:latest` to provide an example of rolling updates. (Started: [_k8s/K8S_README.md](../../blob/master/_k8s/K8S_README.md))
 - [ ] TLS? In single container or via K8s?
 
@@ -214,3 +215,27 @@ Then, in `main.go`, you can include them like this:
 ```
 
 **Note on local packages:** In order to make use of your local package functions, along with running the `go build` command, ensure that your functions are Capital-cased. Otherwise Go will throw an error saying that your method is undefined. Only functions that begin with a capital letter are exported from packages, otherwise they are considered private.
+
+
+## Tests
+### Venom
+
+
+REF: https://sweetohm.net/article/go-api-test.en.html
+REF: https://github.com/c4s4/go-api-testing
+
+Install (Note: this is the Intercloud version): First check the release page and get the latest release for your system, e.g.:
+
+
+```
+sudo curl https://github.com/intercloud/venom/releases/download/intercloud-beta-6/venom.linux-amd64 -L -o /usr/local/bin/venom && sudo chmod +x /usr/local/bin/venom
+venom -h
+```
+
+Update:
+
+`sudo venom update`
+
+Run: `make`
+
+Remove generated test files: `make clean`

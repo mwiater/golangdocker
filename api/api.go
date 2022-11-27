@@ -56,7 +56,7 @@ func readLoadInfo(c *fiber.Ctx) error {
 	return nil
 }
 
-func SetupRoute(cfg *config.Config) *fiber.App {
+func SetupRoute(cfg config.Config) *fiber.App {
 	app := *fiber.New()
 
 	app.Use(func(c *fiber.Ctx) error {

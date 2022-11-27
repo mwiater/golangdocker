@@ -26,4 +26,5 @@ require (
 	github.com/valyala/tcplisten v1.0.0 // indirect
 	github.com/yusufpapurcu/wmi v1.2.2 // indirect
 	golang.org/x/sys v0.0.0-20220811171246-fbc7d0a398ab // indirect
+	gopkg.in/yaml.v2 v2.4.0 // indirect
 )

@@ -4,16 +4,19 @@ import (
 	"embed"
 	"log"
 	"strconv"
+	//"fmt"
 
 	"github.com/mattwiater/golangdocker/api"
 	"github.com/mattwiater/golangdocker/config"
 )
 
 //go:embed config/appConfig.yml
-var f embed.FS
+var conf embed.FS
 
 func main() {
-	cfg, err := config.AppConfig("./config/appConfig.yml")
+	configData, _ := conf.ReadFile("config/appConfig.yml")
+
+	cfg, err := config.AppConfig(configData)
 	if err != nil {
 		log.Fatal(err)
 	}

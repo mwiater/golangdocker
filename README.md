@@ -21,7 +21,7 @@ This repository is a work in progress, but I'll do my best to keep the Master br
 - [x] Add `/metrics` endpoint with [default Fiber middleware](https://docs.gofiber.io/api/middleware/monitor)
 - [x] Setup logger instead of current debugging console output (started in [api/api.go](../../blob/master/api/api.go#L61) logger config)
 - [x] Need config pattern for app config vars: .env, .yaml, etc. 
-- [ ] K8s: Use version tagging instead of `:latest` to provide an example of rolling updates.
+- [ ] K8s: Use version tagging instead of `:latest` to provide an example of rolling updates. (Started: [_k8s/K8S_README.md](../../blob/master/_k8s/K8S_README.md))
 - [ ] TLS? In single container or via K8s?
 
 ## Prerequisites
@@ -94,7 +94,7 @@ This step should be completed first before running via Docker to ensure everythi
 
 ### Building the Docker container
 
-NOTE: The steps will refer to the docker image: `mattwiater/golangdocker`. You should change these steps to match your own image name, e.g.: e.g.: `{your-docker-hub-account-username}/golangdocker`
+NOTE: The steps will refer to the docker image: `mattwiater/golangdocker`. You should change these steps to match your own image name, e.g.: `{your-docker-hub-account-username}/golangdocker`
 
 The build command uses the local [Dockerfile](../../blob/master/Dockerfile) to build the image. Substitute your own Docker image tag for mine wherever you see it (`mattwiater/golangdocker`), e.g.: `{your-docker-hub-account-username}/golangdocker`
 

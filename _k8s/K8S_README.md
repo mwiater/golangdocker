@@ -4,17 +4,30 @@
 
 You have built the container on the Control Plane node:
 
+`docker build -t {your-docker-hub-account-username}/golangdocker:v1 .`
+
+Above we are going to use the `:v1` tag so that we can use [K8s Rolling Updates](https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/) when we make changes to the image. If you have built images in the previous sections, you'll likely see multiple versions of your image with different tags:
+
 `docker images`
 
 ```
 REPOSITORY                TAG       IMAGE ID       CREATED         SIZE
-mattwiater/golangdocker   latest    6ec15eed2ffa   6 minutes ago   10.1MB
+mattwiater/golangdocker   latest    e9b376df3a3f   24 minutes ago  11.1MB
+mattwiater/golangdocker   v1        e9b376df3a3f   4 minutes ago   11.1MB
 ...
 ```
 
-And pushed it to docker hub, e.g.: `docker push mattwiater/golangdocker`
+And pushed it to docker hub, e.g.: `docker push mattwiater/golangdocker:v1`
 
-This step is important for the remaining nodes to download and run the image without having to build it locally on each node.
+Docker Hub Note: This step is important for the remaining nodes to download and run the image without having to manually build it locally on each node. K8s can use local images to spawn pods, but that would require a manual build on each node (dowmlaoding the repo, building the image, and chaning the manifest entry for `imagePullPolicy: Always` to `imagePullPolicy: Never`), which we are skipping for this demonstration.
+
+For rolling updates, we would just make the necessary updates to our code, build an image tagged with a new version, e.g.: `:v1.1`, `:v2`, etc., push it to docker hub, and then issue the command:
+
+`kubectl set image deployments/k8s-golang-api mattwiater/golangdocker:v2`
+
+The command above tells K8s to update the existing deployment to the newer version and it will take care of bringing down the old pods and spawning new pods with no downtime.
+
+[TO DO: Need example after the initial deployment below is complete]
 
 ## Load Balancer
 
@@ -130,7 +143,7 @@ spec:
     spec:
       containers:
         - name: k8s-golang-api
-          image: 'mattwiater/golangdocker:latest'
+          image: 'mattwiater/golangdocker:v1'
           env:
           - name: K8S_NODE_NAME
             valueFrom:

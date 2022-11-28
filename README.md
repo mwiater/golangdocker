@@ -242,3 +242,9 @@ Run via: `go test` #=>
 PASS
 ok      github.com/mattwiater/golangdocker      0.084s
 ```
+
+## golangci-lint
+
+`go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest`
+
+Usage: `golangci-lint run`

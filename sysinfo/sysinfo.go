@@ -3,22 +3,20 @@ package sysinfo
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"net/http"
+	"os"
 	"sort"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/mattwiater/golangdocker/common"
-	// "github.com/mattwiater/golangdocker/config"
+
 	"github.com/shirou/gopsutil/v3/cpu"
 	"github.com/shirou/gopsutil/v3/host"
 	"github.com/shirou/gopsutil/v3/load"
 	"github.com/shirou/gopsutil/v3/mem"
 	"github.com/shirou/gopsutil/v3/net"
 )
-
-var debug = false
 
 func TestTZ() (errors int) {
 	pacific, err := time.LoadLocation("America/Los_Angeles")
@@ -45,14 +43,16 @@ func TestTLS() (errors int) {
 }
 
 func FileSys() (errors int) {
-	files, err := ioutil.ReadDir("./proc")
+	outputDirRead, _ := os.Open("./proc")
+	procFiles, err := outputDirRead.ReadDir(0)
+
 	if err != nil {
 		fmt.Println(err)
 		errors++
 	}
 
-	for _, file := range files {
-		fmt.Println(file.Name(), file.IsDir())
+	for _, procFile := range procFiles {
+		fmt.Println(procFile.Name(), procFile.IsDir())
 	}
 
 	return

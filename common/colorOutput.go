@@ -3,6 +3,7 @@ package common
 import (
 	"bytes"
 	"encoding/json"
+	"log"
 	"os"
 
 	"github.com/fatih/color"
@@ -17,7 +18,11 @@ var ConsoleFailure = color.New(color.Bold, color.FgWhite, color.BgRed).SprintFun
 
 func PrettyPrintJSONToConsole(b []byte) {
 	var out bytes.Buffer
-	json.Indent(&out, b, "", "\t")
+
+	err := json.Indent(&out, b, "", "\t")
+	if err != nil {
+		log.Println("!!!!")
+	}
 	out.Write([]byte("\n\n"))
 	out.WriteTo(os.Stdout)
 }

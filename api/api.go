@@ -56,10 +56,8 @@ func readLoadInfo(c *fiber.Ctx) error {
 	return nil
 }
 
-func hello(c *fiber.Ctx) error {
-	c.Status(200).JSON(&fiber.Map{
-		"hello": "world",
-	})
+func apiFalseRoot(c *fiber.Ctx) error {
+	c.Redirect("/api/v1")
 	return nil
 }
 
@@ -78,7 +76,7 @@ func SetupRoute(cfg config.Config) *fiber.App {
 		TimeZone:   "America/Los_Angeles",
 	}))
 
-	app.Get("/", hello)
+	app.Get("/", apiFalseRoot)
 	app.Get("/api/v1", readAPIIndex)
 	app.Get("/api/metrics", monitor.New(monitor.Config{Title: "golangdocker Metrics Page"}))
 	app.Get("/api/v1/mem", readMemInfo)

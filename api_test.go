@@ -41,6 +41,13 @@ func TestAPIRoutes(t *testing.T) {
 		expectedBody  string
 	}{
 		{
+			description:   "false root route",
+			route:         "/",
+			expectedError: false,
+			expectedCode:  302,
+			expectedBody:  "",
+		},
+		{
 			description:   "routes route",
 			route:         "/api/v1",
 			expectedError: false,
@@ -114,7 +121,7 @@ func TestAPIRoutes(t *testing.T) {
 		}
 
 		contentType := res.Header.Get("Content-Type")
-		if contentType != "application/json" {
+		if contentType != "application/json" && res.StatusCode == 200 {
 			t.Errorf("Content-Type: %#v != 'application/json'", contentType)
 		}
 

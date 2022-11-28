@@ -218,24 +218,27 @@ Then, in `main.go`, you can include them like this:
 
 
 ## Tests
-### Venom
 
+Very simple tests are in: `api_test.go`
 
-REF: https://sweetohm.net/article/go-api-test.en.html
-REF: https://github.com/c4s4/go-api-testing
-
-Install (Note: this is the Intercloud version): First check the release page and get the latest release for your system, e.g.:
-
+Run via: `go test` #=>
 
 ```
-sudo curl https://github.com/intercloud/venom/releases/download/intercloud-beta-6/venom.linux-amd64 -L -o /usr/local/bin/venom && sudo chmod +x /usr/local/bin/venom
-venom -h
+ ┌───────────────────────────────────────────────────┐
+ │                   Fiber v2.40.0                   │
+ │               http://127.0.0.1:5000               │
+ │       (bound on host 0.0.0.0 and port 5000)       │
+ │                                                   │
+ │ Handlers ............ 18  Processes ........... 1 │
+ │ Prefork ....... Disabled  PID ............ 304132 │
+ └───────────────────────────────────────────────────┘
+
+[2022-11-28T10:49:13] GET:/api/v1: 200 (     0s) | Bytes In: 0 Bytes Out: 116
+[2022-11-28T10:49:13] GET:/api/v1/cpu: 200 (    1ms) | Bytes In: 0 Bytes Out: 3593
+[2022-11-28T10:49:13] GET:/api/v1/host: 200 (    3ms) | Bytes In: 0 Bytes Out: 337
+[2022-11-28T10:49:13] GET:/api/v1/load: 200 (     0s) | Bytes In: 0 Bytes Out: 54
+[2022-11-28T10:49:13] GET:/api/v1/mem: 200 (     0s) | Bytes In: 0 Bytes Out: 707
+[2022-11-28T10:49:13] GET:/api/v1/net: 200 (    2ms) | Bytes In: 0 Bytes Out: 1559
+PASS
+ok      github.com/mattwiater/golangdocker      0.084s
 ```
-
-Update:
-
-`sudo venom update`
-
-Run: `make`
-
-Remove generated test files: `make clean`

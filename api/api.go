@@ -56,6 +56,13 @@ func readLoadInfo(c *fiber.Ctx) error {
 	return nil
 }
 
+func hello(c *fiber.Ctx) error {
+	c.Status(200).JSON(&fiber.Map{
+		"hello": "world",
+	})
+	return nil
+}
+
 func SetupRoute(cfg config.Config) *fiber.App {
 	app := *fiber.New()
 
@@ -71,12 +78,9 @@ func SetupRoute(cfg config.Config) *fiber.App {
 		TimeZone:   "America/Los_Angeles",
 	}))
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Welcome to Go Fiber API")
-	})
-	app.Get("/api/metrics", monitor.New(monitor.Config{Title: "golangdocker Metrics Page"}))
-
+	app.Get("/", hello)
 	app.Get("/api/v1", readAPIIndex)
+	app.Get("/api/metrics", monitor.New(monitor.Config{Title: "golangdocker Metrics Page"}))
 	app.Get("/api/v1/mem", readMemInfo)
 	app.Get("/api/v1/cpu", readCPUInfo)
 	app.Get("/api/v1/host", readHostInfo)

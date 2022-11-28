@@ -233,14 +233,15 @@ Run via: `go test` #=>
  │ Prefork ....... Disabled  PID ............ 304132 │
  └───────────────────────────────────────────────────┘
 
-[2022-11-28T10:49:13] GET:/api/v1: 200 (     0s) | Bytes In: 0 Bytes Out: 116
-[2022-11-28T10:49:13] GET:/api/v1/cpu: 200 (    1ms) | Bytes In: 0 Bytes Out: 3593
-[2022-11-28T10:49:13] GET:/api/v1/host: 200 (    3ms) | Bytes In: 0 Bytes Out: 337
-[2022-11-28T10:49:13] GET:/api/v1/load: 200 (     0s) | Bytes In: 0 Bytes Out: 54
-[2022-11-28T10:49:13] GET:/api/v1/mem: 200 (     0s) | Bytes In: 0 Bytes Out: 707
-[2022-11-28T10:49:13] GET:/api/v1/net: 200 (    2ms) | Bytes In: 0 Bytes Out: 1559
+[2022-11-28T15:15:19] GET:/: 302 (     0s) | Bytes In: 0 Bytes Out: 0
+[2022-11-28T15:15:19] GET:/api/v1: 200 (    1ms) | Bytes In: 0 Bytes Out: 116
+[2022-11-28T15:15:19] GET:/api/v1/cpu: 200 (    5ms) | Bytes In: 0 Bytes Out: 3593
+[2022-11-28T15:15:19] GET:/api/v1/host: 200 (    4ms) | Bytes In: 0 Bytes Out: 337
+[2022-11-28T15:15:19] GET:/api/v1/load: 200 (     0s) | Bytes In: 0 Bytes Out: 54
+[2022-11-28T15:15:19] GET:/api/v1/mem: 200 (     0s) | Bytes In: 0 Bytes Out: 706
+[2022-11-28T15:15:19] GET:/api/v1/net: 200 (    2ms) | Bytes In: 0 Bytes Out: 1559
 PASS
-ok      github.com/mattwiater/golangdocker      0.084s
+ok      github.com/mattwiater/golangdocker      0.143s
 ```
 
 ## golangci-lint

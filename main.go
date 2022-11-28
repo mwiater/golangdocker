@@ -4,7 +4,6 @@ import (
 	"embed"
 	"log"
 	"strconv"
-	//"fmt"
 
 	"github.com/mattwiater/golangdocker/api"
 	"github.com/mattwiater/golangdocker/config"

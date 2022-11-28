@@ -1,7 +1,7 @@
 package main
 
 import (
-	"io/ioutil"
+	"io"
 	"log"
 	"net"
 	"net/http"
@@ -119,7 +119,7 @@ func TestAPIRoutes(t *testing.T) {
 		}
 
 		if test.expectedBody != "" {
-			body, err := ioutil.ReadAll(res.Body)
+			body, err := io.ReadAll(res.Body)
 			assert.Nilf(t, err, test.description)
 			assert.Equalf(t, test.expectedBody, string(body), test.description)
 		}

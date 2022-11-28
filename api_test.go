@@ -3,14 +3,34 @@ package main
 import (
 	"io/ioutil"
 	"log"
+	"net"
 	"net/http"
 	"strconv"
 	"testing"
+	"time"
 
 	"github.com/mattwiater/golangdocker/api"
 	"github.com/mattwiater/golangdocker/config"
 	"github.com/stretchr/testify/assert"
 )
+
+func waitForServer(port string) {
+	backoff := 50 * time.Millisecond
+
+	for i := 0; i < 10; i++ {
+		conn, err := net.DialTimeout("tcp", ":"+port, 1*time.Second)
+		if err != nil {
+			time.Sleep(backoff)
+			continue
+		}
+		err = conn.Close()
+		if err != nil {
+			log.Fatal(err)
+		}
+		return
+	}
+	log.Fatalf("Server on port %s not up after 10 attempts", port)
+}
 
 func TestAPIRoutes(t *testing.T) {
 	tests := []struct {
@@ -74,6 +94,8 @@ func TestAPIRoutes(t *testing.T) {
 	app := api.SetupRoute(cfg)
 
 	go app.Listen(":" + strconv.Itoa(cfg.Server.Port))
+
+	waitForServer(strconv.Itoa(cfg.Server.Port))
 
 	for _, test := range tests {
 		req, _ := http.NewRequest(

@@ -10,7 +10,6 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/mattwiater/golangdocker/common"
-
 	"github.com/shirou/gopsutil/v3/cpu"
 	"github.com/shirou/gopsutil/v3/host"
 	"github.com/shirou/gopsutil/v3/load"
@@ -45,7 +44,6 @@ func TestTLS() (errors int) {
 func FileSys() (errors int) {
 	outputDirRead, _ := os.Open("./proc")
 	procFiles, err := outputDirRead.ReadDir(0)
-
 	if err != nil {
 		fmt.Println(err)
 		errors++

@@ -34,60 +34,81 @@ func waitForServer(port string) {
 
 func TestAPIRoutes(t *testing.T) {
 	tests := []struct {
-		description   string
-		route         string
-		expectedError bool
-		expectedCode  int
-		expectedBody  string
+		description         string
+		route               string
+		expectedCode        int
+		expectedContentType string
+		expectedBody        string
 	}{
 		{
-			description:   "false root route",
-			route:         "/",
-			expectedError: false,
-			expectedCode:  302,
-			expectedBody:  "",
+			description:         "false root route",
+			route:               "/",
+			expectedCode:        302,
+			expectedContentType: "application/json",
+			expectedBody:        "",
 		},
 		{
-			description:   "routes route",
-			route:         "/api/v1",
-			expectedError: false,
-			expectedCode:  200,
-			expectedBody:  "{\"apiRoutes\":[\"/\",\"/api/metrics\",\"/api/v1\",\"/api/v1/cpu\",\"/api/v1/host\",\"/api/v1/load\",\"/api/v1/mem\",\"/api/v1/net\"]}",
+			description:         "routes route",
+			route:               "/api/v1",
+			expectedCode:        200,
+			expectedContentType: "application/json",
+			expectedBody:        "{\"apiRoutes\":[\"/\",\"/api/v1\",\"/api/v1/cpu\",\"/api/v1/docs/*\",\"/api/v1/host\",\"/api/v1/load\",\"/api/v1/mem\",\"/api/v1/metrics\",\"/api/v1/net\"]}",
 		},
 		{
-			description:   "cpu route",
-			route:         "/api/v1/cpu",
-			expectedError: false,
-			expectedCode:  200,
-			expectedBody:  "",
+			description:         "cpu route",
+			route:               "/api/v1/cpu",
+			expectedCode:        200,
+			expectedContentType: "application/json",
+			expectedBody:        "",
 		},
 		{
-			description:   "host route",
-			route:         "/api/v1/host",
-			expectedError: false,
-			expectedCode:  200,
-			expectedBody:  "",
+			description:         "host route",
+			route:               "/api/v1/host",
+			expectedCode:        200,
+			expectedContentType: "application/json",
+			expectedBody:        "",
 		},
 		{
-			description:   "load route",
-			route:         "/api/v1/load",
-			expectedError: false,
-			expectedCode:  200,
-			expectedBody:  "",
+			description:         "load route",
+			route:               "/api/v1/load",
+			expectedCode:        200,
+			expectedContentType: "application/json",
+			expectedBody:        "",
 		},
 		{
-			description:   "mem route",
-			route:         "/api/v1/mem",
-			expectedError: false,
-			expectedCode:  200,
-			expectedBody:  "",
+			description:         "mem route",
+			route:               "/api/v1/mem",
+			expectedCode:        200,
+			expectedContentType: "application/json",
+			expectedBody:        "",
 		},
 		{
-			description:   "net route",
-			route:         "/api/v1/net",
-			expectedError: false,
-			expectedCode:  200,
-			expectedBody:  "",
+			description:         "net route",
+			route:               "/api/v1/net",
+			expectedCode:        200,
+			expectedContentType: "application/json",
+			expectedBody:        "",
+		},
+		{
+			description:         "metrics route",
+			route:               "/api/v1/metrics",
+			expectedCode:        200,
+			expectedContentType: "text/html; charset=utf-8",
+			expectedBody:        "",
+		},
+		{
+			description:         "docs route",
+			route:               "/api/v1/docs/index.html",
+			expectedCode:        200,
+			expectedContentType: "text/html; charset=utf-8",
+			expectedBody:        "",
+		},
+		{
+			description:         "forced 404 route",
+			route:               "/api/v1/404",
+			expectedCode:        404,
+			expectedContentType: "text/html; charset=utf-8",
+			expectedBody:        "",
 		},
 	}
 
@@ -121,8 +142,8 @@ func TestAPIRoutes(t *testing.T) {
 		}
 
 		contentType := res.Header.Get("Content-Type")
-		if contentType != "application/json" && res.StatusCode == 200 {
-			t.Errorf("Content-Type: %#v != 'application/json'", contentType)
+		if contentType != test.expectedContentType && res.StatusCode == 200 {
+			t.Errorf("Content-Type: %#v != %#v", contentType, test.expectedContentType)
 		}
 
 		if test.expectedBody != "" {

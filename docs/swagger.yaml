@@ -1,0 +1,126 @@
+basePath: /
+info:
+  contact:
+    name: Matt J. Wiater
+    url: https://github.com/mwiater
+  description: Boilerplate Fiber Rest API for use in Docker
+  license:
+    name: MIT License
+    url: https://en.wikipedia.org/wiki/MIT_License
+  title: Golang Docker
+  version: "1.0"
+paths:
+  /:
+    get:
+      consumes:
+      - '*/*'
+      description: Redirect root od API server to "/api/v1"
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              type: string
+            type: array
+      summary: Redirect root od API server to "/api/v1"
+      tags:
+      - API Routes Root
+  /api/v1:
+    get:
+      consumes:
+      - '*/*'
+      description: Get all API routes
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Get all API routes
+      tags:
+      - API Routes
+  /api/v1/cpu:
+    get:
+      consumes:
+      - '*/*'
+      description: Get system cpu info
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Get system cpu info
+      tags:
+      - System CPU
+  /api/v1/host:
+    get:
+      consumes:
+      - '*/*'
+      description: Get system host info
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Get system host info
+      tags:
+      - System Host
+  /api/v1/load:
+    get:
+      consumes:
+      - '*/*'
+      description: Get system load info
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Get system load info
+      tags:
+      - System Load
+  /api/v1/mem:
+    get:
+      consumes:
+      - '*/*'
+      description: Get system memory info
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Get system memory info
+      tags:
+      - System Memory
+  /api/v1/net:
+    get:
+      consumes:
+      - '*/*'
+      description: Get system network info
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Get system network info
+      tags:
+      - System Network
+swagger: "2.0"

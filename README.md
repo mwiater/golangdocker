@@ -23,7 +23,7 @@ This repository is a work in progress, but I'll do my best to keep the Master br
 - [x] Need config pattern for app config vars: .env, .yaml, etc. Need to use `embed` since we're dealing with a binary executable
 - [x] Tests: unit/coverage.
 - [x] Documentation: Swagger docs for API Endpoints
-- [ ] Fix `api/v1/docs` and `/api/v1/docs/` to route directly to `/api/v1/docs/index.html`
+- [x] Fix `api/v1/docs` and `/api/v1/docs/` to route directly to `/api/v1/docs/index.html`
 - [ ] K8s: Use version tagging instead of `:latest` to provide an example of rolling updates. (Started: [_k8s/K8S_README.md](../../blob/master/_k8s/K8S_README.md))
 - [ ] TLS? In single container or via K8s?
 

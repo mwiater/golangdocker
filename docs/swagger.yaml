@@ -14,7 +14,7 @@ paths:
     get:
       consumes:
       - '*/*'
-      description: Redirect root od API server to "/api/v1"
+      description: Redirect root of API server to "/api/v1"
       produces:
       - application/json
       responses:
@@ -24,7 +24,7 @@ paths:
             items:
               type: string
             type: array
-      summary: Redirect root od API server to "/api/v1"
+      summary: Redirect root of API server to "/api/v1"
       tags:
       - API Routes Root
   /api/v1:

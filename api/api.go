@@ -120,19 +120,6 @@ func readLoadInfo(c *fiber.Ctx) error {
 	return nil
 }
 
-// docsRedirects ... Redirect `docs` endpoints correctly
-// @Summary Redirect `docs` endpoints correctly
-// @Description Redirect `docs` endpoints correctly
-// @Tags API Routes Docs
-// @Accept */*
-// @Produce json
-// @Success 200 {object} []string
-// @Router /docs* [get]
-func docsRedirects(c *fiber.Ctx) error {
-	c.Redirect("/api/v1/docs/index.html")
-	return nil
-}
-
 // SetupRoute ... Setup Fiber API routes
 // @Summary Setup Fiber API routes
 // @Description Setup Fiber API routes

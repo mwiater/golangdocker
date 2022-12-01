@@ -25,7 +25,7 @@ const docTemplate = `{
     "paths": {
         "/": {
             "get": {
-                "description": "Redirect root od API server to \"/api/v1\"",
+                "description": "Redirect root of API server to \"/api/v1\"",
                 "consumes": [
                     "*/*"
                 ],
@@ -35,7 +35,7 @@ const docTemplate = `{
                 "tags": [
                     "API Routes Root"
                 ],
-                "summary": "Redirect root od API server to \"/api/v1\"",
+                "summary": "Redirect root of API server to \"/api/v1\"",
                 "responses": {
                     "200": {
                         "description": "OK",

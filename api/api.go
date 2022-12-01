@@ -11,9 +11,9 @@ import (
 	_ "github.com/mattwiater/golangdocker/docs"
 )
 
-// apiFalseRoot ... Redirect root od API server to "/api/v1"
-// @Summary Redirect root od API server to "/api/v1"
-// @Description Redirect root od API server to "/api/v1"
+// apiFalseRoot ... Redirect root of API server to "/api/v1"
+// @Summary Redirect root of API server to "/api/v1"
+// @Description Redirect root of API server to "/api/v1"
 // @Tags API Routes Root
 // @Accept */*
 // @Produce json
@@ -120,6 +120,19 @@ func readLoadInfo(c *fiber.Ctx) error {
 	return nil
 }
 
+// docsRedirects ... Redirect `docs` endpoints correctly
+// @Summary Redirect `docs` endpoints correctly
+// @Description Redirect `docs` endpoints correctly
+// @Tags API Routes Docs
+// @Accept */*
+// @Produce json
+// @Success 200 {object} []string
+// @Router /docs* [get]
+func docsRedirects(c *fiber.Ctx) error {
+	c.Redirect("/api/v1/docs/index.html")
+	return nil
+}
+
 // SetupRoute ... Setup Fiber API routes
 // @Summary Setup Fiber API routes
 // @Description Setup Fiber API routes
@@ -148,6 +161,7 @@ func SetupRoute(cfg config.Config) *fiber.App {
 	app.Get("/api/v1/net", readNetInfo)
 	app.Get("/api/v1/load", readLoadInfo)
 
+	// Routes for Swagger API Docs
 	app.Get("/api/v1/docs/*", fiberSwagger.WrapHandler)
 
 	return &app

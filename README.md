@@ -23,6 +23,7 @@ This repository is a work in progress, but I'll do my best to keep the Master br
 - [x] Need config pattern for app config vars: .env, .yaml, etc. Need to use `embed` since we're dealing with a binary executable
 - [x] Tests: unit/coverage.
 - [x] Documentation: Swagger docs for API Endpoints
+- [ ] Fix `api/v1/docs` and `/api/v1/docs/` to route directly to `/api/v1/docs/index.html`
 - [ ] K8s: Use version tagging instead of `:latest` to provide an example of rolling updates. (Started: [_k8s/K8S_README.md](../../blob/master/_k8s/K8S_README.md))
 - [ ] TLS? In single container or via K8s?
 
@@ -102,7 +103,7 @@ The build command uses the local [Dockerfile](../../blob/master/Dockerfile) to b
 
 `docker build -t mattwiater/golangdocker .`
 
-Or, for convenience, run: `docker_build.sh '{your-docker-hub-account-username}'` This will locally build the Docker image: `{your-docker-hub-account-username}/golangdocker`.
+Or, for convenience, run: `bash docker_build.sh '{your-docker-hub-account-username}/{your-docker-hub-image-name}{:optional-version}'`
 
 Once you have built your image successfully, check the output of `docker images` #=>
 
@@ -137,7 +138,7 @@ Start the container in an interactive shell, with the host port `5000` (the mach
 
 `docker run -it -p 5000:5000 --rm mattwiater/golangdocker`
 
-Or, for convenience, run: `docker_run.sh '{your-docker-hub-account-username}'` This will execute the Docker image: `{your-docker-hub-account-username}/golangdocker`.
+Or, for convenience, run: `bash docker_run.sh '{your-docker-hub-account-username}/{your-docker-hub-image-name}{:optional-version}'`.
 
 You should see teh default Fiber message, e.g.:
 
@@ -159,6 +160,7 @@ Our build is simple, just a compiled Go binary that runs in a container. This bi
 ```
 http://{your-host-ip-address}:5000/api/v1
 http://{your-host-ip-address}:5000/api/metrics
+http://{your-host-ip-address}:5000/api/docs
 http://{your-host-ip-address}:5000/api/v1/mem
 http://{your-host-ip-address}:5000/api/v1/cpu
 http://{your-host-ip-address}:5000/api/v1/host
@@ -189,11 +191,6 @@ hostInfo: {
   }
 }
 ```
-
-## [TO DO] Scripts
-
-`bash docker_build.sh`
-`bash docker_run.sh`
 
 ## [TO DO] Notes
 

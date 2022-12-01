@@ -23,7 +23,9 @@ Docker Hub Note: This step is important for the remaining nodes to download and 
 
 For rolling updates, we would just make the necessary updates to our code, build an image tagged with a new version, e.g.: `:v1.1`, `:v2`, etc., push it to docker hub, and then issue the command:
 
-`kubectl set image deployments/k8s-golang-api mattwiater/golangdocker:v2`
+[NEED TO FIX]: `kubectl set image deployments/k8s-golang-api k8s-golang-api=mattwiater/golangdocker:v2`
+
+[PROBLEM]: The command is not working with namespaced deployments, need to adjust.
 
 The command above tells K8s to update the existing deployment to the newer version and it will take care of bringing down the old pods and spawning new pods with no downtime.
 
@@ -39,7 +41,7 @@ Ingress: Our domain maps to an exposed service so that we can reach the Service
 Service: The load balancer which will route traffic from a singular endpoint to multiple Pods containers via internal Endpoints
 Endpoints: Defines which target Pods to route traffic to: internal IP Address and Port
 
-For this examlpe, we'll use Metal-LB to do the heavy lifting.
+For this example, we'll use Metal-LB to do the heavy lifting.
 
 ### Metal LB
 
@@ -143,7 +145,7 @@ spec:
     spec:
       containers:
         - name: k8s-golang-api
-          image: 'mattwiater/golangdocker:v1'
+          image: 'mattwiater/golangdocker:latest'
           env:
           - name: K8S_NODE_NAME
             valueFrom:

@@ -7,10 +7,34 @@
 
 This repository is a work in progress, but I'll do my best to keep the Master branch in a working state. Initially, this project was to create a boilerplate for containerizing Go binaries for use a K8s cluster. For now, just origanizing my notes in order to be able to replicate this process from end-to-end. The idea is to keep this narrow and succinct and be able to use this as a simple boilerplate for Go containers.
 
+## Topics
+
+This project is in three parts, each which build on the previous:
+
+##### 1) A simple but functioanl rest API app written in Go. This rest API incorporates: 
+  * The Fiber Metrics middleware (API endpoint: `/api/v1/metrics`).
+  * Creating and serving API documentation (using `swag init`) based on Swagger specifications: `/api/v1/docs/`).
+  * A `YAML` configuration pattern for setting app variables.
+  * Basic Go endpoint tests.
+  * Building a binary of the app and embedding external files so that it is portable and self contained.
+  * File formatting for *.go files using `gofmt`.
+
+##### 2) Using the app in a Docker container, covering:
+  * Docker build concepts.
+  * Docker run concepts.
+  * Docker image versioning.
+  * Ways to make use of bash scripts for repetative tasks.
+
+##### 3) Using the Docker container in Kubernetes
+  * This section is the most incomplete, but should be in a working state.
+  * You should already have a working K8s cluster available for this section.
+  * Does not provide much background, assumes some basic knowledge using `kubectl`.
+  * This app will be deployed as a load-balanced Service across a Control Plane and 3 Worker nodes.
+
 ## Assumptions
 
-* IP Addresses: For the most part, disregard the hard-coded IP addresses in here (e.g.: my K8s cluster and VM IPs (192.168.*.*)). You'll have to sub in your own for your particular envionment. Right now, laziness!
-* I'm noticing a few instances where I'm using both `container` and `pod` to mean the same thing. Until I make them more consistent, assume they are interchangeable. A pod is basiically a container in in K8s context. While a `pod` can technically have multiple containers, for this demonstration, assume a 1:1 relationship.
+* **IP Addresses:** For the most part, disregard the hard-coded IP addresses in here (e.g.: my K8s cluster and VM IPs (192.168.*.*)). You'll have to sub in your own for your particular envionment. Right now, laziness!
+* **Container vs. Pod:** I'm noticing a few instances where I'm using both `container` and `pod` to mean the same thing in the K8s section. Until I make them more consistent, assume they are interchangeable. A pod is basiically a container in in K8s context. While a `pod` can technically have multiple containers, for this demonstration, assume a 1:1 relationship.
 
 ## To Do
 
@@ -38,6 +62,9 @@ Required for Kubernetes itegration:
 
 * A running [Kubernetes](https://kubernetes.io/) cluster
 * A [Docker Hub](https://hub.docker.com/) account
+
+Optional:
+
 * Apache Benchmark (For Ubuntu, it's part of the Apache2 Utilities package, e.g.: `apt-get install apache2-utils `)
 
 While the idea is to get this up and running quickly, it is not a deep dive into Go, Docker, or K8S. Basic knowledge of these technologies is required.
@@ -157,15 +184,27 @@ On your host machine, you can now access the container via `http://{your-host-ip
 
 Our build is simple, just a compiled Go binary that runs in a container. This binary collects local resources/stats for display as JSON via these API Endpoints using [Fiber](https://docs.gofiber.io/):
 
+##### API Info:
+
 ```
 http://{your-host-ip-address}:5000/api/v1
-http://{your-host-ip-address}:5000/api/metrics
-http://{your-host-ip-address}:5000/api/docs
+```
+
+##### System Info:
+
+```
 http://{your-host-ip-address}:5000/api/v1/mem
 http://{your-host-ip-address}:5000/api/v1/cpu
 http://{your-host-ip-address}:5000/api/v1/host
 http://{your-host-ip-address}:5000/api/v1/net
 http://{your-host-ip-address}:5000/api/v1/load
+```
+
+##### API Metrics and Documentation:
+
+```
+http://{your-host-ip-address}:5000/api/v1/metrics
+http://{your-host-ip-address}:5000/api/docs
 ```
 
 This walkthrough is not meant to be groundbreaking by any means, but rather to get something minimal, working, and useful up and running quickly.

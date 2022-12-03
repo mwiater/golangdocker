@@ -49,6 +49,8 @@ This project is in three parts, each which build on the previous:
 - [x] Documentation: Swagger docs for API Endpoints
 - [x] Fix `api/v1/docs` and `/api/v1/docs/` to route directly to `/api/v1/docs/index.html`
 - [x] Fix: Custom headers. Currently have `X-Host-Name` and `X-Host-Id`. Old school problem, `X-` prefixed headers haven't been the RFC standard for [quite awhile](https://www.rfc-editor.org/rfc/rfc6648).
+- [ ] Generate Postman collection for reference?
+- [ ] Turn these to-dos into issues!
 - [ ] K8s: Use version tagging instead of `:latest` to provide an example of rolling updates. (Started: [_k8s/K8S_README.md](../../blob/master/_k8s/K8S_README.md))
 - [ ] TLS? In single container or via K8s?
 

@@ -138,8 +138,8 @@ func SetupRoute(cfg config.Config) *fiber.App {
 	hostInfo, _ := host.Info()
 
 	app.Use(func(c *fiber.Ctx) error {
-		c.Append("X-Host-Name", fmt.Sprintf("%v", hostInfo.Hostname))
-		c.Append("X-Host-Id", fmt.Sprintf("%v", hostInfo.HostID))
+		c.Append("Hostname", fmt.Sprintf("%v", hostInfo.Hostname))
+		c.Append("Hostid", fmt.Sprintf("%v", hostInfo.HostID))
 		return c.Next()
 	})
 

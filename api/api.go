@@ -1,11 +1,14 @@
 package api
 
 import (
+	"fmt"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/monitor"
 	"github.com/mattwiater/golangdocker/config"
 	"github.com/mattwiater/golangdocker/sysinfo"
+	"github.com/shirou/gopsutil/v3/host"
 	fiberSwagger "github.com/swaggo/fiber-swagger"
 
 	_ "github.com/mattwiater/golangdocker/docs"
@@ -126,10 +129,17 @@ func readLoadInfo(c *fiber.Ctx) error {
 // @Tags Fiber API
 func SetupRoute(cfg config.Config) *fiber.App {
 	app := *fiber.New()
-
 	app.Use(func(c *fiber.Ctx) error {
 		c.Locals("port", cfg.Server.Port)
 		c.Locals("debug", cfg.Options.Debug)
+		return c.Next()
+	})
+
+	hostInfo, _ := host.Info()
+
+	app.Use(func(c *fiber.Ctx) error {
+		c.Append("X-Host-Name", fmt.Sprintf("%v", hostInfo.Hostname))
+		c.Append("X-Host-Id", fmt.Sprintf("%v", hostInfo.HostID))
 		return c.Next()
 	})
 

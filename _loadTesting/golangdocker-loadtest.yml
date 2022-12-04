@@ -1,0 +1,20 @@
+# Run, e.g.: `clear && artillery run --output golangdocker-docker.json golangdocker-docker.yml && artillery report golangdocker-docker.json`
+config:
+  phases:
+    - duration: 60
+      arrivalRate: 10
+      name: Sustained load
+  processor: "custom-artillery-functions.js"
+scenarios:
+  - name: "golang.0nezer0.com"
+    flow:
+
+    - get:
+        url: "/v1/host"
+        capture:
+          - json: "$['hostInfo']['virtualizationSystem']"
+            as: "virtualizationSystem"
+          - json: "$['hostInfo']['hostname']"
+            as: "hostname"
+        # afterResponse: "logHeaders"
+    - log: "{{ hostname }} [{{ virtualizationSystem }}]"

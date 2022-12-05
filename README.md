@@ -56,9 +56,31 @@ Required for Kubernetes itegration:
 
 Optional:
 
-* Apache Benchmark (For Ubuntu, it's part of the Apache2 Utilities package, e.g.: `apt-get install apache2-utils `)
+* Artillery (nodejs): [Load Testing](../../blob/master/_repository_docs/_loadTesting/ARTILLERY.md)
 
 While the idea is to get this up and running quickly, it is not a deep dive into Go, Docker, or K8S. Basic knowledge of these technologies is required.
+
+For example, we can peek into the container via the API endpoint `api/v1/host` and see the docker assigned `hostname: "b189564db0c5"` and verify that it is one running a single process `procs: 1`:
+
+```
+{
+hostInfo: {
+  hostname: "b189564db0c5",
+  uptime: 1238849,
+  bootTime: 1667920883,
+  procs: 1,
+  os: "linux",
+  platform: "",
+  platformFamily: "",
+  platformVersion: "",
+  kernelVersion: "5.4.0-110-generic",
+  kernelArch: "x86_64",
+  virtualizationSystem: "docker",
+  virtualizationRole: "guest",
+  hostId: "12345678-1234-5678-90ab-cddeefaabbcc"
+  }
+}
+```
 
 ## App
 
@@ -101,7 +123,7 @@ For `debug`, this will print out the JSON response to the console, depending on 
 }
 ```
 
-### Testing
+### Testing/Developing App
 
 while developing/testing the app, you can run it natively (not in a Docker container) via:
 
@@ -191,36 +213,37 @@ http://{your-host-ip-address}:5000/api/v1/net
 http://{your-host-ip-address}:5000/api/v1/load
 ```
 
-##### API Metrics and Documentation:
+##### API Metrics:
 
-```
-http://{your-host-ip-address}:5000/api/v1/metrics
-http://{your-host-ip-address}:5000/api/docs
-```
+For simplicity, the default [Fiber Monitor middleware](https://docs.gofiber.io/api/middleware/monitor) is included and available at:
+`http://{your-host-ip-address}:5000/api/v1/metrics`
 
-This walkthrough is not meant to be groundbreaking by any means, but rather to get something minimal, working, and useful up and running quickly.
 
-For example, we can peek into the container via the API endpoint `api/v1/host` and see the docker assigned `hostname: "b189564db0c5"` and verify that it is one running a single process `procs: 1`:
+##### API Endpoint Documentation via Swagger
 
-```
-{
-hostInfo: {
-  hostname: "b189564db0c5",
-  uptime: 1238849,
-  bootTime: 1667920883,
-  procs: 1,
-  os: "linux",
-  platform: "",
-  platformFamily: "",
-  platformVersion: "",
-  kernelVersion: "5.4.0-110-generic",
-  kernelArch: "x86_64",
-  virtualizationSystem: "docker",
-  virtualizationRole: "guest",
-  hostId: "12345678-1234-5678-90ab-cddeefaabbcc"
-  }
-}
-```
+`go install github.com/swaggo/swag/cmd/swag@latest`
+
+`go get -u github.com/swaggo/fiber-swagger`
+
+When updating documentation, you must run this to regenerate docs data: `swag init` (`swag init` is incorporated into the bash scripts for convenience, e.g.: [docker_run.sh](../../blob/master/docker_run.sh))
+
+Then, when you run the application, docs are avaialble at: `http://192.168.0.91:5000/api/v1/docs/index.html`
+
+## Tests
+
+See: [Tests](../../blob/master/_repository_docs/_tests/TESTS.md)
+
+## Linting: Code analysis
+
+Basic linting option via `golangci-lint`
+
+See: [Linting](../../blob/master/_repository_docs/_linting/LINTING.md)
+
+## Gosec: Security analysis
+
+High level gosec usage example.
+
+See: [Gosec](../../blob/master/_repository_docs/_gosec/GOSEC.md)
 
 ## [TO DO] Notes
 
@@ -243,50 +266,3 @@ Then, in `main.go`, you can include them like this:
 ```
 
 **Note on local packages:** In order to make use of your local package functions, along with running the `go build` command, ensure that your functions are Capital-cased. Otherwise Go will throw an error saying that your method is undefined. Only functions that begin with a capital letter are exported from packages, otherwise they are considered private.
-
-
-## Tests
-
-Very simple tests are in: `api_test.go`
-
-Run via: `go test` #=>
-
-```
- ┌───────────────────────────────────────────────────┐
- │                   Fiber v2.40.1                   │
- │               http://127.0.0.1:5000               │
- │       (bound on host 0.0.0.0 and port 5000)       │
- │                                                   │
- │ Handlers ............ 20  Processes ........... 1 │
- │ Prefork ....... Disabled  PID ............ 473552 │
- └───────────────────────────────────────────────────┘
-
-[2022-11-29T09:24:16] GET:/: 302 (     0s) | Bytes In: 0 Bytes Out: 0
-[2022-11-29T09:24:16] GET:/api/v1: 200 (     0s) | Bytes In: 0 Bytes Out: 136
-[2022-11-29T09:24:16] GET:/api/v1/cpu: 200 (    2ms) | Bytes In: 0 Bytes Out: 3593
-[2022-11-29T09:24:16] GET:/api/v1/host: 200 (    4ms) | Bytes In: 0 Bytes Out: 337
-[2022-11-29T09:24:16] GET:/api/v1/load: 200 (     0s) | Bytes In: 0 Bytes Out: 54
-[2022-11-29T09:24:16] GET:/api/v1/mem: 200 (    1ms) | Bytes In: 0 Bytes Out: 708
-[2022-11-29T09:24:16] GET:/api/v1/net: 200 (    3ms) | Bytes In: 0 Bytes Out: 1559
-[2022-11-29T09:24:16] GET:/api/v1/metrics: 200 (     0s) | Bytes In: 0 Bytes Out: 6186
-[2022-11-29T09:24:16] GET:/api/v1/docs/index.html: 200 (    1ms) | Bytes In: 0 Bytes Out: 3519
-[2022-11-29T09:24:16] GET:/api/v1/404: 404 (     0s) | Bytes In: 0 Bytes Out: 22
-PASS
-ok      github.com/mattwiater/golangdocker      0.155s
-```
-
-## golangci-lint
-
-`go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest`
-
-Usage: `golangci-lint run`
-
-## Documentations
-
-`go install github.com/swaggo/swag/cmd/swag@latest`
-
-`go get -u github.com/swaggo/fiber-swagger`
-
-When updating documentation, you must run this to regenerate docs data: `swag init`
-
-Then, when you run the application, docs are avaialble at: `http://192.168.0.91:5000/api/v1/docs/index.html`

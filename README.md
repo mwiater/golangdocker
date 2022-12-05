@@ -1,6 +1,6 @@
 # Golangdocker
 
-| !["Go"](_assets/logo-golang.png?raw=true "Go") | !["Docker"](_assets/logo-docker.png?raw=true "Docker") | !["Fiber"](_assets/logo-golang-fiber.png?raw=true "Fiber") | !["Kubernetes"](_assets/logo-k8s.png?raw=true "Kubernetes") |
+| !["Go"](_repository_docs/_repository_assets/logo-golang.png?raw=true "Go") | !["Docker"](_repository_docs/_repository_assets/logo-docker.png?raw=true "Docker") | !["Fiber"](_repository_docs/_repository_assets/logo-golang-fiber.png?raw=true "Fiber") | !["Kubernetes"](_repository_docs/_repository_assets/logo-k8s.png?raw=true "Kubernetes") |
 |:-------------:|:-------------:|:-------------:|:-------------:|
 
 ## Summary
@@ -37,22 +37,10 @@ This project is in three parts, each which build on the previous:
 * **Container vs. Pod:** I'm noticing a few instances where I'm using both `container` and `pod` to mean the same thing in the K8s section. Until I make them more consistent, assume they are interchangeable. A pod is basiically a container in in K8s context. While a `pod` can technically have multiple containers, for this demonstration, assume a 1:1 relationship.
 
 ## To Do
-
-- [x] Dockerize, multi-stage binary build
-- [x] [Sysinfo](https://github.com/shirou/gopsutil) collecting system information
-- [x] [Fiber](https://docs.gofiber.io/): Simple Rest API for demonstration
-- [x] Usage in [Kubernetes](https://kubernetes.io/) (See: [_k8s/K8S_README.md](../../blob/master/_k8s/K8S_README.md))
-- [x] Add `/metrics` endpoint with [default Fiber middleware](https://docs.gofiber.io/api/middleware/monitor)
-- [x] Setup logger instead of current debugging console output (started in [api/api.go](../../blob/master/api/api.go#L61) logger config)
-- [x] Need config pattern for app config vars: .env, .yaml, etc. Need to use `embed` since we're dealing with a binary executable
-- [x] Tests: unit/coverage.
-- [x] Documentation: Swagger docs for API Endpoints
-- [x] Fix `api/v1/docs` and `/api/v1/docs/` to route directly to `/api/v1/docs/index.html`
-- [x] Fix: Custom headers. Currently have `X-Host-Name` and `X-Host-Id`. Old school problem, `X-` prefixed headers haven't been the RFC standard for [quite awhile](https://www.rfc-editor.org/rfc/rfc6648).
 - [ ] Generate Postman collection for reference?
 - [ ] Turn these to-dos into issues!
-- [ ] K8s: Use version tagging instead of `:latest` to provide an example of rolling updates. (Started: [_k8s/K8S_README.md](../../blob/master/_k8s/K8S_README.md))
-- [ ] TLS? In single container or via K8s?
+- [ ] K8s: Use version tagging instead of `:latest` to provide an example of rolling updates. (Started: [_k8s/K8S_README.md](../../blob/master/_repository_docs/_k8s/K8S_README.md))
+- [ ] TLS? In single container or via K8s? To update in: [certs/](../../blob/master/certs/)
 
 ## Prerequisites
 

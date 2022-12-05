@@ -39,7 +39,7 @@ This project is in three parts, each which build on the previous:
 ## To Do
 - [ ] Generate Postman collection for reference?
 - [ ] Turn these to-dos into issues!
-- [ ] K8s: Use version tagging instead of `:latest` to provide an example of rolling updates. (Started: [_k8s/K8S_README.md](../../blob/master/_repository_docs/_k8s/K8S_README.md))
+- [ ] K8s: Use version tagging instead of `:latest` to provide an example of rolling updates. (Started: [K8S_README.md](../../blob/master/_repository_docs/_k8s/K8S_README.md))
 - [ ] TLS? In single container or via K8s? To update in: [certs/](../../blob/master/certs/)
 
 ## Prerequisites

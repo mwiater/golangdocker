@@ -1,6 +1,6 @@
 # Tests
 
-Very simple tests are in: [api_test.go](../../blob/master/api_test.go)
+Very simple tests are in: [api_test.go](../../../../blob/master/api_test.go)
 
 Run via: `go test` #=>
 

@@ -1,4 +1,3 @@
-# Run, e.g.: `clear && artillery run --output golangdocker-docker.json golangdocker-docker.yml && artillery report golangdocker-docker.json`
 config:
   phases:
     - duration: 60
@@ -16,5 +15,5 @@ scenarios:
             as: "virtualizationSystem"
           - json: "$['hostInfo']['hostname']"
             as: "hostname"
-        # afterResponse: "logHeaders"
+        afterResponse: "logHeaders"
     - log: "{{ hostname }} [{{ virtualizationSystem }}]"

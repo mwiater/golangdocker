@@ -1,11 +1,14 @@
 //
 // custom-artillery-functions.js
 //
+// Placeholder for custom Artiller function, just a middleware passthrough currently.
+//
+
 module.exports = {
   logHeaders: logHeaders
 }
 
-function logHeaders(requestParams, response, context, ee, next) {
+function logHeaders(requestParams, response, context, events, next) {
   // console.log(response.headers);
-  return next(); // MUST be called for the scenario to continue
+  return next();
 }

@@ -24,5 +24,8 @@ done;
 echo -e "${GREENBOLD}...Complete${RESET}"
 echo ""
 
-echo -e "${CYANBOLD}Running Go app:${RESET}"
-go run .
+echo -e "${CYANBOLD}Building Go app:${RESET} ${GREENBOLD}go build -o bin/golangdocker .${RESET}"
+go build -o bin/golangdocker .
+
+echo -e "${CYANBOLD}Running Go app:${RESET} ${GREENBOLD}./bin/golangdocker${RESET}"
+./bin/golangdocker

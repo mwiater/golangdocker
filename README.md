@@ -49,6 +49,8 @@ The following programs will need to be installed:
 * [Go](https://go.dev/learn/)
 * [Docker](https://www.docker.com/get-started/)
 
+You must set the DOCKERIMAGE environment variable when running the Docker Bash scripts. For only the current session, just enter: `export DOCKERIMAGE={your-docker-hub-account-username}/{your-docker-hub-image-name}`, e.g.: `export DOCKERIMAGE=mattwiater/golangdocker`. If you want that var to be permanent accross ssh sessions, add the export line to your ~/.bashrc (or equivalent) file.
+
 Required for Kubernetes itegration:
 
 * A running [Kubernetes](https://kubernetes.io/) cluster

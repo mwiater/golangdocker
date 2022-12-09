@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-# From root of project, run: `bash docker_run.sh '{your-docker-hub-account-username}/{your-docker-hub-image-name}{:optional-version}'`
-# E.g.: `bash docker_run.sh 'mattwiater/golangdocker'` or `bash docker_run.sh 'mattwiater/golangdocker:v1'`
+# From root of project, run: `bash docker_run.sh`
+# You must have a DOCKERIMAGE envionment variable set, e.g.: add `export DOCKERIMAGE={your-docker-hub-account-username}/{your-docker-hub-image-name}` to your ~/.bashrc file.
 
 clear
 
@@ -12,10 +12,9 @@ GREENBOLD='\033[1;32m'    # Green (Bold)
 YELLOWBOLD='\033[1;33m'   # Yellow (Bold)
 CYANBOLD='\033[1;36m'     # Cyan (Bold)
 
-if [ -z "$*" ]
-then
+if [ "$DOCKERIMAGE" = "" ]; then
   echo ""
-  echo -e "${REDBOLD}You must supply an image tag argument to run the docker image {your-docker-hub-account-username}/{your-docker-hub-image-name}{:optional-version}.${RESET} E.g.: bash docker_run.sh 'mattwiater/golangdocker:v1'"
+  echo -e "${REDBOLD}Please set your DOCKERIMAGE environment variable:${RESET} ${CYANBOLD}{your-docker-hub-account-username}/{your-docker-hub-image-name}${RESET}"
   echo ""
   exit 0
 fi
@@ -33,5 +32,5 @@ done;
 echo -e "${GREENBOLD}...Complete.${RESET}"
 echo ""
 
-echo -e "${CYANBOLD}Running Docker container:${RESET} ${GREENBOLD}$1${RESET}"
-docker run -it -p 5000:5000 --rm $1
+echo -e "${CYANBOLD}Running Docker container:${RESET} ${DOCKERIMAGE}${RESET}"
+docker run -it -p 5000:5000 --rm $DOCKERIMAGE

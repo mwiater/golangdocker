@@ -218,6 +218,7 @@ http://{your-host-ip-address}:5000/api/v1/load
 ##### API Metrics:
 
 For simplicity, the default [Fiber Monitor middleware](https://docs.gofiber.io/api/middleware/monitor) is included and available at:
+
 `http://{your-host-ip-address}:5000/api/v1/metrics`
 
 
@@ -229,7 +230,9 @@ For simplicity, the default [Fiber Monitor middleware](https://docs.gofiber.io/a
 
 When updating documentation, you must run this to regenerate docs data: `swag init` (`swag init` is incorporated into the bash scripts for convenience, e.g.: [docker_run.sh](../../blob/master/docker_run.sh))
 
-Then, when you run the application, docs are avaialble at: `http://192.168.0.91:5000/api/v1/docs/index.html`
+Then, when you run the application, docs are avaialble at:
+
+`http://{your-host-ip-address}:5000/api/v1/docs/index.html`
 
 ## Tests
 

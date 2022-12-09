@@ -6,6 +6,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/monitor"
+	"github.com/mattwiater/golangdocker/common"
 	"github.com/mattwiater/golangdocker/config"
 	"github.com/mattwiater/golangdocker/sysinfo"
 	"github.com/shirou/gopsutil/v3/host"
@@ -128,6 +129,14 @@ func readLoadInfo(c *fiber.Ctx) error {
 // @Description Setup Fiber API routes
 // @Tags Fiber API
 func SetupRoute(cfg config.Config) *fiber.App {
+
+	if cfg.Options.Debug == true {
+		fmt.Println(common.ConsoleInfo("Multi-stage image build tests:"))
+		sysinfo.TestTZ()
+		sysinfo.TestTLS()
+		fmt.Println("")
+	}
+
 	app := *fiber.New()
 	app.Use(func(c *fiber.Ctx) error {
 		c.Locals("port", cfg.Server.Port)

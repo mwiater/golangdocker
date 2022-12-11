@@ -1,7 +1,6 @@
 package api
 
 import (
-	"errors"
 	"fmt"
 	"time"
 
@@ -57,15 +56,8 @@ func readAPIIndex(c *fiber.Ctx) error {
 func readMemInfo(c *fiber.Ctx) error {
 	memInfo, err := sysinfo.GetMemInfo(c)
 	if err != nil {
-		fmt.Println("!!!")
+		return fiber.NewError(fiber.StatusServiceUnavailable, err.Error())
 	}
-
-	err2 := errors.New("something didn't work")
-
-	if err2 != nil {
-		return fiber.NewError(fiber.StatusServiceUnavailable, err2.Error())
-	}
-
 	c.Status(200).JSON(&fiber.Map{
 		"memInfo": memInfo,
 	})
@@ -81,6 +73,10 @@ func readMemInfo(c *fiber.Ctx) error {
 // @Success 200 {object} map[string]interface{}
 // @Router /api/v1/cpu [get]
 func readCPUInfo(c *fiber.Ctx) error {
+	cpuInfo, err := sysinfo.GetCPUInfo(c)
+	if err != nil {
+		return fiber.NewError(fiber.StatusServiceUnavailable, err.Error())
+	}
 	c.Status(200).JSON(&fiber.Map{
 		"cpuInfo": cpuInfo,
 	})
@@ -96,7 +92,10 @@ func readCPUInfo(c *fiber.Ctx) error {
 // @Success 200 {object} map[string]interface{}
 // @Router /api/v1/host [get]
 func readHostInfo(c *fiber.Ctx) error {
-	hostInfo := sysinfo.GetHostInfo(c)
+	hostInfo, err := sysinfo.GetHostInfo(c)
+	if err != nil {
+		return fiber.NewError(fiber.StatusServiceUnavailable, err.Error())
+	}
 	c.Status(200).JSON(&fiber.Map{
 		"hostInfo": hostInfo,
 	})
@@ -112,7 +111,10 @@ func readHostInfo(c *fiber.Ctx) error {
 // @Success 200 {object} map[string]interface{}
 // @Router /api/v1/net [get]
 func readNetInfo(c *fiber.Ctx) error {
-	netInfo := sysinfo.GetNetInfo(c)
+	netInfo, err := sysinfo.GetNetInfo(c)
+	if err != nil {
+		return fiber.NewError(fiber.StatusServiceUnavailable, err.Error())
+	}
 	c.Status(200).JSON(&fiber.Map{
 		"netInfo": netInfo,
 	})
@@ -128,7 +130,10 @@ func readNetInfo(c *fiber.Ctx) error {
 // @Success 200 {object} map[string]interface{}
 // @Router /api/v1/load [get]
 func readLoadInfo(c *fiber.Ctx) error {
-	loadInfo := sysinfo.GetLoadInfo(c)
+	loadInfo, err := sysinfo.GetLoadInfo(c)
+	if err != nil {
+		return fiber.NewError(fiber.StatusServiceUnavailable, err.Error())
+	}
 	c.Status(200).JSON(&fiber.Map{
 		"loadInfo": loadInfo,
 	})
@@ -141,14 +146,13 @@ func TimerHandler() fiber.Handler {
 		start := time.Now()
 		c.Next()
 		defer func() {
-			c.Append("Server-timing", fmt.Sprintf("app;dur=%v", time.Since(start).String()))
+			c.Append("Server-timing", fmt.Sprintf("route;dur=%v", time.Since(start).Milliseconds()))
 		}()
 		return nil
 	}
 }
 
 func CustomHeaders(c *fiber.Ctx) error {
-	fmt.Println("CustomHeaders")
 	hostInfo, _ := host.Info()
 	c.Append("Hostname", fmt.Sprintf("%v", hostInfo.Hostname))
 	c.Append("Hostid", fmt.Sprintf("%v", hostInfo.HostID))
@@ -169,11 +173,9 @@ func SetupRoute(cfg config.Config) *fiber.App {
 	}
 
 	app := *fiber.New()
-
 	app.Use(TimerHandler())
 	app.Use(CustomHeaders)
 	app.Use(func(c *fiber.Ctx) error {
-		fmt.Println("Debug")
 		c.Locals("port", cfg.Server.Port)
 		c.Locals("debug", cfg.Options.Debug)
 		return c.Next()

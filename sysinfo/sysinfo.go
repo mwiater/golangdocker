@@ -79,9 +79,8 @@ func GetMemInfo(c *fiber.Ctx) (*mem.VirtualMemoryStat, error) {
 	memInfo, _ := mem.VirtualMemory()
 	memInfoBytes, err := json.Marshal(memInfo)
 	if err != nil {
-		return nil, fmt.Errorf("json.Marshal Error:", err)
+		return nil, fmt.Errorf("[json.Marshal Error] %v", err.Error())
 	}
-
 	if c.Locals("debug") == true {
 		fmt.Printf("\n\n%s Memory Info:\n\n", common.ConsoleInfo("[ ★ INFO ]"))
 		common.PrettyPrintJSONToConsole(memInfoBytes)
@@ -90,61 +89,57 @@ func GetMemInfo(c *fiber.Ctx) (*mem.VirtualMemoryStat, error) {
 	return memInfo, nil
 }
 
-func GetCPUInfo(c *fiber.Ctx) []cpu.InfoStat {
+func GetCPUInfo(c *fiber.Ctx) ([]cpu.InfoStat, error) {
 	cpuInfo, _ := cpu.Info()
 	cpuInfoBytes, err := json.Marshal(cpuInfo)
 	if err != nil {
-		fmt.Println("ERR", err)
+		return nil, fmt.Errorf("[json.Marshal Error] %v", err.Error())
 	}
-
 	if c.Locals("debug") == true {
 		fmt.Printf("\n\n%s CPU Info:\n\n", common.ConsoleInfo("[ ★ INFO ]"))
 		common.PrettyPrintJSONToConsole(cpuInfoBytes)
 	}
 
-	return cpuInfo
+	return cpuInfo, nil
 }
 
-func GetHostInfo(c *fiber.Ctx) *host.InfoStat {
+func GetHostInfo(c *fiber.Ctx) (*host.InfoStat, error) {
 	hostInfo, _ := host.Info()
 	hostInfoBytes, err := json.Marshal(hostInfo)
 	if err != nil {
-		fmt.Println("ERR", err)
+		return nil, fmt.Errorf("[json.Marshal Error] %v", err.Error())
 	}
-
 	if c.Locals("debug") == true {
 		fmt.Printf("\n\n%s Host Info:\n\n", common.ConsoleInfo("[ ★ INFO ]"))
 		common.PrettyPrintJSONToConsole(hostInfoBytes)
 	}
 
-	return hostInfo
+	return hostInfo, nil
 }
 
-func GetNetInfo(c *fiber.Ctx) []net.InterfaceStat {
+func GetNetInfo(c *fiber.Ctx) ([]net.InterfaceStat, error) {
 	netInfo, _ := net.Interfaces()
 	netInfoBytes, err := json.Marshal(netInfo)
 	if err != nil {
-		fmt.Println("ERR", err)
+		return nil, fmt.Errorf("[json.Marshal Error] %v", err.Error())
 	}
-
 	if c.Locals("debug") == true {
 		fmt.Printf("\n\n%s Net Info:\n\n", common.ConsoleInfo("[ ★ INFO ]"))
 		common.PrettyPrintJSONToConsole(netInfoBytes)
 	}
 
-	return netInfo
+	return netInfo, nil
 }
 
-func GetLoadInfo(c *fiber.Ctx) *load.AvgStat {
+func GetLoadInfo(c *fiber.Ctx) (*load.AvgStat, error) {
 	loadInfo, _ := load.Avg()
 	loadInfoBytes, err := json.Marshal(loadInfo)
 	if err != nil {
-		fmt.Println("ERR", err)
+		return nil, fmt.Errorf("[json.Marshal Error] %v", err.Error())
 	}
 	if c.Locals("debug") == true {
 		fmt.Printf("\n\n%s Load Info:\n\n", common.ConsoleInfo("[ ★ INFO ]"))
 		common.PrettyPrintJSONToConsole(loadInfoBytes)
 	}
-
-	return loadInfo
+	return loadInfo, nil
 }

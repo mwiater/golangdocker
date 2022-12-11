@@ -75,11 +75,11 @@ func GetAPIRoutes(c *fiber.Ctx) []string {
 	return routePaths
 }
 
-func GetMemInfo(c *fiber.Ctx) *mem.VirtualMemoryStat {
+func GetMemInfo(c *fiber.Ctx) (*mem.VirtualMemoryStat, error) {
 	memInfo, _ := mem.VirtualMemory()
 	memInfoBytes, err := json.Marshal(memInfo)
 	if err != nil {
-		fmt.Println("ERR", err)
+		return nil, fmt.Errorf("json.Marshal Error:", err)
 	}
 
 	if c.Locals("debug") == true {
@@ -87,7 +87,7 @@ func GetMemInfo(c *fiber.Ctx) *mem.VirtualMemoryStat {
 		common.PrettyPrintJSONToConsole(memInfoBytes)
 	}
 
-	return memInfo
+	return memInfo, nil
 }
 
 func GetCPUInfo(c *fiber.Ctx) []cpu.InfoStat {

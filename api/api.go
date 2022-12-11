@@ -1,7 +1,9 @@
 package api
 
 import (
+	"errors"
 	"fmt"
+	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
@@ -53,7 +55,17 @@ func readAPIIndex(c *fiber.Ctx) error {
 // @Success 200 {object} map[string]interface{}
 // @Router /api/v1/mem [get]
 func readMemInfo(c *fiber.Ctx) error {
-	memInfo := sysinfo.GetMemInfo(c)
+	memInfo, err := sysinfo.GetMemInfo(c)
+	if err != nil {
+		fmt.Println("!!!")
+	}
+
+	err2 := errors.New("something didn't work")
+
+	if err2 != nil {
+		return fiber.NewError(fiber.StatusServiceUnavailable, err2.Error())
+	}
+
 	c.Status(200).JSON(&fiber.Map{
 		"memInfo": memInfo,
 	})
@@ -69,7 +81,6 @@ func readMemInfo(c *fiber.Ctx) error {
 // @Success 200 {object} map[string]interface{}
 // @Router /api/v1/cpu [get]
 func readCPUInfo(c *fiber.Ctx) error {
-	cpuInfo := sysinfo.GetCPUInfo(c)
 	c.Status(200).JSON(&fiber.Map{
 		"cpuInfo": cpuInfo,
 	})
@@ -124,13 +135,33 @@ func readLoadInfo(c *fiber.Ctx) error {
 	return nil
 }
 
+// New creates a new middleware handler
+func TimerHandler() fiber.Handler {
+	return func(c *fiber.Ctx) error {
+		start := time.Now()
+		c.Next()
+		defer func() {
+			c.Append("Server-timing", fmt.Sprintf("app;dur=%v", time.Since(start).String()))
+		}()
+		return nil
+	}
+}
+
+func CustomHeaders(c *fiber.Ctx) error {
+	fmt.Println("CustomHeaders")
+	hostInfo, _ := host.Info()
+	c.Append("Hostname", fmt.Sprintf("%v", hostInfo.Hostname))
+	c.Append("Hostid", fmt.Sprintf("%v", hostInfo.HostID))
+	return c.Next()
+}
+
 // SetupRoute ... Setup Fiber API routes
 // @Summary Setup Fiber API routes
 // @Description Setup Fiber API routes
 // @Tags Fiber API
 func SetupRoute(cfg config.Config) *fiber.App {
 
-	if cfg.Options.Debug == true {
+	if cfg.Options.Debug {
 		fmt.Println(common.ConsoleInfo("Multi-stage image build tests:"))
 		sysinfo.TestTZ()
 		sysinfo.TestTLS()
@@ -138,20 +169,15 @@ func SetupRoute(cfg config.Config) *fiber.App {
 	}
 
 	app := *fiber.New()
+
+	app.Use(TimerHandler())
+	app.Use(CustomHeaders)
 	app.Use(func(c *fiber.Ctx) error {
+		fmt.Println("Debug")
 		c.Locals("port", cfg.Server.Port)
 		c.Locals("debug", cfg.Options.Debug)
 		return c.Next()
 	})
-
-	hostInfo, _ := host.Info()
-
-	app.Use(func(c *fiber.Ctx) error {
-		c.Append("Hostname", fmt.Sprintf("%v", hostInfo.Hostname))
-		c.Append("Hostid", fmt.Sprintf("%v", hostInfo.HostID))
-		return c.Next()
-	})
-
 	app.Use(logger.New(logger.Config{
 		Format:     "[${time}] ${method}:${path}: ${status} (${latency}) | Bytes In: ${bytesReceived} Bytes Out: ${bytesSent}\n",
 		TimeFormat: "2006-01-02T15:04:05",
@@ -169,6 +195,12 @@ func SetupRoute(cfg config.Config) *fiber.App {
 
 	// Routes for Swagger API Docs
 	app.Get("/api/v1/docs/*", fiberSwagger.WrapHandler)
+
+	app.Hooks().OnRoute(func(r fiber.Route) error {
+		fmt.Print("Name: " + r.Name + ", ")
+
+		return nil
+	})
 
 	return &app
 }

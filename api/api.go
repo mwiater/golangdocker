@@ -140,8 +140,8 @@ func readLoadInfo(c *fiber.Ctx) error {
 	return nil
 }
 
-// New creates a new middleware handler
-func TimerHandler() fiber.Handler {
+// New creates a new middleware handler that wraps all other middleware
+func RouteTimerHandler() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		start := time.Now()
 		c.Next()
@@ -164,7 +164,6 @@ func CustomHeaders(c *fiber.Ctx) error {
 // @Description Setup Fiber API routes
 // @Tags Fiber API
 func SetupRoute(cfg config.Config) *fiber.App {
-
 	if cfg.Options.Debug {
 		fmt.Println(common.ConsoleInfo("Multi-stage image build tests:"))
 		sysinfo.TestTZ()
@@ -173,7 +172,7 @@ func SetupRoute(cfg config.Config) *fiber.App {
 	}
 
 	app := *fiber.New()
-	app.Use(TimerHandler())
+	app.Use(RouteTimerHandler())
 	app.Use(CustomHeaders)
 	app.Use(func(c *fiber.Ctx) error {
 		c.Locals("port", cfg.Server.Port)
@@ -197,12 +196,6 @@ func SetupRoute(cfg config.Config) *fiber.App {
 
 	// Routes for Swagger API Docs
 	app.Get("/api/v1/docs/*", fiberSwagger.WrapHandler)
-
-	app.Hooks().OnRoute(func(r fiber.Route) error {
-		fmt.Print("Name: " + r.Name + ", ")
-
-		return nil
-	})
 
 	return &app
 }

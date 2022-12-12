@@ -1,12 +1,30 @@
 config:
   phases:
     - duration: 60
-      arrivalRate: 10
+      arrivalRate: 5
+      name: Warm up
+    - duration: 120
+      arrivalRate: 5
+      rampTo: 50
+      name: Ramp up load
+    - duration: 600
+      arrivalRate: 50
       name: Sustained load
+  plugins:
+    metrics-by-endpoint:
+      useOnlyRequestNames: false
   processor: "custom-artillery-functions.js"
 scenarios:
   - name: "golang.0nezer0.com"
     flow:
+
+    - get:
+        url: "/v1"
+        afterResponse: "customMetrics"
+
+    - get:
+        url: "/v1/cpu"
+        afterResponse: "customMetrics"
 
     - get:
         url: "/v1/host"
@@ -15,5 +33,17 @@ scenarios:
             as: "virtualizationSystem"
           - json: "$['hostInfo']['hostname']"
             as: "hostname"
-        afterResponse: "logHeaders"
-    - log: "{{ hostname }} [{{ virtualizationSystem }}]"
+        afterResponse: "customMetrics"
+    # - log: "{{ hostname }} [{{ virtualizationSystem }}]" # Here to ensure we are correctly load-balancing different pods in K8s deployment
+
+    - get:
+        url: "/v1/load"
+        afterResponse: "customMetrics"
+
+    - get:
+        url: "/v1/mem"
+        afterResponse: "customMetrics"
+
+    - get:
+        url: "/v1/net"
+        afterResponse: "customMetrics"

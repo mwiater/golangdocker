@@ -76,7 +76,10 @@ func GetAPIRoutes(c *fiber.Ctx) []string {
 }
 
 func GetMemInfo(c *fiber.Ctx) (*mem.VirtualMemoryStat, error) {
-	memInfo, _ := mem.VirtualMemory()
+	memInfo, err := mem.VirtualMemory()
+	if err != nil {
+		return nil, fmt.Errorf("[mem.VirtualMemory() Error] %v", err.Error())
+	}
 	memInfoBytes, err := json.Marshal(memInfo)
 	if err != nil {
 		return nil, fmt.Errorf("[json.Marshal Error] %v", err.Error())
@@ -90,7 +93,10 @@ func GetMemInfo(c *fiber.Ctx) (*mem.VirtualMemoryStat, error) {
 }
 
 func GetCPUInfo(c *fiber.Ctx) ([]cpu.InfoStat, error) {
-	cpuInfo, _ := cpu.Info()
+	cpuInfo, err := cpu.Info()
+	if err != nil {
+		return nil, fmt.Errorf("[mem.VirtualMemory() Error] %v", err.Error())
+	}
 	cpuInfoBytes, err := json.Marshal(cpuInfo)
 	if err != nil {
 		return nil, fmt.Errorf("[json.Marshal Error] %v", err.Error())
@@ -104,7 +110,10 @@ func GetCPUInfo(c *fiber.Ctx) ([]cpu.InfoStat, error) {
 }
 
 func GetHostInfo(c *fiber.Ctx) (*host.InfoStat, error) {
-	hostInfo, _ := host.Info()
+	hostInfo, err := host.Info()
+	if err != nil {
+		return nil, fmt.Errorf("[host.Info() Error] %v", err.Error())
+	}
 	hostInfoBytes, err := json.Marshal(hostInfo)
 	if err != nil {
 		return nil, fmt.Errorf("[json.Marshal Error] %v", err.Error())
@@ -118,7 +127,10 @@ func GetHostInfo(c *fiber.Ctx) (*host.InfoStat, error) {
 }
 
 func GetNetInfo(c *fiber.Ctx) ([]net.InterfaceStat, error) {
-	netInfo, _ := net.Interfaces()
+	netInfo, err := net.Interfaces()
+	if err != nil {
+		return nil, fmt.Errorf("[net.Interfaces() Error] %v", err.Error())
+	}
 	netInfoBytes, err := json.Marshal(netInfo)
 	if err != nil {
 		return nil, fmt.Errorf("[json.Marshal Error] %v", err.Error())
@@ -132,7 +144,10 @@ func GetNetInfo(c *fiber.Ctx) ([]net.InterfaceStat, error) {
 }
 
 func GetLoadInfo(c *fiber.Ctx) (*load.AvgStat, error) {
-	loadInfo, _ := load.Avg()
+	loadInfo, err := load.Avg()
+	if err != nil {
+		return nil, fmt.Errorf("[load.Avg() Error] %v", err.Error())
+	}
 	loadInfoBytes, err := json.Marshal(loadInfo)
 	if err != nil {
 		return nil, fmt.Errorf("[json.Marshal Error] %v", err.Error())

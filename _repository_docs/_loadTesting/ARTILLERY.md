@@ -2,9 +2,20 @@
 
 [WORK IN PROGRESS]
 
+## To Do
+- [ ] Explore custom metrics options in more depth.
+- [ ] Generate applicable reports for comparison between bare go app, dockerized app, and k8s replicas.
+
+
 ## Install
 
 `npm install -g artillery@latest`
+
+## Plugins
+
+[Official: Per-endpoint (URL) metrics](https://www.artillery.io/docs/guides/plugins/plugin-metrics-by-endpoint#useonlyrequestnames)
+
+`npm install artillery-plugin-metrics-by-endpoint`
 
 ## Load Tests
 
@@ -32,7 +43,7 @@ artillery run --output golangdocker-docker.json --target http://192.168.0.91:500
 
 ## K8s
 
-Assumes working K8s cluster...
+Assumes working K8s cluster and manual scaling of replicas for each test, e.g.:
 
 ```
 clear && \
@@ -45,3 +56,5 @@ clear && \
 artillery run --output golangdocker-k8s-2-replica.json --target http://golang.0nezer0.com/api golangdocker-loadtest.yml && \
 	artillery report golangdocker-k8s-2-replica.json
 ```
+
+...

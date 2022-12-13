@@ -1,10 +1,11 @@
+// Package sysinfo implements functions for gathering system information
+// via the https://github.com/shirou/gopsutil/ package.
 package sysinfo
 
 import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"os"
 	"sort"
 	"time"
 
@@ -17,6 +18,9 @@ import (
 	"github.com/shirou/gopsutil/v3/net"
 )
 
+// TestTZ checks to see if the timezone data was properly included in the docker multi-stage build.
+//
+// This is only executed when 'debug' is set to 'true' in 'config/appConfig.yml'.
 func TestTZ() (errors int) {
 	pacific, err := time.LoadLocation("America/Los_Angeles")
 	if err != nil {
@@ -28,6 +32,9 @@ func TestTZ() (errors int) {
 	return
 }
 
+// TestTLS checks to see if the certificates were properly included in the docker multi-stage build.
+//
+// This is only executed when 'debug' is set to 'true' in 'config/appConfig.yml'.
 func TestTLS() (errors int) {
 	url := "https://google.com"
 	rsp, err := http.Get(url)
@@ -41,21 +48,21 @@ func TestTLS() (errors int) {
 	return
 }
 
-func FileSys() (errors int) {
-	outputDirRead, _ := os.Open("./proc")
-	procFiles, err := outputDirRead.ReadDir(0)
-	if err != nil {
-		fmt.Println(err)
-		errors++
-	}
-
-	for _, procFile := range procFiles {
-		fmt.Println(procFile.Name(), procFile.IsDir())
-	}
-
-	return
-}
-
+// GetAPIRoutes collects active Fiber routes, parses them, and returns the data or an error.
+//
+// Returned data example:
+//
+//	[
+//		"/",
+//		"/api/v1",
+//		"/api/v1/cpu",
+//		"/api/v1/docs/*",
+//		"/api/v1/host",
+//		"/api/v1/load",
+//		"/api/v1/mem",
+//		"/api/v1/metrics",
+//		"/api/v1/net"
+//	]
 func GetAPIRoutes(c *fiber.Ctx) []string {
 	app := c.App()
 	routes := app.GetRoutes()
@@ -75,7 +82,20 @@ func GetAPIRoutes(c *fiber.Ctx) []string {
 	return routePaths
 }
 
-func GetMemInfo(c *fiber.Ctx) (*mem.VirtualMemoryStat, error) {
+// GetMemInfo collects local system memory info, parses it, and returns the data or an error.
+//
+// Returned data example (truncated ...):
+//
+//	{
+//		memInfo: {
+//			total: 8247103488,
+//			available: 5860028416,
+//			used: 2075901952,
+//			usedPercent: 25.171285349099282,
+//			...
+//		}
+//	}
+func GetMemInfo(debug bool) (*mem.VirtualMemoryStat, error) {
 	memInfo, err := mem.VirtualMemory()
 	if err != nil {
 		return nil, fmt.Errorf("[mem.VirtualMemory() Error] %v", err.Error())
@@ -84,7 +104,7 @@ func GetMemInfo(c *fiber.Ctx) (*mem.VirtualMemoryStat, error) {
 	if err != nil {
 		return nil, fmt.Errorf("[json.Marshal Error] %v", err.Error())
 	}
-	if c.Locals("debug") == true {
+	if debug {
 		fmt.Printf("\n\n%s Memory Info:\n\n", common.ConsoleInfo("[ ★ INFO ]"))
 		common.PrettyPrintJSONToConsole(memInfoBytes)
 	}
@@ -92,7 +112,46 @@ func GetMemInfo(c *fiber.Ctx) (*mem.VirtualMemoryStat, error) {
 	return memInfo, nil
 }
 
-func GetCPUInfo(c *fiber.Ctx) ([]cpu.InfoStat, error) {
+// GetCPUInfo collects local system cpu info, parses it, and returns the data or an error.
+//
+// Returned data example (truncated ...):
+//
+//	{
+//		memInfo: {
+//			total: 8247103488,
+//			available: 5860028416,
+//			used: 2075901952,
+//			usedPercent: 25.171285349099282,
+//			...
+//		}
+//	}
+
+//	{
+//		cpuInfo: {
+//			[
+//				{
+//					"cpu": 0,
+//					"vendorId": "GenuineIntel",
+//					"family": "6",
+//					"model": "76",
+//					"stepping": 4,
+//					"physicalId": "0",
+//					 "coreId": "0",
+//					"cores": 1,
+//					"modelName": "Intel(R) Pentium(R) CPU  N3710  @ 1.60GHz",
+//					"mhz": 2560,
+//					"cacheSize": 1024,
+//					"flags": [
+//						"fpu",
+//						"vme",
+//						"de",
+//						...
+//					],
+//				}
+//			]
+//		}
+//	}
+func GetCPUInfo(debug bool) ([]cpu.InfoStat, error) {
 	cpuInfo, err := cpu.Info()
 	if err != nil {
 		return nil, fmt.Errorf("[mem.VirtualMemory() Error] %v", err.Error())
@@ -101,15 +160,36 @@ func GetCPUInfo(c *fiber.Ctx) ([]cpu.InfoStat, error) {
 	if err != nil {
 		return nil, fmt.Errorf("[json.Marshal Error] %v", err.Error())
 	}
-	if c.Locals("debug") == true {
-		fmt.Printf("\n\n%s CPU Info:\n\n", common.ConsoleInfo("[ ★ INFO ]"))
+
+	if debug {
+		fmt.Printf("\n\n%s Memory Info:\n\n", common.ConsoleInfo("[ ★ INFO ]"))
 		common.PrettyPrintJSONToConsole(cpuInfoBytes)
 	}
 
 	return cpuInfo, nil
 }
 
-func GetHostInfo(c *fiber.Ctx) (*host.InfoStat, error) {
+// GetHostInfo collects local system host info, parses it, and returns the data or an error.
+//
+// Returned data example:
+//
+//	{
+//		hostInfo: {
+//			uptime: 1386790,
+//			bootTime: 1669484114,
+//			procs: 193,
+//			os: "linux",
+//			platform: "ubuntu",
+//			platformFamily: "debian",
+//			platformVersion: "20.04",
+//			kernelVersion: "5.4.0-110-generic",
+//			kernelArch: "x86_64",
+//			virtualizationSystem: "kvm",
+//			virtualizationRole: "host",
+//			hostId: "3a114467-105a-48a5-9419-32654a9b2076"
+//		}
+//	}
+func GetHostInfo(debug bool) (*host.InfoStat, error) {
 	hostInfo, err := host.Info()
 	if err != nil {
 		return nil, fmt.Errorf("[host.Info() Error] %v", err.Error())
@@ -118,15 +198,43 @@ func GetHostInfo(c *fiber.Ctx) (*host.InfoStat, error) {
 	if err != nil {
 		return nil, fmt.Errorf("[json.Marshal Error] %v", err.Error())
 	}
-	if c.Locals("debug") == true {
-		fmt.Printf("\n\n%s Host Info:\n\n", common.ConsoleInfo("[ ★ INFO ]"))
+
+	if debug {
+		fmt.Printf("\n\n%s Memory Info:\n\n", common.ConsoleInfo("[ ★ INFO ]"))
 		common.PrettyPrintJSONToConsole(hostInfoBytes)
 	}
 
 	return hostInfo, nil
 }
 
-func GetNetInfo(c *fiber.Ctx) ([]net.InterfaceStat, error) {
+// GetNetInfo collects local system network info, parses it, and returns the data or an error.
+//
+// Returned data example (truncated ...):
+//
+//	{
+//		netInfo: [
+//			{
+//				index: 1,
+//				mtu: 65536,
+//				name: "lo",
+//				hardwareAddr: "",
+//				flags: [
+//					"up",
+//					"loopback"
+//				],
+//				addrs: [
+//					{
+//						addr: "127.0.0.1/8"
+//					},
+//					{
+//						addr: "::1/128"
+//					}
+//				]
+//			},
+//			...
+//		]
+//	}
+func GetNetInfo(debug bool) ([]net.InterfaceStat, error) {
 	netInfo, err := net.Interfaces()
 	if err != nil {
 		return nil, fmt.Errorf("[net.Interfaces() Error] %v", err.Error())
@@ -135,15 +243,27 @@ func GetNetInfo(c *fiber.Ctx) ([]net.InterfaceStat, error) {
 	if err != nil {
 		return nil, fmt.Errorf("[json.Marshal Error] %v", err.Error())
 	}
-	if c.Locals("debug") == true {
-		fmt.Printf("\n\n%s Net Info:\n\n", common.ConsoleInfo("[ ★ INFO ]"))
+
+	if debug {
+		fmt.Printf("\n\n%s Memory Info:\n\n", common.ConsoleInfo("[ ★ INFO ]"))
 		common.PrettyPrintJSONToConsole(netInfoBytes)
 	}
 
 	return netInfo, nil
 }
 
-func GetLoadInfo(c *fiber.Ctx) (*load.AvgStat, error) {
+// GetLoadInfo collects local system load info, parses it, and returns the data or an error.
+//
+// Returned data example:
+//
+//	{
+//		loadInfo: {
+//			load1: 0.58,
+//			load5: 0.87,
+//			load15: 0.9
+//		}
+//	}
+func GetLoadInfo(debug bool) (*load.AvgStat, error) {
 	loadInfo, err := load.Avg()
 	if err != nil {
 		return nil, fmt.Errorf("[load.Avg() Error] %v", err.Error())
@@ -152,9 +272,11 @@ func GetLoadInfo(c *fiber.Ctx) (*load.AvgStat, error) {
 	if err != nil {
 		return nil, fmt.Errorf("[json.Marshal Error] %v", err.Error())
 	}
-	if c.Locals("debug") == true {
-		fmt.Printf("\n\n%s Load Info:\n\n", common.ConsoleInfo("[ ★ INFO ]"))
+
+	if debug {
+		fmt.Printf("\n\n%s Memory Info:\n\n", common.ConsoleInfo("[ ★ INFO ]"))
 		common.PrettyPrintJSONToConsole(loadInfoBytes)
 	}
+
 	return loadInfo, nil
 }

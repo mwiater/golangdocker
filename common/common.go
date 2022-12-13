@@ -9,5 +9,6 @@ func UniqueSlice(s []string) []string {
 			result = append(result, str)
 		}
 	}
+
 	return result
 }

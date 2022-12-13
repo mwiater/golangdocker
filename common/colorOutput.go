@@ -21,7 +21,7 @@ func PrettyPrintJSONToConsole(b []byte) {
 
 	err := json.Indent(&out, b, "", "\t")
 	if err != nil {
-		log.Println("!!!!")
+		log.Println("Error:", err)
 	}
 	out.Write([]byte("\n\n"))
 	out.WriteTo(os.Stdout)

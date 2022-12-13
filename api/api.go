@@ -54,7 +54,11 @@ func readAPIIndex(c *fiber.Ctx) error {
 // @Success 200 {object} map[string]interface{}
 // @Router /api/v1/mem [get]
 func readMemInfo(c *fiber.Ctx) error {
-	memInfo, err := sysinfo.GetMemInfo(c)
+	debug := false
+	if c.Locals("debug") == true {
+		debug = true
+	}
+	memInfo, err := sysinfo.GetMemInfo(debug)
 	if err != nil {
 		return fiber.NewError(fiber.StatusServiceUnavailable, err.Error())
 	}
@@ -73,7 +77,11 @@ func readMemInfo(c *fiber.Ctx) error {
 // @Success 200 {object} map[string]interface{}
 // @Router /api/v1/cpu [get]
 func readCPUInfo(c *fiber.Ctx) error {
-	cpuInfo, err := sysinfo.GetCPUInfo(c)
+	debug := false
+	if c.Locals("debug") == true {
+		debug = true
+	}
+	cpuInfo, err := sysinfo.GetCPUInfo(debug)
 	if err != nil {
 		return fiber.NewError(fiber.StatusServiceUnavailable, err.Error())
 	}
@@ -92,7 +100,11 @@ func readCPUInfo(c *fiber.Ctx) error {
 // @Success 200 {object} map[string]interface{}
 // @Router /api/v1/host [get]
 func readHostInfo(c *fiber.Ctx) error {
-	hostInfo, err := sysinfo.GetHostInfo(c)
+	debug := false
+	if c.Locals("debug") == true {
+		debug = true
+	}
+	hostInfo, err := sysinfo.GetHostInfo(debug)
 	if err != nil {
 		return fiber.NewError(fiber.StatusServiceUnavailable, err.Error())
 	}
@@ -111,7 +123,11 @@ func readHostInfo(c *fiber.Ctx) error {
 // @Success 200 {object} map[string]interface{}
 // @Router /api/v1/net [get]
 func readNetInfo(c *fiber.Ctx) error {
-	netInfo, err := sysinfo.GetNetInfo(c)
+	debug := false
+	if c.Locals("debug") == true {
+		debug = true
+	}
+	netInfo, err := sysinfo.GetNetInfo(debug)
 	if err != nil {
 		return fiber.NewError(fiber.StatusServiceUnavailable, err.Error())
 	}
@@ -130,7 +146,11 @@ func readNetInfo(c *fiber.Ctx) error {
 // @Success 200 {object} map[string]interface{}
 // @Router /api/v1/load [get]
 func readLoadInfo(c *fiber.Ctx) error {
-	loadInfo, err := sysinfo.GetLoadInfo(c)
+	debug := false
+	if c.Locals("debug") == true {
+		debug = true
+	}
+	loadInfo, err := sysinfo.GetLoadInfo(debug)
 	if err != nil {
 		return fiber.NewError(fiber.StatusServiceUnavailable, err.Error())
 	}

@@ -6,7 +6,6 @@
 - [ ] Explore custom metrics options in more depth.
 - [ ] Generate applicable reports for comparison between bare go app, dockerized app, and k8s replicas.
 
-
 ## Install
 
 `npm install -g artillery@latest`
@@ -17,9 +16,15 @@
 
 `npm install artillery-plugin-metrics-by-endpoint`
 
+## Custom Scripts
+
+Reference: https://www.artillery.io/docs/guides/guides/extension-apis#example
+
+Working project example here: [custom-artillery-functions.js](../../blob/master/_repository_docs/_loadTesting/custom-artillery-functions.js)
+
 ## Load Tests
 
-In order to benchmark the different run processes, we need to start the app differently before sending a load test. You will alos want to run these test form a different physical machine that where you're running the container from. Keep in mind that these are not real world load tests, as we are mostly testing to targets within the same network.
+In order to benchmark the different run processes, we need to start the app differently before sending a load test. You will alos want to run these test form a different physical machine that where you're running the container from. Keep in mind that these are not real world load tests, as we are mostly testing to targets within the same network. These tests are mainly for comparisons of ruinning the app with different mechanisims, e.g: go app, inside Docker container, within K8s w/ replicas.
 
 ## No container, bare app
 

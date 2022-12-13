@@ -20,7 +20,9 @@
 
 Reference: https://www.artillery.io/docs/guides/guides/extension-apis#example
 
-Working project example here: [custom-artillery-functions.js](../../blob/master/_repository_docs/_loadTesting/custom-artillery-functions.js)
+Working project example here: [custom-artillery-functions.js](../../../../blob/master/_repository_docs/_loadTesting/custom-artillery-functions.js)
+
+This simple example makes use of a custom Fiber middleware wrapper that captures the time spent on the server in each API call and sets a `Server-Timing` response header, e.g.: `Server-Timing: route;dur=16`. See the [RouteTimerHandler()](../../../../blob/master/api/api.go) function in `api/api.go`.
 
 ## Load Tests
 

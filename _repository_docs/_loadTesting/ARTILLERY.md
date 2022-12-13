@@ -1,6 +1,6 @@
 # ARTILLERY
 
-[WORK IN PROGRESS]
+[IN PROGRESS]
 
 ## To Do
 - [ ] Explore custom metrics options in more depth.

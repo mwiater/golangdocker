@@ -121,7 +121,7 @@ func TestAPIRoutes(t *testing.T) {
 
 	app := api.SetupRoute(cfg)
 
-	go app.Listen(":" + strconv.Itoa(cfg.Server.Port))
+	go app.Listen(":" + strconv.Itoa(cfg.Server.Port)) //nolint
 
 	waitForServer(strconv.Itoa(cfg.Server.Port))
 

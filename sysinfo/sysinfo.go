@@ -63,7 +63,7 @@ func TestTLS() (errors int) {
 //		"/api/v1/metrics",
 //		"/api/v1/net"
 //	]
-func GetAPIRoutes(c *fiber.Ctx) []string {
+func GetAPIRoutes(c *fiber.Ctx) ([]string, error) {
 	app := c.App()
 	routes := app.GetRoutes()
 	routePaths := []string{}
@@ -71,15 +71,20 @@ func GetAPIRoutes(c *fiber.Ctx) []string {
 		routePaths = append(routePaths, route.Path)
 	}
 	routePaths = common.UniqueSlice(routePaths)
-	sort.Sort(sort.StringSlice(routePaths))
-	routePathsJSON, _ := json.Marshal(routePaths)
+	sort.Slice(routePaths, func(i, j int) bool {
+		return routePaths[i] < routePaths[j]
+	})
+	routePathsJSON, err := json.Marshal(routePaths)
+	if err != nil {
+		return nil, fmt.Errorf("[json.Marshal Error] %v", err.Error())
+	}
 
 	if c.Locals("debug") == true {
 		fmt.Printf("\n\n%s API Routes:\n\n", common.ConsoleInfo("[ ★ INFO ]"))
 		common.PrettyPrintJSONToConsole(routePathsJSON)
 	}
 
-	return routePaths
+	return routePaths, nil
 }
 
 // GetMemInfo collects local system memory info, parses it, and returns the data or an error.

@@ -1,6 +1,6 @@
 # Godoc
 
-[TO DO]
+[IN PROGRESS]
 
 `godoc -http=:6060`
 

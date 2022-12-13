@@ -1,6 +1,9 @@
 # Gosec
 
-[TO DO]
+[IN PROGRESS]
+
+## To Do
+- [ ] Showing same/similar things to `golangci-lint`, redundant?
 
 ## Install to `./bin/`
 

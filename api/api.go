@@ -25,7 +25,10 @@ import (
 // @Success 200 {object} []string
 // @Router / [get]
 func apiFalseRoot(c *fiber.Ctx) error {
-	c.Redirect("/api/v1")
+	err := c.Redirect("/api/v1")
+	if err != nil {
+		return fiber.NewError(fiber.StatusServiceUnavailable, err.Error())
+	}
 	return nil
 }
 
@@ -38,10 +41,11 @@ func apiFalseRoot(c *fiber.Ctx) error {
 // @Success 200 {object} map[string]interface{}
 // @Router /api/v1 [get]
 func readAPIIndex(c *fiber.Ctx) error {
-	apiRoutes := sysinfo.GetAPIRoutes(c)
-	c.Status(200).JSON(&fiber.Map{
-		"apiRoutes": apiRoutes,
-	})
+	apiRoutes, err := sysinfo.GetAPIRoutes(c)
+	if err != nil {
+		return fiber.NewError(fiber.StatusServiceUnavailable, err.Error())
+	}
+	c.Status(200).JSON(&fiber.Map{"apiRoutes": apiRoutes}) //nolint
 	return nil
 }
 
@@ -62,9 +66,7 @@ func readMemInfo(c *fiber.Ctx) error {
 	if err != nil {
 		return fiber.NewError(fiber.StatusServiceUnavailable, err.Error())
 	}
-	c.Status(200).JSON(&fiber.Map{
-		"memInfo": memInfo,
-	})
+	c.Status(200).JSON(&fiber.Map{"memInfo": memInfo}) //nolint
 	return nil
 }
 
@@ -85,9 +87,7 @@ func readCPUInfo(c *fiber.Ctx) error {
 	if err != nil {
 		return fiber.NewError(fiber.StatusServiceUnavailable, err.Error())
 	}
-	c.Status(200).JSON(&fiber.Map{
-		"cpuInfo": cpuInfo,
-	})
+	c.Status(200).JSON(&fiber.Map{"cpuInfo": cpuInfo}) //nolint
 	return nil
 }
 
@@ -108,9 +108,7 @@ func readHostInfo(c *fiber.Ctx) error {
 	if err != nil {
 		return fiber.NewError(fiber.StatusServiceUnavailable, err.Error())
 	}
-	c.Status(200).JSON(&fiber.Map{
-		"hostInfo": hostInfo,
-	})
+	c.Status(200).JSON(&fiber.Map{"hostInfo": hostInfo}) //nolint
 	return nil
 }
 
@@ -131,9 +129,7 @@ func readNetInfo(c *fiber.Ctx) error {
 	if err != nil {
 		return fiber.NewError(fiber.StatusServiceUnavailable, err.Error())
 	}
-	c.Status(200).JSON(&fiber.Map{
-		"netInfo": netInfo,
-	})
+	c.Status(200).JSON(&fiber.Map{"netInfo": netInfo}) //nolint
 	return nil
 }
 
@@ -154,9 +150,7 @@ func readLoadInfo(c *fiber.Ctx) error {
 	if err != nil {
 		return fiber.NewError(fiber.StatusServiceUnavailable, err.Error())
 	}
-	c.Status(200).JSON(&fiber.Map{
-		"loadInfo": loadInfo,
-	})
+	c.Status(200).JSON(&fiber.Map{"loadInfo": loadInfo}) //nolint
 	return nil
 }
 
@@ -164,7 +158,10 @@ func readLoadInfo(c *fiber.Ctx) error {
 func RouteTimerHandler() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		start := time.Now()
-		c.Next()
+		err := c.Next()
+		if err != nil {
+			return fiber.NewError(fiber.StatusServiceUnavailable, err.Error())
+		}
 		defer func() {
 			c.Append("Server-timing", fmt.Sprintf("route;dur=%v", time.Since(start).Milliseconds()))
 		}()

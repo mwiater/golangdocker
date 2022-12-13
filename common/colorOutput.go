@@ -23,6 +23,14 @@ func PrettyPrintJSONToConsole(b []byte) {
 	if err != nil {
 		log.Println("Error:", err)
 	}
-	out.Write([]byte("\n\n"))
-	out.WriteTo(os.Stdout)
+
+	_, err = out.Write([]byte("\n\n"))
+	if err != nil {
+		log.Println("Error:", err)
+	}
+
+	_, err = out.WriteTo(os.Stdout)
+	if err != nil {
+		log.Println("Error:", err)
+	}
 }

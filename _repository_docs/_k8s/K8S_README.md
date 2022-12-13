@@ -1,5 +1,10 @@
 # K8s
 
+[IN PROGRESS]
+
+## To Do
+- [ ] Working, but walkthrough needs more definition, test commands to ensure cluster setup is correct.
+
 ## Assumptions
 
 You have built the container on the Control Plane node:

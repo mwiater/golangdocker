@@ -4,7 +4,6 @@ Very simple tests are in: [api_test.go](../../../../blob/master/api_test.go)
 
 Run via: `clear && go test -v $(go list ./... | grep -v /docs | grep -v /config | grep -v /api)` #=>
 
-
 ```
 === RUN   TestAPIRoutes
 

@@ -15,7 +15,7 @@ This project is in three parts, each which build on the previous:
   * The Fiber Metrics middleware (API endpoint: `/api/v1/metrics`).
   * Creating and serving API documentation (using `swag init`) based on Swagger specifications: `/api/v1/docs/`).
   * A `YAML` configuration pattern for setting app variables.
-  * Basic Go endpoint tests.
+  * Basic Go endpoint tests via `go test`.
   * Building a binary of the app and embedding external files so that it is portable and self contained.
   * File formatting for *.go files using `gofmt`.
 
@@ -37,6 +37,7 @@ This project is in three parts, each which build on the previous:
 * **Container vs. Pod:** I'm noticing a few instances where I'm using both `container` and `pod` to mean the same thing in the K8s section. Until I make them more consistent, assume they are interchangeable. A pod is basiically a container in in K8s context. While a `pod` can technically have multiple containers, for this demonstration, assume a 1:1 relationship.
 
 ## To Do
+- [x] Cross-compiling: Add scripts: `go_build.sh` and `go_build_arm64.sh` as examples.
 - [ ] Generate Postman collection for reference?
 - [ ] Turn these to-dos into issues!
 - [ ] K8s: Use version tagging instead of `:latest` to provide an example of rolling updates. (Started: [K8S_README.md](../../blob/master/_repository_docs/_k8s/K8S_README.md))

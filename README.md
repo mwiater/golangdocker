@@ -5,23 +5,28 @@
 
 ## Summary
 
-This repository is a work in progress, but I'll do my best to keep the Master branch in a working state. Initially, this project was to create a boilerplate for containerizing Go binaries for use a K8s cluster. For now, just origanizing my notes in order to be able to replicate this process from end-to-end. The idea is to keep this narrow and succinct and be able to use this as a simple boilerplate for Go containers.
+This repository is a work in progress, but I'll do my best to keep the Master branch in a working state. Initially, this project was to create a boilerplate for containerizing Go binaries for use in a K8s cluster. For now, just origanizing my notes in order to be able to replicate this process from end-to-end. The idea is to keep this narrow and succinct and be able to use this as a simple boilerplate for Go containers.
 
-## Topics
+While my intention is to keep this image minimal, I also want to add in my most used go tools, e.g.: `godoc`, `gofmt`, `golangci-lint`, etc. 
+
+## Project Topics
 
 This project is in three parts, each which build on the previous:
 
 ##### 1) A simple but functioanl rest API app written in Go. This rest API incorporates: 
-  * The Fiber Metrics middleware (API endpoint: `/api/v1/metrics`).
-  * Creating and serving API documentation (using `swag init`) based on Swagger specifications: `/api/v1/docs/`).
+  * The [Fiber Monitor middleware](https://docs.gofiber.io/api/middleware/monitor) (API endpoint: `/api/v1/metrics`).
+  * Creating and serving API documentation (using `swag init`) based on [Swagger specifications](https://swagger.io/docs/specification/about/): `/api/v1/docs/`).
   * A `YAML` configuration pattern for setting app variables.
   * Basic Go endpoint tests via `go test`.
-  * Building a binary of the app and embedding external files so that it is portable and self contained.
-  * File formatting for *.go files using `gofmt`.
+  * Building a binary of the app and embedding external files (both native compilation and cross-compilation for `armv6` as an example) so that it is portable and self contained.
+  * Go Tools
+    * File formatting for *.go files using `gofmt`.
+    * Code linting for *.go files using `golangci-lint`.
+    * Code documentation via `godocs`.
 
 ##### 2) Using the app in a Docker container, covering:
-  * Docker build concepts.
-  * Docker run concepts.
+  * [Docker build](https://docs.docker.com/engine/reference/commandline/build/) concepts.
+  * [Docker run](https://docs.docker.com/engine/reference/commandline/run/) concepts.
   * Docker image versioning.
   * Ways to make use of bash scripts for repetative tasks.
 

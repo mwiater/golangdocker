@@ -7,11 +7,11 @@
 
 This repository is a work in progress, but I'll do my best to keep the Master branch in a working state. Initially, this project was to create a boilerplate for containerizing Go binaries for use in a K8s cluster. For now, just origanizing my notes in order to be able to replicate this process from end-to-end. The idea is to keep this narrow and succinct and be able to use this as a simple boilerplate for Go containers.
 
-While my intention is to keep this image minimal, I also want to add in my most used go tools, e.g.: `godoc`, `gofmt`, `golangci-lint`, etc. 
+While my intention is to keep this image minimal, I also want to add in my most used go tools, e.g.: `godoc`, `gofmt`, `golangci-lint`, etc. I will try to make these additions for only tools and packages I find necessary, but it will be an opinionated balance.
 
 ## Project Topics
 
-This project is in three parts, each which build on the previous:
+This project is in three distinct parts, each which build on the previous:
 
 ##### 1) A simple but functioanl rest API app written in Go. This rest API incorporates: 
   * The [Fiber Monitor middleware](https://docs.gofiber.io/api/middleware/monitor) (API endpoint: `/api/v1/metrics`).

@@ -277,3 +277,7 @@ Assuming that your setup is also on your local network, make sure to add add an 
 ```
 192.168.0.91 golang.0nezer0.com
 ```
+
+## Horizontal Pod Autoscaler (HPA)
+
+`kubectl autoscale deployment -n k8s-golang-api  k8s-golang-api --cpu-percent=75 --memory-percent=75 --min=1 --max=3`

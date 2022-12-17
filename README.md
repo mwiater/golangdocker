@@ -40,6 +40,13 @@ This project is in three distinct parts, each which build on the previous:
 
 * **IP Addresses:** For the most part, disregard the hard-coded IP addresses in here (e.g.: my K8s cluster and VM IPs (192.168.*.*)). You'll have to sub in your own for your particular envionment. Right now, laziness!
 * **Container vs. Pod:** I'm noticing a few instances where I'm using both `container` and `pod` to mean the same thing in the K8s section. Until I make them more consistent, assume they are interchangeable. A pod is basiically a container in in K8s context. While a `pod` can technically have multiple containers, for this demonstration, assume a 1:1 relationship.
+* **System** My system and architecture is below, you'll have to adjust your commands if you're departing from Linux/x86_64.
+
+`uname -a`
+
+```
+Linux mjw-udoo-01 5.4.0-110-generic #124-Ubuntu SMP Thu Apr 14 19:46:19 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+```
 
 ## To Do
 - [x] Cross-compiling: Add scripts: `go_build.sh` and `go_build_arm64.sh` as examples.
@@ -88,6 +95,22 @@ hostInfo: {
   hostId: "12345678-1234-5678-90ab-cddeefaabbcc"
   }
 }
+```
+
+## Makefile
+
+[IN PROGRESS]
+
+There is a `Makefile` for convenience. At the moment, it's just acting as a script-runner. To viee the executable tagets, just type: `make`:
+
+```
+Targets in this Makefile:
+
+docker-build
+docker-run
+golang-build
+golang-build-arm64
+golang-run
 ```
 
 ## App

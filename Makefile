@@ -1,5 +1,7 @@
 SHELL=/bin/bash
 
+.PHONY : always-remake
+
 .DEFAULT_GOAL := list
 
 # Color Console Output
@@ -18,13 +20,16 @@ list:
 	@echo ""
 
 golang-run:
-	scripts/go_run.sh
+	scripts/golang_run.sh
 
 golang-build:
-	scripts/go_build.sh
+	scripts/golang_build.sh
 
 golang-build-arm64:
-	scripts/go_build_arm64.sh
+	scripts/golang_build_arm64.sh
+
+golang-test:
+	scripts/golang_test.sh
 
 docker-build:
 	scripts/docker_build.sh

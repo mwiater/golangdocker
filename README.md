@@ -3,13 +3,13 @@
 | !["Go"](_repository_docs/_repository_assets/logo-golang.png?raw=true "Go") | !["Docker"](_repository_docs/_repository_assets/logo-docker.png?raw=true "Docker") | !["Fiber"](_repository_docs/_repository_assets/logo-golang-fiber.png?raw=true "Fiber") | !["Kubernetes"](_repository_docs/_repository_assets/logo-k8s.png?raw=true "Kubernetes") |
 |:-------------:|:-------------:|:-------------:|:-------------:|
 
+**To jump directly into the app, head down to the [App section](../../blob/master/README.md#app)!**
+
 ## Summary
 
 This repository is a work in progress, but I'll do my best to keep the Master branch in a working state. Initially, this project was to create a boilerplate for containerizing Go binaries for use in a K8s cluster. For now, just origanizing my notes in order to be able to replicate this process from end-to-end. The idea is to keep this narrow and succinct and be able to use this as a simple boilerplate for Go containers.
 
 While my intention is to keep this image minimal, I also want to add in my most used go tools, e.g.: `godoc`, `gofmt`, `golangci-lint`, etc. I will try to make these additions for only tools and packages I find necessary, but it will be an opinionated balance.
-
-**To jump directly into the app, head down to the [App section](../../blob/master/README.md#app)!**
 
 ## Project Topics
 

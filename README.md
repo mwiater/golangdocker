@@ -9,6 +9,8 @@ This repository is a work in progress, but I'll do my best to keep the Master br
 
 While my intention is to keep this image minimal, I also want to add in my most used go tools, e.g.: `godoc`, `gofmt`, `golangci-lint`, etc. I will try to make these additions for only tools and packages I find necessary, but it will be an opinionated balance.
 
+**To jump directly into the app, head down to the [App section](../../blob/master/README.md#app)!**
+
 ## Project Topics
 
 This project is in three distinct parts, each which build on the previous:

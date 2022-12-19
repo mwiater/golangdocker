@@ -1,57 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
-  <title>Your awesome title | Write an awesome description for your new site here. You can edit this line in
-    _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site
-    description.</title>
-  <meta name="generator" content="Jekyll v4.3.1" />
-  <meta property="og:title" content="Your awesome title" />
-  <meta property="og:locale" content="en_US" />
-  <meta name="description"
-    content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description." />
-  <meta property="og:description"
-    content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description." />
-  <link rel="canonical" href="http://0.0.0.0:4000/" />
-  <meta property="og:url" content="http://0.0.0.0:4000/" />
-  <meta property="og:site_name" content="Your awesome title" />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary" />
-  <meta property="twitter:title" content="Your awesome title" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bootstrap demo</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-  <script src="https://kit.fontawesome.com/5ae6879468.js" crossorigin="anonymous"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
-  <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","description":"Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.","headline":"Your awesome title","name":"Your awesome title","url":"http://0.0.0.0:4000/"}</script>
-  <!-- End Jekyll SEO tag -->
-  <link rel="stylesheet" href="/assets/main.css">
-  <link rel="stylesheet" href="/css/app.css">
-  <link type="application/atom+xml" rel="alternate" href="http://0.0.0.0:4000/feed.xml" title="Your awesome title" />
-</head>
+---
+layout: null
+---
+{% include header.html %}
 
 <body>
-
-  <body>
-    <div class="container">
-      <header role="banner">
-        golangdocker
-      </header>
-      <div class="row">
-        <div class="col">
-          <h1 id="tests">Tests</h1>
-          <p>Very simple tests are in: <a href="../../../../blob/master/api_test.go">api_test.go</a></p>
-          <p>Run via:
-            <code>clear &amp;&amp; go test -v $(go list ./... | grep -v /docs | grep -v /config | grep -v /api)</code>
-            #=&gt;</p>
-          <pre><code>=== RUN   TestAPIRoutes
+  <div class="container">
+    <header role="banner">
+      golangdocker
+    </header>
+    <div class="row">
+      <div class="col">
+        <h1 id="tests">Tests</h1>
+        <p>Very simple tests are in: <a href="../../../../blob/master/api_test.go">api_test.go</a></p>
+        <p>Run via:
+          <code>clear &amp;&amp; go test -v $(go list ./... | grep -v /docs | grep -v /config | grep -v /api)</code>
+          #=&gt;
+        </p>
+        <pre><code>=== RUN   TestAPIRoutes
 
  ┌───────────────────────────────────────────────────┐
  │                   Fiber v2<span class="hljs-number">.40</span><span class="hljs-number">.1</span>                   │
@@ -88,20 +53,20 @@ ok      github.com<span class="hljs-regexp">/mattwiater/</span>golangdocker/comm
 PASS
 ok      github.com<span class="hljs-regexp">/mattwiater/</span>golangdocker/sysinfo      <span class="hljs-number">0.365</span>s
 </code></pre>
-          <h2 id="test-cache">Test Cache</h2>
-          <p>To clear the test cache, run: <code>go clean -testcache</code></p>
+        <h2 id="test-cache">Test Cache</h2>
+        <p>To clear the test cache, run: <code>go clean -testcache</code></p>
 
-        </div>
       </div>
-      <footer class="site-footer h-card">
-        FOOTER
-      </footer>
     </div>
+    <footer class="site-footer h-card">
+      FOOTER
+    </footer>
+  </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-      crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
 
-  </body>
+</body>
 
 </html>

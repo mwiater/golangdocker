@@ -3,7 +3,13 @@
 | !["Go"](_repository_docs/_repository_assets/logo-golang.png?raw=true "Go") | !["Docker"](_repository_docs/_repository_assets/logo-docker.png?raw=true "Docker") | !["Fiber"](_repository_docs/_repository_assets/logo-golang-fiber.png?raw=true "Fiber") | !["Kubernetes"](_repository_docs/_repository_assets/logo-k8s.png?raw=true "Kubernetes") |
 |:-------------:|:-------------:|:-------------:|:-------------:|
 
-**To jump directly into the app, head down to the [App section](../../blob/master/README.md#app)!**
+## Table of Contents
+
+* [Project Summary](../../blob/master/README.md#project-summary)
+* [Project Topics](../../blob/master/README.md#project-topics)
+* [Project Assumptions](../../blob/master/README.md#assumptions)
+* [Project Prerequisites](../../blob/master/README.md#prerequisites)
+* Jump directly into the Project [app code](../../blob/master/README.md#app)
 
 ## Summary
 
@@ -213,7 +219,7 @@ Start the container in an interactive shell, with the host port `5000` (the mach
 
 Or, for convenience, run: `bash docker_run.sh '{your-docker-hub-account-username}/{your-docker-hub-image-name}{:optional-version}'`.
 
-You should see teh default Fiber message, e.g.:
+You should see the default Fiber message, e.g.:
 
 ```
  ┌───────────────────────────────────────────────────┐

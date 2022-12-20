@@ -2,23 +2,6 @@
 layout: null
 ---
 {% include header.html %}
-
-<body>
-  <div class="container">
-    <header role="banner">
-      golangdocker
-    </header>
-
-<nav class="navbar fixed-top bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="https://mwiater.github.io/golangdocker/godoc.html"><i class="fa-duotone fa-flask-vial fa-fw"></i> Tests</a>
-    <a class="navbar-brand" href="https://mwiater.github.io/golangdocker/linting.html"><i class="fa-duotone fa-screwdriver-wrench fa-fw"></i> Linting</a>
-    <a class="navbar-brand" href="https://mwiater.github.io/golangdocker/loadTesting.html"><i class="fa-duotone fa-weight-hanging fa-fw"></i> Load Testing</a>
-    <a class="navbar-brand" href="https://mwiater.github.io/golangdocker/godoc.html"><i class="fa-duotone fa-file-invoice fa-fw"></i> Godoc</a>
-    <a class="navbar-brand" href="https://mwiater.github.io/golangdocker/gosec.html"><i class="fa-duotone fa-shield-check fa-fw"></i> Gosec</a>
-    <a class="navbar-brand" href="https://mwiater.github.io/golangdocker/k8s.html"><i class="fa-duotone fa-chart-network fa-fw"></i> Kubernetes</a>
-  </div>
-</nav>
     <div class="row">
       <div class="col">
         <h1 id="golangdocker">Golangdocker</h1>

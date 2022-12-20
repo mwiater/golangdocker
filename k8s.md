@@ -3,7 +3,6 @@ layout: null
 ---
 {% include header.html %}
 
-<body>
   <div class="container">
     <header role="banner">
       golangdocker

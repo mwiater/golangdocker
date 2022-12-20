@@ -8,11 +8,23 @@ layout: null
     <header role="banner">
       golangdocker
     </header>
+
+<nav class="navbar fixed-top bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="https://mwiater.github.io/golangdocker/godoc.html"><i class="fa-duotone fa-flask-vial fa-fw"></i> Tests</a>
+    <a class="navbar-brand" href="https://mwiater.github.io/golangdocker/linting.html"><i class="fa-duotone fa-screwdriver-wrench fa-fw"></i> Linting</a>
+    <a class="navbar-brand" href="https://mwiater.github.io/golangdocker/loadTesting.html"><i class="fa-duotone fa-weight-hanging fa-fw"></i> Load Testing</a>
+    <a class="navbar-brand" href="https://mwiater.github.io/golangdocker/godoc.html"><i class="fa-duotone fa-file-invoice fa-fw"></i> Godoc</a>
+    <a class="navbar-brand" href="https://mwiater.github.io/golangdocker/gosec.html"><i class="fa-duotone fa-shield-check fa-fw"></i> Gosec</a>
+    <a class="navbar-brand" href="https://mwiater.github.io/golangdocker/k8s.html"><i class="fa-duotone fa-chart-network fa-fw"></i> Kubernetes</a>
+  </div>
+</nav>
     <div class="row">
       <div class="col">
         <h1 id="golangdocker">Golangdocker</h1>
         <table>
-          <thead>
+          <thead></thead>
+          <tbody>
             <tr>
               <th style="text-align:center"><img
                   src="https://raw.githubusercontent.com/mwiater/golangdocker/master/_repository_docs/_repository_assets/logo-golang.png?raw=true"
@@ -27,20 +39,15 @@ layout: null
                   src="https://raw.githubusercontent.com/mwiater/golangdocker/master/_repository_docs/_repository_assets/logo-k8s.png?raw=true"
                   alt="&quot;Kubernetes&quot;" title="Kubernetes"></th>
             </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="text-align:center"></td>
-            </tr>
           </tbody>
         </table>
         <h2 id="table-of-contents">Table of Contents</h2>
         <ul>
-          <li><a href="../../blob/master/README.md#project-summary">Project Summary</a></li>
-          <li><a href="../../blob/master/README.md#project-topics">Project Topics</a></li>
-          <li><a href="../../blob/master/README.md#assumptions">Project Assumptions</a></li>
-          <li><a href="../../blob/master/README.md#prerequisites">Project Prerequisites</a></li>
-          <li>Jump directly into the Project <a href="../../blob/master/README.md#app">app code</a></li>
+          <li><a href="#project-summary">Project Summary</a></li>
+          <li><a href="#project-topics">Project Topics</a></li>
+          <li><a href="#assumptions">Project Assumptions</a></li>
+          <li><a href="#prerequisites">Project Prerequisites</a></li>
+          <li>Jump directly into the Project <a href="#app">app code</a></li>
         </ul>
         <h2 id="summary">Summary</h2>
         <p>This repository is a work in progress, but I&#39;ll do my best to keep the Master branch in a working

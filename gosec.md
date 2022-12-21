@@ -4,22 +4,19 @@ layout: null
 {% include header.html %}
 
   <div class="container">
-    <header role="banner">
-      golangdocker
-    </header>
     <div class="row">
       <div class="col">
         <h1 id="gosec">Gosec</h1>
         <p>[IN PROGRESS]</p>
         <h2 id="to-do">To Do</h2>
         <ul>
-          <li>[ ] Showing same/similar things to <code>golangci-lint</code>, redundant?</li>
+          <li>Results same/similar things to <code>golangci-lint</code>, redundant?</li>
         </ul>
         <h2 id="install-to-bin-">Install to <code>./bin/</code></h2>
-        <p><code>curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s v2.14.0</code>
+        <p><code>curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s v2.14.0</code>  <i class="fa-duotone fa-copy fa-fw code-copy-button"></i>
         </p>
         <h2 id="run-with-all-options-">Run with all options:</h2>
-        <p><code>bin/gosec ./...</code> #=&gt;</p>
+        <p><code>bin/gosec ./...</code>  <i class="fa-duotone fa-copy fa-fw code-copy-button"></i>  &nbsp; #=&gt;</p>
         <pre><code>[gosec] <span class="hljs-number">2022</span><span class="hljs-regexp">/12/</span><span class="hljs-number">05</span> <span class="hljs-number">09</span>:<span class="hljs-number">21</span>:<span class="hljs-number">33</span> Including <span class="hljs-string">rules:</span> <span class="hljs-keyword">default</span>
 [gosec] <span class="hljs-number">2022</span><span class="hljs-regexp">/12/</span><span class="hljs-number">05</span> <span class="hljs-number">09</span>:<span class="hljs-number">21</span>:<span class="hljs-number">33</span> Excluding <span class="hljs-string">rules:</span> <span class="hljs-keyword">default</span>
 [gosec] <span class="hljs-number">2022</span><span class="hljs-regexp">/12/</span><span class="hljs-number">05</span> <span class="hljs-number">09</span>:<span class="hljs-number">21</span>:<span class="hljs-number">33</span> Import <span class="hljs-string">directory:</span> <span class="hljs-regexp">/home/</span>matt<span class="hljs-regexp">/_apps/</span>golangdocker
@@ -128,15 +125,6 @@ Summary:</span>
 </code></pre>
       </div>
     </div>
-    <footer class="site-footer h-card">
-      FOOTER
-    </footer>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-    crossorigin="anonymous"></script>
-
-</body>
-
-</html>
+{% include footer.html %}

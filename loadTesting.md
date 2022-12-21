@@ -4,26 +4,23 @@ layout: null
 {% include header.html %}
 
   <div class="container">
-    <header role="banner">
-      golangdocker
-    </header>
     <div class="row">
       <div class="col">
         <h1 id="artillery">ARTILLERY</h1>
         <p>[IN PROGRESS]</p>
         <h2 id="to-do">To Do</h2>
         <ul>
-          <li>[ ] Explore custom metrics options in more depth.</li>
-          <li>[ ] Generate applicable reports for comparison between bare go app, dockerized app, and k8s replicas.
+          <li>Explore custom metrics options in more depth.</li>
+          <li>Generate applicable reports for comparison between bare go app, dockerized app, and k8s replicas.
           </li>
         </ul>
         <h2 id="install">Install</h2>
-        <p><code>npm install -g artillery@latest</code></p>
+        <p><code>npm install -g artillery@latest</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
         <h2 id="plugins">Plugins</h2>
         <p><a
             href="https://www.artillery.io/docs/guides/plugins/plugin-metrics-by-endpoint#useonlyrequestnames">Official:
             Per-endpoint (URL) metrics</a></p>
-        <p><code>npm install artillery-plugin-metrics-by-endpoint</code></p>
+        <p><code>npm install artillery-plugin-metrics-by-endpoint</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
 
         <h2 id="test-phases">Test Phases</h2>
 
@@ -146,36 +143,25 @@ function parseServerTimingLatency(header, timingMetricName) {
         <pre><code><span class="hljs-keyword">clear</span> &amp;&amp; \
 artillery <span class="hljs-keyword">run</span> --<span class="hljs-keyword">output</span> golangdocker-bare.json --target http:<span class="hljs-comment">//192.168.0.91:5000/api golangdocker-loadtest.yml &amp;&amp; \</span>
     artillery report golangdocker-bare.json
-</code></pre>
+</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
         <h2 id="docker-container">Docker container</h2>
         <p>E.g.: <code>bash docker_run.sh</code></p>
         <pre><code><span class="hljs-keyword">clear</span> &amp;&amp; \
 artillery <span class="hljs-keyword">run</span> --<span class="hljs-keyword">output</span> golangdocker-docker.json --target http:<span class="hljs-comment">//192.168.0.91:5000/api golangdocker-loadtest.yml &amp;&amp; \</span>
-    artillery report golangdocker-docker.json
-</code></pre>
+    artillery report golangdocker-docker.json</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
         <h2 id="k8s">K8s</h2>
         <p>Assumes working K8s cluster and manual scaling of replicas for each test, e.g.:</p>
         <pre><code><span class="hljs-keyword">clear</span> &amp;&amp; \
 artillery <span class="hljs-keyword">run</span> --<span class="hljs-keyword">output</span> golangdocker-k8s<span class="hljs-number">-3</span>-replica.json --target http:<span class="hljs-comment">//golang.0nezer0.com/api golangdocker-loadtest.yml &amp;&amp; \</span>
     artillery report golangdocker-k8s<span class="hljs-number">-3</span>-replica.json
-</code></pre>
+</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
         <pre><code><span class="hljs-keyword">clear</span> &amp;&amp; \
 artillery <span class="hljs-keyword">run</span> --<span class="hljs-keyword">output</span> golangdocker-k8s<span class="hljs-number">-2</span>-replica.json --target http:<span class="hljs-comment">//golang.0nezer0.com/api golangdocker-loadtest.yml &amp;&amp; \</span>
     artillery report golangdocker-k8s<span class="hljs-number">-2</span>-replica.json
-</code></pre>
-        <p>...</p>
+</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
 
       </div>
     </div>
-    <footer class="site-footer h-card">
-      FOOTER
-    </footer>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-    crossorigin="anonymous"></script>
-
-</body>
-
-</html>
+{% include footer.html %}

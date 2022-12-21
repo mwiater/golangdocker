@@ -4,7 +4,6 @@ layout: null
 {% include header.html %}
     <div class="row">
       <div class="col">
-        <h1 id="golangdocker">Golangdocker</h1>
         <table>
           <thead></thead>
           <tbody>
@@ -94,7 +93,7 @@ layout: null
           <li><strong>System</strong> My system and architecture is below, you&#39;ll have to adjust your commands if
             you&#39;re departing from Linux/x86_64.</li>
         </ul>
-        <p><code>uname -a</code></p>
+        <p><code>uname -a</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
         <pre><code><span class="hljs-selector-tag">Linux</span> <span class="hljs-selector-tag">mjw-udoo-01</span> <span class="hljs-selector-tag">5</span><span class="hljs-selector-class">.4</span><span class="hljs-selector-class">.0-110-generic</span> <span class="hljs-selector-id">#124-Ubuntu</span> <span class="hljs-selector-tag">SMP</span> <span class="hljs-selector-tag">Thu</span> <span class="hljs-selector-tag">Apr</span> <span class="hljs-selector-tag">14</span> <span class="hljs-selector-tag">19</span><span class="hljs-selector-pseudo">:46</span><span class="hljs-selector-pseudo">:19</span> <span class="hljs-selector-tag">UTC</span> <span class="hljs-selector-tag">2022</span> <span class="hljs-selector-tag">x86_64</span> <span class="hljs-selector-tag">x86_64</span> <span class="hljs-selector-tag">x86_64</span> <span class="hljs-selector-tag">GNU</span>/<span class="hljs-selector-tag">Linux</span>
 </code></pre>
         <h2 id="to-do">To Do</h2>
@@ -202,8 +201,8 @@ golang-<span class="hljs-keyword">run</span><span class="bash"></span>
 </code></pre>
         <h3 id="testing-developing-app">Testing/Developing App</h3>
         <p>while developing/testing the app, you can run it natively (not in a Docker container) via:</p>
-        <p><code>go run main.go</code></p>
-        <p>Or, for convenience and formatting, run: <code>bash go_run.sh</code></p>
+        <p><code>go run main.go</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i></p>
+        <p>Or, for convenience, run: <code>make golang-run</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
         <p>Site will be available at: <a href="http://192.168.0.91:5000/api/v1">http://192.168.0.91:5000/api/v1</a>
           (substitute your own IP address)</p>
         <p>This step should be completed first before running via Docker to ensure everything is working properly.</p>
@@ -249,14 +248,14 @@ mattwiater/golangdocker   latest    <span class="hljs-number">053</span>f2105265
           <code>bash docker_run.sh &#39;{your-docker-hub-account-username}/{your-docker-hub-image-name}{:optional-version}&#39;</code>.
         </p>
         <p>You should see the default Fiber message, e.g.:</p>
-        <pre><code> ┌───────────────────────────────────────────────────┐
- │                   Fiber v2<span class="hljs-number">.40</span><span class="hljs-number">.0</span>                   │
- │               http:<span class="hljs-comment">//127.0.0.1:5000               │</span>
- │       (bound on host <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span> and port <span class="hljs-number">5000</span>)       │
- │                                                   │
- │ Handlers ............ <span class="hljs-number">14</span>  Processes ........... <span class="hljs-number">1</span> │
- │ Prefork ....... Disabled  PID ................. <span class="hljs-number">1</span> │
- └───────────────────────────────────────────────────┘
+        <pre><code> ┌─────────────────────────────────────────────────────────┐
+ │                   Fiber v2<span class="hljs-number">.40</span><span class="hljs-number">.0</span>                    │
+ │               http:<span class="hljs-comment">//127.0.0.1:5000                │</span> 
+ │       (bound on host <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span> and port <span class="hljs-number">5000</span>)        │
+ │                                                    │
+ │ Handlers ............ <span class="hljs-number">14</span>  Processes ........... <span class="hljs-number">1</span>  │
+ │ Prefork ....... Disabled  PID ................. <span class="hljs-number">1</span>  │
+ └─────────────────────────────────────────────────────────┘
 </code></pre>
         <p>On your host machine, you can now access the container via <code>http://{your-host-ip-address}:5000</code>
         </p>
@@ -285,14 +284,6 @@ mattwiater/golangdocker   latest    <span class="hljs-number">053</span>f2105265
             href="../../blob/master/docker_run.sh">docker_run.sh</a>)</p>
         <p>Then, when you run the application, docs are avaialble at:</p>
         <p><code>http://{your-host-ip-address}:5000/api/v1/docs/index.html</code></p>
-        <h2 id="tests">Tests</h2>
-        <p>See: <a href="../../blob/master/_repository_docs/_tests/TESTS.md">Tests</a></p>
-        <h2 id="linting-code-analysis">Linting: Code analysis</h2>
-        <p>Basic linting option via <code>golangci-lint</code></p>
-        <p>See: <a href="../../blob/master/_repository_docs/_linting/LINTING.md">Linting</a></p>
-        <h2 id="gosec-security-analysis">Gosec: Security analysis</h2>
-        <p>High level gosec usage example.</p>
-        <p>See: <a href="../../blob/master/_repository_docs/_gosec/GOSEC.md">Gosec</a></p>
         <h2 id="-to-do-notes">[TO DO] Notes</h2>
         <p>Assumptions:</p>
         <p>Since we initialized the project with: </p>
@@ -314,15 +305,5 @@ mattwiater/golangdocker   latest    <span class="hljs-number">053</span>f2105265
 
       </div>
     </div>
-    <footer class="site-footer h-card">
-      FOOTER
-    </footer>
   </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-    crossorigin="anonymous"></script>
-
-</body>
-
-</html>
+{% include footer.html %}

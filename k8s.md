@@ -4,32 +4,29 @@ layout: null
 {% include header.html %}
 
   <div class="container">
-    <header role="banner">
-      golangdocker
-    </header>
     <div class="row">
       <div class="col">
         <h1 id="k8s">K8s</h1>
         <p>[IN PROGRESS]</p>
         <h2 id="to-do">To Do</h2>
         <ul>
-          <li>[ ] Working, but walkthrough needs more definition, test commands to ensure cluster setup is correct.
+          <li>Working, but walkthrough needs more definition, test commands to ensure cluster setup is correct.
           </li>
         </ul>
         <h2 id="assumptions">Assumptions</h2>
         <p>You have built the container on the Control Plane node:</p>
-        <p><code>docker build -t {your-docker-hub-account-username}/golangdocker:v1 .</code></p>
+        <p><code>docker build -t {your-docker-hub-account-username}/golangdocker:v1 .</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
         <p>Above we are going to use the <code>:v1</code> tag so that we can use <a
             href="https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/">K8s Rolling Updates</a>
           when we make changes to the image. If you have built images in the previous sections, you&#39;ll likely see
           multiple versions of your image with different tags:</p>
-        <p><code>docker images</code></p>
+        <p><code>docker images</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
         <pre><code>REPOSITORY                TAG       IMAGE ID       CREATED         SIZE
 mattwiater/golangdocker   latest    e9b376df3a3f   <span class="hljs-number">24</span> minutes ago  <span class="hljs-number">11.1</span>MB
 mattwiater/golangdocker   v1        e9b376df3a3f   <span class="hljs-number">4</span> minutes ago   <span class="hljs-number">11.1</span>MB
 ...
 </code></pre>
-        <p>And pushed it to docker hub, e.g.: <code>docker push mattwiater/golangdocker:v1</code></p>
+        <p>And pushed it to docker hub, e.g.: <code>docker push mattwiater/golangdocker:v1</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
         <p>Docker Hub Note: This step is important for the remaining nodes to download and run the image without
           having to manually build it locally on each node. K8s can use local images to spawn pods, but that would
           require a manual build on each node (dowmlaoding the repo, building the image, and chaning the manifest
@@ -39,7 +36,7 @@ mattwiater/golangdocker   v1        e9b376df3a3f   <span class="hljs-number">4</
           version, e.g.: <code>:v1.1</code>, <code>:v2</code>, etc., push it to docker hub, and then issue the
           command:</p>
         <p>[NEED TO FIX]:
-          <code>kubectl set image deployments/k8s-golang-api k8s-golang-api=mattwiater/golangdocker:v2</code>
+          <code>kubectl set image deployments/k8s-golang-api k8s-golang-api=mattwiater/golangdocker:v2</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> 
         </p>
         <p>[PROBLEM]: The command is not working with namespaced deployments, need to adjust.</p>
         <p>The command above tells K8s to update the existing deployment to the newer version and it will take care of
@@ -65,7 +62,7 @@ mattwiater/golangdocker   v1        e9b376df3a3f   <span class="hljs-number">4</
 <span class="hljs-symbol">mode:</span> <span class="hljs-string">"ipvs"</span>
 <span class="hljs-symbol">ipvs:</span>
 <span class="hljs-symbol">  strictARP:</span> true
-</code></pre>
+</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
         <p>Next, set up the Metal-LB infrastructure and resources by applying the Metal-LB native Manifest via:</p>
         <p>
           <code>kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.7/config/manifests/metallb-native.yaml</code>
@@ -89,7 +86,7 @@ mattwiater/golangdocker   v1        e9b376df3a3f   <span class="hljs-number">4</
 <span class="hljs-attr">  addresses:</span>
 <span class="hljs-bullet">  -</span> <span class="hljs-number">192.168</span><span class="hljs-number">.0</span><span class="hljs-number">.91</span><span class="hljs-bullet">-192.168</span><span class="hljs-number">.0</span><span class="hljs-number">.94</span>
 EOF
-</code></pre>
+</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
         <p>Then, you can name your IPAddressPool and advertise it to the cluster. In my case, I&#39;ve hjust named it
           <code>udoo</code>
         </p>
@@ -103,7 +100,7 @@ EOF
 <span class="hljs-attr">  ipAddressPools:</span>
 <span class="hljs-bullet">  -</span> udoo
 EOF
-</code></pre>
+</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
         <p>Then, create the namespace and deployment for the App. The following code creates the
           <code>k8s-golang-api</code> namespace for the app to run in and be identified with. It is up to you to
           choose a name that makes sense, but be sure to adjust the the following YAML snippets to reflect your
@@ -116,7 +113,7 @@ EOF
 <span class="hljs-attr">metadata:</span>
 <span class="hljs-attr">  name:</span> k8s-golang-api
 EOF
-</code></pre>
+</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
         <h3 id="create-deployment">Create Deployment</h3>
         <p>The following defines how K8s will deploy the Pods on your system. It defines the names, associated
           Namespaces, number of Replicas, Resource Limits, Ports, etc.</p>
@@ -175,7 +172,7 @@ EOF
 <span class="hljs-attr">            - containerPort:</span> <span class="hljs-number">5000</span>
 <span class="hljs-attr">              protocol:</span> TCP
 EOF
-</code></pre>
+</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
         <p>The final two steps, Service and Ingress are responsible for routing external traffic into the cluster.</p>
         <h3 id="create-service">Create Service</h3>
         <p>You can see that the service is accepting incoming traffic on port 80, and routing to the Pods named
@@ -197,7 +194,7 @@ EOF
 <span class="hljs-attr">    port:</span> <span class="hljs-number">80</span>
 <span class="hljs-attr">    targetPort:</span> <span class="hljs-number">5000</span>
 EOF
-</code></pre>
+</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
         <h3 id="create-ingress">Create Ingress</h3>
         <p>In my setup, I want the containers to be accessible via Port 80 at the domain
           <code>golang.0nezer0.com</code>. So the Ingress section below defines the domain mapping to the Serice
@@ -227,9 +224,9 @@ EOF
 <span class="hljs-attr">            port:</span>
 <span class="hljs-attr">              number:</span> <span class="hljs-number">80</span>
 EOF
-</code></pre>
+</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
         <p>You can verify the setup via:</p>
-        <p><code>kubectl describe ingress k8s-golang-api-ingress -n=k8s-golang-api</code></p>
+        <p><code>kubectl describe ingress k8s-golang-api-ingress -n=k8s-golang-api</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
         <pre><code><span class="hljs-symbol">Name:</span>             k8s-golang-api-ingress
 <span class="hljs-symbol">Labels:</span>           &lt;none&gt;
 <span class="hljs-symbol">Namespace:</span>        k8s-golang-api
@@ -246,7 +243,7 @@ Ingress Class:    &lt;none&gt;
 </code></pre>
         <p>Note that the domain is listed and the Backend are pointing to the Service we created.</p>
         <p>Ensure that you have an IP Address allocated for the Load Balancer:</p>
-        <p><code>kubectl get svc -n=k8s-golang-api</code></p>
+        <p><code>kubectl get svc -n=k8s-golang-api</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
         <pre><code>NAME             TYPE           CLUSTER-<span class="hljs-built_in">IP</span>      EXTERNAL-<span class="hljs-built_in">IP</span>    PORT(S)        AGE
 k8s-golang-api   LoadBalancer   <span class="hljs-number">10.105</span><span class="hljs-meta">.31</span><span class="hljs-meta">.196</span>   <span class="hljs-number">192.168</span><span class="hljs-meta">.0</span><span class="hljs-meta">.91</span>   <span class="hljs-number">80</span>:<span class="hljs-number">31188</span>/TCP   21s
 </code></pre>
@@ -257,20 +254,11 @@ k8s-golang-api   LoadBalancer   <span class="hljs-number">10.105</span><span cla
 </code></pre>
         <h2 id="horizontal-pod-autoscaler-hpa-">Horizontal Pod Autoscaler (HPA)</h2>
         <p>
-          <code>kubectl autoscale deployment -n k8s-golang-api  k8s-golang-api --cpu-percent=75 --memory-percent=75 --min=1 --max=3</code>
+          <code>kubectl autoscale deployment -n k8s-golang-api  k8s-golang-api --cpu-percent=75 --memory-percent=75 --min=1 --max=3</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> 
         </p>
 
       </div>
     </div>
-    <footer class="site-footer h-card">
-      FOOTER
-    </footer>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-    crossorigin="anonymous"></script>
-
-</body>
-
-</html>
+{% include footer.html %}

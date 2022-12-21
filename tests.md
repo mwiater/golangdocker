@@ -4,15 +4,12 @@ layout: null
 {% include header.html %}
 
   <div class="container">
-    <header role="banner">
-      golangdocker
-    </header>
     <div class="row">
       <div class="col">
         <h1 id="tests">Tests</h1>
         <p>Very simple tests are in: <a href="../../../../blob/master/api_test.go">api_test.go</a></p>
         <p>Run via:
-          <code>clear &amp;&amp; go test -v $(go list ./... | grep -v /docs | grep -v /config | grep -v /api)</code>
+          <code>clear &amp;&amp; go test -v $(go list ./... | grep -v /docs | grep -v /config | grep -v /api)</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> 
           #=&gt;
         </p>
         <pre><code>=== RUN   TestAPIRoutes
@@ -57,15 +54,6 @@ ok      github.com<span class="hljs-regexp">/mattwiater/</span>golangdocker/sysi
 
       </div>
     </div>
-    <footer class="site-footer h-card">
-      FOOTER
-    </footer>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-    crossorigin="anonymous"></script>
-
-</body>
-
-</html>
+{% include footer.html %}

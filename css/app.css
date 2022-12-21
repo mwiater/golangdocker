@@ -8,6 +8,19 @@ header {
   border-bottom: 5px solid #424242;
   font-size: 2em;
   margin-top: 20px;
-  margin-bottom: 20px;
+  //margin-bottom: 20px;
   padding-bottom: 20px;
+}
+
+.navbar-brand {
+  font-size: 1em;
+}
+
+.navbar {
+  padding-top: 0px;
+}
+
+pre code {
+  font-family: 'Red Hat Mono', monospace;
+  color: #111;
 }

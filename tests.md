@@ -50,7 +50,7 @@ PASS
 ok      github.com<span class="hljs-regexp">/mattwiater/</span>golangdocker/sysinfo      <span class="hljs-number">0.365</span>s
 </code></pre>
         <h2 id="test-cache">Test Cache</h2>
-        <p>To clear the test cache, run: <code>go clean -testcache</code></p>
+        <p>To clear the test cache, run: <code>go clean -testcache</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
 
       </div>
     </div>

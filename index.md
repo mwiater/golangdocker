@@ -4,31 +4,13 @@ layout: null
 {% include header.html %}
     <div class="row">
       <div class="col">
-        <table>
-          <thead></thead>
-          <tbody>
-            <tr>
-              <th style="text-align:center"><img
-                  src="https://raw.githubusercontent.com/mwiater/golangdocker/master/_repository_docs/_repository_assets/logo-golang.png?raw=true"
-                  alt="&quot;Go&quot;" title="Go"></th>
-              <th style="text-align:center"><img
-                  src="https://raw.githubusercontent.com/mwiater/golangdocker/master/_repository_docs/_repository_assets/logo-docker.png?raw=true"
-                  alt="&quot;Docker&quot;" title="Docker"></th>
-              <th style="text-align:center"><img
-                  src="https://raw.githubusercontent.com/mwiater/golangdocker/master/_repository_docs/_repository_assets/logo-golang-fiber.png?raw=true"
-                  alt="&quot;Fiber&quot;" title="Fiber"></th>
-              <th style="text-align:center"><img
-                  src="https://raw.githubusercontent.com/mwiater/golangdocker/master/_repository_docs/_repository_assets/logo-k8s.png?raw=true"
-                  alt="&quot;Kubernetes&quot;" title="Kubernetes"></th>
-            </tr>
-          </tbody>
-        </table>
         <h2 id="table-of-contents">Table of Contents</h2>
         <ul>
           <li><a href="#project-summary">Project Summary</a></li>
           <li><a href="#project-topics">Project Topics</a></li>
           <li><a href="#assumptions">Project Assumptions</a></li>
           <li><a href="#prerequisites">Project Prerequisites</a></li>
+          <li><a href="#makefile">Makefile</a></li>
           <li>Jump directly into the Project <a href="#app">app code</a></li>
         </ul>
         <h2 id="summary">Summary</h2>
@@ -96,17 +78,6 @@ layout: null
         <p><code>uname -a</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
         <pre><code><span class="hljs-selector-tag">Linux</span> <span class="hljs-selector-tag">mjw-udoo-01</span> <span class="hljs-selector-tag">5</span><span class="hljs-selector-class">.4</span><span class="hljs-selector-class">.0-110-generic</span> <span class="hljs-selector-id">#124-Ubuntu</span> <span class="hljs-selector-tag">SMP</span> <span class="hljs-selector-tag">Thu</span> <span class="hljs-selector-tag">Apr</span> <span class="hljs-selector-tag">14</span> <span class="hljs-selector-tag">19</span><span class="hljs-selector-pseudo">:46</span><span class="hljs-selector-pseudo">:19</span> <span class="hljs-selector-tag">UTC</span> <span class="hljs-selector-tag">2022</span> <span class="hljs-selector-tag">x86_64</span> <span class="hljs-selector-tag">x86_64</span> <span class="hljs-selector-tag">x86_64</span> <span class="hljs-selector-tag">GNU</span>/<span class="hljs-selector-tag">Linux</span>
 </code></pre>
-        <h2 id="to-do">To Do</h2>
-        <ul>
-          <li>[x] Cross-compiling: Add scripts: <code>go_build.sh</code> and <code>go_build_arm64.sh</code> as
-            examples.</li>
-          <li>[ ] Generate Postman collection for reference?</li>
-          <li>[ ] Turn these to-dos into issues!</li>
-          <li>[ ] K8s: Use version tagging instead of <code>:latest</code> to provide an example of rolling updates.
-            (Started: <a href="../../blob/master/_repository_docs/_k8s/K8S_README.md">K8S_README.md</a>)</li>
-          <li>[ ] TLS? In single container or via K8s? To update in: <a href="../../blob/master/certs/">certs/</a>
-          </li>
-        </ul>
         <h2 id="prerequisites">Prerequisites</h2>
         <p>The following programs will need to be installed:</p>
         <ul>
@@ -155,7 +126,7 @@ layout: null
         <h2 id="makefile">Makefile</h2>
         <p>[IN PROGRESS]</p>
         <p>There is a <code>Makefile</code> for convenience. At the moment, it&#39;s just acting as a script-runner.
-          To viee the executable tagets, just type: <code>make</code>:</p>
+          To viee the executable tagets, just type: <code>make</code></p>
         <pre><code>Targets in this Makefile:
 
 docker-build
@@ -285,7 +256,6 @@ mattwiater/golangdocker   latest    <span class="hljs-number">053</span>f2105265
         <p>Then, when you run the application, docs are avaialble at:</p>
         <p><code>http://{your-host-ip-address}:5000/api/v1/docs/index.html</code></p>
         <h2 id="-to-do-notes">[TO DO] Notes</h2>
-        <p>Assumptions:</p>
         <p>Since we initialized the project with: </p>
         <p><code>go mod init github.com/mattwiater/golangdocker</code></p>
         <p>And each package is in it&#39;s own directory: <code>sysinfo</code>, <code>api</code>, <code>common</code>,

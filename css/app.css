@@ -8,7 +8,7 @@ header {
   border-bottom: 5px solid #424242;
   font-size: 2em;
   margin-top: 20px;
-  //margin-bottom: 20px;
+  margin-bottom: 20px;
   padding-bottom: 20px;
 }
 
@@ -23,4 +23,34 @@ header {
 pre code {
   font-family: 'Red Hat Mono', monospace;
   color: #111;
+}
+
+.list-group {
+  margin-bottom: 20px;
+}
+
+.list-group .list-group-item {
+  padding: 5px;
+}
+
+.list-group .list-group-item h5 {
+  font-size: 1em;
+}
+
+.list-group .list-group-item p {
+  font-size: 1em;
+  padding: 0;
+}
+
+.card {
+  margin-bottom:20px;
+}
+
+.card:hover{
+  background: #efefef;
+}
+
+.card small {
+  padding: 5px;
+  text-align: right;
 }

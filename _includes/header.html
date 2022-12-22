@@ -8,10 +8,8 @@
   <meta name="generator" content="Jekyll v4.3.1" />
   <meta property="og:title" content="Golangdocker" />
   <meta property="og:locale" content="en_US" />
-  <meta name="description"
-    content="Golangdocker" />
-  <meta property="og:description"
-    content="Golangdocker" />
+  <meta name="description" content="Golangdocker" />
+  <meta property="og:description" content="Golangdocker" />
   <link rel="canonical" href="https://mwiater.github.io/golangdocker/" />
   <meta property="og:url" content="https://mwiater.github.io/golangdocker/" />
   <meta property="og:site_name" content="Your awesome title" />
@@ -23,27 +21,113 @@
   <script src="https://kit.fontawesome.com/5ae6879468.js" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono&family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono&family=Roboto:wght@100;300;400&display=swap"
+    rel="stylesheet">
   <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","description":"Golangdocker","headline":"Golangdocker","name":"Golangdocker","url":"https://mwiater.github.io/golangdocker/"}</script>
   <!-- End Jekyll SEO tag -->
   <link rel="stylesheet" href="assets/main.css">
   <link rel="stylesheet" href="css/app.css">
-  <link type="application/atom+xml" rel="alternate" href="https://mwiater.github.io/golangdocker/feed.xml" title="Your awesome title" />
+  <link type="application/atom+xml" rel="alternate" href="https://mwiater.github.io/golangdocker/feed.xml"
+    title="Your awesome title" />
 </head>
+
 <body>
   <div class="container">
     <header role="banner">
       golangdocker
     </header>
-    <nav class="navbar bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/"><i class="fa-duotone fa-home fa-fw"></i> Home</a>
-        <a class="navbar-brand" href="tests.html"><i class="fa-duotone fa-flask-vial fa-fw"></i> Tests</a>
-        <a class="navbar-brand" href="linting.html"><i class="fa-duotone fa-screwdriver-wrench fa-fw"></i> Linting</a>
-        <a class="navbar-brand" href="loadTesting.html"><i class="fa-duotone fa-weight-hanging fa-fw"></i> Load Testing</a>
-        <a class="navbar-brand" href="godoc.html"><i class="fa-duotone fa-file-invoice fa-fw"></i> Godoc</a>
-        <a class="navbar-brand" href="gosec.html"><i class="fa-duotone fa-shield-check fa-fw"></i> Gosec</a>
-        <a class="navbar-brand" href="k8s.html"><i class="fa-duotone fa-chart-network fa-fw"></i> Kubernetes</a>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h4>Project Sections</h4>
+          <div class="row row-cols-3 row-cols-md-3">
+
+            <div class="col">
+              <div class="card project-section">
+                <div class="card-header">
+                  <a href="/"><i class="fa-duotone fa-home fa-fw"></i> Home</a>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">Project summary, prerequisites, setup and application code.</p>
+                </div>
+                <small class="card-footer text-muted">
+                  <a href="/">Read More <i class="fa-duotone fa-angles-right"></i></a>
+                </small>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card project-section">
+                <div class="card-header">
+                  <a href="tests.html"><i class="fa-duotone fa-flask-vial fa-fw"></i> Tests</a>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">Unit tests with <code>go test</code> and API endpoint tests via <code>godoc</code>.</p>
+                </div>
+                <small class="card-footer text-muted">
+                  <a href="tests.html">Read More <i class="fa-duotone fa-angles-right"></i></a>
+                </small>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card project-section">
+                <div class="card-header">
+                  <a href="linting.html"><i class="fa-duotone fa-screwdriver-wrench fa-fw"></i> Linting</a>
+                </div>
+                <div class="card-body">
+                  <p class="card-text"><strong>How to:</strong> Lintint golang code using: <code>golangci-lint</code></p>
+                </div>
+                <small class="card-footer text-muted">
+                  <a href="linting.html">Read More <i class="fa-duotone fa-angles-right"></i></a>
+                </small>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card project-section">
+                <div class="card-header">
+                  <a href="loadTesting.html"><i class="fa-duotone fa-weight-hanging fa-fw"></i> Load Testing</a>
+                </div>
+                <div class="card-body">
+                  <p class="card-text"><strong>How to:</strong> Load testing basics using <code>Artillery</code></p>
+                </div>
+                <small class="card-footer text-muted">
+                  <a href="loadTesting.html">Read More <i class="fa-duotone fa-angles-right"></i></a>
+                </small>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card project-section">
+                <div class="card-header">
+                  <a href="godoc.html"><i class="fa-duotone fa-file-invoice fa-fw"></i> Godoc</a>
+                </div>
+                <div class="card-body">
+                  <p class="card-text"><strong>How To:</strong> Document, test, and serve your documentation with <code>Godoc</code></p>
+                </div>
+                <small class="card-footer text-muted">
+                  <a href="godoc.html">Read More <i class="fa-duotone fa-angles-right"></i></a>
+                </small>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card project-section">
+                <div class="card-header">
+                  <a href="k8s.html"><i class="fa-duotone fa-chart-network fa-fw"></i> Kubernetes</a>
+                </div>
+                <div class="card-body">
+                  <p class="card-text"><strong>How To:</strong> Integrating your container into a Kubernetes pod deployment.</p>
+                </div>
+                <small class="card-footer text-muted">
+                  <a href="k8s.html">Read More <i class="fa-duotone fa-angles-right"></i></a>
+                </small>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
-    </nav>
+    </div>

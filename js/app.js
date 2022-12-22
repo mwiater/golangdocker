@@ -1,4 +1,6 @@
 
+
+
 $(".code-copy-button").each(function( index ) {
   const copyButton = $(this)[0];
   let codeBoxPos = {}
@@ -29,4 +31,22 @@ $(".code-copy-button").each(function( index ) {
       // Promise Error
     });
   });
+});
+
+$(".project-section").each(function( index ) {
+  const card = $(this);
+  const link = $(this).find("a")[0];
+  card.css("cursor", "pointer");
+
+  card[0].addEventListener('click', (event) => {
+    link.click()
+  });
+
+  const url = new URL(link.href);
+
+  if(window.location.pathname.slice(1) === url.pathname.slice(1)){
+    console.log($(this))
+    $(this).css("background", "#eff6ef");
+  }
+
 });

@@ -31,6 +31,12 @@ golang-build-arm64:
 golang-test:
 	scripts/golang_test.sh
 
+golang-lint:
+	scripts/golang_lint.sh
+
+golang-godoc:
+	scripts/golang_godoc.sh
+
 docker-build:
 	scripts/docker_build.sh
 

@@ -12,6 +12,11 @@ header {
   padding-bottom: 20px;
 }
 
+a, a:visited, a:hover {
+  color: #4F754F;
+}
+
+
 .navbar-brand {
   font-size: 1em;
 }
@@ -53,4 +58,12 @@ pre code {
 .card small {
   padding: 5px;
   text-align: right;
+}
+
+.card-header {
+  padding: 5px;
+}
+
+.card-body {
+  padding: 5px;
 }

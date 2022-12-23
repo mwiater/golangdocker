@@ -50,6 +50,10 @@ $(document).ready(function () {
 
     if (window.location.pathname.slice(1) === url.pathname.slice(1)) {
       $(this).css("background", "#eff6ef");
+    } else {
+      if(window.location.pathname.slice(1) === url.pathname.slice(1)+"/"){
+        $(this).css("background", "#eff6ef");
+      }
     }
 
   });

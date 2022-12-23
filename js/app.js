@@ -1,4 +1,10 @@
 $(document).ready(function () {
+  var pathArr = window.location.pathname.split("/").slice(0, 2);
+  pathArr = pathArr.filter(p => p);
+  pathArr = pathArr.filter(p => !p.includes(".html"));
+  var homePath = "/"+pathArr.join("");
+  $(".homelink").attr("href", homePath)
+  
   $(".code-copy-button").each(function (index) {
     const copyButton = $(this)[0];
     let codeBoxPos = {}
@@ -44,6 +50,10 @@ $(document).ready(function () {
 
     if (window.location.pathname.slice(1) === url.pathname.slice(1)) {
       $(this).css("background", "#eff6ef");
+    } else {
+      if(window.location.pathname.slice(1) === url.pathname.slice(1)+"/"){
+        $(this).css("background", "#eff6ef");
+      }
     }
 
   });

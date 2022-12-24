@@ -97,7 +97,7 @@ layout: null
         </ul>
         <p>Optional:</p>
         <ul>
-          <li>Artillery (nodejs): <a href="../../blob/master/_repository_docs/_loadTesting/ARTILLERY.md">Load
+          <li>Artillery (nodejs): <a href="loadTesting.html">Load
               Testing</a></li>
         </ul>
         <p>While the idea is to get this up and running quickly, it is not a deep dive into Go, Docker, or K8S. Basic
@@ -181,7 +181,7 @@ golang-<span class="hljs-keyword">run</span><span class="bash"></span>
         <p>NOTE: The steps will refer to the docker image: <code>mattwiater/golangdocker</code>. You should change
           these steps to match your own image name, e.g.: <code>{your-docker-hub-account-username}/golangdocker</code>
         </p>
-        <p>The build command uses the local <a href="../../blob/master/Dockerfile">Dockerfile</a> to build the image.
+        <p>The build command uses the local <a href="https://github.com/mwiater/golangdocker/blob/master/Dockerfile">Dockerfile</a> to build the image.
           Substitute your own Docker image tag for mine wherever you see it (<code>mattwiater/golangdocker</code>),
           e.g.: <code>{your-docker-hub-account-username}/golangdocker</code></p>
         <p><code>docker build -t mattwiater/golangdocker .</code></p>
@@ -252,7 +252,7 @@ mattwiater/golangdocker   latest    <span class="hljs-number">053</span>f2105265
         <p><code>go get -u github.com/swaggo/fiber-swagger</code></p>
         <p>When updating documentation, you must run this to regenerate docs data: <code>swag init</code>
           (<code>swag init</code> is incorporated into the bash scripts for convenience, e.g.: <a
-            href="../../blob/master/docker_run.sh">docker_run.sh</a>)</p>
+            href="https://github.com/mwiater/golangdocker/blob/master/scripts/docker_run.sh">docker_run.sh</a>)</p>
         <p>Then, when you run the application, docs are avaialble at:</p>
         <p><code>http://{your-host-ip-address}:5000/api/v1/docs/index.html</code></p>
         <h2 id="-to-do-notes">[TO DO] Notes</h2>

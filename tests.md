@@ -7,11 +7,14 @@ layout: null
     <div class="row">
       <div class="col">
         <h1 id="tests">Tests</h1>
-        <p>Very simple tests are in: <a href="../../../../blob/master/api_test.go">api_test.go</a></p>
+        <p>Very simple tests are in: <a href="https://github.com/mwiater/golangdocker/blob/master/api_test.go">api_test.go</a></p>
         <p>Run via:
           <code>clear &amp;&amp; go test -v $(go list ./... | grep -v /docs | grep -v /config | grep -v /api)</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> 
-          #=&gt;
         </p>
+        <p>Or via Makefile:
+          <code>make golang-test</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> (which will execute the <a target="_blank" href="https://github.com/mwiater/golangdocker/blob/master/scripts/golang_test.sh">scripts/golang_test.sh</a> script)
+        </p>
+
         <pre><code>=== RUN   TestAPIRoutes
 
  ┌───────────────────────────────────────────────────┐

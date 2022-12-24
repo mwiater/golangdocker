@@ -89,7 +89,7 @@ layout: null
         <p>This simple example makes use of a custom Fiber middleware wrapper that captures the time spent on the
           server in each API call and sets a <code>Server-Timing</code> response header, e.g.:
           <code>Server-Timing: route;dur=16</code>. See the <a
-            href="../../../../blob/master/api/api.go">RouteTimerHandler()</a> function in <code>api/api.go</code>.
+            href="https://github.com/mwiater/golangdocker/blob/master/api/api.go">RouteTimerHandler()</a> function in <code>api/api.go</code>.
         </p>
 
         <p>

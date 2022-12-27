@@ -3,7 +3,6 @@ package main
 import (
 	"embed"
 	"log"
-	"strconv"
 
 	"github.com/mattwiater/golangdocker/api"
 	"github.com/mattwiater/golangdocker/config"
@@ -21,18 +20,16 @@ import (
 
 // @BasePath /
 
-//go:embed config/appConfig.yml
+//go:embed .env
 var conf embed.FS
 
 func main() {
-	configData, _ := conf.ReadFile("config/appConfig.yml")
-
-	cfg, err := config.AppConfig(configData)
+	cfg, err := config.AppConfig()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Error: config.AppConfig()")
 	}
 
 	app := api.SetupRoute(cfg)
 
-	log.Fatal(app.Listen(":" + strconv.Itoa(cfg.Server.Port)))
+	log.Fatal(app.Listen(":" + cfg["SERVERPORT"]))
 }

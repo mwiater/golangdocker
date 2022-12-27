@@ -1,28 +1,26 @@
 package config
 
 import (
-	"gopkg.in/yaml.v3"
+	"log"
+
+	"github.com/joho/godotenv"
 )
 
 var cfg Config
 
 // Config struct for webapp config
 type Config struct {
-	Server struct {
-		Port int `yaml:"port"`
-	} `yaml:"server"`
-	Options struct {
-		Debug bool `yaml:"debug"`
-	} `yaml:"options"`
+	Port  int
+	Debug bool
 }
 
 // AppConfig returns a new decoded Config struct
-func AppConfig(configData []byte) (Config, error) {
-
-	err := yaml.Unmarshal(configData, &cfg)
+func AppConfig() (map[string]string, error) {
+	var appEnvs map[string]string
+	appEnvs, err := godotenv.Read()
 	if err != nil {
-		panic(err)
+		log.Fatal("Error loading .env file")
 	}
 
-	return cfg, nil
+	return appEnvs, nil
 }

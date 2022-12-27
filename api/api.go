@@ -8,7 +8,6 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/monitor"
 	"github.com/mattwiater/golangdocker/common"
-	"github.com/mattwiater/golangdocker/config"
 	"github.com/mattwiater/golangdocker/sysinfo"
 	"github.com/shirou/gopsutil/v3/host"
 	fiberSwagger "github.com/swaggo/fiber-swagger"
@@ -180,8 +179,8 @@ func CustomHeaders(c *fiber.Ctx) error {
 // @Summary Setup Fiber API routes
 // @Description Setup Fiber API routes
 // @Tags Fiber API
-func SetupRoute(cfg config.Config) *fiber.App {
-	if cfg.Options.Debug {
+func SetupRoute(cfg map[string]string) *fiber.App {
+	if cfg["DEBUG"] == "true" {
 		fmt.Println(common.ConsoleInfo("Multi-stage image build tests:"))
 		sysinfo.TestTZ()
 		sysinfo.TestTLS()
@@ -192,8 +191,8 @@ func SetupRoute(cfg config.Config) *fiber.App {
 	app.Use(RouteTimerHandler())
 	app.Use(CustomHeaders)
 	app.Use(func(c *fiber.Ctx) error {
-		c.Locals("port", cfg.Server.Port)
-		c.Locals("debug", cfg.Options.Debug)
+		c.Locals("port", cfg["SERVERPORT"])
+		c.Locals("debug", cfg["DEBUG"])
 		return c.Next()
 	})
 	app.Use(logger.New(logger.Config{

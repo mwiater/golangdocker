@@ -227,7 +227,14 @@ mattwiater/golangdocker   latest    <span class="hljs-number">053</span>f2105265
     <p>The <strong>bottom</strong> section uses the Docker <code>scratch</code> image (a completely empty image). It incldes the top
       <code>app</code> section into the image (all of the minimal artifacts used to generate the app binary), as well as installing some fundamentals, like the certs from the <code>Alpine</code> image.</p>
 
-    <p>The app could certainly be built on top of the <code>Alpine</code> image and used from that point, rather than re-building it on <code>scratch</code>. But, for this project, we only need to run a single go binary, we don't need all of the superfluous Alpine OS tools, allowing us to keep this image as small as possible by only including the <strong>bare minimum</strong> dependencies to run the binary in the container.</p>
+    <p>The app could certainly be built on top of the <code>Alpine</code> image and used from that point, rather than re-building it on <code>scratch</code>. But, for this project, we only need to run a single go binary, we don't need all of the superfluous Alpine OS tools, allowing us to keep this image as small as possible by only including the <strong>bare minimum</strong> dependencies to run the binary in the container. If it was built upon the full <code>Alpine</code> image, the container would have access to common linux commands like <code>ls</code>, <code>bash</code>, etc. This is often nice to have for testing, but does create minimal, unneeded overhead.</p>
+
+    <p>When interactively executed with the multi-stage build, all of the common linux OS commands are not requireed, or included. in fact, just trying to run the <code>ls</code> command on our image results in an error:</p>
+
+    <p><code>docker run -it -p 5000:5000 --entrypoint ls -laF --rm mattwiater/golangdocker`</code></p>
+
+    <p><code>docker: Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: "ls": executable file not found in $PATH: unknown.</code></p>
+    
   </div>
 </div>
 <div class="row">
@@ -237,7 +244,7 @@ mattwiater/golangdocker   latest    <span class="hljs-number">053</span>f2105265
     <p>The make command below executes the following Docker command, using the <code>.env</code> vars you've defined:
     </p>
 
-    <p>Docker command: <code>docker run -it -p $DOCKERPORT:$SERVERPORT --rm $DOCKERIMAGE</code></p>
+    <p><code>docker run -it -p $DOCKERPORT:$SERVERPORT --rm $DOCKERIMAGE</code></p>
 
     Env vars used in the bash script:
     <pre><code>SERVERPORT=5000

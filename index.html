@@ -221,6 +221,13 @@ mattwiater/golangdocker   latest    <span class="hljs-number">053</span>f2105265
 </span><span class="hljs-keyword">COPY</span><span class="bash"> --from=alpine:latest /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 </span><span class="hljs-keyword">ENTRYPOINT</span><span class="bash"> [<span class="hljs-string">"/golangdocker"</span>]</span>
 </code></pre>
+    <p>The above represents a multi-stage build Dockerfile. The <strong>top</strong> section uses the base Golang Alpine image to copy
+      the app files and install required packages, like <code>timetzdata</code>. Using the <code>Alpine</code> image for the initial stage ensure that the image is built on a full working OS. This is important as were using the Docker <code>scratch</code> image in the subsequent step, which contains no OS, toolchains, etc. In this step, all of the toolchains required to build a go app are in the base <code>Alpine</code> image.</p>
+
+    <p>The <strong>bottom</strong> section uses the Docker <code>scratch</code> image (a completely empty image). It incldes the top
+      <code>app</code> section into the image (all of the minimal artifacts used to generate the app binary), as well as installing some fundamentals, like the certs from the <code>Alpine</code> image.</p>
+
+    <p>The app could certainly be built on top of the <code>Alpine</code> image and used from that point, rather than re-building it on <code>scratch</code>. But, for this project, we only need to run a single go binary, we don't need all of the superfluous Alpine OS tools, allowing us to keep this image as small as possible by only including the <strong>bare minimum</strong> dependencies to run the binary in the container.</p>
   </div>
 </div>
 <div class="row">
@@ -232,7 +239,7 @@ mattwiater/golangdocker   latest    <span class="hljs-number">053</span>f2105265
 
     <p>Docker command: <code>docker run -it -p $DOCKERPORT:$SERVERPORT --rm $DOCKERIMAGE</code></p>
 
-    Env Vars:
+    Env vars used in the bash script:
     <pre><code>SERVERPORT=5000
 DOCKERPORT=5000
 DOCKERIMAGE=mattwiater/golangdocker</code></pre>
@@ -240,7 +247,7 @@ DOCKERIMAGE=mattwiater/golangdocker</code></pre>
     <p>For simplicity, the default setup above has both the application <strong>and</strong> the Docker container
       listening on port <strong>5000</strong>. These ports can be different. The <code>DOCKERPORT</code> var is the port
       the container listens on, and then passes the request to the <code>SERVERPORT</code> port var.</p>
-    <p><code>make docker-run</code></p>
+    <p>To run the app in the container, simply run: <code>make docker-run</code></p>
     <p>You should see the default Fiber message, e.g.:</p>
     <pre><code> ┌─────────────────────────────────────────────────────────┐
  │                   Fiber v2<span class="hljs-number">.40</span><span class="hljs-number">.0</span>                    │

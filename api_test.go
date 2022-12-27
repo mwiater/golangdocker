@@ -5,7 +5,6 @@ import (
 	"log"
 	"net"
 	"net/http"
-	"strconv"
 	"testing"
 	"time"
 
@@ -112,18 +111,16 @@ func TestAPIRoutes(t *testing.T) {
 		},
 	}
 
-	configData, _ := conf.ReadFile("config/appConfig.yml")
-
-	cfg, err := config.AppConfig(configData)
+	cfg, err := config.AppConfig(fs)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Error: config.AppConfig()")
 	}
 
 	app := api.SetupRoute(cfg)
 
-	go app.Listen(":" + strconv.Itoa(cfg.Server.Port)) //nolint
+	go app.Listen(":" + cfg["SERVERPORT"]) //nolint
 
-	waitForServer(strconv.Itoa(cfg.Server.Port))
+	waitForServer(cfg["SERVERPORT"])
 
 	for _, test := range tests {
 		req, _ := http.NewRequest(

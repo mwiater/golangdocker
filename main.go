@@ -21,10 +21,11 @@ import (
 // @BasePath /
 
 //go:embed .env
-var conf embed.FS
+var fs embed.FS
 
 func main() {
-	cfg, err := config.AppConfig()
+
+	cfg, err := config.AppConfig(fs)
 	if err != nil {
 		log.Fatal("Error: config.AppConfig()")
 	}

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# From root of project, run: `bash golang_build_arm64.sh`
+# From root of project, run: `bash scripts/golang_build_arm64.sh`
 #
 # Find the architec ture of the taget machine. On Linus, for example: `uname -a` #=>
 # Linux piarmy-01 5.4.0-1074-raspi #85-Ubuntu SMP PREEMPT Fri Nov 4 13:34:24 UTC 2022 aarch64 aarch64 aarch64 GNU/Linux

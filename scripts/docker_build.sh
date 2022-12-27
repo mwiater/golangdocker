@@ -1,9 +1,13 @@
 #!/bin/bash
 #
-# From root of project, run: `bash docker_build.sh`
-# You must have a DOCKERIMAGE envionment variable set, e.g.: add `export DOCKERIMAGE={your-docker-hub-account-username}/{your-docker-hub-image-name}` to your ~/.bashrc file.
+# From root of project, run: `bash scripts/docker_build.sh`
 
 clear
+
+if [ ! -f ../.env ]
+then
+  export $(cat .env | xargs)
+fi
 
 # Color Console Output
 RESET='\033[0m'           # Text Reset
@@ -14,7 +18,7 @@ CYANBOLD='\033[1;36m'     # Cyan (Bold)
 
 if [ "$DOCKERIMAGE" = "" ]; then
   echo ""
-  echo -e "${REDBOLD}Please set your DOCKERIMAGE environment variable:${RESET} ${CYANBOLD}{your-docker-hub-account-username}/{your-docker-hub-image-name}${RESET}"
+  echo -e "${REDBOLD}Please set your DOCKERIMAGE environment variable in the .env file: ${RESET} E.g.: ${CYANBOLD}DOCKERIMAGE=mattwiater/golangdocker${RESET}"
   echo ""
   exit 0
 fi

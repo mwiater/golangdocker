@@ -1,26 +1,22 @@
 package config
 
 import (
-	"log"
-
-	"github.com/joho/godotenv"
+	"bufio"
+	"embed"
+	"strings"
 )
 
-var cfg Config
-
-// Config struct for webapp config
-type Config struct {
-	Port  int
-	Debug bool
-}
-
 // AppConfig returns a new decoded Config struct
-func AppConfig() (map[string]string, error) {
-	var appEnvs map[string]string
-	appEnvs, err := godotenv.Read()
-	if err != nil {
-		log.Fatal("Error loading .env file")
+func AppConfig(fs embed.FS) (map[string]string, error) {
+	var envs map[string]string
+	envs = make(map[string]string)
+	envsFromFile, _ := fs.ReadFile(".env")
+
+	scanner := bufio.NewScanner(strings.NewReader(string(envsFromFile)))
+	for scanner.Scan() {
+		env := strings.Split(scanner.Text(), "=")
+		envs[env[0]] = env[1]
 	}
 
-	return appEnvs, nil
+	return envs, nil
 }

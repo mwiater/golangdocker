@@ -153,7 +153,7 @@ func readLoadInfo(c *fiber.Ctx) error {
 	return nil
 }
 
-// New creates a new middleware handler that wraps all other middleware
+// Creates a new middleware handler that wraps all other middleware
 func RouteTimerHandler() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		start := time.Now()

@@ -1,9 +1,13 @@
 #!/bin/bash
 #
-# From root of project, run: `bash docker_run.sh`
-# You must have a DOCKERIMAGE envionment variable set, e.g.: add `export DOCKERIMAGE={your-docker-hub-account-username}/{your-docker-hub-image-name}` to your ~/.bashrc file.
+# From root of project, run: `bash scripts/docker_run.sh`
 
 clear
+
+if [ ! -f ../.env ]
+then
+  export $(cat .env | xargs)
+fi
 
 # Color Console Output
 RESET='\033[0m'           # Text Reset
@@ -14,7 +18,20 @@ CYANBOLD='\033[1;36m'     # Cyan (Bold)
 
 if [ "$DOCKERIMAGE" = "" ]; then
   echo ""
-  echo -e "${REDBOLD}Please set your DOCKERIMAGE environment variable:${RESET} ${CYANBOLD}{your-docker-hub-account-username}/{your-docker-hub-image-name}${RESET}"
+  echo -e "${REDBOLD}Please set your DOCKERIMAGE environment variable in the .env file: ${RESET} E.g.: ${CYANBOLD}DOCKERIMAGE=mattwiater/golangdocker${RESET}"
+  echo ""
+  exit 0
+fi
+
+if [ "$SERVERPORT" = "" ]; then
+  echo ""
+  echo -e "${REDBOLD}Please set your SERVERPORT environment variable in the .env file:${RESET} E.g.: ${CYANBOLD}SERVERPORT=5000${RESET}"
+  echo ""
+  exit 0
+fi
+if [ "$DOCKERPORT" = "" ]; then
+  echo ""
+  echo -e "${REDBOLD}Please set your DOCKERPORT environment variable in the .env file:${RESET} E.g.: ${CYANBOLD}DOCKERPORT=5000${RESET}"
   echo ""
   exit 0
 fi
@@ -33,4 +50,4 @@ echo -e "${GREENBOLD}...Complete.${RESET}"
 echo ""
 
 echo -e "${CYANBOLD}Running Docker container:${RESET} ${DOCKERIMAGE}${RESET}"
-docker run -it -p 5000:5000 --rm $DOCKERIMAGE
+docker run -it -p $DOCKERPORT:$SERVERPORT --rm $DOCKERIMAGE

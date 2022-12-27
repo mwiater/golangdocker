@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# From root of project, run: `bash golang_godoc.sh`
+# From root of project, run: `bash scripts/golang_godoc.sh`
 
 clear
 

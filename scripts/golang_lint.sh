@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# From root of project, run: `bash golang_lint.sh`
+# From root of project, run: `bash scripts/golang_lint.sh`
 
 clear
 

@@ -41,17 +41,17 @@ a, a:visited, a:hover {
 }
 
 pre {
-  background: #f8f8f8;
+  background: #ffffff;
 }
 
 code {
-  background: #f8f8f8;;
+  background: #ffffff;;
 }
 
 pre code {
   font-family: 'Red Hat Mono', monospace;
   color: #111;
-  background: #f8f8f8;;
+  background: #ffffff;;
 }
 
 .list-group {

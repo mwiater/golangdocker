@@ -2,6 +2,7 @@
 
 body {
   font-family: 'Roboto', sans-serif;
+  background: #ffffff;
 }
 
 header {
@@ -12,10 +13,17 @@ header {
   padding-bottom: 20px;
 }
 
+.row.project-sections {
+  background: #ffffff;
+}
+
+.row.project-sections div {
+  background: #ffffff;
+}
+
 a, a:visited, a:hover {
   color: #4F754F;
 }
-
 
 .navbar-brand {
   font-size: 1em;
@@ -25,9 +33,25 @@ a, a:visited, a:hover {
   padding-top: 0px;
 }
 
+.row {
+  background: #f8f8f8;
+  padding: 10px;
+  margin-bottom:10px;
+  border-radius: 5px;
+}
+
+pre {
+  background: #f8f8f8;
+}
+
+code {
+  background: #f8f8f8;;
+}
+
 pre code {
   font-family: 'Red Hat Mono', monospace;
   color: #111;
+  background: #f8f8f8;;
 }
 
 .list-group {
@@ -51,8 +75,9 @@ pre code {
   margin-bottom:20px;
 }
 
-.card:hover{
+.card:hover {
   background: #efefef;
+  cursor: pointer;
 }
 
 .card small {

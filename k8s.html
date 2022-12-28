@@ -3,80 +3,96 @@ layout: null
 ---
 {% include header.html %}
 
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <h1 id="k8s">K8s</h1>
-        <p>[IN PROGRESS]</p>
-        <h2 id="to-do">To Do</h2>
-        <ul>
-          <li>Working, but walkthrough needs more definition, test commands to ensure cluster setup is correct.
-          </li>
-        </ul>
-        <h2 id="assumptions">Assumptions</h2>
-        <p>You have built the container on the Control Plane node:</p>
-        <p><code>docker build -t {your-docker-hub-account-username}/golangdocker:v1 .</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
-        <p>Above we are going to use the <code>:v1</code> tag so that we can use <a
-            href="https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/">K8s Rolling Updates</a>
-          when we make changes to the image. If you have built images in the previous sections, you&#39;ll likely see
-          multiple versions of your image with different tags:</p>
-        <p><code>docker images</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
-        <pre><code>REPOSITORY                TAG       IMAGE ID       CREATED         SIZE
+<div class="row">
+  <div class="col">
+    <h1 id="k8s">K8s</h1>
+    <p>[IN PROGRESS]</p>
+    <h2 id="to-do">To Do</h2>
+    <ul>
+      <li>Working, but walkthrough needs more definition, test commands to ensure cluster setup is correct.
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <h2 id="assumptions">Assumptions</h2>
+    <p>You have built the container on the Control Plane node:</p>
+    <p><code>docker build -t {your-docker-hub-account-username}/golangdocker:v1 .</code> <i
+        class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
+    <p>Above we are going to use the <code>:v1</code> tag so that we can use <a
+        href="https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/">K8s Rolling Updates</a>
+      when we make changes to the image. If you have built images in the previous sections, you&#39;ll likely see
+      multiple versions of your image with different tags:</p>
+    <p><code>docker images</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
+    <pre><code>REPOSITORY                TAG       IMAGE ID       CREATED         SIZE
 mattwiater/golangdocker   latest    e9b376df3a3f   <span class="hljs-number">24</span> minutes ago  <span class="hljs-number">11.1</span>MB
 mattwiater/golangdocker   v1        e9b376df3a3f   <span class="hljs-number">4</span> minutes ago   <span class="hljs-number">11.1</span>MB
 ...
 </code></pre>
-        <p>And pushed it to docker hub, e.g.: <code>docker push mattwiater/golangdocker:v1</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
-        <p>Docker Hub Note: This step is important for the remaining nodes to download and run the image without
-          having to manually build it locally on each node. K8s can use local images to spawn pods, but that would
-          require a manual build on each node (dowmlaoding the repo, building the image, and chaning the manifest
-          entry for <code>imagePullPolicy: Always</code> to <code>imagePullPolicy: Never</code>), which we are
-          skipping for this demonstration.</p>
-        <p>For rolling updates, we would just make the necessary updates to our code, build an image tagged with a new
-          version, e.g.: <code>:v1.1</code>, <code>:v2</code>, etc., push it to docker hub, and then issue the
-          command:</p>
-        <p>[NEED TO FIX]:
-          <code>kubectl set image deployments/k8s-golang-api k8s-golang-api=mattwiater/golangdocker:v2</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> 
-        </p>
-        <p>[PROBLEM]: The command is not working with namespaced deployments, need to adjust.</p>
-        <p>The command above tells K8s to update the existing deployment to the newer version and it will take care of
-          bringing down the old pods and spawning new pods with no downtime.</p>
-        <p>[TO DO: Need example after the initial deployment below is complete]</p>
-        <h2 id="load-balancer">Load Balancer</h2>
-        <p>Since we want to make use of multiple container instances in our cluster which are accessible via a single
-          external endpoint, we&#39;ll need to setup a load balancer.</p>
-        <p>The basic traffic path is for our setup is:</p>
-        <p>Ingress: Our domain maps to an exposed service so that we can reach the Service
-          Service: The load balancer which will route traffic from a singular endpoint to multiple Pods containers via
-          internal Endpoints
-          Endpoints: Defines which target Pods to route traffic to: internal IP Address and Port</p>
-        <p>For this example, we&#39;ll use Metal-LB to do the heavy lifting.</p>
-        <h3 id="metal-lb">Metal LB</h3>
-        <p>METAL-LB: <a href="https://metallb.universe.tf/installation/">https://metallb.universe.tf/installation/</a>
-        </p>
-        <p>Ensure that Strict ARP Mode is enabled in your cluster:</p>
-        <p><code>kubectl edit configmap -n kube-system kube-proxy</code></p>
-        <p>Eddit/Add the <code>mode</code> and <code>strictARP</code> fields to match below:</p>
-        <pre><code><span class="hljs-symbol">apiVersion:</span> kubeproxy.config.k8s.io/v1alpha1
+    <p>And pushed it to docker hub, e.g.: <code>docker push mattwiater/golangdocker:v1</code> <i
+        class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
+    <p>Docker Hub Note: This step is important for the remaining nodes to download and run the image without
+      having to manually build it locally on each node. K8s can use local images to spawn pods, but that would
+      require a manual build on each node (dowmlaoding the repo, building the image, and chaning the manifest
+      entry for <code>imagePullPolicy: Always</code> to <code>imagePullPolicy: Never</code>), which we are
+      skipping for this demonstration.</p>
+    <p>For rolling updates, we would just make the necessary updates to our code, build an image tagged with a new
+      version, e.g.: <code>:v1.1</code>, <code>:v2</code>, etc., push it to docker hub, and then issue the
+      command:</p>
+    <p>[NEED TO FIX]:
+      <code>kubectl set image deployments/k8s-golang-api k8s-golang-api=mattwiater/golangdocker:v2</code> <i
+        class="fa-duotone fa-copy fa-fw code-copy-button"></i>
+    </p>
+    <p>[PROBLEM]: The command is not working with namespaced deployments, need to adjust.</p>
+    <p>The command above tells K8s to update the existing deployment to the newer version and it will take care of
+      bringing down the old pods and spawning new pods with no downtime.</p>
+    <p>[TO DO: Need example after the initial deployment below is complete]</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <h2 id="load-balancer">Load Balancer</h2>
+    <p>Since we want to make use of multiple container instances in our cluster which are accessible via a single
+      external endpoint, we&#39;ll need to setup a load balancer.</p>
+    <p>The basic traffic path is for our setup is:</p>
+    <p>Ingress: Our domain maps to an exposed service so that we can reach the Service
+      Service: The load balancer which will route traffic from a singular endpoint to multiple Pods containers via
+      internal Endpoints
+      Endpoints: Defines which target Pods to route traffic to: internal IP Address and Port</p>
+    <p>For this example, we&#39;ll use Metal-LB to do the heavy lifting.</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <h2 id="metal-lb">Metal LB</h2>
+    <p>METAL-LB: <a href="https://metallb.universe.tf/installation/">https://metallb.universe.tf/installation/</a>
+    </p>
+    <p>Ensure that Strict ARP Mode is enabled in your cluster:</p>
+    <p><code>kubectl edit configmap -n kube-system kube-proxy</code></p>
+    <p>Eddit/Add the <code>mode</code> and <code>strictARP</code> fields to match below:</p>
+    <pre><code><span class="hljs-symbol">apiVersion:</span> kubeproxy.config.k8s.io/v1alpha1
 <span class="hljs-symbol">kind:</span> KubeProxyConfiguration
 <span class="hljs-symbol">mode:</span> <span class="hljs-string">"ipvs"</span>
 <span class="hljs-symbol">ipvs:</span>
 <span class="hljs-symbol">  strictARP:</span> true
 </code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
-        <p>Next, set up the Metal-LB infrastructure and resources by applying the Metal-LB native Manifest via:</p>
-        <p>
-          <code>kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.7/config/manifests/metallb-native.yaml</code>
-        </p>
-        <p>Your cluster will vary, but my setup has static IP Addresses on my local network:</p>
-        <p><code>kubectl get nodes</code></p>
-        <p>NAME STATUS ROLES AGE VERSION
-          mjw-udoo-01 Ready control-plane 181d v1.25.3
-          mjw-udoo-02 Ready worker 181d v1.25.3
-          mjw-udoo-03 Ready worker 181d v1.25.3
-          mjw-udoo-04 Ready worker 181d v1.25.3</p>
-        <p>Configure Metal-LB to add these IP addresses to the IPAddressPool (REF: <a
-            href="https://metallb.universe.tf/usage/example/">https://metallb.universe.tf/usage/example/</a>)</p>
-        <pre><code>cat &lt;&lt;EOF | kubectl apply -f -
+    <p>Next, set up the Metal-LB infrastructure and resources by applying the Metal-LB native Manifest via:</p>
+    <p>
+      <code>kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.7/config/manifests/metallb-native.yaml</code>
+    </p>
+    <p>Your cluster will vary, but my setup has static IP Addresses on my local network:</p>
+    <p><code>kubectl get nodes</code></p>
+    <p>
+    <pre><code>NAME STATUS ROLES AGE VERSION
+mjw-udoo-01 Ready control-plane 181d v1.25.3
+mjw-udoo-02 Ready worker 181d v1.25.3
+mjw-udoo-03 Ready worker 181d v1.25.3
+mjw-udoo-04 Ready worker 181d v1.25.3</code></pre>
+    </p>
+    <p>Configure Metal-LB to add these IP addresses to the IPAddressPool (REF: <a
+        href="https://metallb.universe.tf/usage/example/">https://metallb.universe.tf/usage/example/</a>)</p>
+    <pre><code>cat &lt;&lt;EOF | kubectl apply -f -
 <span class="hljs-attr">apiVersion:</span> metallb.io/v1beta1
 <span class="hljs-attr">kind:</span> IPAddressPool
 <span class="hljs-attr">metadata:</span>
@@ -87,10 +103,10 @@ mattwiater/golangdocker   v1        e9b376df3a3f   <span class="hljs-number">4</
 <span class="hljs-bullet">  -</span> <span class="hljs-number">192.168</span><span class="hljs-number">.0</span><span class="hljs-number">.91</span><span class="hljs-bullet">-192.168</span><span class="hljs-number">.0</span><span class="hljs-number">.94</span>
 EOF
 </code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
-        <p>Then, you can name your IPAddressPool and advertise it to the cluster. In my case, I&#39;ve hjust named it
-          <code>udoo</code>
-        </p>
-        <pre><code>cat &lt;&lt;EOF | kubectl apply -f -
+    <p>Then, you can name your IPAddressPool and advertise it to the cluster. In my case, I&#39;ve hjust named it
+      <code>udoo</code>
+    </p>
+    <pre><code>cat &lt;&lt;EOF | kubectl apply -f -
 <span class="hljs-attr">apiVersion:</span> metallb.io/v1beta1
 <span class="hljs-attr">kind:</span> BGPAdvertisement
 <span class="hljs-attr">metadata:</span>
@@ -101,23 +117,34 @@ EOF
 <span class="hljs-bullet">  -</span> udoo
 EOF
 </code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
-        <p>Then, create the namespace and deployment for the App. The following code creates the
-          <code>k8s-golang-api</code> namespace for the app to run in and be identified with. It is up to you to
-          choose a name that makes sense, but be sure to adjust the the following YAML snippets to reflect your
-          Namespave name in <em>all</em> of the <code>namespace:</code> fields.
-        </p>
-        <h3 id="create-namespace">Create Namespace</h3>
-        <pre><code>cat &lt;&lt;EOF | kubectl apply -f -
+    <p>Then, create the namespace and deployment for the App. The following code creates the
+      <code>k8s-golang-api</code> namespace for the app to run in and be identified with. It is up to you to
+      choose a name that makes sense, but be sure to adjust the the following YAML snippets to reflect your
+      Namespave name in <em>all</em> of the <code>namespace:</code> fields.
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <h2 id="create-namespace">Create Namespace</h2>
+    <p>Create the <code>k8s-golang-api</code> namespace to group all services, deployments, etc. Notice that all of
+      the following YAML definitions use <code>namespace: k8s-golang-api</code> to access this new Namespace
+      definition.</p>
+    <pre><code>cat &lt;&lt;EOF | kubectl apply -f -
 <span class="hljs-attr">apiVersion:</span> v1
 <span class="hljs-attr">kind:</span> Namespace
 <span class="hljs-attr">metadata:</span>
 <span class="hljs-attr">  name:</span> k8s-golang-api
 EOF
 </code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
-        <h3 id="create-deployment">Create Deployment</h3>
-        <p>The following defines how K8s will deploy the Pods on your system. It defines the names, associated
-          Namespaces, number of Replicas, Resource Limits, Ports, etc.</p>
-        <pre><code>cat &lt;&lt;EOF | kubectl apply -f -
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <h2 id="create-deployment">Create Deployment</h2>
+    <p>The following defines how K8s will deploy the Pods on your system. It defines the names, associated
+      Namespaces, number of Replicas, Resource Limits, Ports, etc.</p>
+    <pre><code>cat &lt;&lt;EOF | kubectl apply -f -
 <span class="hljs-attr">apiVersion:</span> apps/v1
 <span class="hljs-attr">kind:</span> Deployment
 <span class="hljs-attr">metadata:</span>
@@ -173,13 +200,17 @@ EOF
 <span class="hljs-attr">              protocol:</span> TCP
 EOF
 </code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
-        <p>The final two steps, Service and Ingress are responsible for routing external traffic into the cluster.</p>
-        <h3 id="create-service">Create Service</h3>
-        <p>You can see that the service is accepting incoming traffic on port 80, and routing to the Pods named
-          <code>k8s-golang-api</code> that are already running on Port 5000 (defined in the Deployment manifest above:
-          <code>containerPort: 5000</code>)
-        </p>
-        <pre><code>cat &lt;&lt;EOF | kubectl apply -f -
+    <p>The final two steps, Service and Ingress are responsible for routing external traffic into the cluster.</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <h2 id="create-service">Create Service</h2>
+    <p>You can see that the service is accepting incoming traffic on port 80, and routing to the Pods named
+      <code>k8s-golang-api</code> that are already running on Port 5000 (defined in the Deployment manifest above:
+      <code>containerPort: 5000</code>)
+    </p>
+    <pre><code>cat &lt;&lt;EOF | kubectl apply -f -
 <span class="hljs-attr">apiVersion:</span> v1
 <span class="hljs-attr">kind:</span> Service
 <span class="hljs-attr">metadata:</span>
@@ -195,12 +226,16 @@ EOF
 <span class="hljs-attr">    targetPort:</span> <span class="hljs-number">5000</span>
 EOF
 </code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
-        <h3 id="create-ingress">Create Ingress</h3>
-        <p>In my setup, I want the containers to be accessible via Port 80 at the domain
-          <code>golang.0nezer0.com</code>. So the Ingress section below defines the domain mapping to the Serice
-          section
-        </p>
-        <pre><code>cat &lt;&lt;EOF | kubectl apply -f -
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <h2 id="create-ingress">Create Ingress</h2>
+    <p>In my setup, I want the containers to be accessible via Port 80 at the domain
+      <code>golang.0nezer0.com</code>. So the Ingress section below defines the domain mapping to the Serice
+      section
+    </p>
+    <pre><code>cat &lt;&lt;EOF | kubectl apply -f -
 <span class="hljs-attr">apiVersion:</span> networking.k8s.io/v1
 <span class="hljs-attr">kind:</span> Ingress
 <span class="hljs-attr">metadata:</span>
@@ -225,9 +260,10 @@ EOF
 <span class="hljs-attr">              number:</span> <span class="hljs-number">80</span>
 EOF
 </code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
-        <p>You can verify the setup via:</p>
-        <p><code>kubectl describe ingress k8s-golang-api-ingress -n=k8s-golang-api</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
-        <pre><code><span class="hljs-symbol">Name:</span>             k8s-golang-api-ingress
+    <p>You can verify the setup via:</p>
+    <p><code>kubectl describe ingress k8s-golang-api-ingress -n=k8s-golang-api</code> <i
+        class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
+    <pre><code><span class="hljs-symbol">Name:</span>             k8s-golang-api-ingress
 <span class="hljs-symbol">Labels:</span>           &lt;none&gt;
 <span class="hljs-symbol">Namespace:</span>        k8s-golang-api
 <span class="hljs-symbol">Address:</span>
@@ -241,24 +277,28 @@ Ingress Class:    &lt;none&gt;
 <span class="hljs-symbol">Annotations:</span>          &lt;none&gt;
 <span class="hljs-symbol">Events:</span>               &lt;none&gt;
 </code></pre>
-        <p>Note that the domain is listed and the Backend are pointing to the Service we created.</p>
-        <p>Ensure that you have an IP Address allocated for the Load Balancer:</p>
-        <p><code>kubectl get svc -n=k8s-golang-api</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
-        <pre><code>NAME             TYPE           CLUSTER-<span class="hljs-built_in">IP</span>      EXTERNAL-<span class="hljs-built_in">IP</span>    PORT(S)        AGE
+    <p>Note that the domain is listed and the Backend are pointing to the Service we created.</p>
+    <p>Ensure that you have an IP Address allocated for the Load Balancer:</p>
+    <p><code>kubectl get svc -n=k8s-golang-api</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
+    <pre><code>NAME             TYPE           CLUSTER-<span class="hljs-built_in">IP</span>      EXTERNAL-<span class="hljs-built_in">IP</span>    PORT(S)        AGE
 k8s-golang-api   LoadBalancer   <span class="hljs-number">10.105</span><span class="hljs-meta">.31</span><span class="hljs-meta">.196</span>   <span class="hljs-number">192.168</span><span class="hljs-meta">.0</span><span class="hljs-meta">.91</span>   <span class="hljs-number">80</span>:<span class="hljs-number">31188</span>/TCP   21s
 </code></pre>
-        <p>Assuming that your setup is also on your local network, make sure to add add an IP -&gt; Domain mapping in
-          <code>/etc/hosts</code> file on the machine you are accessing the cluster from:
-        </p>
-        <pre><code>192<span class="hljs-selector-class">.168</span><span class="hljs-selector-class">.0</span><span class="hljs-selector-class">.91</span> <span class="hljs-selector-tag">golang</span><span class="hljs-selector-class">.0nezer0</span><span class="hljs-selector-class">.com</span>
+    <p>Assuming that your setup is also on your local network, make sure to add add an IP -&gt; Domain mapping in
+      <code>/etc/hosts</code> file on the machine you are accessing the cluster from:
+    </p>
+    <pre><code>192<span class="hljs-selector-class">.168</span><span class="hljs-selector-class">.0</span><span class="hljs-selector-class">.91</span> <span class="hljs-selector-tag">golang</span><span class="hljs-selector-class">.0nezer0</span><span class="hljs-selector-class">.com</span>
 </code></pre>
-        <h2 id="horizontal-pod-autoscaler-hpa-">Horizontal Pod Autoscaler (HPA)</h2>
-        <p>
-          <code>kubectl autoscale deployment -n k8s-golang-api  k8s-golang-api --cpu-percent=75 --memory-percent=75 --min=1 --max=3</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> 
-        </p>
-
-      </div>
-    </div>
   </div>
+</div>
+<div class="row">
+  <div class="col">
+    <h2 id="horizontal-pod-autoscaler-hpa-">Horizontal Pod Autoscaler (HPA)</h2>
+    <p>
+      <code>kubectl autoscale deployment -n k8s-golang-api  k8s-golang-api --cpu-percent=75 --memory-percent=75 --min=1 --max=3</code>
+      <i class="fa-duotone fa-copy fa-fw code-copy-button"></i>
+    </p>
+
+  </div>
+</div>
 
 {% include footer.html %}

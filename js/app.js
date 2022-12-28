@@ -2,9 +2,20 @@ $(document).ready(function () {
   var pathArr = window.location.pathname.split("/").slice(0, 2);
   pathArr = pathArr.filter(p => p);
   pathArr = pathArr.filter(p => !p.includes(".html"));
-  var homePath = "/"+pathArr.join("");
-  $(".homelink").attr("href", homePath)
-  
+  var homePath = "/" + pathArr.join("");
+  $(".homelink").attr("href", homePath);
+
+  $("h2").parents(".row:nth-child(2n)").each(function (index) {
+    $(this).css("background", "#f1f1f1");
+    $(this).find("pre").each(function (index) {
+      // $(this).css("background", "#ffffff");
+    });
+
+    $(this).find("code").each(function (index) {
+      // $(this).css("background", "#ffffff");
+    });
+  });
+
   $(".code-copy-button").each(function (index) {
     const copyButton = $(this)[0];
     let codeBoxPos = {}
@@ -19,6 +30,8 @@ $(document).ready(function () {
     $(this).css("position", "absolute");
     $(this).css("top", codeBoxPos.top + 2);
     $(this).css("left", codeBoxPos.right + 11);
+    $(this).css("cursor", "pointer");
+
     copyButton.addEventListener('click', (event) => {
       const content = $(this).siblings().first().text();
       const self = $(this);
@@ -51,7 +64,7 @@ $(document).ready(function () {
     if (window.location.pathname.slice(1) === url.pathname.slice(1)) {
       $(this).css("background", "#eff6ef");
     } else {
-      if(window.location.pathname.slice(1) === url.pathname.slice(1)+"/"){
+      if (window.location.pathname.slice(1) === url.pathname.slice(1) + "/") {
         $(this).css("background", "#eff6ef");
       }
     }

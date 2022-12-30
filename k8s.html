@@ -17,9 +17,18 @@ layout: null
 <div class="row">
   <div class="col">
     <h2 id="assumptions">Assumptions</h2>
-    <p>You have built the container on the Control Plane node:</p>
-    <p><code>docker build -t {your-docker-hub-account-username}/golangdocker:v1 .</code> <i
-        class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
+    <p>You have built the container on the Control Plane node, e.g.:</p>
+    <p>To build, run:
+      <code>make docker-build</code> <i
+      class="fa-duotone fa-copy fa-fw code-copy-button"></i>
+    </p>
+    <p>Once you have built your image successfully, check the output of <code>docker images</code> #=&gt;</p>
+    <pre><code>REPOSITORY                <span class="hljs-keyword">TAG</span>       <span class="hljs-title">IMAGE</span> ID       CREATED          SIZE
+mattwiater/golangdocker   latest    <span class="hljs-number">053</span>f21052659   <span class="hljs-number">10</span> minutes ago   <span class="hljs-number">10.7M</span>B
+...
+</code></pre>
+    <p>You should see your tagged image in the list, similar to the output above.</p>
+
     <p>Above we are going to use the <code>:v1</code> tag so that we can use <a
         href="https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/">K8s Rolling Updates</a>
       when we make changes to the image. If you have built images in the previous sections, you&#39;ll likely see

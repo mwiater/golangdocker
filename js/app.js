@@ -62,10 +62,10 @@ $(document).ready(function () {
     const url = new URL(link.href);
 
     if (window.location.pathname.slice(1) === url.pathname.slice(1)) {
-      $(this).css("background", "#eff6ef");
+      card.css("background", "#eff6ef");
     } else {
       if (window.location.pathname.slice(1) === url.pathname.slice(1) + "/") {
-        $(this).css("background", "#eff6ef");
+        card.css("background", "#eff6ef");
       }
     }
 

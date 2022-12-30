@@ -114,7 +114,11 @@ DOCKERIMAGE=mattwiater/golangdocker</code></pre>
       <li><b>DOCKERPORT:</b> The port to open for Docker to map to the port above.Value: 5000</li>
       <li><b>DEBUG:</b> Turn on debugging. Value: true/false</li>
       <li><b>DOCKERIMAGE:</b> The tag for your Docker image. Value:
-        <code>{your-docker-hub-account-username}/{your-docker-hub-image-name}</code>
+        <code>{your-docker-hub-account-username}/{your-docker-hub-image-name}</code> NOTE: By default, Docker will
+        implicitly tag your image as 'latest' if no image tag is supplied. If you want to tag the image differently,
+        adjust the <code>DOCKERIMAGE</code> env variable to inclued an explicit tag in the format:
+        <code>{your-docker-hub-account-username}/{your-docker-hub-image-name}</code> For example, if it is a Version 1
+        release, you might tag it <code>:v1</code>, e.g.: <code>mattwiater/golangdocker:v1</code>
       </li>
     </ul>
     <p>Required for Kubernetes itegration:</p>
@@ -156,8 +160,9 @@ DOCKERIMAGE=mattwiater/golangdocker</code></pre>
   <div class="col">
     <h2 id="makefile">Makefile</h2>
     <p>[IN PROGRESS]</p>
-    <p>There is a <code>Makefile</code> for convenience. At the moment, it&#39;s just acting as a script-runner.
-      To viee the executable tagets, just type: <code>make</code></p>
+    <p>There is a <a target="_blank" href="https://github.com/mwiater/golangdocker/blob/master/Makefile">Makefile</a>
+      for convenience. At the moment, it&#39;s just acting as a script-runner.
+      To view the executable tagets, just type: <code>make</code></p>
     <pre><code>Targets in this Makefile:
 
 docker-build
@@ -166,6 +171,8 @@ golang-build
 </span>golang-build-arm64
 golang-<span class="hljs-keyword">run</span><span class="bash"></span>
 </code></pre>
+    <p>The bash scripts executed by the Makefile live in the <a target="_blank"
+        href="https://github.com/mwiater/golangdocker/tree/master/scripts">/scripts</a> directory.</p>
   </div>
 </div>
 <div class="row">
@@ -184,15 +191,11 @@ golang-<span class="hljs-keyword">run</span><span class="bash"></span>
   <div class="col">
     <h2 id="building-the-docker-container">Building the Docker container</h2>
     <p>NOTE: The steps will refer to the docker image: <code>mattwiater/golangdocker</code>. You should change
-      these steps to match your own image name, e.g.: <code>{your-docker-hub-account-username}/golangdocker</code>
+      these steps to match your own image name in the <code>.env</code> file, e.g.:
+      <code>DOCKERIMAGE={your-docker-hub-account-username}/golangdocker</code>
     </p>
-    <p>The build command uses the local <a
-        href="https://github.com/mwiater/golangdocker/blob/master/Dockerfile">Dockerfile</a> to build the image.
-      Substitute your own Docker image tag for mine wherever you see it (<code>mattwiater/golangdocker</code>),
-      e.g.: <code>{your-docker-hub-account-username}/golangdocker</code></p>
-    <p><code>docker build -t mattwiater/golangdocker .</code></p>
-    <p>Or, for convenience, run:
-      <code>bash docker_build.sh &#39;{your-docker-hub-account-username}/{your-docker-hub-image-name}{:optional-version}&#39;</code>
+    <p>To build, run:
+      <code>make docker-build</code>
     </p>
     <p>Once you have built your image successfully, check the output of <code>docker images</code> #=&gt;</p>
     <pre><code>REPOSITORY                <span class="hljs-keyword">TAG</span>       <span class="hljs-title">IMAGE</span> ID       CREATED          SIZE
@@ -223,15 +226,21 @@ mattwiater/golangdocker   latest    <span class="hljs-number">053</span>f2105265
 <div class="row">
   <div class="col">
     <h2 id="running-the-docker-container">Running the Docker container</h2>
-    <p>Start the container in an interactive shell, with the host port <code>5000</code> (the machine you&#39;re
-      running Docker on) mapping to the container port (the port the app is running on within the Docker
-      container) <code>5000</code> for simplicity. The app is Port if configured here:
-      <code>./config/appConfig.yml</code>
+
+    <p>The make command below executes the following Docker command, using the <code>.env</code> vars you've defined:
     </p>
-    <p><code>docker run -it -p 5000:5000 --rm mattwiater/golangdocker</code></p>
-    <p>Or, for convenience, run:
-      <code>bash docker_run.sh &#39;{your-docker-hub-account-username}/{your-docker-hub-image-name}{:optional-version}&#39;</code>.
-    </p>
+
+    <p>Docker command: <code>docker run -it -p $DOCKERPORT:$SERVERPORT --rm $DOCKERIMAGE</code></p>
+
+    Env Vars:
+    <pre><code>SERVERPORT=5000
+DOCKERPORT=5000
+DOCKERIMAGE=mattwiater/golangdocker</code></pre>
+
+    <p>For simplicity, the default setup above has both the application <strong>and</strong> the Docker container
+      listening on port <strong>5000</strong>. These ports can be different. The <code>DOCKERPORT</code> var is the port
+      the container listens on, and then passes the request to the <code>SERVERPORT</code> port var.</p>
+    <p><code>make docker-run</code></p>
     <p>You should see the default Fiber message, e.g.:</p>
     <pre><code> ┌─────────────────────────────────────────────────────────┐
  │                   Fiber v2<span class="hljs-number">.40</span><span class="hljs-number">.0</span>                    │

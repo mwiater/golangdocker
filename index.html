@@ -1,319 +1,214 @@
----
-layout: null
----
-{% include header.html %}
-<div class="row">
-  <div class="col">
-    <h2 id="table-of-contents">Table of Contents</h2>
-    <ul>
-      <li><a href="#project-summary">Project Summary</a></li>
-      <li><a href="#project-topics">Project Topics</a></li>
-      <li><a href="#assumptions">Project Assumptions</a></li>
-      <li><a href="#prerequisites">Project Prerequisites</a></li>
-      <li><a href="#makefile">Makefile</a></li>
-      <li>Jump directly into the Project <a href="#app">app code</a></li>
-    </ul>
-  </div>
-</div>
-<div class="row">
-  <div class="col">
-    <h2 id="summary">Summary</h2>
-    <p>This repository is a work in progress, but I&#39;ll do my best to keep the Master branch in a working
-      state. Initially, this project was to create a boilerplate for containerizing Go binaries for use in a K8s
-      cluster. For now, just origanizing my notes in order to be able to replicate this process from end-to-end.
-      The idea is to keep this narrow and succinct and be able to use this as a simple boilerplate for Go
-      containers.</p>
-    <p>While my intention is to keep this image minimal, I also want to add in my most used go tools, e.g.:
-      <code>godoc</code>, <code>gofmt</code>, <code>golangci-lint</code>, etc. I will try to make these additions
-      for only tools and packages I find necessary, but it will be an opinionated balance.
-    </p>
-  </div>
-</div>
-<div class="row">
-  <div class="col">
-    <h2 id="project-topics">Project Topics</h2>
-    <p>This project is in three distinct parts, each which build on the previous:</p>
-    <h5 id="1-a-simple-but-functioanl-rest-api-app-written-in-go-this-rest-api-incorporates-">1) A simple but
-      functioanl rest API app written in Go. This rest API incorporates:</h5>
-    <ul>
-      <li>The <a href="https://docs.gofiber.io/api/middleware/monitor">Fiber Monitor middleware</a> (API endpoint:
-        <code>/api/v1/metrics</code>).
-      </li>
-      <li>Creating and serving API documentation (using <code>swag init</code>) based on <a
-          href="https://swagger.io/docs/specification/about/">Swagger specifications</a>:
-        <code>/api/v1/docs/</code>).
-      </li>
-      <li>A <code>YAML</code> configuration pattern for setting app variables.</li>
-      <li>Basic Go endpoint tests via <code>go test</code>.</li>
-      <li>Building a binary of the app and embedding external files (both native compilation and cross-compilation
-        for <code>armv6</code> as an example) so that it is portable and self contained.</li>
-      <li>Go Tools<ul>
-          <li>File formatting for *.go files using <code>gofmt</code>.</li>
-          <li>Code linting for *.go files using <code>golangci-lint</code>.</li>
-          <li>Code documentation via <code>godocs</code>.</li>
-        </ul>
-      </li>
-    </ul>
-    <h5 id="2-using-the-app-in-a-docker-container-covering-">2) Using the app in a Docker container, covering:
-    </h5>
-    <ul>
-      <li><a href="https://docs.docker.com/engine/reference/commandline/build/">Docker build</a> concepts.</li>
-      <li><a href="https://docs.docker.com/engine/reference/commandline/run/">Docker run</a> concepts.</li>
-      <li>Docker image versioning.</li>
-      <li>Ways to make use of bash scripts for repetative tasks.</li>
-    </ul>
-    <h5 id="3-using-the-docker-container-in-kubernetes">3) Using the Docker container in Kubernetes</h5>
-    <ul>
-      <li>This section is the most incomplete, but should be in a working state.</li>
-      <li>You should already have a working K8s cluster available for this section.</li>
-      <li>Does not provide much background, assumes some basic knowledge using <code>kubectl</code>.</li>
-      <li>This app will be deployed as a load-balanced Service across a Control Plane and 3 Worker nodes.</li>
-    </ul>
-  </div>
-</div>
-<div class="row">
-  <div class="col">
-    <h2 id="assumptions">Assumptions</h2>
-    <ul>
-      <li><strong>IP Addresses:</strong> For the most part, disregard the hard-coded IP addresses in here (e.g.:
-        my K8s cluster and VM IPs (192.168.<em>.</em>)). You&#39;ll have to sub in your own for your particular
-        envionment. Right now, laziness!</li>
-      <li><strong>Container vs. Pod:</strong> I&#39;m noticing a few instances where I&#39;m using both
-        <code>container</code> and <code>pod</code> to mean the same thing in the K8s section. Until I make them
-        more consistent, assume they are interchangeable. A pod is basiically a container in in K8s context. While
-        a <code>pod</code> can technically have multiple containers, for this demonstration, assume a 1:1
-        relationship.
-      </li>
-      <li><strong>System</strong> My system and architecture is below, you&#39;ll have to adjust your commands if
-        you&#39;re departing from Linux/x86_64.</li>
-    </ul>
-    <p><code>uname -a</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
-    <pre><code><span class="hljs-selector-tag">Linux</span> <span class="hljs-selector-tag">mjw-udoo-01</span> <span class="hljs-selector-tag">5</span><span class="hljs-selector-class">.4</span><span class="hljs-selector-class">.0-110-generic</span> <span class="hljs-selector-id">#124-Ubuntu</span> <span class="hljs-selector-tag">SMP</span> <span class="hljs-selector-tag">Thu</span> <span class="hljs-selector-tag">Apr</span> <span class="hljs-selector-tag">14</span> <span class="hljs-selector-tag">19</span><span class="hljs-selector-pseudo">:46</span><span class="hljs-selector-pseudo">:19</span> <span class="hljs-selector-tag">UTC</span> <span class="hljs-selector-tag">2022</span> <span class="hljs-selector-tag">x86_64</span> <span class="hljs-selector-tag">x86_64</span> <span class="hljs-selector-tag">x86_64</span> <span class="hljs-selector-tag">GNU</span>/<span class="hljs-selector-tag">Linux</span>
-</code></pre>
-  </div>
-</div>
-<div class="row">
-  <div class="col">
-    <h2 id="prerequisites">Prerequisites</h2>
-    <p>The following programs will need to be installed:</p>
-    <ul>
-      <li><a href="https://go.dev/learn/">Go</a></li>
-      <li><a href="https://www.docker.com/get-started/">Docker</a></li>
-    </ul>
-    <h4><code>.env</code> file:</h4>
-    <p>The <code>.env</code> file contains the configuration for your app, and is used in the Docker build and run
-      processes.</p>
-    <p>
-    <pre><code>SERVERPORT=5000
-DOCKERPORT=5000
-DEBUG=false
-DOCKERIMAGE=mattwiater/golangdocker</code></pre>
-    </p>
-    <ul>
-      <li><b>SERVERPORT:</b> The port to open for the Golang app. Value: 5000</li>
-      <li><b>DOCKERPORT:</b> The port to open for Docker to map to the port above.Value: 5000</li>
-      <li><b>DEBUG:</b> Turn on debugging. Value: true/false</li>
-      <li><b>DOCKERIMAGE:</b> The tag for your Docker image. Value:
-        <code>{your-docker-hub-account-username}/{your-docker-hub-image-name}</code> NOTE: By default, Docker will
-        implicitly tag your image as 'latest' if no image tag is supplied. If you want to tag the image differently,
-        adjust the <code>DOCKERIMAGE</code> env variable to inclued an explicit tag in the format:
-        <code>{your-docker-hub-account-username}/{your-docker-hub-image-name}</code> For example, if it is a Version 1
-        release, you might tag it <code>:v1</code>, e.g.: <code>mattwiater/golangdocker:v1</code>
-      </li>
-    </ul>
-    <p>Required for Kubernetes itegration:</p>
-    <ul>
-      <li>A running <a href="https://kubernetes.io/">Kubernetes</a> cluster</li>
-      <li>A <a href="https://hub.docker.com/">Docker Hub</a> account</li>
-    </ul>
-    <p>Optional:</p>
-    <ul>
-      <li>Artillery (nodejs): <a href="loadTesting.html">Load
-          Testing</a></li>
-    </ul>
-    <p>While the idea is to get this up and running quickly, it is not a deep dive into Go, Docker, or K8S. Basic
-      knowledge of these technologies is required.</p>
-    <p>For example, we can peek into the container via the API endpoint <code>api/v1/host</code> and see the
-      docker assigned <code>hostname: &quot;b189564db0c5&quot;</code> and verify that it is one running a single
-      process <code>procs: 1</code>:</p>
-    <pre><code>{
-<span class="hljs-symbol">hostInfo:</span> {
-<span class="hljs-symbol">  hostname:</span> <span class="hljs-string">"b189564db0c5"</span>,
-<span class="hljs-symbol">  uptime:</span> <span class="hljs-number">1238849</span>,
-<span class="hljs-symbol">  bootTime:</span> <span class="hljs-number">1667920883</span>,
-<span class="hljs-symbol">  procs:</span> <span class="hljs-number">1</span>,
-<span class="hljs-symbol">  os:</span> <span class="hljs-string">"linux"</span>,
-<span class="hljs-symbol">  platform:</span> <span class="hljs-string">""</span>,
-<span class="hljs-symbol">  platformFamily:</span> <span class="hljs-string">""</span>,
-<span class="hljs-symbol">  platformVersion:</span> <span class="hljs-string">""</span>,
-<span class="hljs-symbol">  kernelVersion:</span> <span class="hljs-string">"5.4.0-110-generic"</span>,
-<span class="hljs-symbol">  kernelArch:</span> <span class="hljs-string">"x86_64"</span>,
-<span class="hljs-symbol">  virtualizationSystem:</span> <span class="hljs-string">"docker"</span>,
-<span class="hljs-symbol">  virtualizationRole:</span> <span class="hljs-string">"guest"</span>,
-<span class="hljs-symbol">  hostId:</span> <span class="hljs-string">"12345678-1234-5678-90ab-cddeefaabbcc"</span>
-  }
-}
-</code></pre>
-  </div>
-</div>
-<div class="row">
-  <div class="col">
-    <h2 id="makefile">Makefile</h2>
-    <p>[IN PROGRESS]</p>
-    <p>There is a <a target="_blank" href="https://github.com/mwiater/golangdocker/blob/master/Makefile">Makefile</a>
-      for convenience. At the moment, it&#39;s just acting as a script-runner.
-      To view the executable tagets, just type: <code>make</code></p>
-    <pre><code>Targets in this Makefile:
-
-docker-build
-docker-<span class="hljs-keyword">run</span><span class="bash">
-golang-build
-</span>golang-build-arm64
-golang-<span class="hljs-keyword">run</span><span class="bash"></span>
-</code></pre>
-    <p>The bash scripts executed by the Makefile live in the <a target="_blank"
-        href="https://github.com/mwiater/golangdocker/tree/master/scripts">/scripts</a> directory.</p>
-  </div>
-</div>
-<div class="row">
-  <div class="col">
-    <h2 id="testing-developing-app">Testing/Developing App</h2>
-    <p>while developing/testing the app, you can run it natively (not in a Docker container) via:</p>
-    <p><code>go run main.go</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i></p>
-    <p>Or, for convenience, run: <code>make golang-run</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i>
-    </p>
-    <p>Site will be available at: <a href="http://192.168.0.91:5000/api/v1">http://192.168.0.91:5000/api/v1</a>
-      (substitute your own IP address)</p>
-    <p>This step should be completed first before running via Docker to ensure everything is working properly.</p>
-  </div>
-</div>
-<div class="row">
-  <div class="col">
-    <h2 id="building-the-docker-container">Building the Docker container</h2>
-    <p>NOTE: The steps will refer to the docker image: <code>mattwiater/golangdocker</code>. You should change
-      these steps to match your own image name in the <code>.env</code> file, e.g.:
-      <code>DOCKERIMAGE={your-docker-hub-account-username}/golangdocker</code>
-    </p>
-    <p>To build, run:
-      <code>make docker-build</code>
-    </p>
-    <p>Once you have built your image successfully, check the output of <code>docker images</code> #=&gt;</p>
-    <pre><code>REPOSITORY                <span class="hljs-keyword">TAG</span>       <span class="hljs-title">IMAGE</span> ID       CREATED          SIZE
-mattwiater/golangdocker   latest    <span class="hljs-number">053</span>f21052659   <span class="hljs-number">10</span> minutes ago   <span class="hljs-number">10.7M</span>B
-...
-</code></pre>
-    <p>You should see your tagged image in the list, similar to the output above.</p>
-  </div>
-</div>
-<div class="row">
-  <div class="col">
-    <h2 id="docker-build-notes">Docker Build Notes</h2>
-    <p>Using <a href="https://docs.docker.com/build/building/multi-stage/#use-multi-stage-builds">multi-stage
-        builds</a>, we will use a very simple <code>Dockerfile</code> to containerize our app.</p>
-    <pre><code><span class="hljs-keyword">FROM</span> golang:alpine as app
-<span class="hljs-keyword">WORKDIR</span><span class="bash"> /go/src/app
-</span><span class="hljs-keyword">COPY</span><span class="bash"> . .
-</span><span class="hljs-keyword">RUN</span><span class="bash"> apk add git
-</span><span class="hljs-keyword">RUN</span><span class="bash"> CGO_ENABLED=0 go install -ldflags <span class="hljs-string">'-extldflags "-static"'</span> -tags timetzdata
-</span>
-<span class="hljs-keyword">FROM</span> scratch
-<span class="hljs-keyword">COPY</span><span class="bash"> --from=app /go/bin/golangdocker /golangdocker
-</span><span class="hljs-keyword">COPY</span><span class="bash"> --from=alpine:latest /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-</span><span class="hljs-keyword">ENTRYPOINT</span><span class="bash"> [<span class="hljs-string">"/golangdocker"</span>]</span>
-</code></pre>
-    <p>The above represents a multi-stage build Dockerfile. The <strong>top</strong> section uses the base Golang Alpine image to copy
-      the app files and install required packages, like <code>timetzdata</code>. Using the <code>Alpine</code> image for the initial stage ensure that the image is built on a full working OS. This is important as were using the Docker <code>scratch</code> image in the subsequent step, which contains no OS, toolchains, etc. In this step, all of the toolchains required to build a go app are in the base <code>Alpine</code> image.</p>
-
-    <p>The <strong>bottom</strong> section uses the Docker <code>scratch</code> image (a completely empty image). It incldes the top
-      <code>app</code> section into the image (all of the minimal artifacts used to generate the app binary), as well as installing some fundamentals, like the certs from the <code>Alpine</code> image.</p>
-
-    <p>The app could certainly be built on top of the <code>Alpine</code> image and used from that point, rather than re-building it on <code>scratch</code>. But, for this project, we only need to run a single go binary, we don't need all of the superfluous Alpine OS tools, allowing us to keep this image as small as possible by only including the <strong>bare minimum</strong> dependencies to run the binary in the container. If it was built upon the full <code>Alpine</code> image, the container would have access to common linux commands like <code>ls</code>, <code>bash</code>, etc. This is often nice to have for testing, but does create minimal, unneeded overhead.</p>
-
-    <p>When interactively executed with the multi-stage build, all of the common linux OS commands are not requireed, or included. in fact, just trying to run the <code>ls</code> command on our image results in an error:</p>
-
-    <p><code>docker run -it -p 5000:5000 --entrypoint ls -laF --rm mattwiater/golangdocker`</code></p>
-
-    <p><code>docker: Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: "ls": executable file not found in $PATH: unknown.</code></p>
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <title>CoderDocs - Bootstrap 5 Documentation Template For Software Projects</title>
     
-  </div>
-</div>
-<div class="row">
-  <div class="col">
-    <h2 id="running-the-docker-container">Running the Docker container</h2>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bootstrap Documentation Template For Software Developers">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
+    <link rel="shortcut icon" href="favicon.ico"> 
+    
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome JS-->
+    <script defer src="assets/fontawesome/js/all.min.js"></script>
 
-    <p>The make command below executes the following Docker command, using the <code>.env</code> vars you've defined:
-    </p>
+    <!-- Theme CSS -->  
+    <link id="theme-style" rel="stylesheet" href="assets/css/theme.css">
 
-    <p><code>docker run -it -p $DOCKERPORT:$SERVERPORT --rm $DOCKERIMAGE</code></p>
+</head> 
 
-    Env vars used in the bash script:
-    <pre><code>SERVERPORT=5000
-DOCKERPORT=5000
-DOCKERIMAGE=mattwiater/golangdocker</code></pre>
+<body>    
+    <header class="header fixed-top">	 
+	       
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a class="navbar-brand" href="index.html"><img class="logo-icon me-2" src="assets/images/coderdocs-logo.svg" alt="logo"><span class="logo-text">Coder<span class="text-alt">Docs</span></span></a></div>    
+                </div><!--//docs-logo-wrapper-->
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+	
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a href="#"><i class="fab fa-github fa-fw"></i></a></li>
+			            <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+		                <li class="list-inline-item"><a href="#"><i class="fab fa-slack fa-fw"></i></a></li>
+		                <li class="list-inline-item"><a href="#"><i class="fab fa-product-hunt fa-fw"></i></a></li>
+		            </ul><!--//social-list-->
+		            <a href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/coderdocs-free-bootstrap-5-documentation-template-for-software-projects/" class="btn btn-primary d-none d-lg-flex">Download</a>
+	            </div><!--//docs-top-utilities-->
+            </div><!--//container-->
+        </div><!--//branding-->
+    </header><!--//header-->
+    
+    
+    <div class="page-header theme-bg-dark py-5 text-center position-relative">
+	    <div class="theme-bg-shapes-right"></div>
+	    <div class="theme-bg-shapes-left"></div>
+	    <div class="container">
+		    <h1 class="page-heading single-col-max mx-auto">Documentation</h1>
+		    <div class="page-intro single-col-max mx-auto">Everything you need to get your software documentation online.</div>
+		    <div class="main-search-box pt-3 d-block mx-auto">
+                 <form class="search-form w-100">
+		            <input type="text" placeholder="Search the docs..." name="search" class="form-control search-input">
+		            <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
+		        </form>
+             </div>
+	    </div>
+    </div><!--//page-header-->
+   <div class="page-content">
+	    <div class="container">
+		    <div class="docs-overview py-5">
+			    <div class="row justify-content-center">
+				    <div class="col-12 col-lg-4 py-3">
+					    <div class="card shadow-sm">
+						    <div class="card-body">
+							    <h5 class="card-title mb-3">
+								    <span class="theme-icon-holder card-icon-holder me-2">
+								        <i class="fas fa-map-signs"></i>
+							        </span><!--//card-icon-holder-->
+							        <span class="card-title-text">Home </span>
+							    </h5>
+							    <div class="card-text">
+								    Project summary, prerequisites, setup and application code.
+							    </div>
+							    <a class="card-link-mask" href="docs-page.html#section-1"></a>
+						    </div><!--//card-body-->
+					    </div><!--//card-->
+				    </div><!--//col-->
+				    <div class="col-12 col-lg-4 py-3">
+					    <div class="card shadow-sm">
+						    <div class="card-body">
+							    <h5 class="card-title mb-3">
+								    <span class="theme-icon-holder card-icon-holder me-2">
+								        <i class="fas fa-arrow-down"></i>
+							        </span><!--//card-icon-holder-->
+							        <span class="card-title-text">Tests</span>
+							    </h5>
+							    <div class="card-text">
+								    Section overview goes here. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
+							    </div>
+							    <a class="card-link-mask" href="docs-page.html#section-2"></a>
+						    </div><!--//card-body-->
+					    </div><!--//card-->
+				    </div><!--//col-->
+				    <div class="col-12 col-lg-4 py-3">
+					    <div class="card shadow-sm">
+						    <div class="card-body">
+							    <h5 class="card-title mb-3">
+								    <span class="theme-icon-holder card-icon-holder me-2">
+								        <i class="fas fa-box fa-fw"></i>
+							        </span><!--//card-icon-holder-->
+							        <span class="card-title-text">Linting</span>
+							    </h5>
+							    <div class="card-text">
+								    Section overview goes here. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet.						    
+								</div>
+							    <a class="card-link-mask" href="docs-page.html#section-3"></a>
+						    </div><!--//card-body-->
+					    </div><!--//card-->
+				    </div><!--//col-->
+				    <div class="col-12 col-lg-4 py-3">
+					    <div class="card shadow-sm">
+						    <div class="card-body">
+							    <h5 class="card-title mb-3">
+								    <span class="theme-icon-holder card-icon-holder me-2">
+								        <i class="fas fa-cogs fa-fw"></i>
+							        </span><!--//card-icon-holder-->
+							        <span class="card-title-text">Godoc</span>
+							    </h5>
+							    <div class="card-text">
+								    Section overview goes here. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet.						    
+								</div>
+							    <a class="card-link-mask" href="docs-page.html#section-4"></a>
+						    </div><!--//card-body-->
+					    </div><!--//card-->
+				    </div><!--//col-->
+				    <div class="col-12 col-lg-4 py-3">
+					    <div class="card shadow-sm">
+						    <div class="card-body">
+							    <h5 class="card-title mb-3">
+								    <span class="theme-icon-holder card-icon-holder me-2">
+								        <i class="fas fa-tools"></i>
+							        </span><!--//card-icon-holder-->
+							        <span class="card-title-text">Load Testing</span>
+							    </h5>
+							    <div class="card-text">
+								    Section overview goes here. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet.						    
+								</div>
+							    <a class="card-link-mask" href="docs-page.html#section-5"></a>
+						    </div><!--//card-body-->
+					    </div><!--//card-->
+				    </div><!--//col-->
+				    <div class="col-12 col-lg-4 py-3">
+					    <div class="card shadow-sm">
+						    <div class="card-body">
+							    <h5 class="card-title mb-3">
+								    <span class="theme-icon-holder card-icon-holder me-2">
+								        <i class="fas fa-laptop-code"></i>
+							        </span><!--//card-icon-holder-->
+							        <span class="card-title-text">Kubernetes</span>
+							    </h5>
+							    <div class="card-text">
+								    Section overview goes here. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet.						    
+								</div>
+							    <a class="card-link-mask" href="docs-page.html#section-6"></a>
+						    </div><!--//card-body-->
+					    </div><!--//card-->
+				    </div><!--//col-->
+			    </div><!--//row-->
+		    </div><!--//container-->
+		</div><!--//container-->
+    </div><!--//page-content-->
 
-    <p>For simplicity, the default setup above has both the application <strong>and</strong> the Docker container
-      listening on port <strong>5000</strong>. These ports can be different. The <code>DOCKERPORT</code> var is the port
-      the container listens on, and then passes the request to the <code>SERVERPORT</code> port var.</p>
-    <p>To run the app in the container, simply run: <code>make docker-run</code></p>
-    <p>You should see the default Fiber message, e.g.:</p>
-    <pre><code> ┌─────────────────────────────────────────────────────────┐
- │                   Fiber v2<span class="hljs-number">.40</span><span class="hljs-number">.0</span>                    │
- │               http:<span class="hljs-comment">//127.0.0.1:5000                │</span> 
- │       (bound on host <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span> and port <span class="hljs-number">5000</span>)        │
- │                                                    │
- │ Handlers ............ <span class="hljs-number">14</span>  Processes ........... <span class="hljs-number">1</span>  │
- │ Prefork ....... Disabled  PID ................. <span class="hljs-number">1</span>  │
- └─────────────────────────────────────────────────────────┘
-</code></pre>
-    <p>On your host machine, you can now access the container via <code>http://{your-host-ip-address}:5000</code>
-    </p>
-    <p>Our build is simple, just a compiled Go binary that runs in a container. This binary collects local
-      resources/stats for display as JSON via these API Endpoints using <a href="https://docs.gofiber.io/">Fiber</a>:
-    </p>
-    <h5 id="api-info-">API Info:</h5>
-    <pre><code><span class="hljs-symbol">http:</span><span class="hljs-comment">//{your-host-ip-address}:5000/api/v1</span>
-</code></pre>
-    <h5 id="system-info-">System Info:</h5>
-    <pre><code><span class="hljs-symbol">http:</span><span class="hljs-comment">//{your-host-ip-address}:5000/api/v1/mem</span>
-<span class="hljs-symbol">http:</span><span class="hljs-comment">//{your-host-ip-address}:5000/api/v1/cpu</span>
-<span class="hljs-symbol">http:</span><span class="hljs-comment">//{your-host-ip-address}:5000/api/v1/host</span>
-<span class="hljs-symbol">http:</span><span class="hljs-comment">//{your-host-ip-address}:5000/api/v1/net</span>
-<span class="hljs-symbol">http:</span><span class="hljs-comment">//{your-host-ip-address}:5000/api/v1/load</span>
-</code></pre>
-    <h5 id="api-metrics-">API Metrics:</h5>
-    <p>For simplicity, the default <a href="https://docs.gofiber.io/api/middleware/monitor">Fiber Monitor
-        middleware</a> is included and available at:</p>
-    <p><code>http://{your-host-ip-address}:5000/api/v1/metrics</code></p>
-    <h5 id="api-endpoint-documentation-via-swagger">API Endpoint Documentation via Swagger</h5>
-    <p><code>go install github.com/swaggo/swag/cmd/swag@latest</code></p>
-    <p><code>go get -u github.com/swaggo/fiber-swagger</code></p>
-    <p>When updating documentation, you must run this to regenerate docs data: <code>swag init</code>
-      (<code>swag init</code> is incorporated into the bash scripts for convenience, e.g.: <a
-        href="https://github.com/mwiater/golangdocker/blob/master/scripts/docker_run.sh">docker_run.sh</a>)</p>
-    <p>Then, when you run the application, docs are avaialble at:</p>
-    <p><code>http://{your-host-ip-address}:5000/api/v1/docs/index.html</code></p>
-  </div>
-</div>
-<div class="row">
-  <div class="col">
-    <h2 id="-to-do-notes">[TO DO] Notes</h2>
-    <p>Since we initialized the project with: </p>
-    <p><code>go mod init github.com/mattwiater/golangdocker</code></p>
-    <p>And each package is in it&#39;s own directory: <code>sysinfo</code>, <code>api</code>, <code>common</code>,
-      etc., in order to use these local packages within the <code>main</code> Go package, you must enter each
-      directory and type: <code>go build</code></p>
-    <p>Then, in <code>main.go</code>, you can include them like this:</p>
-    <pre><code>...
-<span class="hljs-string">"github.com/mattwiater/golangdocker/sysinfo"</span>
-<span class="hljs-string">"github.com/mattwiater/golangdocker/api"</span>
-<span class="hljs-string">"github.com/mattwiater/golangdocker/common"</span>
-...
-</code></pre>
-    <p><strong>Note on local packages:</strong> In order to make use of your local package functions, along with
-      running the <code>go build</code> command, ensure that your functions are Capital-cased. Otherwise Go will
-      throw an error saying that your method is undefined. Only functions that begin with a capital letter are
-      exported from packages, otherwise they are considered private.</p>
+    <section class="cta-section text-center py-5 theme-bg-dark position-relative">
+	    <div class="theme-bg-shapes-right"></div>
+	    <div class="theme-bg-shapes-left"></div>
+	    <div class="container">
+		    <h3 class="mb-2 text-white mb-3">Launch Your Software Project Like A Pro</h3>
+		    <div class="section-intro text-white mb-3 single-col-max mx-auto">Want to launch your software project and start getting traction from your target users? Check out our premium <a class="text-white" href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/coderpro-bootstrap-5-startup-template-for-software-projects/">Bootstrap 5 startup template CoderPro</a>! It has everything you need to promote your product.</div>
+		    <div class="pt-3 text-center">
+			    <a class="btn btn-light" href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/coderpro-bootstrap-5-startup-template-for-software-projects/">Get CoderPro<i class="fas fa-arrow-alt-circle-right ml-2"></i></a>
+		    </div>
+	    </div>
+    </section><!--//cta-section-->
 
-  </div>
-</div>
-{% include footer.html %}
+    <footer class="footer">
+
+	    <div class="footer-bottom text-center py-5">
+		    
+		    <ul class="social-list list-unstyled pb-4 mb-0">
+			    <li class="list-inline-item"><a href="#"><i class="fab fa-github fa-fw"></i></a></li> 
+	            <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+	            <li class="list-inline-item"><a href="#"><i class="fab fa-slack fa-fw"></i></a></li>
+	            <li class="list-inline-item"><a href="#"><i class="fab fa-product-hunt fa-fw"></i></a></li>
+	            <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f fa-fw"></i></a></li>
+	            <li class="list-inline-item"><a href="#"><i class="fab fa-instagram fa-fw"></i></a></li>
+	        </ul><!--//social-list-->
+	        
+	        <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
+            <small class="copyright">Designed with <span class="sr-only">love</span><i class="fas fa-heart" style="color: #fb866a;"></i> by <a class="theme-link" href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
+            
+	        
+	    </div>
+	    
+    </footer>
+       
+    <!-- Javascript -->          
+    <script src="assets/plugins/popper.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>  
+    
+    <!-- Page Specific JS -->
+    <script src="assets/plugins/smoothscroll.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+    <script src="assets/js/highlight-custom.js"></script> 
+    <script src="assets/plugins/simplelightbox/simple-lightbox.min.js"></script>      
+    <script src="assets/plugins/gumshoe/gumshoe.polyfills.min.js"></script> 
+    <script src="assets/js/docs.js"></script> 
+
+</body>
+</html> 
+

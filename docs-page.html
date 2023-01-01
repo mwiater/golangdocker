@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>CoderDocs - Bootstrap 4 Documentation Template For Software Projects</title>
+
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta name="description" content="Bootstrap 4 Template For Software Startups">
+	<meta name="author" content="Xiaoying Riley at 3rd Wave Media">
+	<link rel="shortcut icon" href="favicon.ico">
+
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+
+	<!-- FontAwesome JS-->
+	<script defer src="assets/fontawesome/js/all.min.js"></script>
+
+	<!-- Plugins CSS -->
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.2/styles/atom-one-dark.min.css">
+	<link rel="stylesheet" href="assets/plugins/simplelightbox/simple-lightbox.min.css">
+
+	<!-- Theme CSS -->
+	<link id="theme-style" rel="stylesheet" href="assets/css/theme.css">
+
+
+</head>
+
+<body class="docs-page">
+	<header class="header fixed-top">
+		<div class="branding docs-branding">
+			<div class="container-fluid position-relative py-2">
+				<div class="docs-logo-wrapper">
+					<button id="docs-sidebar-toggler" class="docs-sidebar-toggler docs-sidebar-visible me-2 d-xl-none"
+						type="button">
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+					<div class="site-logo"><a class="navbar-brand" href="index.html"><img class="logo-icon me-2"
+								src="assets/images/coderdocs-logo.svg" alt="logo"><span class="logo-text">Coder<span
+									class="text-alt">Docs</span></span></a></div>
+				</div><!--//docs-logo-wrapper-->
+				<div class="docs-top-utilities d-flex justify-content-end align-items-center">
+					<div class="top-search-box d-none d-lg-flex">
+						<form class="search-form">
+							<input type="text" placeholder="Search the docs..." name="search" class="form-control search-input">
+							<button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
+						</form>
+					</div>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a href="#"><i class="fab fa-github fa-fw"></i></a></li>
+						<li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+						<li class="list-inline-item"><a href="#"><i class="fab fa-slack fa-fw"></i></a></li>
+						<li class="list-inline-item"><a href="#"><i class="fab fa-product-hunt fa-fw"></i></a></li>
+					</ul><!--//social-list-->
+					<a href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/coderdocs-free-bootstrap-5-documentation-template-for-software-projects/"
+						class="btn btn-primary d-none d-lg-flex">Download</a>
+				</div><!--//docs-top-utilities-->
+			</div><!--//container-->
+		</div><!--//branding-->
+	</header><!--//header-->
+
+
+	<div class="docs-wrapper">
+		<div id="docs-sidebar" class="docs-sidebar">
+			<div class="top-search-box d-lg-none p-3">
+				<form class="search-form">
+					<input type="text" placeholder="Search the docs..." name="search" class="form-control search-input">
+					<button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
+				</form>
+			</div>
+			<nav id="docs-nav" class="docs-nav navbar">
+				<ul class="section-items list-unstyled nav flex-column pb-3">
+					<li class="nav-item section-title"><a class="nav-link scrollto active" href="#section-1"><span
+								class="theme-icon-holder me-2"><i class="fas fa-map-signs"></i></span>Introduction</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-1-1">Summary</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-1-2">Project Topics</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-1-3">Assumptions</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-1-4">Prerequisites</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-1-5">Makefile</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-1-6">Testing/Developing App</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-1-7">Building the Docker container</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-1-8">Docker Build Notes</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-1-9">Running the Docker container</a></li>
+					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-2"><span
+								class="theme-icon-holder me-2"><i class="fas fa-arrow-down"></i></span>Tests</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-2-1">Run</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-2-2">Clear Test Cache</a></li>
+					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-3"><span
+								class="theme-icon-holder me-2"><i class="fas fa-box"></i></span>APIs</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-3-1">Section Item 3.1</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-3-2">Section Item 3.2</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-3-3">Section Item 3.3</a></li>
+					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-4"><span
+								class="theme-icon-holder me-2"><i class="fas fa-cogs"></i></span>Integrations</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-4-1">Section Item 4.1</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-4-2">Section Item 4.2</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-4-3">Section Item 4.3</a></li>
+					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-5"><span
+								class="theme-icon-holder me-2"><i class="fas fa-tools"></i></span>Utilities</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-5-1">Section Item 5.1</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-5-2">Section Item 5.2</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-5-3">Section Item 5.3</a></li>
+					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-6"><span
+								class="theme-icon-holder me-2"><i class="fas fa-laptop-code"></i></span>Web</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-6-1">Section Item 6.1</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-6-2">Section Item 6.2</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-6-3">Section Item 6.3</a></li>
+					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-7"><span
+								class="theme-icon-holder me-2"><i class="fas fa-tablet-alt"></i></span>Mobile</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-7-1">Section Item 7.1</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-7-2">Section Item 7.2</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-7-3">Section Item 7.3</a></li>
+					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-8"><span
+								class="theme-icon-holder me-2"><i class="fas fa-book-reader"></i></span>Resources</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-8-1">Section Item 8.1</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-8-2">Section Item 8.2</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-8-3">Section Item 8.3</a></li>
+					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-9"><span
+								class="theme-icon-holder me-2"><i class="fas fa-lightbulb"></i></span>FAQs</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-9-1">Section Item 9.1</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-9-2">Section Item 9.2</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-9-3">Section Item 9.3</a></li>
+				</ul>
+
+			</nav><!--//docs-nav-->
+		</div><!--//docs-sidebar-->
+		<div class="docs-content">
+			<div class="container">
+				<article class="docs-article" id="section-1">
+					<header class="docs-header">
+						<h1 class="docs-heading">Introduction <span class="docs-time">Last updated: 2019-06-01</span></h1>
+						<section class="docs-intro">
+							<p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus
+								condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh
+								convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce
+								in malesuada odio.</p>
+						</section><!--//docs-intro-->
+
+						<h5>Github Code Example:</h5>
+						<p>You can <a class="theme-link" href="https://gist.github.com/" target="_blank">embed your code snippets
+								using Github gists</a></p>
+						<div class="docs-code-block">
+							<!-- ** Embed github code starts ** -->
+							<script src="https://gist.github.com/xriley/fce6cf71edfd2dadc7919eb9c98f3f17.js"></script>
+							<!-- ** Embed github code ends ** -->
+						</div><!--//docs-code-block-->
+
+						<h5>Highlight.js Example:</h5>
+						<p>You can <a class="theme-link" href="https://github.com/highlightjs/highlight.js" target="_blank">embed
+								your code snippets using highlight.js</a> It supports <a class="theme-link"
+								href="https://highlightjs.org/static/demo/" target="_blank">185 languages and 89 styles</a>.</p>
+						<p>This template uses <a class="theme-link" href="https://highlightjs.org/static/demo/" target="_blank">Atom
+								One Dark</a> style for the code blocks:
+							<br><code>&#x3C;link rel=&#x22;stylesheet&#x22; href=&#x22;//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.2/styles/atom-one-dark.min.css&#x22;&#x3E;</code>
+						</p>
+						<div class="docs-code-block">
+							<pre class="shadow-lg rounded"><code class="json hljs">[
+  {
+    <span class="hljs-attr">"title"</span>: <span class="hljs-string">"apples"</span>,
+    <span class="hljs-attr">"count"</span>: [<span class="hljs-number">12000</span>, <span class="hljs-number">20000</span>],
+    <span class="hljs-attr">"description"</span>: {<span class="hljs-attr">"text"</span>: <span class="hljs-string">"..."</span>, <span class="hljs-attr">"sensitive"</span>: <span class="hljs-literal">false</span>}
+  },
+  {
+    <span class="hljs-attr">"title"</span>: <span class="hljs-string">"oranges"</span>,
+    <span class="hljs-attr">"count"</span>: [<span class="hljs-number">17500</span>, <span class="hljs-literal">null</span>],
+    <span class="hljs-attr">"description"</span>: {<span class="hljs-attr">"text"</span>: <span class="hljs-string">"..."</span>, <span class="hljs-attr">"sensitive"</span>: <span class="hljs-literal">false</span>}
+  }
+]
+
+
+</code></pre>
+						</div><!--//docs-code-block-->
+
+
+					</header>
+					<section class="docs-section" id="item-1-1">
+						<h2 class="section-heading">Summary</h2>
+						<p>This repository is a work in progress, but I&#39;ll do my best to keep the Master branch in a working
+							state. Initially, this project was to create a boilerplate for containerizing Go binaries for use in a K8s
+							cluster. For now, just origanizing my notes in order to be able to replicate this process from end-to-end.
+							The idea is to keep this narrow and succinct and be able to use this as a simple boilerplate for Go
+							containers.</p>
+						<p>While my intention is to keep this image minimal, I also want to add in my most used go tools, e.g.:
+							<code>godoc</code>, <code>gofmt</code>, <code>golangci-lint</code>, etc. I will try to make these
+							additions
+							for only tools and packages I find necessary, but it will be an opinionated balance.
+						</p>
+
+
+					</section><!--//section-->
+
+					<section class="docs-section" id="item-1-2">
+						<h2 class="section-heading">Project Topics</h2>
+						<p>This project is in three distinct parts, each which build on the previous:</p>
+						<h5 id="1-a-simple-but-functioanl-rest-api-app-written-in-go-this-rest-api-incorporates-">1) A simple but
+							functioanl rest API app written in Go. This rest API incorporates:</h5>
+						<ul>
+							<li>The <a href="https://docs.gofiber.io/api/middleware/monitor">Fiber Monitor middleware</a> (API
+								endpoint:
+								<code>/api/v1/metrics</code>).
+							</li>
+							<li>Creating and serving API documentation (using <code>swag init</code>) based on <a
+									href="https://swagger.io/docs/specification/about/">Swagger specifications</a>:
+								<code>/api/v1/docs/</code>).
+							</li>
+							<li>A <code>YAML</code> configuration pattern for setting app variables.</li>
+							<li>Basic Go endpoint tests via <code>go test</code>.</li>
+							<li>Building a binary of the app and embedding external files (both native compilation and
+								cross-compilation
+								for <code>armv6</code> as an example) so that it is portable and self contained.</li>
+							<li>Go Tools<ul>
+									<li>File formatting for *.go files using <code>gofmt</code>.</li>
+									<li>Code linting for *.go files using <code>golangci-lint</code>.</li>
+									<li>Code documentation via <code>godocs</code>.</li>
+								</ul>
+							</li>
+						</ul>
+						<h5 id="2-using-the-app-in-a-docker-container-covering-">2) Using the app in a Docker container, covering:
+						</h5>
+						<ul>
+							<li><a href="https://docs.docker.com/engine/reference/commandline/build/">Docker build</a> concepts.</li>
+							<li><a href="https://docs.docker.com/engine/reference/commandline/run/">Docker run</a> concepts.</li>
+							<li>Docker image versioning.</li>
+							<li>Ways to make use of bash scripts for repetative tasks.</li>
+						</ul>
+						<h5 id="3-using-the-docker-container-in-kubernetes">3) Using the Docker container in Kubernetes</h5>
+						<ul>
+							<li>This section is the most incomplete, but should be in a working state.</li>
+							<li>You should already have a working K8s cluster available for this section.</li>
+							<li>Does not provide much background, assumes some basic knowledge using <code>kubectl</code>.</li>
+							<li>This app will be deployed as a load-balanced Service across a Control Plane and 3 Worker nodes.</li>
+						</ul>
+
+
+					</section><!--//section-->
+
+					<section class="docs-section" id="item-1-3">
+						<h2 class="section-heading">Assumptions</h2>
+						<ul>
+							<li><strong>IP Addresses:</strong> For the most part, disregard the hard-coded IP addresses in here (e.g.:
+								my K8s cluster and VM IPs (192.168.<em>.</em>)). You&#39;ll have to sub in your own for your particular
+								envionment. Right now, laziness!</li>
+							<li><strong>Container vs. Pod:</strong> I&#39;m noticing a few instances where I&#39;m using both
+								<code>container</code> and <code>pod</code> to mean the same thing in the K8s section. Until I make them
+								more consistent, assume they are interchangeable. A pod is basiically a container in in K8s context.
+								While
+								a <code>pod</code> can technically have multiple containers, for this demonstration, assume a 1:1
+								relationship.
+							</li>
+							<li><strong>System</strong> My system and architecture is below, you&#39;ll have to adjust your commands
+								if
+								you&#39;re departing from Linux/x86_64.</li>
+						</ul>
+						<p><code>uname -a</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
+						<pre><code>Linux mjw-udoo-01 5.4.0-110-generic 124-Ubuntu SMP Thu Apr 14 19:46:19 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux</code></pre>
+					</section><!--//section-->
+
+					<section class="docs-section" id="item-1-4">
+						<h2 class="section-heading">Prerequisites</h2>
+						<p>The following programs will need to be installed:</p>
+						<ul>
+							<li><a href="https://go.dev/learn/">Go</a></li>
+							<li><a href="https://www.docker.com/get-started/">Docker</a></li>
+						</ul>
+						<h4><code>.env</code> file:</h4>
+						<p>The <code>.env</code> file contains the configuration for your app, and is used in the Docker build and
+							run
+							processes.</p>
+						<p>
+						<pre><code>SERVERPORT=5000
+DOCKERPORT=5000
+DEBUG=false
+DOCKERIMAGE=mattwiater/golangdocker</code></pre>
+						</p>
+						<ul>
+							<li><b>SERVERPORT:</b> The port to open for the Golang app. Value: 5000</li>
+							<li><b>DOCKERPORT:</b> The port to open for Docker to map to the port above.Value: 5000</li>
+							<li><b>DEBUG:</b> Turn on debugging. Value: true/false</li>
+							<li><b>DOCKERIMAGE:</b> The tag for your Docker image. Value:
+								<code>{your-docker-hub-account-username}/{your-docker-hub-image-name}</code> NOTE: By default, Docker
+								will
+								implicitly tag your image as 'latest' if no image tag is supplied. If you want to tag the image
+								differently,
+								adjust the <code>DOCKERIMAGE</code> env variable to inclued an explicit tag in the format:
+								<code>{your-docker-hub-account-username}/{your-docker-hub-image-name}</code> For example, if it is a
+								Version 1
+								release, you might tag it <code>:v1</code>, e.g.: <code>mattwiater/golangdocker:v1</code>
+							</li>
+						</ul>
+						<p>Required for Kubernetes itegration:</p>
+						<ul>
+							<li>A running <a href="https://kubernetes.io/">Kubernetes</a> cluster</li>
+							<li>A <a href="https://hub.docker.com/">Docker Hub</a> account</li>
+						</ul>
+						<p>Optional:</p>
+						<ul>
+							<li>Artillery (nodejs): <a href="loadTesting.html">Load
+									Testing</a></li>
+						</ul>
+						<p>While the idea is to get this up and running quickly, it is not a deep dive into Go, Docker, or K8S.
+							Basic
+							knowledge of these technologies is required.</p>
+						<p>For example, we can peek into the container via the API endpoint <code>api/v1/host</code> and see the
+							docker assigned <code>hostname: &quot;b189564db0c5&quot;</code> and verify that it is one running a single
+							process <code>procs: 1</code>:</p>
+						<pre><code>{
+	hostInfo: {
+		hostname: "b189564db0c5",
+		uptime: 1238849,
+		bootTime: 1667920883,
+		procs: 1,
+		os: "linux",
+		platform: "",
+		platformFamily: "",
+		platformVersion: "",
+		kernelVersion: "5.4.0-110-generic",
+		kernelArch: "x86_64",
+		virtualizationSystem: "docker",
+		virtualizationRole: "guest",
+		hostId: "12345678-1234-5678-90ab-cddeefaabbcc"
+		}
+	}
+</code></pre>
+					</section><!--//section-->
+					<section class="docs-section" id="item-1-5">
+						<h2 class="section-heading">Makefile</h2>
+						<p>[IN PROGRESS]</p>
+						<p>There is a <a target="_blank"
+								href="https://github.com/mwiater/golangdocker/blob/master/Makefile">Makefile</a>
+							for convenience. At the moment, it&#39;s just acting as a script-runner.
+							To view the executable tagets, just type: <code>make</code></p>
+						<pre><code>Targets in this Makefile:
+
+docker-build
+docker-<span class="hljs-keyword">run</span><span class="bash">
+golang-build
+</span>golang-build-arm64
+golang-<span class="hljs-keyword">run</span><span class="bash"></span>
+</code></pre>
+						<p>The bash scripts executed by the Makefile live in the <a target="_blank"
+								href="https://github.com/mwiater/golangdocker/tree/master/scripts">/scripts</a> directory.</p>
+					</section><!--//section-->
+
+					<section class="docs-section" id="item-1-6">
+						<h2 class="section-heading">Testing/Developing App</h2>
+						<p>while developing/testing the app, you can run it natively (not in a Docker container) via:</p>
+						<p><code>go run main.go</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i></p>
+						<p>Or, for convenience, run: <code>make golang-run</code> <i
+								class="fa-duotone fa-copy fa-fw code-copy-button"></i>
+						</p>
+						<p>Site will be available at: <a href="http://192.168.0.91:5000/api/v1">http://192.168.0.91:5000/api/v1</a>
+							(substitute your own IP address)</p>
+						<p>This step should be completed first before running via Docker to ensure everything is working properly.
+						</p>
+					</section><!--//section-->
+					<section class="docs-section" id="item-1-7">
+						<h2 id="building-the-docker-container">Building the Docker container</h2>
+						<p>NOTE: The steps will refer to the docker image: <code>mattwiater/golangdocker</code>. You should change
+							these steps to match your own image name in the <code>.env</code> file, e.g.:
+							<code>DOCKERIMAGE={your-docker-hub-account-username}/golangdocker</code>
+						</p>
+						<p>To build, run:
+							<code>make docker-build</code>
+						</p>
+						<p>Once you have built your image successfully, check the output of <code>docker images</code> #=&gt;</p>
+						<pre><code>REPOSITORY                <span class="hljs-keyword">TAG</span>       <span class="hljs-title">IMAGE</span> ID       CREATED          SIZE
+mattwiater/golangdocker   latest    <span class="hljs-number">053</span>f21052659   <span class="hljs-number">10</span> minutes ago   <span class="hljs-number">10.7M</span>B
+...
+</code></pre>
+						<p>You should see your tagged image in the list, similar to the output above.</p>
+					</section><!--//section-->
+
+					<section class="docs-section" id="item-1-8">
+						<h2 class="section-heading">Docker Build Notes</h2>
+						<p>Using <a href="https://docs.docker.com/build/building/multi-stage/#use-multi-stage-builds">multi-stage
+								builds</a>, we will use a very simple <code>Dockerfile</code> to containerize our app.</p>
+						<pre><code>FROM golang:alpine as app
+WORKDIR /go/src/app
+COPY . .
+RUN apk add git
+RUN CGO_ENABLED=0 go install -ldflags <span class="hljs-string">'-extldflags "-static"'</span> -tags timetzdata
+		
+FROM scratch
+COPY --from=app /go/bin/golangdocker /golangdocker
+COPY --from=alpine:latest /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+ENTRYPOINT ["/golangdocker"]</code></pre>
+						<p>The above represents a multi-stage build Dockerfile. The <strong>top</strong> section uses the base
+							Golang Alpine image to copy
+							the app files and install required packages, like <code>timetzdata</code>. Using the <code>Alpine</code>
+							image for the initial stage ensure that the image is built on a full working OS. This is important as were
+							using the Docker <code>scratch</code> image in the subsequent step, which contains no OS, toolchains, etc.
+							In this step, all of the toolchains required to build a go app are in the base <code>Alpine</code> image.
+						</p>
+
+						<p>The <strong>bottom</strong> section uses the Docker <code>scratch</code> image (a completely empty
+							image). It incldes the top
+							<code>app</code> section into the image (all of the minimal artifacts used to generate the app binary), as
+							well as installing some fundamentals, like the certs from the <code>Alpine</code> image.
+						</p>
+
+						<p>The app could certainly be built on top of the <code>Alpine</code> image and used from that point, rather
+							than re-building it on <code>scratch</code>. But, for this project, we only need to run a single go
+							binary, we don't need all of the superfluous Alpine OS tools, allowing us to keep this image as small as
+							possible by only including the <strong>bare minimum</strong> dependencies to run the binary in the
+							container. If it was built upon the full <code>Alpine</code> image, the container would have access to
+							common linux commands like <code>ls</code>, <code>bash</code>, etc. This is often nice to have for
+							testing, but does create minimal, unneeded overhead.</p>
+
+						<p>When interactively executed with the multi-stage build, all of the common linux OS commands are not
+							requireed, or included. in fact, just trying to run the <code>ls</code> command on our image results in an
+							error:</p>
+
+						<p><code>docker run -it -p 5000:5000 --entrypoint ls -laF --rm mattwiater/golangdocker`</code></p>
+
+						<p>
+							<code>docker: Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: "ls": executable file not found in $PATH: unknown.</code>
+						</p>
+
+					</section><!--//section-->
+
+					<section class="docs-section" id="item-1-9">
+						<h2 class="section-heading">Running the Docker container</h2>
+						<p>The make command below executes the following Docker command, using the <code>.env</code> vars you've
+							defined:
+						</p>
+
+						<p><code>docker run -it -p $DOCKERPORT:$SERVERPORT --rm $DOCKERIMAGE</code></p>
+
+						Env vars used in the bash script:
+						<pre><code>SERVERPORT=5000
+DOCKERPORT=5000
+DOCKERIMAGE=mattwiater/golangdocker</code></pre>
+
+						<p>For simplicity, the default setup above has both the application <strong>and</strong> the Docker
+							container
+							listening on port <strong>5000</strong>. These ports can be different. The <code>DOCKERPORT</code> var is
+							the port
+							the container listens on, and then passes the request to the <code>SERVERPORT</code> port var.</p>
+						<p>To run the app in the container, simply run: <code>make docker-run</code></p>
+						<p>You should see the default Fiber message, e.g.:</p>
+						<pre><code>┌────────────────────────────────────────────────────┐
+│                   Fiber v2<span class="hljs-number">.40</span><span class="hljs-number">.0</span>                    │
+│               http:<span class="hljs-number">//127.0.0.1:5000                │</span> 
+│       (bound on host <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span> and port <span class="hljs-number">5000</span>)        │
+│                                                    │
+│ Handlers ............ <span class="hljs-number">14</span>  Processes ........... <span class="hljs-number">1</span>  │
+│ Prefork ....... Disabled  PID ................. <span class="hljs-number">1</span>  │
+└────────────────────────────────────────────────────┘
+			</code></pre>
+						<p>On your host machine, you can now access the container via
+							<code>http://{your-host-ip-address}:5000</code>
+						</p>
+						<p>Our build is simple, just a compiled Go binary that runs in a container. This binary collects local
+							resources/stats for display as JSON via these API Endpoints using <a
+								href="https://docs.gofiber.io/">Fiber</a>:
+						</p>
+						<h5 id="api-info-">API Info:</h5>
+						<pre>http://{your-host-ip-address}:5000/api/v1</pre>
+						<h5 id="system-info-">System Info:</h5>
+						<pre>http://{your-host-ip-address}:5000/api/v1/mem
+http://{your-host-ip-address}:5000/api/v1/cpu
+http://{your-host-ip-address}:5000/api/v1/host
+http://{your-host-ip-address}:5000/api/v1/net
+http://{your-host-ip-address}:5000/api/v1/load
+			</pre>
+						<h5 id="api-metrics-">API Metrics:</h5>
+						<p>For simplicity, the default <a href="https://docs.gofiber.io/api/middleware/monitor">Fiber Monitor
+								middleware</a> is included and available at:</p>
+						<p><code>http://{your-host-ip-address}:5000/api/v1/metrics</code></p>
+						<h5 id="api-endpoint-documentation-via-swagger">API Endpoint Documentation via Swagger</h5>
+						<p><code>go install github.com/swaggo/swag/cmd/swag@latest</code></p>
+						<p><code>go get -u github.com/swaggo/fiber-swagger</code></p>
+						<p>When updating documentation, you must run this to regenerate docs data: <code>swag init</code>
+							(<code>swag init</code> is incorporated into the bash scripts for convenience, e.g.: <a
+								href="https://github.com/mwiater/golangdocker/blob/master/scripts/docker_run.sh">docker_run.sh</a>)</p>
+						<p>Then, when you run the application, docs are avaialble at:</p>
+						<p><code>http://{your-host-ip-address}:5000/api/v1/docs/index.html</code></p>
+					</section><!--//section-->
+
+				</article>
+
+				<article class="docs-article" id="section-2">
+					<header class="docs-header">
+						<h1 class="docs-heading">Tests</h1>
+						<section class="docs-intro">
+							<p>Very simple tests are in: <a
+									href="https://github.com/mwiater/golangdocker/blob/master/api_test.go">api_test.go</a></p>
+							
+						</section><!--//docs-intro-->
+					</header>
+					<section class="docs-section" id="item-2-1">
+						<h2 class="section-heading">Run Tests</h2>
+						<p>Run via:
+							<code>clear &amp;&amp; go test -v $(go list ./... | grep -v /docs | grep -v /config | grep -v /api)</code>
+							<i class="fa-duotone fa-copy fa-fw code-copy-button"></i>
+						</p>
+						<p>Or via Makefile:
+							<code>make golang-test</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> (which will
+							execute the
+							<a target="_blank"
+								href="https://github.com/mwiater/golangdocker/blob/master/scripts/golang_test.sh">scripts/golang_test.sh</a>
+							script)
+						</p>
+
+						<pre><code>=== RUN   TestAPIRoutes
+			
+┌───────────────────────────────────────────────────┐
+│                   Fiber v2.40.1                   │
+│               http://127.0.0.1:5000               │
+│       (bound on host 0.0.0.0 and port 5000)       │
+│                                                   │
+│ Handlers ............ 22  Processes ........... 1 │
+│ Prefork ....... Disabled  PID ........... 2214242 │
+└───────────────────────────────────────────────────┘
+
+[2022-12-13T11:01:06] GET:/: 302 (     0s) | Bytes In: 0 Bytes Out: 0
+[2022-12-13T11:01:06] GET:/api/v1: 200 (     0s) | Bytes In: 0 Bytes Out: 136
+[2022-12-13T11:01:06] GET:/api/v1/cpu: 200 (    1ms) | Bytes In: 0 Bytes Out: 3593
+[2022-12-13T11:01:06] GET:/api/v1/host: 200 (    1ms) | Bytes In: 0 Bytes Out: 338
+[2022-12-13T11:01:06] GET:/api/v1/load: 200 (     0s) | Bytes In: 0 Bytes Out: 54
+[2022-12-13T11:01:06] GET:/api/v1/mem: 200 (    1ms) | Bytes In: 0 Bytes Out: 706
+[2022-12-13T11:01:06] GET:/api/v1/net: 200 (    2ms) | Bytes In: 0 Bytes Out: 1559
+[2022-12-13T11:01:06] GET:/api/v1/metrics: 200 (     0s) | Bytes In: 0 Bytes Out: 6186
+[2022-12-13T11:01:06] GET:/api/v1/docs/index.html: 200 (     0s) | Bytes In: 0 Bytes Out: 3519
+[2022-12-13T11:01:06] GET:/api/v1/404: 404 (     0s) | Bytes In: 0 Bytes Out: 22
+--- PASS: TestAPIRoutes (0.13s)
+PASS
+ok      github.com/mattwiater/golangdocker      0.190s
+=== RUN   ExamplePrettyPrintJSONToConsole
+--- PASS: ExamplePrettyPrintJSONToConsole (0.00s)
+=== RUN   ExampleUniqueSlice
+--- PASS: ExampleUniqueSlice (0.00s)
+PASS
+ok      github.com/mattwiater/golangdocker/common       0.005s
+=== RUN   ExampleTestTZ
+--- PASS: ExampleTestTZ (0.00s)
+=== RUN   ExampleTestTLS
+--- PASS: ExampleTestTLS (0.35s)
+PASS
+ok      github.com/mattwiater/golangdocker/sysinfo      0.365s
+			</code></pre>
+					</section><!--//section-->
+
+					<section class="docs-section" id="item-2-2">
+						<h2 class="section-heading">Clear Test Cache</h2>
+						<p>To clear the test cache, run: <code>go clean -testcache</code> <i
+							class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
+					</section><!--//section-->
+				</article><!--//docs-article-->
+
+
+				<article class="docs-article" id="section-3">
+					<header class="docs-header">
+						<h1 class="docs-heading">APIs</h1>
+						<section class="docs-intro">
+							<p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus
+								condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh
+								convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce
+								in malesuada odio.</p>
+						</section><!--//docs-intro-->
+					</header>
+					<section class="docs-section" id="item-3-1">
+						<h2 class="section-heading">Section Item 3.1</h2>
+						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
+							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
+							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
+							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
+							est. Vestibulum ultricies malesuada tempor.</p>
+					</section><!--//section-->
+
+					<section class="docs-section" id="item-3-2">
+						<h2 class="section-heading">Section Item 3.2</h2>
+						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
+							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
+							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
+							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
+							est. Vestibulum ultricies malesuada tempor.</p>
+					</section><!--//section-->
+
+					<section class="docs-section" id="item-3-3">
+						<h2 class="section-heading">Section Item 3.3</h2>
+						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
+							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
+							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
+							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
+							est. Vestibulum ultricies malesuada tempor.</p>
+					</section><!--//section-->
+				</article><!--//docs-article-->
+
+				<article class="docs-article" id="section-4">
+					<header class="docs-header">
+						<h1 class="docs-heading">Intergrations</h1>
+						<section class="docs-intro">
+							<p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus
+								condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh
+								convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce
+								in malesuada odio.</p>
+						</section><!--//docs-intro-->
+					</header>
+					<section class="docs-section" id="item-4-1">
+						<h2 class="section-heading">Section Item 4.1</h2>
+						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
+							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
+							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
+							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
+							est. Vestibulum ultricies malesuada tempor.</p>
+					</section><!--//section-->
+
+					<section class="docs-section" id="item-4-2">
+						<h2 class="section-heading">Section Item 4.2</h2>
+						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
+							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
+							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
+							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
+							est. Vestibulum ultricies malesuada tempor.</p>
+					</section><!--//section-->
+
+					<section class="docs-section" id="item-4-3">
+						<h2 class="section-heading">Section Item 4.3</h2>
+						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
+							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
+							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
+							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
+							est. Vestibulum ultricies malesuada tempor.</p>
+					</section><!--//section-->
+				</article><!--//docs-article-->
+
+				<article class="docs-article" id="section-5">
+					<header class="docs-header">
+						<h1 class="docs-heading">Utilities</h1>
+						<section class="docs-intro">
+							<p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus
+								condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh
+								convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce
+								in malesuada odio.</p>
+						</section><!--//docs-intro-->
+					</header>
+					<section class="docs-section" id="item-5-1">
+						<h2 class="section-heading">Section Item 5.1</h2>
+						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
+							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
+							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
+							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
+							est. Vestibulum ultricies malesuada tempor.</p>
+					</section><!--//section-->
+
+					<section class="docs-section" id="item-5-2">
+						<h2 class="section-heading">Section Item 5.2</h2>
+						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
+							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
+							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
+							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
+							est. Vestibulum ultricies malesuada tempor.</p>
+					</section><!--//section-->
+
+					<section class="docs-section" id="item-5-3">
+						<h2 class="section-heading">Section Item 5.3</h2>
+						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
+							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
+							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
+							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
+							est. Vestibulum ultricies malesuada tempor.</p>
+					</section><!--//section-->
+				</article><!--//docs-article-->
+
+
+				<article class="docs-article" id="section-6">
+					<header class="docs-header">
+						<h1 class="docs-heading">Web</h1>
+						<section class="docs-intro">
+							<p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus
+								condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh
+								convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce
+								in malesuada odio.</p>
+						</section><!--//docs-intro-->
+					</header>
+					<section class="docs-section" id="item-6-1">
+						<h2 class="section-heading">Section Item 6.1</h2>
+						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
+							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
+							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
+							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
+							est. Vestibulum ultricies malesuada tempor.</p>
+					</section><!--//section-->
+
+					<section class="docs-section" id="item-6-2">
+						<h2 class="section-heading">Section Item 6.2</h2>
+						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
+							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
+							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
+							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
+							est. Vestibulum ultricies malesuada tempor.</p>
+					</section><!--//section-->
+
+					<section class="docs-section" id="item-6-3">
+						<h2 class="section-heading">Section Item 6.3</h2>
+						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
+							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
+							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
+							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
+							est. Vestibulum ultricies malesuada tempor.</p>
+					</section><!--//section-->
+				</article><!--//docs-article-->
+
+
+				<article class="docs-article" id="section-7">
+					<header class="docs-header">
+						<h1 class="docs-heading">Mobile</h1>
+						<section class="docs-intro">
+							<p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus
+								condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh
+								convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce
+								in malesuada odio.</p>
+						</section><!--//docs-intro-->
+					</header>
+					<section class="docs-section" id="item-7-1">
+						<h2 class="section-heading">Section Item 7.1</h2>
+						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
+							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
+							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
+							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
+							est. Vestibulum ultricies malesuada tempor.</p>
+					</section><!--//section-->
+
+					<section class="docs-section" id="item-7-2">
+						<h2 class="section-heading">Section Item 7.2</h2>
+						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
+							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
+							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
+							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
+							est. Vestibulum ultricies malesuada tempor.</p>
+					</section><!--//section-->
+
+					<section class="docs-section" id="item-7-3">
+						<h2 class="section-heading">Section Item 7.3</h2>
+						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
+							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
+							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
+							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
+							est. Vestibulum ultricies malesuada tempor.</p>
+					</section><!--//section-->
+				</article><!--//docs-article-->
+
+
+				<article class="docs-article" id="section-8">
+					<header class="docs-header">
+						<h1 class="docs-heading">Resources</h1>
+						<section class="docs-intro">
+							<p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus
+								condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh
+								convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce
+								in malesuada odio.</p>
+						</section><!--//docs-intro-->
+					</header>
+					<section class="docs-section" id="item-8-1">
+						<h2 class="section-heading">Section Item 8.1</h2>
+						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
+							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
+							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
+							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
+							est. Vestibulum ultricies malesuada tempor.</p>
+					</section><!--//section-->
+
+					<section class="docs-section" id="item-8-2">
+						<h2 class="section-heading">Section Item 8.2</h2>
+						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
+							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
+							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
+							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
+							est. Vestibulum ultricies malesuada tempor.</p>
+					</section><!--//section-->
+
+					<section class="docs-section" id="item-8-3">
+						<h2 class="section-heading">Section Item 8.3</h2>
+						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
+							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
+							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
+							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
+							est. Vestibulum ultricies malesuada tempor.</p>
+					</section><!--//section-->
+				</article><!--//docs-article-->
+
+
+				<article class="docs-article" id="section-9">
+					<header class="docs-header">
+						<h1 class="docs-heading">FAQs</h1>
+						<section class="docs-intro">
+							<p>Section intro goes here. You can list all your FAQs using the format below.</p>
+						</section><!--//docs-intro-->
+					</header>
+					<section class="docs-section" id="item-9-1">
+						<h2 class="section-heading">Section Item 9.1 <small>(FAQ Category One)</small></h2>
+						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>What's sit amet quam eget lacinia?</h5>
+						<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+							Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+							ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo,
+							fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae,
+							justo. Nullam dictum felis eu pede mollis pretium.</p>
+						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>How to ipsum dolor sit amet quam tortor?</h5>
+						<p>Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis
+							gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis
+							sed, nonummy id, metus. Nullam accumsan lorem in dui. </p>
+						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>Can I bibendum sodales?</h5>
+						<p>Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus.
+							Nullam accumsan lorem in dui. </p>
+						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>Where arcu sed urna gravida?</h5>
+						<p>Aenean et sodales nisi, vel efficitur sapien. Quisque molestie diam libero, et elementum diam mollis ac.
+							In dignissim aliquam est eget ullamcorper. Sed id sodales tortor, eu finibus leo. Vivamus dapibus
+							sollicitudin justo vel fermentum. Curabitur nec arcu sed urna gravida lobortis. Donec lectus est,
+							imperdiet eu viverra viverra, ultricies nec urna. </p>
+					</section><!--//section-->
+
+					<section class="docs-section" id="item-9-2">
+						<h2 class="section-heading">Section Item 9.2 <small>(FAQ Category Two)</small></h2>
+						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>What's sit amet quam eget lacinia?</h5>
+						<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+							Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+							ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo,
+							fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae,
+							justo. Nullam dictum felis eu pede mollis pretium.</p>
+						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>How to ipsum dolor sit amet quam tortor?</h5>
+						<p>Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis
+							gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis
+							sed, nonummy id, metus. Nullam accumsan lorem in dui. </p>
+						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>Can I bibendum sodales?</h5>
+						<p>Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus.
+							Nullam accumsan lorem in dui. </p>
+						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>Where arcu sed urna gravida?</h5>
+						<p>Aenean et sodales nisi, vel efficitur sapien. Quisque molestie diam libero, et elementum diam mollis ac.
+							In dignissim aliquam est eget ullamcorper. Sed id sodales tortor, eu finibus leo. Vivamus dapibus
+							sollicitudin justo vel fermentum. Curabitur nec arcu sed urna gravida lobortis. Donec lectus est,
+							imperdiet eu viverra viverra, ultricies nec urna. </p>
+					</section><!--//section-->
+
+					<section class="docs-section" id="item-9-3">
+						<h2 class="section-heading">Section Item 9.3 <small>(FAQ Category Three)</small></h2>
+						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>How to dapibus sollicitudin justo vel fermentum?
+						</h5>
+						<p>Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis
+							gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis
+							sed, nonummy id, metus. Nullam accumsan lorem in dui. </p>
+						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>How long bibendum sodales?</h5>
+						<p>Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus.
+							Nullam accumsan lorem in dui. </p>
+						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>Where dapibus sollicitudin?</h5>
+						<p>Aenean et sodales nisi, vel efficitur sapien. Quisque molestie diam libero, et elementum diam mollis ac.
+							In dignissim aliquam est eget ullamcorper. Sed id sodales tortor, eu finibus leo. Vivamus dapibus
+							sollicitudin justo vel fermentum. Curabitur nec arcu sed urna gravida lobortis. Donec lectus est,
+							imperdiet eu viverra viverra, ultricies nec urna. </p>
+					</section><!--//section-->
+				</article><!--//docs-article-->
+
+				<footer class="footer">
+					<div class="container text-center py-5">
+						<!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
+						<small class="copyright">Designed with <span class="sr-only">love</span><i class="fas fa-heart"
+								style="color: #fb866a;"></i> by <a class="theme-link" href="http://themes.3rdwavemedia.com"
+								target="_blank">Xiaoying Riley</a> for developers</small>
+						<ul class="social-list list-unstyled pt-4 mb-0">
+							<li class="list-inline-item"><a href="#"><i class="fab fa-github fa-fw"></i></a></li>
+							<li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+							<li class="list-inline-item"><a href="#"><i class="fab fa-slack fa-fw"></i></a></li>
+							<li class="list-inline-item"><a href="#"><i class="fab fa-product-hunt fa-fw"></i></a></li>
+							<li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f fa-fw"></i></a></li>
+							<li class="list-inline-item"><a href="#"><i class="fab fa-instagram fa-fw"></i></a></li>
+						</ul><!--//social-list-->
+					</div>
+				</footer>
+			</div>
+		</div>
+	</div><!--//docs-wrapper-->
+
+
+	<!-- Javascript -->
+	<script src="assets/plugins/popper.min.js"></script>
+	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+
+	<!-- Page Specific JS -->
+	<script src="assets/plugins/smoothscroll.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+	<script src="assets/js/highlight-custom.js"></script>
+	<script src="assets/plugins/simplelightbox/simple-lightbox.min.js"></script>
+	<script src="assets/plugins/gumshoe/gumshoe.polyfills.min.js"></script>
+	<script src="assets/js/docs.js"></script>
+
+</body>
+
+</html>

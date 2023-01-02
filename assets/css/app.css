@@ -1,0 +1,18 @@
+.callout-title svg {
+  height: 1em;
+}
+
+.docs-nav .section-title {
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+.docs-nav .nav-link {
+  padding:0;
+  padding-left:10px;
+  padding-top:10px;
+}
+
+.docs-nav .nav-link:before {
+  margin-top: 0; 
+}

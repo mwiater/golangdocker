@@ -17,7 +17,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
 
 	<!-- FontAwesome JS-->
-	<script defer src="assets/fontawesome/js/all.min.js"></script>
+	<script src="https://kit.fontawesome.com/5ae6879468.js" crossorigin="anonymous"></script>
 
 	<!-- Plugins CSS -->
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.2/styles/atom-one-dark.min.css">
@@ -25,6 +25,7 @@
 
 	<!-- Theme CSS -->
 	<link id="theme-style" rel="stylesheet" href="assets/css/theme.css">
+	<link id="theme-style" rel="stylesheet" href="assets/css/app.css">
 
 
 </head>
@@ -41,26 +42,10 @@
 						<span></span>
 					</button>
 					<div class="site-logo"><a class="navbar-brand" href="index.html"><img class="logo-icon me-2"
-								src="assets/images/coderdocs-logo.svg" alt="logo"><span class="logo-text">Coder<span
-									class="text-alt">Docs</span></span></a></div>
+								src="assets/images/coderdocs-logo.svg" alt="logo"><span class="logo-text">Golang<span
+									class="text-alt">Docker</span></span></a></div>
 				</div><!--//docs-logo-wrapper-->
-				<div class="docs-top-utilities d-flex justify-content-end align-items-center">
-					<div class="top-search-box d-none d-lg-flex">
-						<form class="search-form">
-							<input type="text" placeholder="Search the docs..." name="search" class="form-control search-input">
-							<button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
-						</form>
-					</div>
 
-					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
-						<li class="list-inline-item"><a href="#"><i class="fab fa-github fa-fw"></i></a></li>
-						<li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
-						<li class="list-inline-item"><a href="#"><i class="fab fa-slack fa-fw"></i></a></li>
-						<li class="list-inline-item"><a href="#"><i class="fab fa-product-hunt fa-fw"></i></a></li>
-					</ul><!--//social-list-->
-					<a href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/coderdocs-free-bootstrap-5-documentation-template-for-software-projects/"
-						class="btn btn-primary d-none d-lg-flex">Download</a>
-				</div><!--//docs-top-utilities-->
 			</div><!--//container-->
 		</div><!--//branding-->
 	</header><!--//header-->
@@ -77,7 +62,8 @@
 			<nav id="docs-nav" class="docs-nav navbar">
 				<ul class="section-items list-unstyled nav flex-column pb-3">
 					<li class="nav-item section-title"><a class="nav-link scrollto active" href="#section-1"><span
-								class="theme-icon-holder me-2"><i class="fas fa-map-signs"></i></span>Introduction</a></li>
+								class="theme-icon-holder me-2"><i class="fa-duotone fa-signs-post fa=fw"></i></span>Introduction</a>
+					</li>
 					<li class="nav-item"><a class="nav-link scrollto" href="#item-1-1">Summary</a></li>
 					<li class="nav-item"><a class="nav-link scrollto" href="#item-1-2">Project Topics</a></li>
 					<li class="nav-item"><a class="nav-link scrollto" href="#item-1-3">Assumptions</a></li>
@@ -88,44 +74,38 @@
 					<li class="nav-item"><a class="nav-link scrollto" href="#item-1-8">Docker Build Notes</a></li>
 					<li class="nav-item"><a class="nav-link scrollto" href="#item-1-9">Running the Docker container</a></li>
 					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-2"><span
-								class="theme-icon-holder me-2"><i class="fas fa-arrow-down"></i></span>Tests</a></li>
+								class="theme-icon-holder me-2"><i class="fa-duotone fa-flask-vial fa-fw"></i></span>Tests</a></li>
 					<li class="nav-item"><a class="nav-link scrollto" href="#item-2-1">Run</a></li>
 					<li class="nav-item"><a class="nav-link scrollto" href="#item-2-2">Clear Test Cache</a></li>
 					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-3"><span
-								class="theme-icon-holder me-2"><i class="fas fa-box"></i></span>APIs</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#item-3-1">Section Item 3.1</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#item-3-2">Section Item 3.2</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#item-3-3">Section Item 3.3</a></li>
+								class="theme-icon-holder me-2"><i
+									class="fa-duotone fa-screwdriver-wrench fa-fw"></i></span></span>Linting</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-3-1">golangci-lint</a></li>
 					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-4"><span
-								class="theme-icon-holder me-2"><i class="fas fa-cogs"></i></span>Integrations</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#item-4-1">Section Item 4.1</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#item-4-2">Section Item 4.2</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#item-4-3">Section Item 4.3</a></li>
+								class="theme-icon-holder me-2"><i class="fa-duotone fa-file-invoice fa-fw"></i></span>GoDoc</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-4-1">Usage</a></li>
 					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-5"><span
-								class="theme-icon-holder me-2"><i class="fas fa-tools"></i></span>Utilities</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#item-5-1">Section Item 5.1</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#item-5-2">Section Item 5.2</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#item-5-3">Section Item 5.3</a></li>
+								class="theme-icon-holder me-2"><i class="fa-duotone fa-weight-hanging fa-fw"></i></span>Load Testing</a>
+					</li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-5-1">Installation</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-5-2">Plugins</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-5-3">Test Phases</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-5-4">Custom Scripts</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-5-5">Load Tests</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-5-6">No container, bare app</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-5-7">Docker container</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-5-8">Kubernetes</a></li>
 					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-6"><span
-								class="theme-icon-holder me-2"><i class="fas fa-laptop-code"></i></span>Web</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#item-6-1">Section Item 6.1</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#item-6-2">Section Item 6.2</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#item-6-3">Section Item 6.3</a></li>
-					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-7"><span
-								class="theme-icon-holder me-2"><i class="fas fa-tablet-alt"></i></span>Mobile</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#item-7-1">Section Item 7.1</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#item-7-2">Section Item 7.2</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#item-7-3">Section Item 7.3</a></li>
-					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-8"><span
-								class="theme-icon-holder me-2"><i class="fas fa-book-reader"></i></span>Resources</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#item-8-1">Section Item 8.1</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#item-8-2">Section Item 8.2</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#item-8-3">Section Item 8.3</a></li>
-					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-9"><span
-								class="theme-icon-holder me-2"><i class="fas fa-lightbulb"></i></span>FAQs</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#item-9-1">Section Item 9.1</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#item-9-2">Section Item 9.2</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#item-9-3">Section Item 9.3</a></li>
+								class="theme-icon-holder me-2"><i class="fa-duotone fa-chart-network fa-fw"></i></span>Kubernetes</a>
+					</li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-6-1">Assumptions</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-6-2">Load Balancer</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-6-3">Metal LB</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-6-4">Create Namespace</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-6-5">Create Deployment</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-6-6">Create Service</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-6-7">Create Ingress</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-6-8">Horizontal Pod Autoscaler (HPA)</a></li>
 				</ul>
 
 			</nav><!--//docs-nav-->
@@ -134,7 +114,9 @@
 			<div class="container">
 				<article class="docs-article" id="section-1">
 					<header class="docs-header">
-						<h1 class="docs-heading">Introduction <span class="docs-time">Last updated: 2019-06-01</span></h1>
+						<h1 class="docs-heading"><i class="fa-duotone fa-signs-post fa=fw" style="color: #28b76b;"></i> Introduction
+							<span class="docs-time">Last updated: 2019-06-01</span>
+						</h1>
 						<section class="docs-intro">
 							<p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus
 								condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh
@@ -487,11 +469,11 @@ http://{your-host-ip-address}:5000/api/v1/load
 
 				<article class="docs-article" id="section-2">
 					<header class="docs-header">
-						<h1 class="docs-heading">Tests</h1>
-						<section class="docs-intro">
+						<h1 class="docs-heading"><i class="fa-duotone fa-flask-vial fa-fw" style="color: #28b76b;"></i> Tests</h1>
+						<section class=" docs-intro">
 							<p>Very simple tests are in: <a
 									href="https://github.com/mwiater/golangdocker/blob/master/api_test.go">api_test.go</a></p>
-							
+
 						</section><!--//docs-intro-->
 					</header>
 					<section class="docs-section" id="item-2-1">
@@ -550,326 +532,671 @@ ok      github.com/mattwiater/golangdocker/sysinfo      0.365s
 					<section class="docs-section" id="item-2-2">
 						<h2 class="section-heading">Clear Test Cache</h2>
 						<p>To clear the test cache, run: <code>go clean -testcache</code> <i
-							class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
+								class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
 					</section><!--//section-->
 				</article><!--//docs-article-->
 
 
 				<article class="docs-article" id="section-3">
 					<header class="docs-header">
-						<h1 class="docs-heading">APIs</h1>
-						<section class="docs-intro">
-							<p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus
-								condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh
-								convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce
-								in malesuada odio.</p>
+						<h1 class="docs-heading"><i class="fa-duotone fa-screwdriver-wrench fa-fw" style="color: #28b76b;"></i>
+							Linting</h1>
+						<section class=" docs-intro">
+							<div class="callout-block callout-block-info">
+
+								<div class="content">
+									<h4 class="callout-title">
+										<span class="callout-icon-holder me-1">
+											<svg class="svg-inline--fa fa-circle-info" aria-hidden="true" focusable="false" data-prefix="fas"
+												data-icon="circle-info" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+												data-fa-i2svg="">
+												<path fill="currentColor"
+													d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z">
+												</path>
+											</svg><!-- <i class="fas fa-info-circle"></i> Font Awesome fontawesome.com -->
+										</span><!--//icon-holder-->
+										Note
+									</h4>
+									<p>This section is in progress.</p>
+								</div><!--//content-->
+							</div>
 						</section><!--//docs-intro-->
 					</header>
 					<section class="docs-section" id="item-3-1">
 						<h2 class="section-heading">Section Item 3.1</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
-							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
-							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
-							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
-							est. Vestibulum ultricies malesuada tempor.</p>
+						<h1 id="linting">Linting</h1>
+						<h2 id="to-do">To Do</h2>
+						<ul>
+							<li>Create config file <a href="https://golangci-lint.run/usage/configuration/">Official Docs</a></li>
+						</ul>
+						<h2 id="golangci-lint">golangci-lint</h2>
+						<p><code>go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest</code> <i
+								class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
+						<p>Usage: <code>golangci-lint run</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
+						<p>Or via Makefile:
+							<code>make golang-lint</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> (which will
+							execute the
+							<a target="_blank"
+								href="https://github.com/mwiater/golangdocker/blob/master/scripts/golang_lint.sh">scripts/golang_lint.sh</a>
+							script)
+						</p>
 					</section><!--//section-->
 
-					<section class="docs-section" id="item-3-2">
-						<h2 class="section-heading">Section Item 3.2</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
-							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
-							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
-							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
-							est. Vestibulum ultricies malesuada tempor.</p>
-					</section><!--//section-->
 
-					<section class="docs-section" id="item-3-3">
-						<h2 class="section-heading">Section Item 3.3</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
-							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
-							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
-							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
-							est. Vestibulum ultricies malesuada tempor.</p>
-					</section><!--//section-->
 				</article><!--//docs-article-->
 
 				<article class="docs-article" id="section-4">
 					<header class="docs-header">
-						<h1 class="docs-heading">Intergrations</h1>
-						<section class="docs-intro">
-							<p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus
-								condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh
-								convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce
-								in malesuada odio.</p>
+						<h1 class="docs-heading"><i class="fa-duotone fa-file-invoice fa-fw" style="color: #28b76b;"></i> Godoc</h1>
+						<section class=" docs-intro">
+							<div class="callout-block callout-block-info">
+
+								<div class="content">
+									<h4 class="callout-title">
+										<span class="callout-icon-holder me-1">
+											<svg class="svg-inline--fa fa-circle-info" aria-hidden="true" focusable="false" data-prefix="fas"
+												data-icon="circle-info" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+												data-fa-i2svg="">
+												<path fill="currentColor"
+													d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z">
+												</path>
+											</svg><!-- <i class="fas fa-info-circle"></i> Font Awesome fontawesome.com -->
+										</span><!--//icon-holder-->
+										Note
+									</h4>
+									<p>This section is in progress.</p>
+								</div><!--//content-->
+							</div>
 						</section><!--//docs-intro-->
 					</header>
 					<section class="docs-section" id="item-4-1">
-						<h2 class="section-heading">Section Item 4.1</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
-							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
-							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
-							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
-							est. Vestibulum ultricies malesuada tempor.</p>
+						<h2 class="section-heading">Usage</h2>
+						<p><code>godoc -http=:6060</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
+						<p>Or via Makefile:
+							<code>make golang-godoc</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> (which will
+							execute the
+							<a target="_blank"
+								href="https://github.com/mwiater/golangdocker/blob/master/scripts/golang_godoc.sh">scripts/golang_godoc.sh</a>
+							script)
+						</p>
+						<p>Access via browser at: <code>http://{your-ip-address}:6060/pkg/{app-module-name-in-go.mod}</code></p>
+						<p>E.g.: <code>http://192.168.0.91:6060/pkg/github.com/mattwiater/golangdocker/</code></p>
 					</section><!--//section-->
 
-					<section class="docs-section" id="item-4-2">
-						<h2 class="section-heading">Section Item 4.2</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
-							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
-							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
-							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
-							est. Vestibulum ultricies malesuada tempor.</p>
-					</section><!--//section-->
 
-					<section class="docs-section" id="item-4-3">
-						<h2 class="section-heading">Section Item 4.3</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
-							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
-							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
-							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
-							est. Vestibulum ultricies malesuada tempor.</p>
-					</section><!--//section-->
 				</article><!--//docs-article-->
 
 				<article class="docs-article" id="section-5">
 					<header class="docs-header">
-						<h1 class="docs-heading">Utilities</h1>
-						<section class="docs-intro">
-							<p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus
-								condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh
-								convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce
-								in malesuada odio.</p>
+						<h1 class="docs-heading"><i class="fa-duotone fa-weight-hanging fa-fw" style="color: #28b76b;"></i> Load
+							Testing</h1>
+						<section class=" docs-intro">
+							<div class="callout-block callout-block-info">
+
+								<div class="content">
+									<h4 class="callout-title">
+										<span class="callout-icon-holder me-1">
+											<svg class="svg-inline--fa fa-circle-info" aria-hidden="true" focusable="false" data-prefix="fas"
+												data-icon="circle-info" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+												data-fa-i2svg="">
+												<path fill="currentColor"
+													d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z">
+												</path>
+											</svg><!-- <i class="fas fa-info-circle"></i> Font Awesome fontawesome.com -->
+										</span><!--//icon-holder-->
+										Note
+									</h4>
+									<p>This section is in progress.</p>
+								</div><!--//content-->
+							</div>
+							<h2 id="to-do">To Do</h2>
+							<ul>
+								<li>Explore custom metrics options in more depth.</li>
+								<li>Generate applicable reports for comparison between bare go app, dockerized app, and k8s replicas.
+								</li>
+							</ul>
 						</section><!--//docs-intro-->
 					</header>
 					<section class="docs-section" id="item-5-1">
-						<h2 class="section-heading">Section Item 5.1</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
-							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
-							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
-							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
-							est. Vestibulum ultricies malesuada tempor.</p>
+						<h2 class="section-heading">Installation</h2>
+						<p><code>npm install -g artillery@latest</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i>
+						</p>
 					</section><!--//section-->
 
 					<section class="docs-section" id="item-5-2">
-						<h2 class="section-heading">Section Item 5.2</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
-							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
-							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
-							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
-							est. Vestibulum ultricies malesuada tempor.</p>
+						<h2 class="section-heading">Plugins</h2>
+
+						<p><a
+								href="https://www.artillery.io/docs/guides/plugins/plugin-metrics-by-endpoint#useonlyrequestnames">Official:
+								Per-endpoint (URL) metrics</a></p>
+						<p><code>npm install artillery-plugin-metrics-by-endpoint</code> <i
+								class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
+
 					</section><!--//section-->
 
 					<section class="docs-section" id="item-5-3">
-						<h2 class="section-heading">Section Item 5.3</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
-							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
-							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
-							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
-							est. Vestibulum ultricies malesuada tempor.</p>
+						<h2 class="section-heading">Test Phases</h2>
+
+						<p>
+						<pre><code>golangdocker-loadtest.yml</code></pre>
+						</p>
+
+						<pre>
+					<code>config:
+							phases:
+								- duration: 60
+									arrivalRate: 5
+									name: Warm up
+								- duration: 120
+									arrivalRate: 5
+									rampTo: 50
+									name: Ramp up load
+								- duration: 600
+									arrivalRate: 50
+									name: Sustained load
+							plugins:
+								metrics-by-endpoint:
+									useOnlyRequestNames: false
+							processor: "custom-artillery-functions.js"
+						scenarios:
+							- name: "golang.0nezer0.com"
+								flow:
+						
+								- get:
+										url: "/v1"
+										afterResponse: "customMetrics"
+						
+								- get:
+										url: "/v1/cpu"
+										afterResponse: "customMetrics"
+						
+								- get:
+										url: "/v1/host"
+										capture:
+											- json: "$['hostInfo']['virtualizationSystem']"
+												as: "virtualizationSystem"
+											- json: "$['hostInfo']['hostname']"
+												as: "hostname"
+										afterResponse: "customMetrics"
+								# - log: "{{ hostname }} [{{ virtualizationSystem }}]" # Here to ensure we are correctly load-balancing different pods in K8s deployment
+						
+								- get:
+										url: "/v1/load"
+										afterResponse: "customMetrics"
+						
+								- get:
+										url: "/v1/mem"
+										afterResponse: "customMetrics"
+						
+								- get:
+										url: "/v1/net"
+										afterResponse: "customMetrics"
+					</code>
+					</pre>
+
+					</section><!--//section-->
+
+					<section class="docs-section" id="item-5-4">
+						<h2 class="section-heading">Custom Scripts</h2>
+
+						<p>Reference: <a
+								href="https://www.artillery.io/docs/guides/guides/extension-apis#example">https://www.artillery.io/docs/guides/guides/extension-apis#example</a>
+						</p>
+						<p>This simple example makes use of a custom Fiber middleware wrapper that captures the time spent on the
+							server in each API call and sets a <code>Server-Timing</code> response header, e.g.:
+							<code>Server-Timing: route;dur=16</code>. See the <a
+								href="https://github.com/mwiater/golangdocker/blob/master/api/api.go">RouteTimerHandler()</a> function
+							in
+							<code>api/api.go</code>.
+						</p>
+
+						<p>
+						<pre><code>custom-artillery-functions.js</code></pre>
+						</p>
+
+						<pre>
+			<code>//
+			// custom-artillery-functions.js
+			//
+			
+			module.exports = {
+				logHeaders: logHeaders,
+				customMetrics: customMetrics
+			}
+			
+			function logHeaders(requestParams, response, context, events, next) {
+				// console.log(response.headers);
+				return next();
+			}
+			
+			function customMetrics(requestParams, response, context, events, next) {
+				const latency = parseServerTimingLatency(response.headers["server-timing"], "route");
+				const url = new URL(requestParams.url);
+				const routePath = url.pathname.replaceAll("/", "_")
+				events.emit("histogram", "route_latency"+routePath.trim(), latency);
+				return next();
+			}
+			
+			function parseServerTimingLatency(header, timingMetricName) {
+				const serverTimings = header.split(",");
+			
+				for (let timing of serverTimings) {
+					const timingDetails = timing.split(";");
+					if (timingDetails[0] === timingMetricName) {
+						return parseFloat(timingDetails[1].split("=")[1]);
+					}
+				}
+			}
+			</code>
+			</pre>
+
+					</section><!--//section-->
+
+					<section class="docs-section" id="item-5-5">
+						<h2 class="section-heading">Load Tests</h2>
+
+						<p>In order to benchmark the different run processes, we need to start the app differently before sending a
+							load test. You will alos want to run these test form a different physical machine that where you&#39;re
+							running the container from. Keep in mind that these are not real world load tests, as we are mostly
+							testing
+							to targets within the same network. These tests are mainly for comparisons of ruinning the app with
+							different mechanisims, e.g: go app, inside Docker container, within K8s w/ replicas.</p>
+
+					</section><!--//section-->
+
+					<section class="docs-section" id="item-5-6">
+						<h2 class="section-heading">No container, bare app</h2>
+
+						<p>E.g.: <code>bash go_run.sh</code></p>
+						<pre><code><span class="hljs-keyword">clear</span> &amp;&amp; \
+artillery <span class="hljs-keyword">run</span> --<span class="hljs-keyword">output</span> golangdocker-bare.json --target http:<span class="hljs-comment">//192.168.0.91:5000/api golangdocker-loadtest.yml &amp;&amp; \</span>
+    artillery report golangdocker-bare.json
+</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
+
+					</section><!--//section-->
+
+					<section class="docs-section" id="item-5-7">
+						<h2 class="section-heading" Docker container</h2>
+
+							<p>E.g.: <code>bash docker_run.sh</code></p>
+							<pre><code><span class="hljs-keyword">clear</span> &amp;&amp; \
+artillery <span class="hljs-keyword">run</span> --<span class="hljs-keyword">output</span> golangdocker-docker.json --target http:<span class="hljs-comment">//192.168.0.91:5000/api golangdocker-loadtest.yml &amp;&amp; \</span>
+    artillery report golangdocker-docker.json</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
+
+					</section><!--//section-->
+
+					<section class="docs-section" id="item-5-8">
+						<h2 class="section-heading">Kubernetes</h2>
+
+						<p>Assumes working K8s cluster and manual scaling of replicas for each test, e.g.:</p>
+						<pre><code><span class="hljs-keyword">clear</span> &amp;&amp; \
+artillery <span class="hljs-keyword">run</span> --<span class="hljs-keyword">output</span> golangdocker-k8s<span class="hljs-number">-3</span>-replica.json --target http:<span class="hljs-comment">//golang.0nezer0.com/api golangdocker-loadtest.yml &amp;&amp; \</span>
+    artillery report golangdocker-k8s<span class="hljs-number">-3</span>-replica.json
+</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
+						<pre><code><span class="hljs-keyword">clear</span> &amp;&amp; \
+artillery <span class="hljs-keyword">run</span> --<span class="hljs-keyword">output</span> golangdocker-k8s<span class="hljs-number">-2</span>-replica.json --target http:<span class="hljs-comment">//golang.0nezer0.com/api golangdocker-loadtest.yml &amp;&amp; \</span>
+    artillery report golangdocker-k8s<span class="hljs-number">-2</span>-replica.json
+</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
+
 					</section><!--//section-->
 				</article><!--//docs-article-->
 
 
 				<article class="docs-article" id="section-6">
 					<header class="docs-header">
-						<h1 class="docs-heading">Web</h1>
-						<section class="docs-intro">
-							<p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus
-								condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh
-								convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce
-								in malesuada odio.</p>
+						<h1 class="docs-heading"><i class="fa-duotone fa-chart-network fa-fw" style="color: #28b76b;"></i>
+							Kubernetes</h1>
+						<section class=" docs-intro">
+							<div class="callout-block callout-block-info">
+
+								<div class="content">
+									<h4 class="callout-title">
+										<span class="callout-icon-holder me-1">
+											<svg class="svg-inline--fa fa-circle-info" aria-hidden="true" focusable="false" data-prefix="fas"
+												data-icon="circle-info" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+												data-fa-i2svg="">
+												<path fill="currentColor"
+													d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z">
+												</path>
+											</svg><!-- <i class="fas fa-info-circle"></i> Font Awesome fontawesome.com -->
+										</span><!--//icon-holder-->
+										Note
+									</h4>
+									<p>This section is in progress.</p>
+								</div><!--//content-->
+							</div>
 						</section><!--//docs-intro-->
 					</header>
 					<section class="docs-section" id="item-6-1">
 						<h2 class="section-heading">Section Item 6.1</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
-							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
-							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
-							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
-							est. Vestibulum ultricies malesuada tempor.</p>
+						<h2 id="to-do">To Do</h2>
+						<ul>
+							<li>Working, but walkthrough needs more definition, test commands to ensure cluster setup is correct.
+							</li>
+						</ul>
+					</section><!--//section-->
+
+					<section class="docs-section" id="item-6-1">
+						<h2 class="section-heading">Assumptions</h2>
+
+						<p>You have built the container on the Control Plane node, e.g.:</p>
+						<p>To build, run:
+							<code>make docker-build</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i>
+						</p>
+						<p>Once you have built your image successfully, check the output of <code>docker images</code> #=&gt;</p>
+						<pre><code>REPOSITORY                <span class="hljs-keyword">TAG</span>       <span class="hljs-title">IMAGE</span> ID       CREATED          SIZE
+mattwiater/golangdocker   latest    <span class="hljs-number">053</span>f21052659   <span class="hljs-number">10</span> minutes ago   <span class="hljs-number">10.7M</span>B
+...
+</code></pre>
+						<p>You should see your tagged image in the list, similar to the output above.</p>
+
+						<p>Above we are going to use the <code>:v1</code> tag so that we can use <a
+								href="https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/">K8s Rolling
+								Updates</a>
+							when we make changes to the image. If you have built images in the previous sections, you&#39;ll likely
+							see
+							multiple versions of your image with different tags:</p>
+						<p><code>docker images</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
+						<pre><code>REPOSITORY                TAG       IMAGE ID       CREATED         SIZE
+mattwiater/golangdocker   latest    e9b376df3a3f   <span class="hljs-number">24</span> minutes ago  <span class="hljs-number">11.1</span>MB
+mattwiater/golangdocker   v1        e9b376df3a3f   <span class="hljs-number">4</span> minutes ago   <span class="hljs-number">11.1</span>MB
+...
+</code></pre>
+						<p>And pushed it to docker hub, e.g.: <code>docker push mattwiater/golangdocker:v1</code> <i
+								class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
+						<p>Docker Hub Note: This step is important for the remaining nodes to download and run the image without
+							having to manually build it locally on each node. K8s can use local images to spawn pods, but that would
+							require a manual build on each node (dowmlaoding the repo, building the image, and chaning the manifest
+							entry for <code>imagePullPolicy: Always</code> to <code>imagePullPolicy: Never</code>), which we are
+							skipping for this demonstration.</p>
+						<p>For rolling updates, we would just make the necessary updates to our code, build an image tagged with a
+							new
+							version, e.g.: <code>:v1.1</code>, <code>:v2</code>, etc., push it to docker hub, and then issue the
+							command:</p>
+						<p>[NEED TO FIX]:
+							<code>kubectl set image deployments/k8s-golang-api k8s-golang-api=mattwiater/golangdocker:v2</code> <i
+								class="fa-duotone fa-copy fa-fw code-copy-button"></i>
+						</p>
+						<p>[PROBLEM]: The command is not working with namespaced deployments, need to adjust.</p>
+						<p>The command above tells K8s to update the existing deployment to the newer version and it will take care
+							of
+							bringing down the old pods and spawning new pods with no downtime.</p>
+						<p>[TO DO: Need example after the initial deployment below is complete]</p>
+
 					</section><!--//section-->
 
 					<section class="docs-section" id="item-6-2">
-						<h2 class="section-heading">Section Item 6.2</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
-							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
-							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
-							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
-							est. Vestibulum ultricies malesuada tempor.</p>
+						<h2 class="section-heading">Load Balancer</h2>
+
+						<p>Since we want to make use of multiple container instances in our cluster which are accessible via a
+							single external endpoint, we'll need to setup a load balancer.</p>
+
+						<p>The basic traffic path is for our setup is:</p>
+
+						<p>Ingress: Our domain maps to an exposed service so that we can reach the Service Service: The load
+							balancer which will route traffic from a singular endpoint to multiple Pods containers via internal
+							Endpoints Endpoints: Defines which target Pods to route traffic to: internal IP Address and Port</p>
+
+						<p>For this example, we'll use Metal-LB to do the heavy lifting.</p>
+
 					</section><!--//section-->
+
 
 					<section class="docs-section" id="item-6-3">
-						<h2 class="section-heading">Section Item 6.3</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
-							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
-							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
-							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
-							est. Vestibulum ultricies malesuada tempor.</p>
-					</section><!--//section-->
-				</article><!--//docs-article-->
+						<h2 class="section-heading">Metal LB</h2>
 
+						<p>METAL-LB: <a
+								href="https://metallb.universe.tf/installation/">https://metallb.universe.tf/installation/</a>
+						</p>
+						<p>Ensure that Strict ARP Mode is enabled in your cluster:</p>
+						<p><code>kubectl edit configmap -n kube-system kube-proxy</code></p>
+						<p>Eddit/Add the <code>mode</code> and <code>strictARP</code> fields to match below:</p>
+						<pre><code><span class="hljs-symbol">apiVersion:</span> kubeproxy.config.k8s.io/v1alpha1
+<span class="hljs-symbol">kind:</span> KubeProxyConfiguration
+<span class="hljs-symbol">mode:</span> <span class="hljs-string">"ipvs"</span>
+<span class="hljs-symbol">ipvs:</span>
+<span class="hljs-symbol">  strictARP:</span> true
+</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
+						<p>Next, set up the Metal-LB infrastructure and resources by applying the Metal-LB native Manifest via:</p>
+						<p>
+							<code>kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.7/config/manifests/metallb-native.yaml</code>
+						</p>
+						<p>Your cluster will vary, but my setup has static IP Addresses on my local network:</p>
+						<p><code>kubectl get nodes</code></p>
+						<p>
+						<pre><code>NAME STATUS ROLES AGE VERSION
+mjw-udoo-01 Ready control-plane 181d v1.25.3
+mjw-udoo-02 Ready worker 181d v1.25.3
+mjw-udoo-03 Ready worker 181d v1.25.3
+mjw-udoo-04 Ready worker 181d v1.25.3</code></pre>
+						</p>
+						<p>Configure Metal-LB to add these IP addresses to the IPAddressPool (REF: <a
+								href="https://metallb.universe.tf/usage/example/">https://metallb.universe.tf/usage/example/</a>)</p>
+						<pre><code>cat &lt;&lt;EOF | kubectl apply -f -
+<span class="hljs-attr">apiVersion:</span> metallb.io/v1beta1
+<span class="hljs-attr">kind:</span> IPAddressPool
+<span class="hljs-attr">metadata:</span>
+<span class="hljs-attr">  name:</span> udoo
+<span class="hljs-attr">  namespace:</span> metallb-system
+<span class="hljs-attr">spec:</span>
+<span class="hljs-attr">  addresses:</span>
+<span class="hljs-bullet">  -</span> <span class="hljs-number">192.168</span><span class="hljs-number">.0</span><span class="hljs-number">.91</span><span class="hljs-bullet">-192.168</span><span class="hljs-number">.0</span><span class="hljs-number">.94</span>
+EOF
+</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
+						<p>Then, you can name your IPAddressPool and advertise it to the cluster. In my case, I&#39;ve hjust named
+							it
+							<code>udoo</code>
+						</p>
+						<pre><code>cat &lt;&lt;EOF | kubectl apply -f -
+<span class="hljs-attr">apiVersion:</span> metallb.io/v1beta1
+<span class="hljs-attr">kind:</span> BGPAdvertisement
+<span class="hljs-attr">metadata:</span>
+<span class="hljs-attr">  name:</span> external
+<span class="hljs-attr">  namespace:</span> metallb-system
+<span class="hljs-attr">spec:</span>
+<span class="hljs-attr">  ipAddressPools:</span>
+<span class="hljs-bullet">  -</span> udoo
+EOF
+</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
+						<p>Then, create the namespace and deployment for the App. The following code creates the
+							<code>k8s-golang-api</code> namespace for the app to run in and be identified with. It is up to you to
+							choose a name that makes sense, but be sure to adjust the the following YAML snippets to reflect your
+							Namespave name in <em>all</em> of the <code>namespace:</code> fields.
+						</p>
 
-				<article class="docs-article" id="section-7">
-					<header class="docs-header">
-						<h1 class="docs-heading">Mobile</h1>
-						<section class="docs-intro">
-							<p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus
-								condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh
-								convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce
-								in malesuada odio.</p>
-						</section><!--//docs-intro-->
-					</header>
-					<section class="docs-section" id="item-7-1">
-						<h2 class="section-heading">Section Item 7.1</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
-							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
-							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
-							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
-							est. Vestibulum ultricies malesuada tempor.</p>
-					</section><!--//section-->
-
-					<section class="docs-section" id="item-7-2">
-						<h2 class="section-heading">Section Item 7.2</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
-							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
-							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
-							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
-							est. Vestibulum ultricies malesuada tempor.</p>
-					</section><!--//section-->
-
-					<section class="docs-section" id="item-7-3">
-						<h2 class="section-heading">Section Item 7.3</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
-							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
-							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
-							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
-							est. Vestibulum ultricies malesuada tempor.</p>
-					</section><!--//section-->
-				</article><!--//docs-article-->
-
-
-				<article class="docs-article" id="section-8">
-					<header class="docs-header">
-						<h1 class="docs-heading">Resources</h1>
-						<section class="docs-intro">
-							<p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus
-								condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh
-								convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce
-								in malesuada odio.</p>
-						</section><!--//docs-intro-->
-					</header>
-					<section class="docs-section" id="item-8-1">
-						<h2 class="section-heading">Section Item 8.1</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
-							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
-							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
-							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
-							est. Vestibulum ultricies malesuada tempor.</p>
 					</section><!--//section-->
 
-					<section class="docs-section" id="item-8-2">
-						<h2 class="section-heading">Section Item 8.2</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
-							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
-							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
-							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
-							est. Vestibulum ultricies malesuada tempor.</p>
+					<section class="docs-section" id="item-6-4">
+						<h2 class="section-heading">Create Namespace</h2>
+
+						<p>Create the <code>k8s-golang-api</code> namespace to group all services, deployments, etc. Notice that all
+							of
+							the following YAML definitions use <code>namespace: k8s-golang-api</code> to access this new Namespace
+							definition.</p>
+						<pre><code>cat &lt;&lt;EOF | kubectl apply -f -
+<span class="hljs-attr">apiVersion:</span> v1
+<span class="hljs-attr">kind:</span> Namespace
+<span class="hljs-attr">metadata:</span>
+<span class="hljs-attr">  name:</span> k8s-golang-api
+EOF
+</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
+
 					</section><!--//section-->
 
-					<section class="docs-section" id="item-8-3">
-						<h2 class="section-heading">Section Item 8.3</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo.
-							Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum
-							imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies
-							porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin
-							est. Vestibulum ultricies malesuada tempor.</p>
+					<section class="docs-section" id="item-6-5">
+						<h2 class="section-heading">Create Deployment</h2>
+
+						<p>The following defines how K8s will deploy the Pods on your system. It defines the names, associated
+							Namespaces, number of Replicas, Resource Limits, Ports, etc.</p>
+						<pre><code>cat &lt;&lt;EOF | kubectl apply -f -
+<span class="hljs-attr">apiVersion:</span> apps/v1
+<span class="hljs-attr">kind:</span> Deployment
+<span class="hljs-attr">metadata:</span>
+<span class="hljs-attr">  name:</span> k8s-golang-api
+<span class="hljs-attr">  namespace:</span> k8s-golang-api
+<span class="hljs-attr">  labels:</span>
+<span class="hljs-attr">    app:</span> k8s-golang-api
+<span class="hljs-attr">spec:</span>
+<span class="hljs-attr">  replicas:</span> <span class="hljs-number">3</span>
+<span class="hljs-attr">  selector:</span>
+<span class="hljs-attr">    matchLabels:</span>
+<span class="hljs-attr">      app:</span> k8s-golang-api
+<span class="hljs-attr">  template:</span>
+<span class="hljs-attr">    metadata:</span>
+<span class="hljs-attr">      labels:</span>
+<span class="hljs-attr">        app:</span> k8s-golang-api
+<span class="hljs-attr">    spec:</span>
+<span class="hljs-attr">      containers:</span>
+<span class="hljs-attr">        - name:</span> k8s-golang-api
+<span class="hljs-attr">          image:</span> <span class="hljs-string">'mattwiater/golangdocker:latest'</span>
+<span class="hljs-attr">          env:</span>
+<span class="hljs-attr">          - name:</span> K8S_NODE_NAME
+<span class="hljs-attr">            valueFrom:</span>
+<span class="hljs-attr">              fieldRef:</span>
+<span class="hljs-attr">                fieldPath:</span> spec.nodeName
+<span class="hljs-attr">          - name:</span> K8S_NODE_IP
+<span class="hljs-attr">            valueFrom:</span>
+<span class="hljs-attr">              fieldRef:</span>
+<span class="hljs-attr">                fieldPath:</span> status.hostIP
+<span class="hljs-attr">          - name:</span> K8S_POD_NAME
+<span class="hljs-attr">            valueFrom:</span>
+<span class="hljs-attr">              fieldRef:</span>
+<span class="hljs-attr">                fieldPath:</span> metadata.name
+<span class="hljs-attr">          - name:</span> K8S_POD_NAMESPACE
+<span class="hljs-attr">            valueFrom:</span>
+<span class="hljs-attr">              fieldRef:</span>
+<span class="hljs-attr">                fieldPath:</span> metadata.namespace
+<span class="hljs-attr">          - name:</span> K8S_POD_IP
+<span class="hljs-attr">            valueFrom:</span>
+<span class="hljs-attr">              fieldRef:</span>
+<span class="hljs-attr">                fieldPath:</span> status.podIP
+<span class="hljs-attr">          imagePullPolicy:</span> Always
+<span class="hljs-attr">          resources:</span>
+<span class="hljs-attr">            requests:</span>
+<span class="hljs-attr">              memory:</span> <span class="hljs-string">"500Mi"</span>
+<span class="hljs-attr">              cpu:</span> <span class="hljs-string">"250m"</span>
+<span class="hljs-attr">            limits:</span>
+<span class="hljs-attr">              memory:</span> <span class="hljs-string">"500Mi"</span>
+
+<span class="hljs-attr">              cpu:</span> <span class="hljs-string">"250m"</span>
+<span class="hljs-attr">          ports:</span>
+<span class="hljs-attr">            - containerPort:</span> <span class="hljs-number">5000</span>
+<span class="hljs-attr">              protocol:</span> TCP
+EOF
+</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
+						<p>The final two steps, Service and Ingress are responsible for routing external traffic into the cluster.
+						</p>
+
 					</section><!--//section-->
-				</article><!--//docs-article-->
 
 
-				<article class="docs-article" id="section-9">
-					<header class="docs-header">
-						<h1 class="docs-heading">FAQs</h1>
-						<section class="docs-intro">
-							<p>Section intro goes here. You can list all your FAQs using the format below.</p>
-						</section><!--//docs-intro-->
-					</header>
-					<section class="docs-section" id="item-9-1">
-						<h2 class="section-heading">Section Item 9.1 <small>(FAQ Category One)</small></h2>
-						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>What's sit amet quam eget lacinia?</h5>
-						<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-							Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
-							ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo,
-							fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae,
-							justo. Nullam dictum felis eu pede mollis pretium.</p>
-						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>How to ipsum dolor sit amet quam tortor?</h5>
-						<p>Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis
-							gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis
-							sed, nonummy id, metus. Nullam accumsan lorem in dui. </p>
-						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>Can I bibendum sodales?</h5>
-						<p>Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus.
-							Nullam accumsan lorem in dui. </p>
-						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>Where arcu sed urna gravida?</h5>
-						<p>Aenean et sodales nisi, vel efficitur sapien. Quisque molestie diam libero, et elementum diam mollis ac.
-							In dignissim aliquam est eget ullamcorper. Sed id sodales tortor, eu finibus leo. Vivamus dapibus
-							sollicitudin justo vel fermentum. Curabitur nec arcu sed urna gravida lobortis. Donec lectus est,
-							imperdiet eu viverra viverra, ultricies nec urna. </p>
+					<section class="docs-section" id="item-6-6">
+						<h2 class="section-heading">Create Service</h2>
+
+						<p>You can see that the service is accepting incoming traffic on port 80, and routing to the Pods named
+							<code>k8s-golang-api</code> that are already running on Port 5000 (defined in the Deployment manifest
+							above:
+							<code>containerPort: 5000</code>)
+						</p>
+						<pre><code>cat &lt;&lt;EOF | kubectl apply -f -
+<span class="hljs-attr">apiVersion:</span> v1
+<span class="hljs-attr">kind:</span> Service
+<span class="hljs-attr">metadata:</span>
+<span class="hljs-attr">  name:</span> k8s-golang-api
+<span class="hljs-attr">  namespace:</span> k8s-golang-api
+<span class="hljs-attr">spec:</span>
+<span class="hljs-attr">  type:</span> LoadBalancer
+<span class="hljs-attr">  selector:</span>
+<span class="hljs-attr">    app:</span> k8s-golang-api
+<span class="hljs-attr">  ports:</span>
+<span class="hljs-attr">  - name:</span> web
+<span class="hljs-attr">    port:</span> <span class="hljs-number">80</span>
+<span class="hljs-attr">    targetPort:</span> <span class="hljs-number">5000</span>
+EOF
+</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
+
 					</section><!--//section-->
 
-					<section class="docs-section" id="item-9-2">
-						<h2 class="section-heading">Section Item 9.2 <small>(FAQ Category Two)</small></h2>
-						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>What's sit amet quam eget lacinia?</h5>
-						<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-							Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
-							ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo,
-							fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae,
-							justo. Nullam dictum felis eu pede mollis pretium.</p>
-						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>How to ipsum dolor sit amet quam tortor?</h5>
-						<p>Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis
-							gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis
-							sed, nonummy id, metus. Nullam accumsan lorem in dui. </p>
-						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>Can I bibendum sodales?</h5>
-						<p>Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus.
-							Nullam accumsan lorem in dui. </p>
-						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>Where arcu sed urna gravida?</h5>
-						<p>Aenean et sodales nisi, vel efficitur sapien. Quisque molestie diam libero, et elementum diam mollis ac.
-							In dignissim aliquam est eget ullamcorper. Sed id sodales tortor, eu finibus leo. Vivamus dapibus
-							sollicitudin justo vel fermentum. Curabitur nec arcu sed urna gravida lobortis. Donec lectus est,
-							imperdiet eu viverra viverra, ultricies nec urna. </p>
+
+					<section class="docs-section" id="item-6-7">
+						<h2 class="section-heading">Create Ingress</h2>
+
+						<p>In my setup, I want the containers to be accessible via Port 80 at the domain
+							<code>golang.0nezer0.com</code>. So the Ingress section below defines the domain mapping to the Serice
+							section
+						</p>
+						<pre><code>cat &lt;&lt;EOF | kubectl apply -f -
+<span class="hljs-attr">apiVersion:</span> networking.k8s.io/v1
+<span class="hljs-attr">kind:</span> Ingress
+<span class="hljs-attr">metadata:</span>
+<span class="hljs-attr">  name:</span> k8s-golang-api-ingress
+<span class="hljs-attr">  namespace:</span> k8s-golang-api
+<span class="hljs-attr">spec:</span>
+<span class="hljs-attr">  defaultBackend:</span>
+<span class="hljs-attr">    service:</span>
+<span class="hljs-attr">      name:</span> k8s-golang-api
+<span class="hljs-attr">      port:</span>
+<span class="hljs-attr">        number:</span> <span class="hljs-number">80</span>
+<span class="hljs-attr">  rules:</span>
+<span class="hljs-attr">  - host:</span> golang<span class="hljs-number">.0</span>nezer0.com
+<span class="hljs-attr">    http:</span>
+<span class="hljs-attr">      paths:</span>
+<span class="hljs-attr">      - path:</span> /
+<span class="hljs-attr">        pathType:</span> Prefix
+<span class="hljs-attr">        backend:</span>
+<span class="hljs-attr">          service:</span>
+<span class="hljs-attr">            name:</span> k8s-golang-api
+<span class="hljs-attr">            port:</span>
+<span class="hljs-attr">              number:</span> <span class="hljs-number">80</span>
+EOF
+</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
+						<p>You can verify the setup via:</p>
+						<p><code>kubectl describe ingress k8s-golang-api-ingress -n=k8s-golang-api</code> <i
+								class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
+						<pre><code><span class="hljs-symbol">Name:</span>             k8s-golang-api-ingress
+<span class="hljs-symbol">Labels:</span>           &lt;none&gt;
+<span class="hljs-symbol">Namespace:</span>        k8s-golang-api
+<span class="hljs-symbol">Address:</span>
+Ingress Class:    &lt;none&gt;
+<span class="hljs-meta">Default</span> backend:  k8s-golang-api:<span class="hljs-number">80</span> (<span class="hljs-number">10.244</span><span class="hljs-meta">.1</span><span class="hljs-meta">.74</span>:<span class="hljs-number">5000</span>,<span class="hljs-number">10.244</span><span class="hljs-meta">.2</span><span class="hljs-meta">.104</span>:<span class="hljs-number">5000</span>,<span class="hljs-number">10.244</span><span class="hljs-meta">.3</span><span class="hljs-meta">.66</span>:<span class="hljs-number">5000</span>)
+<span class="hljs-symbol">Rules:</span>
+  Host                Path  Backends
+  ----                ----  --------
+  golang.0nezer0.com
+                      /   k8s-golang-api:<span class="hljs-number">80</span> (<span class="hljs-number">10.244</span><span class="hljs-meta">.1</span><span class="hljs-meta">.74</span>:<span class="hljs-number">5000</span>,<span class="hljs-number">10.244</span><span class="hljs-meta">.2</span><span class="hljs-meta">.104</span>:<span class="hljs-number">5000</span>,<span class="hljs-number">10.244</span><span class="hljs-meta">.3</span><span class="hljs-meta">.66</span>:<span class="hljs-number">5000</span>)
+<span class="hljs-symbol">Annotations:</span>          &lt;none&gt;
+<span class="hljs-symbol">Events:</span>               &lt;none&gt;
+</code></pre>
+						<p>Note that the domain is listed and the Backend are pointing to the Service we created.</p>
+						<p>Ensure that you have an IP Address allocated for the Load Balancer:</p>
+						<p><code>kubectl get svc -n=k8s-golang-api</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i>
+						</p>
+						<pre><code>NAME             TYPE           CLUSTER-<span class="hljs-built_in">IP</span>      EXTERNAL-<span class="hljs-built_in">IP</span>    PORT(S)        AGE
+k8s-golang-api   LoadBalancer   <span class="hljs-number">10.105</span><span class="hljs-meta">.31</span><span class="hljs-meta">.196</span>   <span class="hljs-number">192.168</span><span class="hljs-meta">.0</span><span class="hljs-meta">.91</span>   <span class="hljs-number">80</span>:<span class="hljs-number">31188</span>/TCP   21s
+</code></pre>
+						<p>Assuming that your setup is also on your local network, make sure to add add an IP -&gt; Domain mapping
+							in
+							<code>/etc/hosts</code> file on the machine you are accessing the cluster from:
+						</p>
+						<pre><code>192<span class="hljs-selector-class">.168</span><span class="hljs-selector-class">.0</span><span class="hljs-selector-class">.91</span> <span class="hljs-selector-tag">golang</span><span class="hljs-selector-class">.0nezer0</span><span class="hljs-selector-class">.com</span>
+</code></pre>
+
 					</section><!--//section-->
 
-					<section class="docs-section" id="item-9-3">
-						<h2 class="section-heading">Section Item 9.3 <small>(FAQ Category Three)</small></h2>
-						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>How to dapibus sollicitudin justo vel fermentum?
-						</h5>
-						<p>Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis
-							gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis
-							sed, nonummy id, metus. Nullam accumsan lorem in dui. </p>
-						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>How long bibendum sodales?</h5>
-						<p>Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus.
-							Nullam accumsan lorem in dui. </p>
-						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>Where dapibus sollicitudin?</h5>
-						<p>Aenean et sodales nisi, vel efficitur sapien. Quisque molestie diam libero, et elementum diam mollis ac.
-							In dignissim aliquam est eget ullamcorper. Sed id sodales tortor, eu finibus leo. Vivamus dapibus
-							sollicitudin justo vel fermentum. Curabitur nec arcu sed urna gravida lobortis. Donec lectus est,
-							imperdiet eu viverra viverra, ultricies nec urna. </p>
+					<section class="docs-section" id="item-6-8">
+						<h2 class="section-heading">Horizontal Pod Autoscaler (HPA)</h2>
+
+						<p>
+							<code>kubectl autoscale deployment -n k8s-golang-api  k8s-golang-api --cpu-percent=75 --memory-percent=75 --min=1 --max=3</code>
+							<i class="fa-duotone fa-copy fa-fw code-copy-button"></i>
+						</p>
+
 					</section><!--//section-->
 				</article><!--//docs-article-->
 
 				<footer class="footer">
 					<div class="container text-center py-5">
-						<!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
-						<small class="copyright">Designed with <span class="sr-only">love</span><i class="fas fa-heart"
-								style="color: #fb866a;"></i> by <a class="theme-link" href="http://themes.3rdwavemedia.com"
-								target="_blank">Xiaoying Riley</a> for developers</small>
-						<ul class="social-list list-unstyled pt-4 mb-0">
-							<li class="list-inline-item"><a href="#"><i class="fab fa-github fa-fw"></i></a></li>
-							<li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
-							<li class="list-inline-item"><a href="#"><i class="fab fa-slack fa-fw"></i></a></li>
-							<li class="list-inline-item"><a href="#"><i class="fab fa-product-hunt fa-fw"></i></a></li>
-							<li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f fa-fw"></i></a></li>
-							<li class="list-inline-item"><a href="#"><i class="fab fa-instagram fa-fw"></i></a></li>
-						</ul><!--//social-list-->
+						
 					</div>
 				</footer>
 			</div>
@@ -878,6 +1205,8 @@ ok      github.com/mattwiater/golangdocker/sysinfo      0.365s
 
 
 	<!-- Javascript -->
+	<script src="https://code.jquery.com/jquery-3.6.3.min.js"
+		integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 	<script src="assets/plugins/popper.min.js"></script>
 	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
@@ -889,6 +1218,7 @@ ok      github.com/mattwiater/golangdocker/sysinfo      0.365s
 	<script src="assets/plugins/simplelightbox/simple-lightbox.min.js"></script>
 	<script src="assets/plugins/gumshoe/gumshoe.polyfills.min.js"></script>
 	<script src="assets/js/docs.js"></script>
+	<script src="assets/js/app.js"></script>
 
 </body>
 

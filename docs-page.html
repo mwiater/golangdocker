@@ -292,22 +292,22 @@ DOCKERIMAGE=mattwiater/golangdocker</code></pre>
 							docker assigned <code>hostname: &quot;b189564db0c5&quot;</code> and verify that it is one running a single
 							process <code>procs: 1</code>:</p>
 						<pre><code>{
-	hostInfo: {
-		hostname: "b189564db0c5",
-		uptime: 1238849,
-		bootTime: 1667920883,
-		procs: 1,
-		os: "linux",
-		platform: "",
-		platformFamily: "",
-		platformVersion: "",
-		kernelVersion: "5.4.0-110-generic",
-		kernelArch: "x86_64",
-		virtualizationSystem: "docker",
-		virtualizationRole: "guest",
-		hostId: "12345678-1234-5678-90ab-cddeefaabbcc"
-		}
-	}
+  hostInfo: {
+    hostname: "b189564db0c5",
+    uptime: 1238849,
+    bootTime: 1667920883,
+    procs: 1,
+    os: "linux",
+    platform: "",
+    platformFamily: "",
+    platformVersion: "",
+    kernelVersion: "5.4.0-110-generic",
+    kernelArch: "x86_64",
+    virtualizationSystem: "docker",
+    virtualizationRole: "guest",
+    hostId: "12345678-1234-5678-90ab-cddeefaabbcc"
+    }
+  }
 </code></pre>
 					</section><!--//section-->
 					<section class="docs-section" id="item-1-5">
@@ -367,7 +367,7 @@ WORKDIR /go/src/app
 COPY . .
 RUN apk add git
 RUN CGO_ENABLED=0 go install -ldflags <span class="hljs-string">'-extldflags "-static"'</span> -tags timetzdata
-		
+    
 FROM scratch
 COPY --from=app /go/bin/golangdocker /golangdocker
 COPY --from=alpine:latest /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
@@ -434,7 +434,7 @@ DOCKERIMAGE=mattwiater/golangdocker</code></pre>
 │ Handlers ............ <span class="hljs-number">14</span>  Processes ........... <span class="hljs-number">1</span>  │
 │ Prefork ....... Disabled  PID ................. <span class="hljs-number">1</span>  │
 └────────────────────────────────────────────────────┘
-			</code></pre>
+      </code></pre>
 						<p>On your host machine, you can now access the container via
 							<code>http://{your-host-ip-address}:5000</code>
 						</p>
@@ -450,7 +450,7 @@ http://{your-host-ip-address}:5000/api/v1/cpu
 http://{your-host-ip-address}:5000/api/v1/host
 http://{your-host-ip-address}:5000/api/v1/net
 http://{your-host-ip-address}:5000/api/v1/load
-			</pre>
+      </pre>
 						<h5 id="api-metrics-">API Metrics:</h5>
 						<p>For simplicity, the default <a href="https://docs.gofiber.io/api/middleware/monitor">Fiber Monitor
 								middleware</a> is included and available at:</p>
@@ -491,7 +491,7 @@ http://{your-host-ip-address}:5000/api/v1/load
 						</p>
 
 						<pre><code>=== RUN   TestAPIRoutes
-			
+      
 ┌───────────────────────────────────────────────────┐
 │                   Fiber v2.40.1                   │
 │               http://127.0.0.1:5000               │
@@ -526,7 +526,7 @@ ok      github.com/mattwiater/golangdocker/common       0.005s
 --- PASS: ExampleTestTLS (0.35s)
 PASS
 ok      github.com/mattwiater/golangdocker/sysinfo      0.365s
-			</code></pre>
+      </code></pre>
 					</section><!--//section-->
 
 					<section class="docs-section" id="item-2-2">
@@ -542,6 +542,7 @@ ok      github.com/mattwiater/golangdocker/sysinfo      0.365s
 						<h1 class="docs-heading"><i class="fa-duotone fa-screwdriver-wrench fa-fw" style="color: #28b76b;"></i>
 							Linting</h1>
 						<section class=" docs-intro">
+
 							<div class="callout-block callout-block-info">
 
 								<div class="content">
@@ -558,18 +559,18 @@ ok      github.com/mattwiater/golangdocker/sysinfo      0.365s
 										Note
 									</h4>
 									<p>This section is in progress.</p>
+
+
 								</div><!--//content-->
 							</div>
+							<h2 id="to-do">To Do</h2>
+							<ul>
+								<li>Create config file <a href="https://golangci-lint.run/usage/configuration/">Official Docs</a></li>
+							</ul>
 						</section><!--//docs-intro-->
 					</header>
 					<section class="docs-section" id="item-3-1">
-						<h2 class="section-heading">Section Item 3.1</h2>
-						<h1 id="linting">Linting</h1>
-						<h2 id="to-do">To Do</h2>
-						<ul>
-							<li>Create config file <a href="https://golangci-lint.run/usage/configuration/">Official Docs</a></li>
-						</ul>
-						<h2 id="golangci-lint">golangci-lint</h2>
+						<h2 class="section-heading">golangci-lint</h2>
 						<p><code>go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest</code> <i
 								class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
 						<p>Usage: <code>golangci-lint run</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
@@ -607,6 +608,8 @@ ok      github.com/mattwiater/golangdocker/sysinfo      0.365s
 									<p>This section is in progress.</p>
 								</div><!--//content-->
 							</div>
+
+							<p>Generate and serve app documentation via <code>godoc</code>.</p>
 						</section><!--//docs-intro-->
 					</header>
 					<section class="docs-section" id="item-4-1">
@@ -649,6 +652,8 @@ ok      github.com/mattwiater/golangdocker/sysinfo      0.365s
 									<p>This section is in progress.</p>
 								</div><!--//content-->
 							</div>
+							<p>A simple local load test example using <a target="_blank" href="https://www.artillery.io/">Artillery</a>.</p>
+
 							<h2 id="to-do">To Do</h2>
 							<ul>
 								<li>Explore custom metrics options in more depth.</li>
@@ -677,62 +682,60 @@ ok      github.com/mattwiater/golangdocker/sysinfo      0.365s
 					<section class="docs-section" id="item-5-3">
 						<h2 class="section-heading">Test Phases</h2>
 
-						<p>
-						<pre><code>golangdocker-loadtest.yml</code></pre>
-						</p>
+						<p>Config file: <code>golangdocker-loadtest.yml</code></p>
 
 						<pre>
-					<code>config:
-							phases:
-								- duration: 60
-									arrivalRate: 5
-									name: Warm up
-								- duration: 120
-									arrivalRate: 5
-									rampTo: 50
-									name: Ramp up load
-								- duration: 600
-									arrivalRate: 50
-									name: Sustained load
-							plugins:
-								metrics-by-endpoint:
-									useOnlyRequestNames: false
-							processor: "custom-artillery-functions.js"
-						scenarios:
-							- name: "golang.0nezer0.com"
-								flow:
-						
-								- get:
-										url: "/v1"
-										afterResponse: "customMetrics"
-						
-								- get:
-										url: "/v1/cpu"
-										afterResponse: "customMetrics"
-						
-								- get:
-										url: "/v1/host"
-										capture:
-											- json: "$['hostInfo']['virtualizationSystem']"
-												as: "virtualizationSystem"
-											- json: "$['hostInfo']['hostname']"
-												as: "hostname"
-										afterResponse: "customMetrics"
-								# - log: "{{ hostname }} [{{ virtualizationSystem }}]" # Here to ensure we are correctly load-balancing different pods in K8s deployment
-						
-								- get:
-										url: "/v1/load"
-										afterResponse: "customMetrics"
-						
-								- get:
-										url: "/v1/mem"
-										afterResponse: "customMetrics"
-						
-								- get:
-										url: "/v1/net"
-										afterResponse: "customMetrics"
-					</code>
-					</pre>
+          <code>config:
+              phases:
+                - duration: 60
+                  arrivalRate: 5
+                  name: Warm up
+                - duration: 120
+                  arrivalRate: 5
+                  rampTo: 50
+                  name: Ramp up load
+                - duration: 600
+                  arrivalRate: 50
+                  name: Sustained load
+              plugins:
+                metrics-by-endpoint:
+                  useOnlyRequestNames: false
+              processor: "custom-artillery-functions.js"
+            scenarios:
+              - name: "golang.0nezer0.com"
+                flow:
+            
+                - get:
+                    url: "/v1"
+                    afterResponse: "customMetrics"
+            
+                - get:
+                    url: "/v1/cpu"
+                    afterResponse: "customMetrics"
+            
+                - get:
+                    url: "/v1/host"
+                    capture:
+                      - json: "$['hostInfo']['virtualizationSystem']"
+                        as: "virtualizationSystem"
+                      - json: "$['hostInfo']['hostname']"
+                        as: "hostname"
+                    afterResponse: "customMetrics"
+                # - log: "{{ hostname }} [{{ virtualizationSystem }}]" # Here to ensure we are correctly load-balancing different pods in K8s deployment
+            
+                - get:
+                    url: "/v1/load"
+                    afterResponse: "customMetrics"
+            
+                - get:
+                    url: "/v1/mem"
+                    afterResponse: "customMetrics"
+            
+                - get:
+                    url: "/v1/net"
+                    afterResponse: "customMetrics"
+          </code>
+          </pre>
 
 					</section><!--//section-->
 
@@ -750,45 +753,43 @@ ok      github.com/mattwiater/golangdocker/sysinfo      0.365s
 							<code>api/api.go</code>.
 						</p>
 
-						<p>
-						<pre><code>custom-artillery-functions.js</code></pre>
-						</p>
+						<p>Custom script file: <code>golangdocker-loadtest.yml</code></p>
 
 						<pre>
-			<code>//
-			// custom-artillery-functions.js
-			//
-			
-			module.exports = {
-				logHeaders: logHeaders,
-				customMetrics: customMetrics
-			}
-			
-			function logHeaders(requestParams, response, context, events, next) {
-				// console.log(response.headers);
-				return next();
-			}
-			
-			function customMetrics(requestParams, response, context, events, next) {
-				const latency = parseServerTimingLatency(response.headers["server-timing"], "route");
-				const url = new URL(requestParams.url);
-				const routePath = url.pathname.replaceAll("/", "_")
-				events.emit("histogram", "route_latency"+routePath.trim(), latency);
-				return next();
-			}
-			
-			function parseServerTimingLatency(header, timingMetricName) {
-				const serverTimings = header.split(",");
-			
-				for (let timing of serverTimings) {
-					const timingDetails = timing.split(";");
-					if (timingDetails[0] === timingMetricName) {
-						return parseFloat(timingDetails[1].split("=")[1]);
-					}
-				}
-			}
-			</code>
-			</pre>
+      <code>//
+      // custom-artillery-functions.js
+      //
+      
+      module.exports = {
+        logHeaders: logHeaders,
+        customMetrics: customMetrics
+      }
+      
+      function logHeaders(requestParams, response, context, events, next) {
+        // console.log(response.headers);
+        return next();
+      }
+      
+      function customMetrics(requestParams, response, context, events, next) {
+        const latency = parseServerTimingLatency(response.headers["server-timing"], "route");
+        const url = new URL(requestParams.url);
+        const routePath = url.pathname.replaceAll("/", "_")
+        events.emit("histogram", "route_latency"+routePath.trim(), latency);
+        return next();
+      }
+      
+      function parseServerTimingLatency(header, timingMetricName) {
+        const serverTimings = header.split(",");
+      
+        for (let timing of serverTimings) {
+          const timingDetails = timing.split(";");
+          if (timingDetails[0] === timingMetricName) {
+            return parseFloat(timingDetails[1].split("=")[1]);
+          }
+        }
+      }
+      </code>
+      </pre>
 
 					</section><!--//section-->
 
@@ -807,36 +808,33 @@ ok      github.com/mattwiater/golangdocker/sysinfo      0.365s
 					<section class="docs-section" id="item-5-6">
 						<h2 class="section-heading">No container, bare app</h2>
 
-						<p>E.g.: <code>bash go_run.sh</code></p>
-						<pre><code><span class="hljs-keyword">clear</span> &amp;&amp; \
-artillery <span class="hljs-keyword">run</span> --<span class="hljs-keyword">output</span> golangdocker-bare.json --target http:<span class="hljs-comment">//192.168.0.91:5000/api golangdocker-loadtest.yml &amp;&amp; \</span>
-    artillery report golangdocker-bare.json
-</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
+						<p>With app running with no container, e.g.: <code>make golang-run</code></p>
+						<pre><code>clear && \
+  artillery run --output golangdocker-bare.json --target http://192.168.0.91:5000/api golangdocker-loadtest.yml && \
+  artillery report golangdocker-bare.json</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
 
 					</section><!--//section-->
 
 					<section class="docs-section" id="item-5-7">
-						<h2 class="section-heading" Docker container</h2>
+						<h2 class="section-heading">Docker Container</h2>
 
-							<p>E.g.: <code>bash docker_run.sh</code></p>
-							<pre><code><span class="hljs-keyword">clear</span> &amp;&amp; \
-artillery <span class="hljs-keyword">run</span> --<span class="hljs-keyword">output</span> golangdocker-docker.json --target http:<span class="hljs-comment">//192.168.0.91:5000/api golangdocker-loadtest.yml &amp;&amp; \</span>
-    artillery report golangdocker-docker.json</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
-
+						<p>With app running in Docker container, e.g.: <code>make docker-run</code></p>
+						<pre><code>clear && \
+  artillery run --output golangdocker-docker.json --target http://192.168.0.91:5000/api golangdocker-loadtest.yml && \
+  artillery report golangdocker-docker.json</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
 					</section><!--//section-->
 
 					<section class="docs-section" id="item-5-8">
 						<h2 class="section-heading">Kubernetes</h2>
 
 						<p>Assumes working K8s cluster and manual scaling of replicas for each test, e.g.:</p>
-						<pre><code><span class="hljs-keyword">clear</span> &amp;&amp; \
-artillery <span class="hljs-keyword">run</span> --<span class="hljs-keyword">output</span> golangdocker-k8s<span class="hljs-number">-3</span>-replica.json --target http:<span class="hljs-comment">//golang.0nezer0.com/api golangdocker-loadtest.yml &amp;&amp; \</span>
-    artillery report golangdocker-k8s<span class="hljs-number">-3</span>-replica.json
-</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
-						<pre><code><span class="hljs-keyword">clear</span> &amp;&amp; \
-artillery <span class="hljs-keyword">run</span> --<span class="hljs-keyword">output</span> golangdocker-k8s<span class="hljs-number">-2</span>-replica.json --target http:<span class="hljs-comment">//golang.0nezer0.com/api golangdocker-loadtest.yml &amp;&amp; \</span>
-    artillery report golangdocker-k8s<span class="hljs-number">-2</span>-replica.json
-</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
+						<pre><code>clear && \
+  artillery run --output golangdocker-k8s-3-replica.json --target http://192.168.0.91:5000/api golangdocker-loadtest.yml && \
+  artillery report golangdocker-k8s-3-replica.json</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
+
+						<pre><code>clear && \
+  artillery run --output golangdocker-k8s-2-replica.json --target http://192.168.0.91:5000/api golangdocker-loadtest.yml && \
+  artillery report golangdocker-k8s-2-replica.json</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
 
 					</section><!--//section-->
 				</article><!--//docs-article-->
@@ -865,16 +863,11 @@ artillery <span class="hljs-keyword">run</span> --<span class="hljs-keyword">out
 									<p>This section is in progress.</p>
 								</div><!--//content-->
 							</div>
+
+							<p>This section walks through the high-level process of inegrating your Docker container in to your Kubernetes cluster. The following example will set up your Docker container to run as load-balanced replicas within your cluster.</p>
+
 						</section><!--//docs-intro-->
 					</header>
-					<section class="docs-section" id="item-6-1">
-						<h2 class="section-heading">Section Item 6.1</h2>
-						<h2 id="to-do">To Do</h2>
-						<ul>
-							<li>Working, but walkthrough needs more definition, test commands to ensure cluster setup is correct.
-							</li>
-						</ul>
-					</section><!--//section-->
 
 					<section class="docs-section" id="item-6-1">
 						<h2 class="section-heading">Assumptions</h2>
@@ -1029,61 +1022,60 @@ EOF
 						<p>The following defines how K8s will deploy the Pods on your system. It defines the names, associated
 							Namespaces, number of Replicas, Resource Limits, Ports, etc.</p>
 						<pre><code>cat &lt;&lt;EOF | kubectl apply -f -
-<span class="hljs-attr">apiVersion:</span> apps/v1
-<span class="hljs-attr">kind:</span> Deployment
-<span class="hljs-attr">metadata:</span>
-<span class="hljs-attr">  name:</span> k8s-golang-api
-<span class="hljs-attr">  namespace:</span> k8s-golang-api
-<span class="hljs-attr">  labels:</span>
-<span class="hljs-attr">    app:</span> k8s-golang-api
-<span class="hljs-attr">spec:</span>
-<span class="hljs-attr">  replicas:</span> <span class="hljs-number">3</span>
-<span class="hljs-attr">  selector:</span>
-<span class="hljs-attr">    matchLabels:</span>
-<span class="hljs-attr">      app:</span> k8s-golang-api
-<span class="hljs-attr">  template:</span>
-<span class="hljs-attr">    metadata:</span>
-<span class="hljs-attr">      labels:</span>
-<span class="hljs-attr">        app:</span> k8s-golang-api
-<span class="hljs-attr">    spec:</span>
-<span class="hljs-attr">      containers:</span>
-<span class="hljs-attr">        - name:</span> k8s-golang-api
-<span class="hljs-attr">          image:</span> <span class="hljs-string">'mattwiater/golangdocker:latest'</span>
-<span class="hljs-attr">          env:</span>
-<span class="hljs-attr">          - name:</span> K8S_NODE_NAME
-<span class="hljs-attr">            valueFrom:</span>
-<span class="hljs-attr">              fieldRef:</span>
-<span class="hljs-attr">                fieldPath:</span> spec.nodeName
-<span class="hljs-attr">          - name:</span> K8S_NODE_IP
-<span class="hljs-attr">            valueFrom:</span>
-<span class="hljs-attr">              fieldRef:</span>
-<span class="hljs-attr">                fieldPath:</span> status.hostIP
-<span class="hljs-attr">          - name:</span> K8S_POD_NAME
-<span class="hljs-attr">            valueFrom:</span>
-<span class="hljs-attr">              fieldRef:</span>
-<span class="hljs-attr">                fieldPath:</span> metadata.name
-<span class="hljs-attr">          - name:</span> K8S_POD_NAMESPACE
-<span class="hljs-attr">            valueFrom:</span>
-<span class="hljs-attr">              fieldRef:</span>
-<span class="hljs-attr">                fieldPath:</span> metadata.namespace
-<span class="hljs-attr">          - name:</span> K8S_POD_IP
-<span class="hljs-attr">            valueFrom:</span>
-<span class="hljs-attr">              fieldRef:</span>
-<span class="hljs-attr">                fieldPath:</span> status.podIP
-<span class="hljs-attr">          imagePullPolicy:</span> Always
-<span class="hljs-attr">          resources:</span>
-<span class="hljs-attr">            requests:</span>
-<span class="hljs-attr">              memory:</span> <span class="hljs-string">"500Mi"</span>
-<span class="hljs-attr">              cpu:</span> <span class="hljs-string">"250m"</span>
-<span class="hljs-attr">            limits:</span>
-<span class="hljs-attr">              memory:</span> <span class="hljs-string">"500Mi"</span>
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-golang-api
+  namespace: k8s-golang-api
+  labels:
+    app: k8s-golang-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: k8s-golang-api
+  template:
+    metadata:
+      labels:
+        app: k8s-golang-api
+    spec:
+      containers:
+        - name: k8s-golang-api
+          image: 'mattwiater/golangdocker:latest'
+          env:
+          - name: K8S_NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          - name: K8S_NODE_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP
+          - name: K8S_POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: K8S_POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: K8S_POD_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "500Mi"
+              cpu: "250m"
+            limits:
+              memory: "500Mi"
 
-<span class="hljs-attr">              cpu:</span> <span class="hljs-string">"250m"</span>
-<span class="hljs-attr">          ports:</span>
-<span class="hljs-attr">            - containerPort:</span> <span class="hljs-number">5000</span>
-<span class="hljs-attr">              protocol:</span> TCP
-EOF
-</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
+              cpu: "250m"
+          ports:
+            - containerPort: 5000
+              protocol: TCP
+EOF</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
 						<p>The final two steps, Service and Ingress are responsible for routing external traffic into the cluster.
 						</p>
 
@@ -1196,7 +1188,7 @@ k8s-golang-api   LoadBalancer   <span class="hljs-number">10.105</span><span cla
 
 				<footer class="footer">
 					<div class="container text-center py-5">
-						
+
 					</div>
 				</footer>
 			</div>

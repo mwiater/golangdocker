@@ -16,3 +16,7 @@
 .docs-nav .nav-link:before {
   margin-top: 0; 
 }
+
+code {
+  background-color: #e6e6e6
+}

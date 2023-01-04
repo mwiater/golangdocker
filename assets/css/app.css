@@ -14,7 +14,8 @@
 }
 
 .docs-nav .nav-link:before {
-  margin-top: 0; 
+  margin-top: 0;
+  height: 75%;
 }
 
 code {

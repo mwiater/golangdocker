@@ -6,33 +6,32 @@ const sidebarToggler = document.getElementById('docs-sidebar-toggler');
 const sidebar = document.getElementById('docs-sidebar');
 const sidebarLinks = document.querySelectorAll('#docs-sidebar .scrollto');
 
-
+let navScroll = false;
+let currentNavItemGroup = null;
 
 /* ===== Responsive Sidebar ====== */
 
-window.onload=function() 
-{ 
-    responsiveSidebar(); 
+window.onload = function () {
+	responsiveSidebar();
 };
 
-window.onresize=function() 
-{ 
-    responsiveSidebar(); 
+window.onresize = function () {
+	responsiveSidebar();
 };
 
 
 function responsiveSidebar() {
-    let w = window.innerWidth;
-	if(w >= 1200) {
-	    // if larger 
-	    console.log('larger');
+	let w = window.innerWidth;
+	if (w >= 1200) {
+		// if larger 
+		console.log('larger');
 		sidebar.classList.remove('sidebar-hidden');
 		sidebar.classList.add('sidebar-visible');
-		
+
 	} else {
-	    // if smaller
-	    console.log('smaller');
-	    sidebar.classList.remove('sidebar-visible');
+		// if smaller
+		console.log('smaller');
+		sidebar.classList.remove('sidebar-visible');
 		sidebar.classList.add('sidebar-hidden');
 	}
 };
@@ -42,7 +41,7 @@ sidebarToggler.addEventListener('click', () => {
 		console.log('visible');
 		sidebar.classList.remove('sidebar-visible');
 		sidebar.classList.add('sidebar-hidden');
-		
+
 	} else {
 		console.log('hidden');
 		sidebar.classList.remove('sidebar-hidden');
@@ -51,55 +50,83 @@ sidebarToggler.addEventListener('click', () => {
 });
 
 
+
 /* ===== Smooth scrolling ====== */
 /*  Note: You need to include smoothscroll.min.js (smooth scroll behavior polyfill) on the page to cover some browsers */
 /* Ref: https://github.com/iamdustan/smoothscroll */
 
-sidebarLinks.forEach((sidebarLink) => {
-	
-	sidebarLink.addEventListener('click', (e) => {
-		
-		e.preventDefault();
-		
-		var target = sidebarLink.getAttribute("href").replace('#', '');
-		
-		//console.log(target);
-		
-        document.getElementById(target).scrollIntoView({ behavior: 'smooth' });
-        
-        
-        //Collapse sidebar after clicking
-		if (sidebar.classList.contains('sidebar-visible') && window.innerWidth < 1200){
-			
-			sidebar.classList.remove('sidebar-visible');
-		    sidebar.classList.add('sidebar-hidden');
-		} 
-		
-    });
-	
-});
 
+let currentHash = window.location.hash;
+let currentNavItem = $('a[href*="' + window.location.hash + '"]');
+let currentNavSection = $('a[href*="' + window.location.hash + '"]').parents("li").prevAll(".section-title:first");
+let currentNavSectionHash = currentNavSection.find("a")[0].hash;
+
+if (currentHash === "") {
+	currentSection = $(".section-title:first");
+	currentNavSectionHash = currentSection.find("a")[0].hash;
+}
+
+if (currentNavSectionHash === "#golang-application") {
+	currentNavSection.find("span img").attr("src", "assets/images/golang-logo-white.svg");
+}
+
+currentNavItem.first().addClass("active");
+currentNavSection.addClass("active");
+
+sidebarLinks.forEach((sidebarLink) => {
+	sidebarLink.addEventListener('click', (e) => {
+		navScroll = true;
+		e.preventDefault();
+
+		var target = sidebarLink.getAttribute("href").replace('#', '');
+
+		currentNavItemGroup = $(e.target).parent("li").prevAll(".section-title");
+
+		$(".section-title").removeClass("active");
+		$(".nav-link").removeClass("active");
+
+		if ($(e.target).parents("li").hasClass("section-title")) {
+			$(e.target).parents("li").addClass("active")
+		} else {
+			$(e.target).addClass("active");
+
+			currentNavItemGroup.first().addClass("active");
+		}
+
+		window.location.hash = sidebarLink.getAttribute("href");
+
+		if (currentNavItemGroup.length !== 0) {
+			if (window.location.hash === "#golang-application") {
+				$(".section-items").find("li:first").find("span img").attr("src", "assets/images/golang-logo-green.svg");
+			} else {
+				$(".section-items").find("li:first").find("span img").attr("src", "assets/images/golang-logo-green.svg");
+			}
+		}
+
+		if($(".section-items").find("li:first").hasClass("active")){
+			$(".section-items").find("li:first").find("span img").attr("src", "assets/images/golang-logo-white.svg");
+		}
+
+		document.getElementById(target).scrollIntoView({ behavior: 'smooth' });
+
+		//Collapse sidebar after clicking
+		if (sidebar.classList.contains('sidebar-visible') && window.innerWidth < 1200) {
+			sidebar.classList.remove('sidebar-visible');
+			sidebar.classList.add('sidebar-hidden');
+		}
+	});
+});
 
 /* ===== Gumshoe SrollSpy ===== */
 /* Ref: https://github.com/cferdinandi/gumshoe  */
 // Initialize Gumshoe
-var spy = new Gumshoe('#docs-nav a', {
-	offset: 69 //sticky header height
-});
+//var spy = new Gumshoe('#docs-nav a', {
+//	offset: 69 //sticky header height
+//});
 
 
 /* ====== SimpleLightbox Plugin ======= */
 /*  Ref: https://github.com/andreknieriem/simplelightbox */
 
-var lightbox = new SimpleLightbox('.simplelightbox-gallery a', {/* options */});
-
-
-
-
-
-
-
-
-
-
+var lightbox = new SimpleLightbox('.simplelightbox-gallery a', {/* options */ });
 

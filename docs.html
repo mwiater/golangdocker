@@ -62,14 +62,14 @@
 		<div id="docs-sidebar" class="docs-sidebar">
 			<nav id="docs-nav" class="docs-nav navbar">
 				<ul class="section-items list-unstyled nav flex-column pb-3">
-					<li class="nav-item section-title"><a class="nav-link scrollto" href="#app"><span
-								class="theme-icon-holder me-2"><i class="fa-duotone fa-signs-post fa=fw"></i></span>Application</a>
+					<li class="nav-item section-title"><a class="nav-link scrollto" href="#golang-application"><span
+								class="theme-icon-holder me-2"><img style="margin-top: -4px;margin-left: -1px;" src="assets/images/golang-logo-green.svg" alt="logo"></span>Golang Application</a>
 					</li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#app-topics">Project Topics</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#app-assumptions">Assumptions</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#app-prerequisites">Prerequisites</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#app-makefile">Makefile</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#app-testing-and-developing-app">Testing/Developing
+					<li class="nav-item"><a class="nav-link scrollto" href="#golang-application-topics">Project Topics</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#golang-application-assumptions">Assumptions</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#golang-application-prerequisites">Prerequisites</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#golang-application-makefile">Makefile</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#golang-application-testing-and-developing-app">Testing/Developing
 							App</a></li>
 					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#docker"><span
 								class="theme-icon-holder me-2"><i class="fa-brands fa-docker fa-fw"></i></span>Docker</a>
@@ -124,9 +124,9 @@
 		</div><!--//docs-sidebar-->
 		<div class="docs-content">
 			<div class="container">
-				<article class="docs-article" id="app">
+				<article class="docs-article" id="golang-application">
 					<header class="docs-header">
-						<h1 class="docs-heading"><i class="fa-duotone fa-signs-post fa=fw" style="color: #28b76b;"></i> Application
+						<h1 class="docs-heading"><img style="height: 100px;margin-top: -8px;margin-left: -15px;margin-right: -10px;" src="assets/images/golang-logo-green.svg" alt="logo"> Golang Application
 						</h1>
 						<section class="docs-intro">
 							<p>This repository is a work in progress, but I'll do my best to keep the Master branch in a working
@@ -139,7 +139,7 @@
 						</section><!--//docs-intro-->
 					</header>
 
-					<section class="docs-section" id="app-topics">
+					<section class="docs-section" id="golang-application-topics">
 						<h2 class="section-heading">Project Topics</h2>
 						<p>This project is in three distinct parts, each which build on the previous:</p>
 						<h5 id="1-a-simple-but-functioanl-rest-api-app-written-in-go-this-rest-api-incorporates-">1) A simple but
@@ -184,7 +184,7 @@
 
 					</section><!--//section-->
 
-					<section class="docs-section" id="app-assumptions">
+					<section class="docs-section" id="golang-application-assumptions">
 						<h2 class="section-heading">Assumptions</h2>
 						<ul>
 							<li><strong>IP Addresses:</strong> For the most part, disregard the hard-coded IP addresses in here (e.g.:
@@ -205,7 +205,7 @@
 						<pre><code>Linux mjw-udoo-01 5.4.0-110-generic 124-Ubuntu SMP Thu Apr 14 19:46:19 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux</code></pre>
 					</section><!--//section-->
 
-					<section class="docs-section" id="app-prerequisites">
+					<section class="docs-section" id="golang-application-prerequisites">
 						<h2 class="section-heading">Prerequisites</h2>
 						<p>The following programs will need to be installed:</p>
 						<ul>
@@ -272,7 +272,7 @@ DOCKERIMAGE=mattwiater/golangdocker</code></pre>
   }
 </code></pre>
 					</section><!--//section-->
-					<section class="docs-section" id="app-makefile">
+					<section class="docs-section" id="golang-application-makefile">
 						<h2 class="section-heading">Makefile</h2>
 						<p>[IN PROGRESS]</p>
 						<p>There is a <a target="_blank"
@@ -291,7 +291,7 @@ golang-<span class="hljs-keyword">run</span><span class="bash"></span>
 								href="https://github.com/mwiater/golangdocker/tree/master/scripts">/scripts</a> directory.</p>
 					</section><!--//section-->
 
-					<section class="docs-section" id="app-testing-and-developing-app">
+					<section class="docs-section" id="golang-application-testing-and-developing-app">
 						<h2 class="section-heading">Testing/Developing App</h2>
 						<p>while developing/testing the app, you can run it natively (not in a Docker container) via:</p>
 						<p><code>go run main.go</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i></p>
@@ -1194,7 +1194,7 @@ k8s-golang-api   LoadBalancer   <span class="hljs-number">10.105</span><span cla
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
 	<script src="assets/js/highlight-custom.js"></script>
 	<script src="assets/plugins/simplelightbox/simple-lightbox.min.js"></script>
-	<script src="assets/plugins/gumshoe/gumshoe.polyfills.min.js"></script>
+	<!-- <script src="assets/plugins/gumshoe/gumshoe.polyfills.min.js"></script> -->
 	<script src="assets/js/docs.js"></script>
 	<script src="assets/js/app.js"></script>
 

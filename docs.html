@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<title>CoderDocs - Bootstrap 4 Documentation Template For Software Projects</title>
+	<title>GolangDocker</title>
 
 	<!-- Meta -->
 	<meta charset="utf-8">
@@ -52,7 +52,6 @@
 				</div><!--//docs-logo-wrapper-->
 				<div style="float:right;font-size: 2em;margin-right: 20px;margin-top: 4px;"><a style="color: #000000;"
 						target="_blank" href="https://github.com/mwiater/golangdocker"><i class="fa-brands fa-github"></i></a></div>
-
 			</div><!--//container-->
 		</div><!--//branding-->
 	</header><!--//header-->
@@ -63,7 +62,8 @@
 			<nav id="docs-nav" class="docs-nav navbar">
 				<ul class="section-items list-unstyled nav flex-column pb-3">
 					<li class="nav-item section-title"><a class="nav-link scrollto" href="#project-motivation"><span
-								class="theme-icon-holder me-2"><i class="fa-duotone fa-chalkboard-user fa-fw"></i></span>Project Motivation</a>
+								class="theme-icon-holder me-2"><i class="fa-duotone fa-chalkboard-user fa-fw"></i></span>Project
+							Motivation</a>
 					</li>
 					<li class="nav-item section-title"><a class="nav-link scrollto" href="#golang-application"><span
 								class="theme-icon-holder me-2"><img style="margin-top: -4px;margin-left: -1px;"
@@ -134,16 +134,60 @@
 
 				<article class="docs-article" id="project-motivation">
 					<header class="docs-header">
-						<h1 class="docs-heading"><i class="fa-duotone fa-chalkboard-user fa-fw" style="color: #28b76b;"></i> Project Motivation
+						<h1 class="docs-heading"><i class="fa-duotone fa-chalkboard-user fa-fw" style="color: #28b76b;"></i> Project
+							Motivation
 						</h1>
 						<section class="docs-intro">
-							<p>This repository is a work in progress, but I'll do my best to keep the Master branch in a working
-								state. Initially, this project was to create a boilerplate for containerizing Go binaries for use in a
-								K8s
-								cluster. For now, just origanizing my notes in order to be able to replicate this process from
-								end-to-end.
-								The idea is to keep this narrow and succinct and be able to use this as a simple boilerplate for Go
-								containers.</p>
+							<p>
+							<h3>Why Golang?</h3>
+							</p>
+							<p>In my career at agencies and startups, rapid prototyping is essential. Ruby tended to by the language
+								of choice for may of these projects, as it's easy to get something built quickly, and if you follow
+								style guidelines, easy to read. But as these sites and apps began to scale, runtime speed, the need for
+								concurrency, memory management,
+								and throughput became common bottlenecks with Ruby.</p>
+
+							<p>Go is a statically typed and compiled language. While not as easy as Ruby was to jump in and create
+								working proof-of-concepts from the start, the fundamentals of the language made sense. Once you get the
+								Go concepts and syntax down (it is not an object oriented language),
+								it's easy to move forward quickly. And for a relatively young language, it has a high adoption rate and
+								vast communuity support and feature-complete packages.</p>
+
+							<p>Also, since Golang apps can be compiled into a single binary and executed with minimal OS resources/toolchains, we can create a container with a very small footprint. As show in the tutorial, Go can already compile for many differnt target platforms as well, whci makes it easy to build binaries for, say, both x86 and Arm architectures.</p>
+
+							<p>
+							<h3>Why Docker?</h3>
+							</p>
+
+							<p>Breaking down application componants into separate, unique services allows the engineer to work within
+								confined, single-purpose environments. This is in opposition to singular monoliths, where chipping away
+								in one section of the code can have negative cascading consequences within the rest of the application
+								due to internal dependencies. I often follow the <b><a href target="_blank"
+										href="https://12factor.net/">12 Factor App</a></b> methodolgy, which does a great job of explaining
+								the details, architecture, and reasoning behind the process.</p>
+
+							<p>Using Docker properly can ease you into creating 12 Factor applications by forcing the engineer to
+								think about not only breaking down an app into microservices, but also the potential application
+								architecture involved. Also, by creating single purpose containers, you'll often be guideed towards more
+								parity with the production landscape, e.g.: different services in the AWS and Google Cloud Platform
+								stacks.</p>
+
+							<p>Rather than developing an app on a linux system and using the OS as a shared resource (e.g.: running
+								web and database services), splitting these into separate containers services will accomplish several
+								things. Firstly, it will declare and isolate the service dependencies. Web service dependencies are
+								different than Database server dependencies. When you develop on a single machine, the dependencies for
+								all pieces of the application are installed with access by the underlying shared OS. When running them
+								in Docker containers, these dependencies are specific to the app service inside the container.</p>
+
+							<p>
+							<h3>Why Kubernetes?</h3>
+							</p>
+							<p>As mentioned in the above Docker section, microservice architecture can be essential in building
+								highly-scalable applications. The kubernetes section will give a high-level view of the componants
+								involved in a K8s cluster so that the Docker conatiner can be replicated accross nodes and accessed via
+								a single endpoint.</p>
+							<p></p>
+
 						</section><!--//docs-intro-->
 					</header>
 				</article>

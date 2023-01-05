@@ -57,9 +57,22 @@ sidebarToggler.addEventListener('click', () => {
 
 
 let currentHash = window.location.hash;
+let currentSection;
+
 let currentNavItem = $('a[href*="' + window.location.hash + '"]');
 let currentNavSection = $('a[href*="' + window.location.hash + '"]').parents("li").prevAll(".section-title:first");
-let currentNavSectionHash = currentNavSection.find("a")[0].hash;
+
+if (currentNavSection.length === 0) {
+	currentNavSection = $(".section-title:first");
+}
+
+console.log("currentNavSection", currentNavSection)
+
+let currentNavSectionHash = currentNavSection.find("a");
+
+if (currentNavSectionHash.length !== 0) {
+	currentNavSectionHash = currentNavSectionHash[0].hash
+}
 
 if (currentHash === "") {
 	currentSection = $(".section-title:first");
@@ -95,16 +108,12 @@ sidebarLinks.forEach((sidebarLink) => {
 
 		window.location.hash = sidebarLink.getAttribute("href");
 
-		if (currentNavItemGroup.length !== 0) {
-			if (window.location.hash === "#golang-application") {
-				$(".section-items").find("li:first").find("span img").attr("src", "assets/images/golang-logo-green.svg");
-			} else {
-				$(".section-items").find("li:first").find("span img").attr("src", "assets/images/golang-logo-green.svg");
-			}
-		}
+		console.log($(".section-items").find("a[href*='#golang-application']").parent("li"))
 
-		if($(".section-items").find("li:first").hasClass("active")){
-			$(".section-items").find("li:first").find("span img").attr("src", "assets/images/golang-logo-white.svg");
+		if($(".section-items").find("a[href*='#golang-application']").parent("li").hasClass("active")){
+			$(".section-items").find("a[href*='#golang-application']").find("span img").attr("src", "assets/images/golang-logo-white.svg");
+		} else {
+			$(".section-items").find("a[href*='#golang-application']").find("span img").attr("src", "assets/images/golang-logo-green.svg");
 		}
 
 		document.getElementById(target).scrollIntoView({ behavior: 'smooth' });

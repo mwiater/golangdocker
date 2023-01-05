@@ -153,7 +153,10 @@
 								it's easy to move forward quickly. And for a relatively young language, it has a high adoption rate and
 								vast communuity support and feature-complete packages.</p>
 
-							<p>Also, since Golang apps can be compiled into a single binary and executed with minimal OS resources/toolchains, we can create a container with a very small footprint. As show in the tutorial, Go can already compile for many differnt target platforms as well, whci makes it easy to build binaries for, say, both x86 and Arm architectures.</p>
+							<p>Also, since Golang apps can be compiled into a single binary and executed with minimal OS
+								resources/toolchains, we can create a container with a very small footprint. As show in the tutorial, Go
+								can already compile for many differnt target platforms as well, whci makes it easy to build binaries
+								for, say, both x86 and Arm architectures.</p>
 
 							<p>
 							<h3>Why Docker?</h3>
@@ -410,7 +413,7 @@ mattwiater/golangdocker   latest    <span class="hljs-number">053</span>f2105265
 WORKDIR /go/src/app
 COPY . .
 RUN apk add git
-RUN CGO_ENABLED=0 go install -ldflags <span class="hljs-string">'-extldflags "-static"'</span> -tags timetzdata
+RUN CGO_ENABLED=0 go install -ldflags '-extldflags "-static"' -tags timetzdata
     
 FROM scratch
 COPY --from=app /go/bin/golangdocker /golangdocker
@@ -425,6 +428,12 @@ ENTRYPOINT ["/golangdocker"]</code></pre>
 								etc.
 								In this step, all of the toolchains required to build a go app are in the base <code>Alpine</code>
 								image.
+
+								Note the <strong>last</strong> line of the <strong>top</strong> section:
+								<code>RUN CGO_ENABLED=0 go install -ldflags '-extldflags "-static"' -tags timetzdata</code>
+								Here we are <strong>disabling CGO</strong> and using the <code>-static</code> flag. This enables Go to
+								build a statically compiled binary, with no required additional linked files needed, and very few OS
+								resources required to execute it.
 							</p>
 
 							<p>The <strong>bottom</strong> section uses the Docker <code>scratch</code> image (a completely empty
@@ -445,8 +454,7 @@ ENTRYPOINT ["/golangdocker"]</code></pre>
 
 							<p>When interactively executed with the multi-stage build, all of the common linux OS commands are not
 								requireed, or included. in fact, just trying to run the <code>ls</code> command on our image results in
-								an
-								error:</p>
+								an error:</p>
 
 							<p><code>docker run -it -p 5000:5000 --entrypoint ls -laF --rm mattwiater/golangdocker`</code></p>
 
@@ -615,7 +623,7 @@ ok      github.com/mattwiater/golangdocker/sysinfo      0.365s
 
 								</div><!--//content-->
 							</div>
-							<h2 id="to-do">To Do</h2>
+							<p><b>To Do</b></p>
 							<ul>
 								<li>Create config file <a href="https://golangci-lint.run/usage/configuration/">Official Docs</a></li>
 							</ul>
@@ -707,7 +715,7 @@ ok      github.com/mattwiater/golangdocker/sysinfo      0.365s
 							<p>A simple local load test example using <a target="_blank"
 									href="https://www.artillery.io/">Artillery</a>.</p>
 
-							<h2 id="to-do">To Do</h2>
+							<p><b>To Do</b></p>
 							<ul>
 								<li>Explore custom metrics options in more depth.</li>
 								<li>Generate applicable reports for comparison between bare go app, dockerized app, and k8s replicas.

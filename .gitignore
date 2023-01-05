@@ -2,3 +2,4 @@ certs/*.crt
 certs/*.key
 .vscode
 _site
+assets

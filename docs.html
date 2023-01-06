@@ -197,7 +197,7 @@
 								src="assets/images/golang-logo-green.svg" alt="logo"> Golang Application
 						</h1>
 						<section class="docs-intro">
-							<p>This repository is a work in progress, but I'll do my best to keep the Master branch in a working
+							<p>This repository is a work in progress, but I'll do my best to keep the Main branch in a working
 								state. Initially, this project was to create a boilerplate for containerizing Go binaries for use in a
 								K8s cluster. For now, just organizing my notes in order to be able to replicate this process from
 								end-to-end. The idea is to keep this narrow and succinct and be able to use this as a simple boilerplate
@@ -352,7 +352,7 @@ DOCKERIMAGE=mattwiater/golangdocker</code></pre>
 						<h2 class="section-heading">Makefile</h2>
 						<p>[IN PROGRESS]</p>
 						<p>There is a <a target="_blank"
-								href="https://github.com/mwiater/golangdocker/blob/master/Makefile">Makefile</a>
+								href="https://github.com/mwiater/golangdocker/blob/main/Makefile">Makefile</a>
 							for convenience. At the moment, it&#39;s just acting as a script-runner.
 							To view the executable targets, just type: <code>make</code>
 						</p>
@@ -364,7 +364,7 @@ golang-build
 golang-build-arm64
 golang-run</code></pre>
 						<p>The bash scripts executed by the Makefile live in the <a target="_blank"
-								href="https://github.com/mwiater/golangdocker/tree/master/scripts">/scripts</a> directory.</p>
+								href="https://github.com/mwiater/golangdocker/tree/main/scripts">/scripts</a> directory.</p>
 					</section>
 					<!--//section-->
 					<section class="docs-section" id="golang-application-testing-and-developing-app">
@@ -521,7 +521,7 @@ http://{your-host-ip-address}:5000/api/v1/load
 							<p><code>go get -u github.com/swaggo/fiber-swagger</code></p>
 							<p>When updating documentation, you must run this to regenerate docs data: <code>swag init</code>
 								(<code>swag init</code> is incorporated into the bash scripts for convenience, e.g.: <a
-									href="https://github.com/mwiater/golangdocker/blob/master/scripts/docker_run.sh">docker_run.sh</a>)
+									href="https://github.com/mwiater/golangdocker/blob/main/scripts/docker_run.sh">docker_run.sh</a>)
 							</p>
 							<p>Then, when you run the application, docs are avaialble at:</p>
 							<p><code>http://{your-host-ip-address}:5000/api/v1/docs/index.html</code></p>
@@ -533,7 +533,7 @@ http://{your-host-ip-address}:5000/api/v1/load
 						<h1 class="docs-heading"><i class="fa-duotone fa-flask-vial fa-fw" style="color: #28b76b;"></i> Tests</h1>
 						<section class="docs-intro">
 							<p>Very simple tests are in: <a
-									href="https://github.com/mwiater/golangdocker/blob/master/api_test.go">api_test.go</a></p>
+									href="https://github.com/mwiater/golangdocker/blob/main/api_test.go">api_test.go</a></p>
 						</section>
 						<!--//docs-intro-->
 					</header>
@@ -547,7 +547,7 @@ http://{your-host-ip-address}:5000/api/v1/load
 							<code>make golang-test</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> (which will
 							execute the
 							<a target="_blank"
-								href="https://github.com/mwiater/golangdocker/blob/master/scripts/golang_test.sh">scripts/golang_test.sh</a>
+								href="https://github.com/mwiater/golangdocker/blob/main/scripts/golang_test.sh">scripts/golang_test.sh</a>
 							script)
 						</p>
 						<pre><code>=== RUN   TestAPIRoutes
@@ -639,7 +639,7 @@ ok      github.com/mattwiater/golangdocker/sysinfo      0.365s
 							<code>make golang-lint</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> (which will
 							execute the
 							<a target="_blank"
-								href="https://github.com/mwiater/golangdocker/blob/master/scripts/golang_lint.sh">scripts/golang_lint.sh</a>
+								href="https://github.com/mwiater/golangdocker/blob/main/scripts/golang_lint.sh">scripts/golang_lint.sh</a>
 							script)
 						</p>
 					</section>
@@ -681,7 +681,7 @@ ok      github.com/mattwiater/golangdocker/sysinfo      0.365s
 							<code>make golang-godoc</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> (which will
 							execute the
 							<a target="_blank"
-								href="https://github.com/mwiater/golangdocker/blob/master/scripts/golang_godoc.sh">scripts/golang_godoc.sh</a>
+								href="https://github.com/mwiater/golangdocker/blob/main/scripts/golang_godoc.sh">scripts/golang_godoc.sh</a>
 							script)
 						</p>
 						<p>Access via browser at: <code>http://{your-ip-address}:6060/pkg/{app-module-name-in-go.mod}</code></p>
@@ -808,7 +808,7 @@ scenarios:
 						<p>This simple example makes use of a custom Fiber middleware wrapper that captures the time spent on the
 							server in each API call and sets a <code>Server-Timing</code> response header, e.g.:
 							<code>Server-Timing: route;dur=16</code>. See the <a
-								href="https://github.com/mwiater/golangdocker/blob/master/api/api.go">RouteTimerHandler()</a> function
+								href="https://github.com/mwiater/golangdocker/blob/main/api/api.go">RouteTimerHandler()</a> function
 							in
 							<code>api/api.go</code>.
 						</p>

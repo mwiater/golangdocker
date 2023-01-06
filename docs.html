@@ -358,11 +358,16 @@ DOCKERIMAGE=mattwiater/golangdocker</code></pre>
 						</p>
 						<pre><code>Targets in this Makefile:
 
-docker-build
-docker-run
-golang-build
-golang-build-arm64
-golang-run</code></pre>
+make docker-build
+make docker-run
+make golang-build
+make golang-build-arm64
+make golang-godoc
+make golang-lint
+make golang-run
+make golang-test
+
+For details on these commands, see the bash scripts in the 'scripts/' directory.</code></pre>
 						<p>The bash scripts executed by the Makefile live in the <a target="_blank"
 								href="https://github.com/mwiater/golangdocker/tree/main/scripts">/scripts</a> directory.</p>
 					</section>

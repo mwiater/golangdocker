@@ -67,7 +67,7 @@ Once you have built your image successfully, check the output of the `docker ima
 
 ```
 REPOSITORY                TAG       IMAGE ID       CREATED          SIZE
-mattwiater/golangdocker   latest    053f21052659   1 minute ago     45.7MB
+mattwiater/golangdocker   latest    053f21052659   1 minute ago     26.4MB
 ...
 ```
 

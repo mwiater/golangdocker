@@ -152,7 +152,8 @@
 								vast community support and feature-complete packages.
 							</p>
 							<p>Also, since Golang apps can be compiled into a single binary and executed with minimal OS
-								resources/toolchains (See the <a href="#docker-docker-build-notes">Docker Build Notes</a> static build section below), we can create a container with a very small footprint. As shown in the tutorial,
+								resources/toolchains (See the <a href="#docker-docker-build-notes">Docker Build Notes</a> static build
+								section below), we can create a container with a very small footprint. As shown in the tutorial,
 								Go can already compile for many different target platforms as well, which makes it easy to build
 								binaries for, say, both x86 and Arm architectures. </p>
 							<p>
@@ -309,12 +310,12 @@ DOCKERIMAGE=mattwiater/golangdocker</code></pre>
 								release, you might tag it <code>:v1</code>, e.g.: <code>mattwiater/golangdocker:v1</code>
 							</li>
 						</ul>
-						<p>Required for Kubernetes itegration:</p>
+						<p><b>Required for Kubernetes itegration:</b></p>
 						<ul>
 							<li>A running <a href="https://kubernetes.io/">Kubernetes</a> cluster</li>
 							<li>A <a href="https://hub.docker.com/">Docker Hub</a> account</li>
 						</ul>
-						<p>Optional:</p>
+						<p><b>Optional:</b></p>
 						<ul>
 							<li>Artillery (nodejs): <a href="loadTesting.html">Load
 									Testing</a>
@@ -344,8 +345,7 @@ DOCKERIMAGE=mattwiater/golangdocker</code></pre>
     virtualizationRole: "guest",
     hostId: "12345678-1234-5678-90ab-cddeefaabbcc"
     }
-  }
-</code></pre>
+  }</code></pre>
 					</section>
 					<!--//section-->
 					<section class="docs-section" id="golang-application-makefile">
@@ -384,6 +384,18 @@ For details on these commands, see the bash scripts in the 'scripts/' directory.
 						</p>
 						<p>This step should be completed first before running via Docker to ensure everything is working properly.
 						</p>
+
+						<h4>Swagger Docs</h4>
+
+						<p>As an API documentation example, this app is bundled with Swagger UI Documentation, available at the
+							<code>/api/v1/docs/</code> API endpoint. Alng with documented endpoints, there is a full REST interface to test out API calls through the browser, complete with curl examples and header information.</p>
+
+						<div class="simplelightbox-gallery row mb-1">
+							<div class="col-12 col-md-4 mb-3">
+								<a href="assets/images/swagger-ui.png"><img class="figure-img img-fluid shadow rounded"
+										src="assets/images/swagger-ui.png" alt="" title="Swagger UI" /></a>
+							</div>
+						</div><!--//gallery-->
 					</section>
 					<!--//section-->
 				</article>

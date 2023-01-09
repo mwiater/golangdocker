@@ -43,7 +43,39 @@ paths:
       summary: Get all API routes
       tags:
       - API Routes
-  /api/v1/cpu:
+  /api/v1/resource:
+    get:
+      consumes:
+      - '*/*'
+      description: Get all system info in a single call
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Get all system info in a single call
+      tags:
+      - System Resources
+  /api/v1/resource/all:
+    get:
+      consumes:
+      - '*/*'
+      description: Get all system info in a single call
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Get all system info in a single call
+      tags:
+      - System Resources
+  /api/v1/resource/cpu:
     get:
       consumes:
       - '*/*'
@@ -59,7 +91,7 @@ paths:
       summary: Get system cpu info
       tags:
       - System CPU
-  /api/v1/host:
+  /api/v1/resource/host:
     get:
       consumes:
       - '*/*'
@@ -75,7 +107,7 @@ paths:
       summary: Get system host info
       tags:
       - System Host
-  /api/v1/load:
+  /api/v1/resource/load:
     get:
       consumes:
       - '*/*'
@@ -91,7 +123,7 @@ paths:
       summary: Get system load info
       tags:
       - System Load
-  /api/v1/mem:
+  /api/v1/resource/memory:
     get:
       consumes:
       - '*/*'
@@ -107,7 +139,7 @@ paths:
       summary: Get system memory info
       tags:
       - System Memory
-  /api/v1/net:
+  /api/v1/resource/network:
     get:
       consumes:
       - '*/*'

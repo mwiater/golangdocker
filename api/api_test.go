@@ -1,6 +1,8 @@
-package main
+package api_test
 
 import (
+	"embed"
+	"fmt"
 	"io"
 	"log"
 	"net"
@@ -12,6 +14,11 @@ import (
 	"github.com/mattwiater/golangdocker/config"
 	"github.com/stretchr/testify/assert"
 )
+
+//go:generate bash copy_env_file.sh
+
+//go:embed .env
+var fs embed.FS
 
 func waitForServer(port string) {
 	backoff := 50 * time.Millisecond
@@ -51,39 +58,39 @@ func TestAPIRoutes(t *testing.T) {
 			route:               "/api/v1",
 			expectedCode:        200,
 			expectedContentType: "application/json",
-			expectedBody:        "{\"apiRoutes\":[\"/\",\"/api/v1\",\"/api/v1/cpu\",\"/api/v1/docs/*\",\"/api/v1/host\",\"/api/v1/load\",\"/api/v1/mem\",\"/api/v1/metrics\",\"/api/v1/net\"]}",
+			expectedBody:        "{\"apiRoutes\":[\"/\",\"/api/v1\",\"/api/v1/docs/*\",\"/api/v1/metrics\",\"/api/v1/resource/\",\"/api/v1/resource/all\",\"/api/v1/resource/cpu\",\"/api/v1/resource/host\",\"/api/v1/resource/load\",\"/api/v1/resource/memory\",\"/api/v1/resource/network\"]}",
 		},
 		{
 			description:         "cpu route",
-			route:               "/api/v1/cpu",
+			route:               "/api/v1/resource/cpu",
 			expectedCode:        200,
 			expectedContentType: "application/json",
 			expectedBody:        "",
 		},
 		{
 			description:         "host route",
-			route:               "/api/v1/host",
+			route:               "/api/v1/resource/host",
 			expectedCode:        200,
 			expectedContentType: "application/json",
 			expectedBody:        "",
 		},
 		{
 			description:         "load route",
-			route:               "/api/v1/load",
+			route:               "/api/v1/resource/load",
 			expectedCode:        200,
 			expectedContentType: "application/json",
 			expectedBody:        "",
 		},
 		{
 			description:         "mem route",
-			route:               "/api/v1/mem",
+			route:               "/api/v1/resource/memory",
 			expectedCode:        200,
 			expectedContentType: "application/json",
 			expectedBody:        "",
 		},
 		{
 			description:         "net route",
-			route:               "/api/v1/net",
+			route:               "/api/v1/resource/network",
 			expectedCode:        200,
 			expectedContentType: "application/json",
 			expectedBody:        "",
@@ -135,6 +142,7 @@ func TestAPIRoutes(t *testing.T) {
 		}
 
 		if res.StatusCode != test.expectedCode {
+			fmt.Println(test)
 			t.Errorf("Status Code: %#v != http.StatusOK: %#v\n", res.StatusCode, http.StatusOK)
 		}
 

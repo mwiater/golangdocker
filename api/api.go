@@ -1,3 +1,9 @@
+// Package api implements setup and functions for the Fiber API
+// via the https://docs.gofiber.io/ package.
+//
+// Note: API functions are not documented here, see this API endpoint for Swagger docs and enpoint testing:
+//
+//	/api/v1/docs/
 package api
 
 import (
@@ -55,7 +61,7 @@ func readAPIIndex(c *fiber.Ctx) error {
 // @Accept */*
 // @Produce json
 // @Success 200 {object} map[string]interface{}
-// @Router /api/v1/mem [get]
+// @Router /api/v1/resource/memory [get]
 func readMemInfo(c *fiber.Ctx) error {
 	debug := false
 	if c.Locals("debug") == true {
@@ -65,6 +71,7 @@ func readMemInfo(c *fiber.Ctx) error {
 	if err != nil {
 		return fiber.NewError(fiber.StatusServiceUnavailable, err.Error())
 	}
+
 	c.Status(200).JSON(&fiber.Map{"memInfo": memInfo}) //nolint
 	return nil
 }
@@ -76,7 +83,7 @@ func readMemInfo(c *fiber.Ctx) error {
 // @Accept */*
 // @Produce json
 // @Success 200 {object} map[string]interface{}
-// @Router /api/v1/cpu [get]
+// @Router /api/v1/resource/cpu [get]
 func readCPUInfo(c *fiber.Ctx) error {
 	debug := false
 	if c.Locals("debug") == true {
@@ -97,7 +104,7 @@ func readCPUInfo(c *fiber.Ctx) error {
 // @Accept */*
 // @Produce json
 // @Success 200 {object} map[string]interface{}
-// @Router /api/v1/host [get]
+// @Router /api/v1/resource/host [get]
 func readHostInfo(c *fiber.Ctx) error {
 	debug := false
 	if c.Locals("debug") == true {
@@ -118,7 +125,7 @@ func readHostInfo(c *fiber.Ctx) error {
 // @Accept */*
 // @Produce json
 // @Success 200 {object} map[string]interface{}
-// @Router /api/v1/net [get]
+// @Router /api/v1/resource/network [get]
 func readNetInfo(c *fiber.Ctx) error {
 	debug := false
 	if c.Locals("debug") == true {
@@ -139,7 +146,7 @@ func readNetInfo(c *fiber.Ctx) error {
 // @Accept */*
 // @Produce json
 // @Success 200 {object} map[string]interface{}
-// @Router /api/v1/load [get]
+// @Router /api/v1/resource/load [get]
 func readLoadInfo(c *fiber.Ctx) error {
 	debug := false
 	if c.Locals("debug") == true {
@@ -153,8 +160,46 @@ func readLoadInfo(c *fiber.Ctx) error {
 	return nil
 }
 
-// Creates a new middleware handler that wraps all other middleware
-func RouteTimerHandler() fiber.Handler {
+// readAllResourceInfo ...
+// @Summary Get all system info in a single call
+// @Description Get all system info in a single call
+// @Tags System Resources
+// @Accept */*
+// @Produce json
+// @Success 200 {object} map[string]interface{}
+// @Router /api/v1/resource [get]
+// @Router /api/v1/resource/all [get]
+func readAllResourceInfo(c *fiber.Ctx) error {
+	debug := false
+	if c.Locals("debug") == true {
+		debug = true
+	}
+	memInfo, err := sysinfo.GetMemInfo(debug)
+	if err != nil {
+		return fiber.NewError(fiber.StatusServiceUnavailable, err.Error())
+	}
+	cpuInfo, err := sysinfo.GetCPUInfo(debug)
+	if err != nil {
+		return fiber.NewError(fiber.StatusServiceUnavailable, err.Error())
+	}
+	hostInfo, err := sysinfo.GetHostInfo(debug)
+	if err != nil {
+		return fiber.NewError(fiber.StatusServiceUnavailable, err.Error())
+	}
+	netInfo, err := sysinfo.GetNetInfo(debug)
+	if err != nil {
+		return fiber.NewError(fiber.StatusServiceUnavailable, err.Error())
+	}
+	loadInfo, err := sysinfo.GetLoadInfo(debug)
+	if err != nil {
+		return fiber.NewError(fiber.StatusServiceUnavailable, err.Error())
+	}
+	c.Status(200).JSON(&fiber.Map{"memInfo": memInfo, "cpuInfo": cpuInfo, "hostInfo": hostInfo, "netInfo": netInfo, "loadInfo": loadInfo}) //nolint
+	return nil
+}
+
+// Creates a new middleware handler that wraps all other middleware. This is implemented so that middleware timing is caputed and set as a "Server-timing" response header.
+func routeTimerHandler() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		start := time.Now()
 		err := c.Next()
@@ -168,17 +213,15 @@ func RouteTimerHandler() fiber.Handler {
 	}
 }
 
-func CustomHeaders(c *fiber.Ctx) error {
+// Middleware to add custom headers to all responses
+func customHeaders(c *fiber.Ctx) error {
 	hostInfo, _ := host.Info()
 	c.Append("Hostname", fmt.Sprintf("%v", hostInfo.Hostname))
 	c.Append("Hostid", fmt.Sprintf("%v", hostInfo.HostID))
 	return c.Next()
 }
 
-// SetupRoute ... Setup Fiber API routes
-// @Summary Setup Fiber API routes
-// @Description Setup Fiber API routes
-// @Tags Fiber API
+// SetupRoute creates Fiber API routes and middleware
 func SetupRoute(cfg map[string]string) *fiber.App {
 	if cfg["DEBUG"] == "true" {
 		fmt.Println(common.ConsoleInfo("Multi-stage image build tests:"))
@@ -188,8 +231,8 @@ func SetupRoute(cfg map[string]string) *fiber.App {
 	}
 
 	app := *fiber.New()
-	app.Use(RouteTimerHandler())
-	app.Use(CustomHeaders)
+	app.Use(routeTimerHandler())
+	app.Use(customHeaders)
 	app.Use(func(c *fiber.Ctx) error {
 		c.Locals("port", cfg["SERVERPORT"])
 		c.Locals("debug", cfg["DEBUG"])
@@ -201,17 +244,21 @@ func SetupRoute(cfg map[string]string) *fiber.App {
 		TimeZone:   "America/Los_Angeles",
 	}))
 
+	// Redirect to next route
 	app.Get("/", apiFalseRoot)
+	// List of endpoints
 	app.Get("/api/v1", readAPIIndex)
+	// Metrics plugin
 	app.Get("/api/v1/metrics", monitor.New(monitor.Config{Title: "golangdocker Metrics Page"}))
-	app.Get("/api/v1/mem", readMemInfo)
-	app.Get("/api/v1/cpu", readCPUInfo)
-	app.Get("/api/v1/host", readHostInfo)
-	app.Get("/api/v1/net", readNetInfo)
-	app.Get("/api/v1/load", readLoadInfo)
-
 	// Routes for Swagger API Docs
 	app.Get("/api/v1/docs/*", fiberSwagger.WrapHandler)
+	app.Get("/api/v1/resource/memory", readMemInfo)
+	app.Get("/api/v1/resource/cpu", readCPUInfo)
+	app.Get("/api/v1/resource/host", readHostInfo)
+	app.Get("/api/v1/resource/network", readNetInfo)
+	app.Get("/api/v1/resource/load", readLoadInfo)
+	app.Get("/api/v1/resource/all", readAllResourceInfo)
+	app.Get("/api/v1/resource/", readAllResourceInfo)
 
 	return &app
 }

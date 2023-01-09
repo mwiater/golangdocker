@@ -42,6 +42,22 @@ Output will be similar to:
 
 And will be accessible at: `http://{your-host-ip-address}:5000/`
 
+The above base URL will have the following endpoints, where anything under the `resource` path will return current system information, and other endpoints provide meta information, e.g.: list of endpoints, Swagger documentation, and basic API metrics:
+
+```
+/
+/api/v1
+/api/v1/docs/
+/api/v1/metrics
+/api/v1/resource/
+/api/v1/resource/all
+/api/v1/resource/cpu
+/api/v1/resource/host
+/api/v1/resource/load
+/api/v1/resource/memory
+/api/v1/resource/network
+```
+
 <hr>
 
 ### Docker

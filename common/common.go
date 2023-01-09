@@ -1,5 +1,7 @@
+// Package common implements utility functions shared accross the application
 package common
 
+// Return slice with duplicate items removed
 func UniqueSlice(s []string) []string {
 	inResult := make(map[string]bool)
 	var result []string

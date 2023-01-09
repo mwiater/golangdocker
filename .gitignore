@@ -3,3 +3,5 @@ certs/*.key
 .vscode
 _site
 assets
+config/.env
+api/.env

@@ -73,7 +73,55 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/cpu": {
+        "/api/v1/resource": {
+            "get": {
+                "description": "Get all system info in a single call",
+                "consumes": [
+                    "*/*"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "System Resources"
+                ],
+                "summary": "Get all system info in a single call",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/resource/all": {
+            "get": {
+                "description": "Get all system info in a single call",
+                "consumes": [
+                    "*/*"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "System Resources"
+                ],
+                "summary": "Get all system info in a single call",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/resource/cpu": {
             "get": {
                 "description": "Get system cpu info",
                 "consumes": [
@@ -97,7 +145,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/host": {
+        "/api/v1/resource/host": {
             "get": {
                 "description": "Get system host info",
                 "consumes": [
@@ -121,7 +169,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/load": {
+        "/api/v1/resource/load": {
             "get": {
                 "description": "Get system load info",
                 "consumes": [
@@ -145,7 +193,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/mem": {
+        "/api/v1/resource/memory": {
             "get": {
                 "description": "Get system memory info",
                 "consumes": [
@@ -169,7 +217,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/net": {
+        "/api/v1/resource/network": {
             "get": {
                 "description": "Get system network info",
                 "consumes": [

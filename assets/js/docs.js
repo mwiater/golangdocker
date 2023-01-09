@@ -1,6 +1,5 @@
 "use strict";
 
-
 /* ====== Define JS Constants ====== */
 const sidebarToggler = document.getElementById('docs-sidebar-toggler');
 const sidebar = document.getElementById('docs-sidebar');
@@ -44,8 +43,6 @@ sidebarToggler.addEventListener('click', () => {
 		sidebar.classList.add('sidebar-visible');
 	}
 });
-
-
 
 /* ===== Smooth scrolling ====== */
 /*  Note: You need to include smoothscroll.min.js (smooth scroll behavior polyfill) on the page to cover some browsers */
@@ -91,18 +88,18 @@ sidebarLinks.forEach((sidebarLink) => {
 
 		$(".section-title").removeClass("active");
 		$(".nav-link").removeClass("active");
+		$(".nav-item").removeClass("active");
 
 		if ($(e.target).parents("li").hasClass("section-title")) {
 			$(e.target).parents("li").addClass("active")
 		} else {
 			$(e.target).addClass("active");
-
 			currentNavItemGroup.first().addClass("active");
 		}
 
 		window.location.hash = sidebarLink.getAttribute("href");
 
-		if($(".section-items").find("a[href*='#golang-application']").parent("li").hasClass("active")){
+		if ($(".section-items").find("a[href*='#golang-application']").parent("li").hasClass("active")) {
 			$(".section-items").find("a[href*='#golang-application']").find("span img").attr("src", "assets/images/golang-logo-white.svg");
 		} else {
 			$(".section-items").find("a[href*='#golang-application']").find("span img").attr("src", "assets/images/golang-logo-green.svg");
@@ -118,6 +115,42 @@ sidebarLinks.forEach((sidebarLink) => {
 	});
 });
 
+const docLinks = document.querySelectorAll('.docs-content a');
+docLinks.forEach((a) => {
+	if (a.host === window.location.host) {
+		a.addEventListener('click', (e) => {
+			e.preventDefault();
+
+			$(".section-title").removeClass("active");
+			$(".nav-link").removeClass("active");
+			$(".nav-item").removeClass("active");
+
+			let navLink = $('#docs-sidebar a[href="' + a.hash + '"]');
+			let currentNavItemGroup = navLink.parent("li").prevAll(".section-title");
+
+			if (navLink.parent().hasClass("section-title")) {
+				navLink.parent().addClass("active")
+			} else {
+				navLink.parent().addClass("active");
+				currentNavItemGroup.first().addClass("active");
+			}
+
+			if ($(".section-items").find("a[href*='#golang-application']").parent("li").hasClass("active")) {
+				$(".section-items").find("a[href*='#golang-application']").find("span img").attr("src", "assets/images/golang-logo-white.svg");
+			} else {
+				$(".section-items").find("a[href*='#golang-application']").find("span img").attr("src", "assets/images/golang-logo-green.svg");
+			}
+
+			document.getElementById(a.hash.replace('#', '')).scrollIntoView({ behavior: 'smooth' });
+
+			//Collapse sidebar after clicking
+			if (sidebar.classList.contains('sidebar-visible') && window.innerWidth < 1200) {
+				sidebar.classList.remove('sidebar-visible');
+				sidebar.classList.add('sidebar-hidden');
+			}
+		});
+	}
+});
 
 /* ====== SimpleLightbox Plugin ======= */
 /*  Ref: https://github.com/andreknieriem/simplelightbox */

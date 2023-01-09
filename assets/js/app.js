@@ -68,6 +68,5 @@ $(document).ready(function () {
         card.css("background", "#eff6ef");
       }
     }
-
   });
 });

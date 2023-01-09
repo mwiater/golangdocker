@@ -69,8 +69,7 @@
 					</li>
 					<li class="nav-item"><a class="nav-link scrollto" href="#golang-application-makefile">Makefile</a></li>
 					<li class="nav-item"><a class="nav-link scrollto"
-							href="#golang-application-testing-and-developing-app">Testing/Developing
-							App</a>
+							href="#golang-application-run">Running the Application</a>
 					</li>
 					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#docker"><span
 								class="theme-icon-holder me-2"><i class="fa-brands fa-docker fa-fw"></i></span>Docker</a>
@@ -187,7 +186,14 @@
 								involved in a K8s cluster so that the Docker container can be replicated across nodes and accessed via
 								a single endpoint.
 							</p>
-							<p></p>
+							<p>
+							<h3>What it is</h3>
+							</p>
+							<p>This project is meant to be a high-level view of tying some basic <a href="#golang-application">Golang</a> and <a href="#docker">Docker</a> concepts together. It is meant to be a starting point, by highlighting both Go and Docker fundamentals, basic commands and tools, and an understanding of how Go and Docker can work together to build fast, lightweight, and portable containers.</p>
+							<p>
+							<h3>What it ain't</h3>
+							</p>
+							<p>While I've provided some basic working ideas and a buildable, working application, you should already have some fundamental knowledge of Go and Docker.</p>
 						</section>
 						<!--//docs-intro-->
 					</header>
@@ -211,7 +217,7 @@
 						<h2 class="section-heading">Project Topics</h2>
 						<p>This project is in three distinct parts, each which build on the previous:</p>
 						<h5 id="1-a-simple-but-functioanl-rest-api-app-written-in-go-this-rest-api-incorporates-">1) A simple but
-							functioanl rest API app written in Go. This rest API incorporates:
+							functioanl <a href="#golang-application-run">rest API app written in Go</a>. This rest API incorporates:
 						</h5>
 						<ul>
 							<li>The <a href="https://docs.gofiber.io/api/middleware/monitor">Fiber Monitor middleware</a> (API
@@ -237,7 +243,7 @@
 								</ul>
 							</li>
 						</ul>
-						<h5 id="2-using-the-app-in-a-docker-container-covering-">2) Using the app in a Docker container, covering:
+						<h5 id="2-using-the-app-in-a-docker-container-covering-">2) Using the <a href="#docker">app in a Docker container</a>, covering:
 						</h5>
 						<ul>
 							<li><a href="https://docs.docker.com/engine/reference/commandline/build/">Docker build</a> concepts.</li>
@@ -245,7 +251,7 @@
 							<li>Docker image versioning.</li>
 							<li>Ways to make use of bash scripts for repetitive tasks.</li>
 						</ul>
-						<h5 id="3-using-the-docker-container-in-kubernetes">3) Using the Docker container in Kubernetes</h5>
+						<h5 id="3-using-the-docker-container-in-kubernetes">3) Using the <a href="#kubernetes">Docker container in Kubernetes</a></h5>
 						<ul>
 							<li>This section is the most incomplete, but should be in a working state.</li>
 							<li>You should already have a working K8s cluster available for this section.</li>
@@ -372,9 +378,9 @@ For details on these commands, see the bash scripts in the 'scripts/' directory.
 								href="https://github.com/mwiater/golangdocker/tree/main/scripts">/scripts</a> directory.</p>
 					</section>
 					<!--//section-->
-					<section class="docs-section" id="golang-application-testing-and-developing-app">
-						<h2 class="section-heading">Testing/Developing App</h2>
-						<p>while developing/testing the app, you can run it natively (not in a Docker container) via:</p>
+					<section class="docs-section" id="golang-application-run">
+						<h2 class="section-heading">Running the Application</h2>
+						<p>while developing the app, you should run it natively (not in a Docker container) via:</p>
 						<p><code>go run main.go</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i></p>
 						<p>Or, for convenience, run: <code>make golang-run</code> <i
 								class="fa-duotone fa-copy fa-fw code-copy-button"></i>
@@ -382,13 +388,53 @@ For details on these commands, see the bash scripts in the 'scripts/' directory.
 						<p>Site will be available at: <a href="http://192.168.0.91:5000/api/v1">http://192.168.0.91:5000/api/v1</a>
 							(substitute your own IP address)
 						</p>
-						<p>This step should be completed first before running via Docker to ensure everything is working properly.
-						</p>
+
+						<div class="callout-block callout-block-warning">
+							<div class="content">
+									<h4 class="callout-title">
+										<span class="callout-icon-holder me-1">
+											<svg class="svg-inline--fa fa-bullhorn" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bullhorn" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M480 179.6C498.6 188.4 512 212.1 512 240C512 267.9 498.6 291.6 480 300.4V448C480 460.9 472.2 472.6 460.2 477.6C448.3 482.5 434.5 479.8 425.4 470.6L381.7 426.1C333.7 378.1 268.6 352 200.7 352H192V480C192 497.7 177.7 512 160 512H96C78.33 512 64 497.7 64 480V352C28.65 352 0 323.3 0 288V192C0 156.7 28.65 128 64 128H200.7C268.6 128 333.7 101 381.7 53.02L425.4 9.373C434.5 .2215 448.3-2.516 460.2 2.437C472.2 7.39 480 19.06 480 32V179.6zM200.7 192H192V288H200.7C280.5 288 357.2 317.8 416 371.3V108.7C357.2 162.2 280.5 192 200.7 192V192z"></path></svg><!-- <i class="fas fa-bullhorn"></i> Font Awesome fontawesome.com -->
+									</span><!--//icon-holder-->
+										Warning
+								</h4>
+									<p>This step should be completed first before running via Docker to ensure everything is working properly with the application itself. If errors are introduced at this point, they will simply be carried over when trying to run it in a Docker container.</p>
+							</div><!--//content-->
+					</div>
+
+					<h4>Application Output</h4>
+
+					<p>When running the app, you should see output similar to:</p>
+
+					<pre><code>┌────────────────────────────────────────────────────┐
+│                   Fiber v2.40.0                    │
+│               http://127.0.0.1:5000                │ 
+│       (bound on host 0.0.0.0 and port 5000)        │
+│                                                    │
+│ Handlers ............ 14  Processes ........... 1  │
+│ Prefork ....... Disabled  PID ................. 1  │
+└────────────────────────────────────────────────────┘</code></pre>
+
+<p>To get an understanding of each of the endpoints, explore them while the app is running:</p>
+
+<pre><code>/
+/api/v1
+/api/v1/docs/
+/api/v1/metrics
+/api/v1/resource/
+/api/v1/resource/all
+/api/v1/resource/cpu
+/api/v1/resource/host
+/api/v1/resource/load
+/api/v1/resource/memory
+/api/v1/resource/network</code></pre>
+
 
 						<h4>Swagger Docs</h4>
 
 						<p>As an API documentation example, this app is bundled with Swagger UI Documentation, available at the
-							<code>/api/v1/docs/</code> API endpoint. Alng with documented endpoints, there is a full REST interface to test out API calls through the browser, complete with curl examples and header information.</p>
+							<code>/api/v1/docs/</code> API endpoint. Alng with documented endpoints, there is a full REST interface to
+							test out API calls through the browser, complete with curl examples and header information.
+						</p>
 
 						<div class="simplelightbox-gallery row mb-1">
 							<div class="col-12 col-md-4 mb-3">
@@ -533,7 +579,9 @@ DOCKERIMAGE=mattwiater/golangdocker</code></pre>
 							<p>For simplicity, the default <a href="https://docs.gofiber.io/api/middleware/monitor">Fiber Monitor
 									middleware</a> is included and available at:
 							</p>
-							<p><pre><code>/api/v1/metrics</code></pre></p>
+							<p>
+							<pre><code>/api/v1/metrics</code></pre>
+							</p>
 							<h5 id="api-endpoint-documentation-via-swagger">API Endpoint Documentation via Swagger</h5>
 							<p><code>go install github.com/swaggo/swag/cmd/swag@latest</code></p>
 							<p><code>go get -u github.com/swaggo/fiber-swagger</code></p>

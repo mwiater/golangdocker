@@ -24,13 +24,19 @@ $(document).ready(function () {
     codeBoxPos.bottom = $(this).siblings().first().position().top + $(this).siblings().first().height();
     codeBoxPos.left = $(this).siblings().first().position().left;
     if ($(this).parents("pre").length > 0) {
-      codeBoxPos.right = $(this).parents("pre").first().position().left + $(this).parents("pre").first().width() - 10;
+      codeBoxPos.right = $(this).parents("pre").first().position().left + $(this).parents("pre").first().width() - 40;
+      codeBoxPos.top = codeBoxPos.top + 4;
+      $(this).css("color", "#ffffff");
+    } else {
+      codeBoxPos.top = codeBoxPos.top + 4;
+      codeBoxPos.right = codeBoxPos.right + 10;
     }
-    $(this).siblings().first().css("padding-right", "30px")
+    $(this).siblings().first().css("padding-right", "50px");
     $(this).css("position", "absolute");
-    $(this).css("top", codeBoxPos.top + 2);
+    $(this).css("top", codeBoxPos.top + 4);
     $(this).css("left", codeBoxPos.right + 11);
     $(this).css("cursor", "pointer");
+    $(this).css("font-size", "1.25em");
 
     copyButton.addEventListener('click', (event) => {
       const content = $(this).siblings().first().text();

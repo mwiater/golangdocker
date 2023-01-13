@@ -68,8 +68,7 @@
 					<li class="nav-item"><a class="nav-link scrollto" href="#golang-application-prerequisites">Prerequisites</a>
 					</li>
 					<li class="nav-item"><a class="nav-link scrollto" href="#golang-application-makefile">Makefile</a></li>
-					<li class="nav-item"><a class="nav-link scrollto"
-							href="#golang-application-run">Running the Application</a>
+					<li class="nav-item"><a class="nav-link scrollto" href="#golang-application-run">Running the Application</a>
 					</li>
 					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#docker"><span
 								class="theme-icon-holder me-2"><i class="fa-brands fa-docker fa-fw"></i></span>Docker</a>
@@ -189,11 +188,16 @@
 							<p>
 							<h3>What it is</h3>
 							</p>
-							<p>This project is meant to be a high-level view of tying some basic <a href="#golang-application">Golang</a> and <a href="#docker">Docker</a> concepts together. It is meant to be a starting point, by highlighting both Go and Docker fundamentals, basic commands and tools, and an understanding of how Go and Docker can work together to build fast, lightweight, and portable containers.</p>
+							<p>This project is meant to be a high-level view of tying some basic <a
+									href="#golang-application">Golang</a> and <a href="#docker">Docker</a> concepts together. It is meant
+								to be a starting point, by highlighting both Go and Docker fundamentals, basic commands and tools, and
+								an understanding of how Go and Docker can work together to build fast, lightweight, and portable
+								containers.</p>
 							<p>
 							<h3>What it ain't</h3>
 							</p>
-							<p>While I've provided some basic working ideas and a buildable, working application, you should already have some fundamental knowledge of Go and Docker.</p>
+							<p>While I've provided some basic working ideas and a buildable, working application, you should already
+								have some fundamental knowledge of Go and Docker.</p>
 						</section>
 						<!--//docs-intro-->
 					</header>
@@ -243,7 +247,8 @@
 								</ul>
 							</li>
 						</ul>
-						<h5 id="2-using-the-app-in-a-docker-container-covering-">2) Using the <a href="#docker">app in a Docker container</a>, covering:
+						<h5 id="2-using-the-app-in-a-docker-container-covering-">2) Using the <a href="#docker">app in a Docker
+								container</a>, covering:
 						</h5>
 						<ul>
 							<li><a href="https://docs.docker.com/engine/reference/commandline/build/">Docker build</a> concepts.</li>
@@ -251,7 +256,8 @@
 							<li>Docker image versioning.</li>
 							<li>Ways to make use of bash scripts for repetitive tasks.</li>
 						</ul>
-						<h5 id="3-using-the-docker-container-in-kubernetes">3) Using the <a href="#kubernetes">Docker container in Kubernetes</a></h5>
+						<h5 id="3-using-the-docker-container-in-kubernetes">3) Using the <a href="#kubernetes">Docker container in
+								Kubernetes</a></h5>
 						<ul>
 							<li>This section is the most incomplete, but should be in a working state.</li>
 							<li>You should already have a working K8s cluster available for this section.</li>
@@ -391,21 +397,29 @@ For details on these commands, see the bash scripts in the 'scripts/' directory.
 
 						<div class="callout-block callout-block-warning">
 							<div class="content">
-									<h4 class="callout-title">
-										<span class="callout-icon-holder me-1">
-											<svg class="svg-inline--fa fa-bullhorn" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bullhorn" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M480 179.6C498.6 188.4 512 212.1 512 240C512 267.9 498.6 291.6 480 300.4V448C480 460.9 472.2 472.6 460.2 477.6C448.3 482.5 434.5 479.8 425.4 470.6L381.7 426.1C333.7 378.1 268.6 352 200.7 352H192V480C192 497.7 177.7 512 160 512H96C78.33 512 64 497.7 64 480V352C28.65 352 0 323.3 0 288V192C0 156.7 28.65 128 64 128H200.7C268.6 128 333.7 101 381.7 53.02L425.4 9.373C434.5 .2215 448.3-2.516 460.2 2.437C472.2 7.39 480 19.06 480 32V179.6zM200.7 192H192V288H200.7C280.5 288 357.2 317.8 416 371.3V108.7C357.2 162.2 280.5 192 200.7 192V192z"></path></svg><!-- <i class="fas fa-bullhorn"></i> Font Awesome fontawesome.com -->
+								<h4 class="callout-title">
+									<span class="callout-icon-holder me-1">
+										<svg class="svg-inline--fa fa-bullhorn" aria-hidden="true" focusable="false" data-prefix="fas"
+											data-icon="bullhorn" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+											data-fa-i2svg="">
+											<path fill="currentColor"
+												d="M480 179.6C498.6 188.4 512 212.1 512 240C512 267.9 498.6 291.6 480 300.4V448C480 460.9 472.2 472.6 460.2 477.6C448.3 482.5 434.5 479.8 425.4 470.6L381.7 426.1C333.7 378.1 268.6 352 200.7 352H192V480C192 497.7 177.7 512 160 512H96C78.33 512 64 497.7 64 480V352C28.65 352 0 323.3 0 288V192C0 156.7 28.65 128 64 128H200.7C268.6 128 333.7 101 381.7 53.02L425.4 9.373C434.5 .2215 448.3-2.516 460.2 2.437C472.2 7.39 480 19.06 480 32V179.6zM200.7 192H192V288H200.7C280.5 288 357.2 317.8 416 371.3V108.7C357.2 162.2 280.5 192 200.7 192V192z">
+											</path>
+										</svg><!-- <i class="fas fa-bullhorn"></i> Font Awesome fontawesome.com -->
 									</span><!--//icon-holder-->
-										Warning
+									Warning
 								</h4>
-									<p>This step should be completed first before running via Docker to ensure everything is working properly with the application itself. If errors are introduced at this point, they will simply be carried over when trying to run it in a Docker container.</p>
+								<p>This step should be completed first before running via Docker to ensure everything is working
+									properly with the application itself. If errors are introduced at this point, they will simply be
+									carried over when trying to run it in a Docker container.</p>
 							</div><!--//content-->
-					</div>
+						</div>
 
-					<h4>Application Output</h4>
+						<h4>Application Output</h4>
 
-					<p>When running the app, you should see output similar to:</p>
+						<p>When running the app, you should see output similar to:</p>
 
-					<pre><code>┌────────────────────────────────────────────────────┐
+						<pre><code>┌────────────────────────────────────────────────────┐
 │                   Fiber v2.40.0                    │
 │               http://127.0.0.1:5000                │ 
 │       (bound on host 0.0.0.0 and port 5000)        │
@@ -414,9 +428,9 @@ For details on these commands, see the bash scripts in the 'scripts/' directory.
 │ Prefork ....... Disabled  PID ................. 1  │
 └────────────────────────────────────────────────────┘</code></pre>
 
-<p>To get an understanding of each of the endpoints, explore them while the app is running:</p>
+						<p>To get an understanding of each of the endpoints, explore them while the app is running:</p>
 
-<pre><code>/
+						<pre><code>/
 /api/v1
 /api/v1/docs/
 /api/v1/metrics
@@ -695,8 +709,12 @@ ok      github.com/mattwiater/golangdocker/sysinfo      0.327s
 								<!--//content-->
 							</div>
 							<p><b>To Do</b></p>
-							<ul>
-								<li>Create config file <a href="https://golangci-lint.run/usage/configuration/">Official Docs</a></li>
+							<ul class="list-group">
+								<li class="list-group-item">
+									<input class="form-check-input me-1" type="checkbox" value="" id="todo01">
+									<label class="form-check-label" for="todo01">Create config file <a
+											href="https://golangci-lint.run/usage/configuration/">Official Docs</a></label>
+								</li>
 							</ul>
 						</section>
 						<!--//docs-intro-->
@@ -790,11 +808,18 @@ ok      github.com/mattwiater/golangdocker/sysinfo      0.327s
 							<p>A simple local load test example using <a target="_blank"
 									href="https://www.artillery.io/">Artillery</a>.</p>
 							<p><b>To Do</b></p>
-							<ul>
-								<li>Explore custom metrics options in more depth.</li>
-								<li>Generate applicable reports for comparison between bare go app, dockerized app, and k8s replicas.
+							<ul class="list-group">
+								<li class="list-group-item">
+									<input class="form-check-input me-1" type="checkbox" value="" id="todo02">
+									<label class="form-check-label" for="todo02">Explore custom metrics options in more depth.</label>
+								</li>
+								<li class="list-group-item">
+									<input class="form-check-input me-1" type="checkbox" value="" id="todo03">
+									<label class="form-check-label" for="todo03">Generate applicable reports for comparison between bare
+										go app, dockerized app, and k8s replicas.</label>
 								</li>
 							</ul>
+
 						</section>
 						<!--//docs-intro-->
 					</header>
@@ -873,7 +898,7 @@ scenarios:
 					<!--//section-->
 					<section class="docs-section" id="load-testing-custom-scripts">
 						<h2 class="section-heading">Custom Scripts</h2>
-						<p>Reference: <a
+						<p><strong>Artillery reference</strong>: <a
 								href="https://www.artillery.io/docs/guides/guides/extension-apis#example">https://www.artillery.io/docs/guides/guides/extension-apis#example</a>
 						</p>
 						<p>This simple example makes use of a custom Fiber middleware wrapper that captures the time spent on the
@@ -1020,27 +1045,66 @@ mattwiater/golangdocker   v1        e9b376df3a3f   <span class="hljs-number">4</
 </code></pre>
 						<p>And pushed it to docker hub, e.g.: <code>docker push mattwiater/golangdocker:v1</code> <i
 								class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
-						<p>Docker Hub Note: This step is important for the remaining nodes to download and run the image without
-							having to manually build it locally on each node. K8s can use local images to spawn pods, but that would
-							require a manual build on each node (downloading the repo, building the image, and changing the manifest
-							entry for <code>imagePullPolicy: Always</code> to <code>imagePullPolicy: Never</code>), which we are
-							skipping for this demonstration.
+
+						<p>
+						<div class="callout-block callout-block-info">
+
+							<div class="content">
+								<h4 class="callout-title">
+									<span class="callout-icon-holder me-1">
+										<svg class="svg-inline--fa fa-circle-info" aria-hidden="true" focusable="false" data-prefix="fas"
+											data-icon="circle-info" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+											data-fa-i2svg="">
+											<path fill="currentColor"
+												d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z">
+											</path>
+										</svg><!-- <i class="fas fa-info-circle"></i> Font Awesome fontawesome.com -->
+									</span><!--//icon-holder-->
+									Docker Hub Note
+								</h4>
+								<p>This step is important for the remaining nodes to download and run the image without
+									having to manually build it locally on each node. K8s can use local images to spawn pods, but that
+									would
+									require a manual build on each node (downloading the repo, building the image, and changing the
+									manifest
+									entry for <code>imagePullPolicy: Always</code> to <code>imagePullPolicy: Never</code>), which we are
+									skipping for this demonstration.</p>
+							</div><!--//content-->
+						</div>
+
 						</p>
+
 						<p>For rolling updates, we would just make the necessary updates to our code, build an image tagged with a
 							new
 							version, e.g.: <code>:v1.1</code>, <code>:v2</code>, etc., push it to docker hub, and then issue the
 							command:
 						</p>
-						<p>[NEED TO FIX]:
-							<code>kubectl set image deployments/k8s-golang-api k8s-golang-api=mattwiater/golangdocker:v2</code> <i
-								class="fa-duotone fa-copy fa-fw code-copy-button"></i>
+
+						<p>
+						<div class="callout-block callout-block-danger me-1">
+							<div class="content">
+								<h4 class="callout-title">
+									<span class="callout-icon-holder">
+										<svg class="svg-inline--fa fa-triangle-exclamation" aria-hidden="true" focusable="false"
+											data-prefix="fas" data-icon="triangle-exclamation" role="img" xmlns="http://www.w3.org/2000/svg"
+											viewBox="0 0 512 512" data-fa-i2svg="">
+											<path fill="currentColor"
+												d="M506.3 417l-213.3-364c-16.33-28-57.54-28-73.98 0l-213.2 364C-10.59 444.9 9.849 480 42.74 480h426.6C502.1 480 522.6 445 506.3 417zM232 168c0-13.25 10.75-24 24-24S280 154.8 280 168v128c0 13.25-10.75 24-23.1 24S232 309.3 232 296V168zM256 416c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 401.9 273.4 416 256 416z">
+											</path>
+										</svg><!-- <i class="fas fa-exclamation-triangle"></i> Font Awesome fontawesome.com -->
+									</span><!--//icon-holder-->
+									Need to fix
+								</h4>
+								<p><code>kubectl set image deployments/k8s-golang-api k8s-golang-api=mattwiater/golangdocker:v2</code>
+									<i class="fa-duotone fa-copy fa-fw code-copy-button"></i>
+								</p>
+								<p><strong>Problem</strong>: The command is not working with namespaced deployments, need to adjust. The
+									command above tells K8s to update the existing deployment to the newer version and it will take care
+									of bringing down the old pods and spawning new pods with no downtime.</p>
+							</div><!--//content-->
+						</div>
 						</p>
-						<p>[PROBLEM]: The command is not working with namespaced deployments, need to adjust.</p>
-						<p>The command above tells K8s to update the existing deployment to the newer version and it will take care
-							of
-							bringing down the old pods and spawning new pods with no downtime.
-						</p>
-						<p>[TO DO: Need example after the initial deployment below is complete]</p>
+
 					</section>
 					<!--//section-->
 					<section class="docs-section" id="kubernetes-load-balancer">
@@ -1058,11 +1122,11 @@ mattwiater/golangdocker   v1        e9b376df3a3f   <span class="hljs-number">4</
 					<!--//section-->
 					<section class="docs-section" id="kubernetes-metal-lb">
 						<h2 class="section-heading">Metal LB</h2>
-						<p>METAL-LB: <a
+						<p><strong>Installation</strong>: <a
 								href="https://metallb.universe.tf/installation/">https://metallb.universe.tf/installation/</a>
 						</p>
 						<p>Ensure that Strict ARP Mode is enabled in your cluster:</p>
-						<p><code>kubectl edit configmap -n kube-system kube-proxy</code></p>
+						<p><code>kubectl edit configmap -n kube-system kube-proxy</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
 						<p>Edit/Add the <code>mode</code> and <code>strictARP</code> fields to match below:</p>
 						<pre><code>apiVersion: kubeproxy.config.k8s.io/v1alpha1
 kind: KubeProxyConfiguration
@@ -1071,10 +1135,10 @@ ipvs:
   strictARP: true</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
 						<p>Next, set up the Metal-LB infrastructure and resources by applying the Metal-LB native Manifest via:</p>
 						<p>
-							<code>kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.7/config/manifests/metallb-native.yaml</code>
+							<code>kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.7/config/manifests/metallb-native.yaml</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> 
 						</p>
 						<p>Your cluster will vary, but my setup has static IP Addresses on my local network:</p>
-						<p><code>kubectl get nodes</code></p>
+						<p><code>kubectl get nodes</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
 						<p>
 						<pre><code>NAME STATUS ROLES AGE VERSION
 mjw-udoo-01 Ready control-plane 181d v1.25.3
@@ -1282,6 +1346,28 @@ k8s-golang-api   LoadBalancer   10.105.31.196   192.168.0.91   80:31188/TCP   21
 					<!--//section-->
 					<section class="docs-section" id="kubernetes-horizontal-pod-autoscaler">
 						<h2 class="section-heading">Horizontal Pod Autoscaler (HPA)</h2>
+
+						<p>
+						<div class="callout-block callout-block-info">
+
+							<div class="content">
+								<h4 class="callout-title">
+									<span class="callout-icon-holder me-1">
+										<svg class="svg-inline--fa fa-circle-info" aria-hidden="true" focusable="false" data-prefix="fas"
+											data-icon="circle-info" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+											data-fa-i2svg="">
+											<path fill="currentColor"
+												d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z">
+											</path>
+										</svg><!-- <i class="fas fa-info-circle"></i> Font Awesome fontawesome.com -->
+									</span><!--//icon-holder-->
+									Note
+								</h4>
+								<p>This section needs more documentation.</p>
+							</div><!--//content-->
+						</div>
+
+						</p>
 						<p>
 							<code>kubectl autoscale deployment -n k8s-golang-api  k8s-golang-api --cpu-percent=75 --memory-percent=75 --min=1 --max=3</code>
 							<i class="fa-duotone fa-copy fa-fw code-copy-button"></i>

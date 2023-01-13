@@ -20,10 +20,22 @@
 
 code {
   background-color: #e6e6e6;
-  padding-top: 10px;
-  padding-bottom: 10px;
 }
 
 a:hover {
   cursor: pointer;
+}
+
+p {
+  line-height: 2em;
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+li {
+  padding: 0;
+}
+
+.docs-article li {
+  padding: 0;
 }

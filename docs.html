@@ -479,9 +479,9 @@ For details on these commands, see the bash scripts in the 'scripts/' directory.
 								<code>DOCKERIMAGE={your-docker-hub-account-username}/golangdocker</code>
 							</p>
 							<p>To build, run:
-								<code>make docker-build</code>
+								<code>make docker-build</code>  <i class="fa-duotone fa-copy fa-fw code-copy-button"></i>
 							</p>
-							<p>Once you have built your image successfully, check the output of <code>docker images</code> #=&gt;</p>
+							<p>Once you have built your image successfully, check the output of <code>docker images</code>  <i class="fa-duotone fa-copy fa-fw code-copy-button"></i></p>
 							<pre><code>REPOSITORY                TAG       IMAGE ID       CREATED          SIZE
 mattwiater/golangdocker   latest    053f21052659   10 minutes ago   26.4MB
 ...</code></pre>
@@ -561,7 +561,7 @@ DOCKERIMAGE=mattwiater/golangdocker</code></pre>
 								the port
 								the container listens on, and then passes the request to the <code>SERVERPORT</code> port var.
 							</p>
-							<p>To run the app in the container, simply run: <code>make docker-run</code></p>
+							<p>To run the app in the container, simply run: <code>make docker-run</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i></p>
 							<p>You should see the default Fiber message, e.g.:</p>
 							<pre><code>┌────────────────────────────────────────────────────┐
 │                   Fiber v2<span class="hljs-number">.40</span><span class="hljs-number">.0</span>                    │
@@ -959,7 +959,7 @@ function parseServerTimingLatency(header, timingMetricName) {
 					<!--//section-->
 					<section class="docs-section" id="load-testing-no-container-bare-app">
 						<h2 class="section-heading">No container, bare app</h2>
-						<p>With app running with no container, e.g.: <code>make golang-run</code></p>
+						<p>With app running with no container, e.g.: <code>make golang-run</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i></p>
 						<pre><code>clear && \
   artillery run --output golangdocker-bare.json --target http://192.168.0.91:5000/api golangdocker-loadtest.yml && \
   artillery report golangdocker-bare.json</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
@@ -967,7 +967,7 @@ function parseServerTimingLatency(header, timingMetricName) {
 					<!--//section-->
 					<section class="docs-section" id="load-testing-docker-container">
 						<h2 class="section-heading">Docker Container</h2>
-						<p>With app running in Docker container, e.g.: <code>make docker-run</code></p>
+						<p>With app running in Docker container, e.g.: <code>make docker-run</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i></p>
 						<pre><code>clear && \
   artillery run --output golangdocker-docker.json --target http://192.168.0.91:5000/api golangdocker-loadtest.yml && \
   artillery report golangdocker-docker.json</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>

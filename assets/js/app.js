@@ -28,8 +28,10 @@ $(document).ready(function () {
       codeBoxPos.top = codeBoxPos.top + 4;
       $(this).css("color", "#ffffff");
     } else {
-      codeBoxPos.top = codeBoxPos.top + 4;
+      codeBoxPos.top = codeBoxPos.top-1;
       codeBoxPos.right = codeBoxPos.right + 10;
+      $(this).parent("p").find("code").css("padding-top", "5px");
+      $(this).parent("p").find("code").css("padding-bottom", "5px");
     }
     $(this).siblings().first().css("padding-right", "50px");
     $(this).css("position", "absolute");

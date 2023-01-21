@@ -312,14 +312,57 @@ DOCKERIMAGE=mattwiater/golangdocker</code></pre>
 							<li><b>DOCKERPORT:</b> The port to open for Docker to map to the port above.Value: 5000</li>
 							<li><b>DEBUG:</b> Turn on debugging. Value: true/false</li>
 							<li><b>DOCKERIMAGE:</b> The tag for your Docker image. Value:
-								<code>{your-docker-hub-account-username}/{your-docker-hub-image-name}</code> NOTE: By default, Docker
-								will
-								implicitly tag your image as 'latest' if no image tag is supplied. If you want to tag the image
-								differently,
-								adjust the <code>DOCKERIMAGE</code> env variable to include an explicit tag in the format:
-								<code>{your-docker-hub-account-username}/{your-docker-hub-image-name}</code> For example, if it is a
-								Version 1
-								release, you might tag it <code>:v1</code>, e.g.: <code>mattwiater/golangdocker:v1</code>
+								<code>{your-docker-hub-account-username}/{your-docker-hub-image-name}</code>
+
+								<div class="callout-block callout-block-info">
+									<div class="content">
+										<h4 class="callout-title">
+											<span class="callout-icon-holder me-1">
+												<svg class="svg-inline--fa fa-circle-info" aria-hidden="true" focusable="false"
+													data-prefix="fas" data-icon="circle-info" role="img" xmlns="http://www.w3.org/2000/svg"
+													viewBox="0 0 512 512" data-fa-i2svg="">
+													<path fill="currentColor"
+														d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z">
+													</path>
+												</svg>
+												<!-- <i class="fas fa-info-circle"></i> Font Awesome fontawesome.com -->
+											</span>
+											<!--//icon-holder-->
+											Note
+										</h4>
+										<p>The steps will refer to the docker image: <code>mattwiater/golangdocker</code>. You should change
+											these steps to match your own image name in the <code>.env</code> file, e.g.:
+											<code>DOCKERIMAGE={your-docker-hub-account-username}/golangdocker</code>
+										</p>
+									</div>
+									<!--//content-->
+								</div>
+
+								<div class="callout-block callout-block-warning">
+									<div class="content">
+										<h4 class="callout-title">
+											<span class="callout-icon-holder me-1">
+												<svg class="svg-inline--fa fa-bullhorn" aria-hidden="true" focusable="false" data-prefix="fas"
+													data-icon="bullhorn" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+													data-fa-i2svg="">
+													<path fill="currentColor"
+														d="M480 179.6C498.6 188.4 512 212.1 512 240C512 267.9 498.6 291.6 480 300.4V448C480 460.9 472.2 472.6 460.2 477.6C448.3 482.5 434.5 479.8 425.4 470.6L381.7 426.1C333.7 378.1 268.6 352 200.7 352H192V480C192 497.7 177.7 512 160 512H96C78.33 512 64 497.7 64 480V352C28.65 352 0 323.3 0 288V192C0 156.7 28.65 128 64 128H200.7C268.6 128 333.7 101 381.7 53.02L425.4 9.373C434.5 .2215 448.3-2.516 460.2 2.437C472.2 7.39 480 19.06 480 32V179.6zM200.7 192H192V288H200.7C280.5 288 357.2 317.8 416 371.3V108.7C357.2 162.2 280.5 192 200.7 192V192z">
+													</path>
+												</svg><!-- <i class="fas fa-bullhorn"></i> Font Awesome fontawesome.com -->
+											</span><!--//icon-holder-->
+											Important
+										</h4>
+										<p>If you want to tag the image differently, adjust the <code>DOCKERIMAGE</code> env variable to
+											include an explicit tag in the format:
+											<code>{your-docker-hub-account-username}/{your-docker-hub-image-name}</code> For example, if it is
+											aVersion 1release, you might tag it <code>:v1</code>, e.g.:
+											<code>mattwiater/golangdocker:v1</code>
+										</p>
+									</div>
+									<!--//content-->
+								</div>
+
+
 							</li>
 						</ul>
 						<p><b>Required for Kubernetes itegration:</b></p>
@@ -474,14 +517,37 @@ For details on these commands, see the bash scripts in the 'scripts/' directory.
 						</section>
 						<section class="docs-section" id="docker-building-the-docker-container">
 							<h2 id="building-the-docker-container">Building the Docker container</h2>
-							<p>NOTE: The steps will refer to the docker image: <code>mattwiater/golangdocker</code>. You should change
-								these steps to match your own image name in the <code>.env</code> file, e.g.:
-								<code>DOCKERIMAGE={your-docker-hub-account-username}/golangdocker</code>
-							</p>
+
+							<div class="callout-block callout-block-info">
+								<div class="content">
+									<h4 class="callout-title">
+										<span class="callout-icon-holder me-1">
+											<svg class="svg-inline--fa fa-circle-info" aria-hidden="true" focusable="false" data-prefix="fas"
+												data-icon="circle-info" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+												data-fa-i2svg="">
+												<path fill="currentColor"
+													d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z">
+												</path>
+											</svg>
+											<!-- <i class="fas fa-info-circle"></i> Font Awesome fontawesome.com -->
+										</span>
+										<!--//icon-holder-->
+										Note
+									</h4>
+									<p>The steps will refer to the docker image: <code>mattwiater/golangdocker</code>. You should change
+										these steps to match your own image name in the <code>.env</code> file, e.g.:
+										<code>DOCKERIMAGE={your-docker-hub-account-username}/golangdocker</code>
+									</p>
+								</div>
+								<!--//content-->
+							</div>
+
+
 							<p>To build, run:
-								<code>make docker-build</code>  <i class="fa-duotone fa-copy fa-fw code-copy-button"></i>
+								<code>make docker-build</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i>
 							</p>
-							<p>Once you have built your image successfully, check the output of <code>docker images</code>  <i class="fa-duotone fa-copy fa-fw code-copy-button"></i></p>
+							<p>Once you have built your image successfully, check the output of <code>docker images</code> <i
+									class="fa-duotone fa-copy fa-fw code-copy-button"></i></p>
 							<pre><code>REPOSITORY                TAG       IMAGE ID       CREATED          SIZE
 mattwiater/golangdocker   latest    053f21052659   10 minutes ago   26.4MB
 ...</code></pre>
@@ -534,13 +600,47 @@ ENTRYPOINT ["/golangdocker"]</code></pre>
 								testing, but does create minimal, unneeded overhead.
 							</p>
 							<p>When interactively executed with the multi-stage build, all of the common linux OS commands are not
-								requireed, or included. in fact, just trying to run the <code>ls</code> command on our image results in
+								required, or included. in fact, just trying to run the <code>ls</code> command on our image results in
 								an error:
 							</p>
 							<p><code>docker run -it -p 5000:5000 --entrypoint ls -laF --rm mattwiater/golangdocker`</code></p>
 							<p>
 								<code>docker: Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: "ls": executable file not found in $PATH: unknown.</code>
 							</p>
+
+							<div class="callout-block callout-block-info">
+								<div class="content">
+									<h4 class="callout-title">
+										<span class="callout-icon-holder me-1">
+											<svg class="svg-inline--fa fa-circle-info" aria-hidden="true" focusable="false" data-prefix="fas"
+												data-icon="circle-info" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+												data-fa-i2svg="">
+												<path fill="currentColor"
+													d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z">
+												</path>
+											</svg>
+											<!-- <i class="fas fa-info-circle"></i> Font Awesome fontawesome.com -->
+										</span>
+										<!--//icon-holder-->
+										Note
+									</h4>
+									<p>By using the <code>scratch</code> image in a multi-stage build the Docker container is as
+										lightweight as possible. As of this writing, the docker binary built with the make
+										<code>make golang-build</code> command is <strong>25.5MB</strong>.
+									</p>
+
+									<p>After building the Docker image with <code>make docker-build</code>, using
+										<code>docker images</code> reveals that the image size is only <strong>26.6MB</strong>--very little
+										overhead!
+									</p>
+
+									<pre><code>REPOSITORY                TAG       IMAGE ID       CREATED          SIZE
+mattwiater/golangdocker   latest    ecfe34d443c4   23 seconds ago   26.6MB</code></pre>
+								</div>
+								<!--//content-->
+							</div>
+
+
 						</section>
 						<!--//section-->
 						<section class="docs-section" id="docker-running-the-docker-container">
@@ -561,7 +661,8 @@ DOCKERIMAGE=mattwiater/golangdocker</code></pre>
 								the port
 								the container listens on, and then passes the request to the <code>SERVERPORT</code> port var.
 							</p>
-							<p>To run the app in the container, simply run: <code>make docker-run</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i></p>
+							<p>To run the app in the container, simply run: <code>make docker-run</code> <i
+									class="fa-duotone fa-copy fa-fw code-copy-button"></i></p>
 							<p>You should see the default Fiber message, e.g.:</p>
 							<pre><code>┌────────────────────────────────────────────────────┐
 │                   Fiber v2<span class="hljs-number">.40</span><span class="hljs-number">.0</span>                    │
@@ -959,7 +1060,8 @@ function parseServerTimingLatency(header, timingMetricName) {
 					<!--//section-->
 					<section class="docs-section" id="load-testing-no-container-bare-app">
 						<h2 class="section-heading">No container, bare app</h2>
-						<p>With app running with no container, e.g.: <code>make golang-run</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i></p>
+						<p>With app running with no container, e.g.: <code>make golang-run</code> <i
+								class="fa-duotone fa-copy fa-fw code-copy-button"></i></p>
 						<pre><code>clear && \
   artillery run --output golangdocker-bare.json --target http://192.168.0.91:5000/api golangdocker-loadtest.yml && \
   artillery report golangdocker-bare.json</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
@@ -967,7 +1069,8 @@ function parseServerTimingLatency(header, timingMetricName) {
 					<!--//section-->
 					<section class="docs-section" id="load-testing-docker-container">
 						<h2 class="section-heading">Docker Container</h2>
-						<p>With app running in Docker container, e.g.: <code>make docker-run</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i></p>
+						<p>With app running in Docker container, e.g.: <code>make docker-run</code> <i
+								class="fa-duotone fa-copy fa-fw code-copy-button"></i></p>
 						<pre><code>clear && \
   artillery run --output golangdocker-docker.json --target http://192.168.0.91:5000/api golangdocker-loadtest.yml && \
   artillery report golangdocker-docker.json</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
@@ -1126,7 +1229,8 @@ mattwiater/golangdocker   v1        e9b376df3a3f   <span class="hljs-number">4</
 								href="https://metallb.universe.tf/installation/">https://metallb.universe.tf/installation/</a>
 						</p>
 						<p>Ensure that Strict ARP Mode is enabled in your cluster:</p>
-						<p><code>kubectl edit configmap -n kube-system kube-proxy</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
+						<p><code>kubectl edit configmap -n kube-system kube-proxy</code> <i
+								class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
 						<p>Edit/Add the <code>mode</code> and <code>strictARP</code> fields to match below:</p>
 						<pre><code>apiVersion: kubeproxy.config.k8s.io/v1alpha1
 kind: KubeProxyConfiguration
@@ -1135,7 +1239,8 @@ ipvs:
   strictARP: true</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </pre>
 						<p>Next, set up the Metal-LB infrastructure and resources by applying the Metal-LB native Manifest via:</p>
 						<p>
-							<code>kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.7/config/manifests/metallb-native.yaml</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> 
+							<code>kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.7/config/manifests/metallb-native.yaml</code>
+							<i class="fa-duotone fa-copy fa-fw code-copy-button"></i>
 						</p>
 						<p>Your cluster will vary, but my setup has static IP Addresses on my local network:</p>
 						<p><code>kubectl get nodes</code> <i class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>

@@ -1,7 +1,5 @@
 SHELL=/bin/bash
 
-.PHONY : always-remake
-
 .DEFAULT_GOAL := list
 
 # Color Console Output
@@ -11,7 +9,6 @@ GREENBOLD=\033[1;32m
 YELLOWBOLD=\033[1;33m
 CYANBOLD=\033[1;36m
 
-.PHONY: list
 list:
 	@echo ""
 	@echo -e "${GREENBOLD}Targets in this Makefile:${RESET}"

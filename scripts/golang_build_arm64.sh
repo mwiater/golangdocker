@@ -17,12 +17,26 @@ CYANBOLD='\033[1;36m'     # Cyan (Bold)
 
 echo -e "${CYANBOLD}Building Swagger docs...${RESET}"
 swag init
+status=$?
+if test $status -ne 0
+then
+	echo -e "${REDBOLD}...Error: 'swag init' command failed:${RESET}"
+  echo ""
+  exit 1
+fi
 echo -e "${GREENBOLD}...Complete.${RESET}"
 echo ""
 
 echo -e "${CYANBOLD}Formatting *.go files...${RESET}"
 for i in *.go **/*.go ; do
   gofmt -w "$i"
+  status=$?
+  if test $status -ne 0
+  then
+    echo -e "${REDBOLD}...Error: 'gofmt' command failed!${RESET}"
+    echo ""
+    exit 1
+  fi
   echo "Formatted: $i"
 done;
 echo -e "${GREENBOLD}...Complete${RESET}"
@@ -30,6 +44,13 @@ echo ""
 
 echo -e "${CYANBOLD}Building Go app:${RESET} ${GREENBOLD}env GOOS=linux GOARCH=arm64 go build -o bin/golangdocker-arm64 .${RESET}"
 env GOOS=linux GOARCH=arm64 go build -o bin/golangdocker-arm64 .
+status=$?
+if test $status -ne 0
+then
+	echo -e "${REDBOLD}...Error: 'go build' command failed!${RESET}"
+  echo ""
+  exit 1
+fi
 echo ""
 
 echo -e "${GREENBOLD}Complete: Built arm64/aarch64 go binary.${RESET}"

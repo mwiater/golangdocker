@@ -13,10 +13,33 @@ CYANBOLD='\033[1;36m'     # Cyan (Bold)
 
 echo -e "${CYANBOLD}Running: go generate${RESET}"
 go generate ./...
+status=$?
+if test $status -ne 0
+then
+  echo -e "${REDBOLD}...Error: 'go generate' command failed!${RESET}"
+  echo ""
+  exit 1
+fi
 echo -e "${GREENBOLD}...Complete.${RESET}"
 
 echo -e "${CYANBOLD}Running tests...${RESET}"
 go clean -testcache
+status=$?
+if test $status -ne 0
+then
+  echo -e "${REDBOLD}...Error: 'go clean' command failed!${RESET}"
+  echo ""
+  exit 1
+fi
+
 go test -v $(go list ./... | grep -v /docs)
+status=$?
+if test $status -ne 0
+then
+  echo -e "${REDBOLD}...Error: 'go test' command failed!${RESET}"
+  echo ""
+  exit 1
+fi
+
 echo -e "${GREENBOLD}...Complete.${RESET}"
 echo ""

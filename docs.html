@@ -243,7 +243,7 @@
 								<ul>
 									<li>File formatting for *.go files using <code>gofmt</code>.</li>
 									<li>Code linting for *.go files using <code>golangci-lint</code>.</li>
-									<li>Code documentation via <code>godocs</code>.</li>
+									<li>Code documentation via <code>godoc</code>.</li>
 								</ul>
 							</li>
 						</ul>
@@ -365,7 +365,7 @@ DOCKERIMAGE=mattwiater/golangdocker</code></pre>
 
 							</li>
 						</ul>
-						<p><b>Required for Kubernetes itegration:</b></p>
+						<p><b>Required for Kubernetes integration:</b></p>
 						<ul>
 							<li>A running <a href="https://kubernetes.io/">Kubernetes</a> cluster</li>
 							<li>A <a href="https://hub.docker.com/">Docker Hub</a> account</li>
@@ -405,7 +405,6 @@ DOCKERIMAGE=mattwiater/golangdocker</code></pre>
 					<!--//section-->
 					<section class="docs-section" id="golang-application-makefile">
 						<h2 class="section-heading">Makefile</h2>
-						<p>[IN PROGRESS]</p>
 						<p>There is a <a target="_blank"
 								href="https://github.com/mwiater/golangdocker/blob/main/Makefile">Makefile</a>
 							for convenience. At the moment, it&#39;s just acting as a script-runner.
@@ -425,6 +424,62 @@ make golang-test
 For details on these commands, see the bash scripts in the 'scripts/' directory.</code></pre>
 						<p>The bash scripts executed by the Makefile live in the <a target="_blank"
 								href="https://github.com/mwiater/golangdocker/tree/main/scripts">/scripts</a> directory.</p>
+
+						<div class="callout-block callout-block-info">
+							<div class="content">
+								<h4 class="callout-title">
+									<span class="callout-icon-holder me-1">
+										<svg class="svg-inline--fa fa-circle-info" aria-hidden="true" focusable="false" data-prefix="fas"
+											data-icon="circle-info" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+											data-fa-i2svg="">
+											<path fill="currentColor"
+												d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z">
+											</path>
+										</svg>
+										<!-- <i class="fas fa-info-circle"></i> Font Awesome fontawesome.com -->
+									</span>
+									<!--//icon-holder-->
+									Note
+								</h4>
+								<p>Many of the bash scripts execute helpers before the main command, e.g.: <code>swag init</code>,
+									<code>gofmt</code>, etc. There are exit status checks in place so that, for example, if
+									<code>gofmt</code> fails prior to the build (usually because of a syntax error), the script will
+									report the error and exit before trying to build the go binary--which would likely fail due to the
+									error found via <code>gofmt</code>. Here is an example of the script pattern:
+
+								<pre><code>...
+echo -e "${CYANBOLD}Building Swagger docs...${RESET}"
+swag init
+status=$?
+if test $status -ne 0
+then
+	echo -e "${REDBOLD}...Error: 'swag init' command failed:${RESET}"
+	echo ""
+	exit 1
+fi
+echo -e "${GREENBOLD}...Complete.${RESET}"
+echo ""
+
+echo -e "${CYANBOLD}Formatting *.go files...${RESET}"
+for i in *.go **/*.go ; do
+	gofmt -w "$i"
+	status=$?
+	if test $status -ne 0
+	then
+		echo -e "${REDBOLD}...Error: 'gofmt' command failed!${RESET}"
+		echo ""
+		exit 1
+	fi
+	echo "Formatted: $i"
+done;
+echo -e "${GREENBOLD}...Complete${RESET}"
+echo ""
+...</code></pre>
+								</p>
+							</div>
+							<!--//content-->
+						</div>
+
 					</section>
 					<!--//section-->
 					<section class="docs-section" id="golang-application-run">
@@ -489,7 +544,8 @@ For details on these commands, see the bash scripts in the 'scripts/' directory.
 						<h4>Swagger Docs</h4>
 
 						<p>As an API documentation example, this app is bundled with Swagger UI Documentation, available at the
-							<code>/api/v1/docs/</code> API endpoint. Alng with documented endpoints, there is a full REST interface to
+							<code>/api/v1/docs/</code> API endpoint. Along with documented endpoints, there is a full REST interface
+							to
 							test out API calls through the browser, complete with curl examples and header information.
 						</p>
 
@@ -596,10 +652,10 @@ ENTRYPOINT ["/golangdocker"]</code></pre>
 								binary, we don't need all of the superfluous Alpine OS tools, allowing us to keep this image as small as
 								possible by only including the <strong>bare minimum</strong> dependencies to run the binary in the
 								container. If it was built upon the full <code>Alpine</code> image, the container would have access to
-								common linux commands like <code>ls</code>, <code>bash</code>, etc. This is often nice to have for
+								common Linux commands like <code>ls</code>, <code>bash</code>, etc. This is often nice to have for
 								testing, but does create minimal, unneeded overhead.
 							</p>
-							<p>When interactively executed with the multi-stage build, all of the common linux OS commands are not
+							<p>When interactively executed with the multi-stage build, all of the common Linux OS commands are not
 								required, or included. in fact, just trying to run the <code>ls</code> command on our image results in
 								an error:
 							</p>
@@ -1054,7 +1110,7 @@ function parseServerTimingLatency(header, timingMetricName) {
 							running the container from. Keep in mind that these are not real world load tests, as we are mostly
 							testing
 							to targets within the same network. These tests are mainly for comparisons of running the app with
-							different mechanisms, e.g: go app, inside Docker container, within K8s w/ replicas.
+							different mechanisms, e.g.: go app, inside Docker container, within K8s w/ replicas.
 						</p>
 					</section>
 					<!--//section-->

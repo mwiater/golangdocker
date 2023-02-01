@@ -81,6 +81,10 @@
 					<li class="nav-item"><a class="nav-link scrollto" href="#docker-running-the-docker-container">Running the
 							Docker container</a>
 					</li>
+					<li class="nav-item"><a class="nav-link scrollto"
+							href="#docker-breakdown-running-multiple-docker-containers">Breakdown: Running Multiple Docker
+							Containers</a>
+					</li>
 					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#tests"><span
 								class="theme-icon-holder me-2"><i class="fa-duotone fa-flask-vial fa-fw"></i></span>Tests</a></li>
 					<li class="nav-item"><a class="nav-link scrollto" href="#tests-run">Run</a></li>
@@ -705,7 +709,9 @@ mattwiater/golangdocker   latest    ecfe34d443c4   23 seconds ago   26.6MB</code
 								you've
 								defined:
 							</p>
-							<p><code>docker run -it -p $DOCKERPORT:$SERVERPORT --rm $DOCKERIMAGE</code></p>
+							<p>
+								<code>docker run -it -p $DOCKERPORT:$SERVERPORT --rm--name golangdocker --hostname golangdocker $DOCKERIMAGE</code>
+							</p>
 							Env vars used in the bash script:
 							<pre><code>SERVERPORT=5000
 DOCKERPORT=5000
@@ -764,6 +770,124 @@ DOCKERIMAGE=mattwiater/golangdocker</code></pre>
 							<p><code>/api/v1/docs/index.html</code></p>
 						</section>
 						<!--//section-->
+						<section class="docs-section" id="docker-breakdown-running-multiple-docker-containers">
+							<h2 class="section-heading">Breakdown: Running Multiple Docker Containers</h2>
+							<p>As we saw above, the <code>make docker-run</code> command executes a Docker command like this:</p>
+							<p>
+								<code>docker run -it -p $DOCKERPORT:$SERVERPORT --rm--name golangdocker --hostname golangdocker $DOCKERIMAGE</code>
+							</p>
+							<p>The variables above are defined in the <code>.env</code> file. So the executed command might look like
+								this after variable interpolation:</p>
+							<p>
+								<code>docker run -it --rm -p 5000:5000 --name golangdocker --hostname golangdocker mattwiater/golangdocker</code>
+							</p>
+							<p>The <code>-it</code> (interactive mode) flag is important here. When executing with this flags, Docker
+								runs the container and drops you inside the container shell, rather than back out to your main shell. If
+								we want to create more than one container in the same shell, we need to us the <code>-d</code>
+								(detached) flag instead. This will run the container in the background, allowing you to execute other
+								commands within the same session. Instead of using the script, let's create a detatched container
+								manually:</p>
+							<p>
+								<code>docker run -d --rm -p 5000:5000 --name golangdocker01 --hostname golangdocker01 mattwiater/golangdocker</code>
+							</p>
+							<p>Note that we've changed the <code>--name</code> and <code>--hostname</code> (to: <stromng>
+									golangdocker01</stromng>) in the above example. These can be whatever you want, but for this example,
+								it makes sense to number them.</p>
+							<p>Once you execute the command above, the only thnig you'll see this time is a hash (e.g.:
+								<code>ce6ce3cf3907e15238e34a397ff1b30b53decfae491a1a37d2be41d08598a7d1</code>) before you are dropped
+								back into your main shell. This hash is the container id. You can see this by issuing the
+								<code>docker ps</code> command.</p>
+							<pre><code>docker ps
+
+CONTAINER ID   IMAGE                     COMMAND           CREATED          STATUS          PORTS                                       NAMES
+ce6ce3cf3907   mattwiater/golangdocker   "/golangdocker"   14 seconds ago   Up 13 seconds   0.0.0.0:5000->5000/tcp, :::5000->5000/tcp   golangdocker01</code></pre>
+							<p>Even though you're not in your container shell as in the previous examples, you can still access it the
+								same way as before: <code>http://{your-host-ip-address}:5000</code> Now, let's start a second container,
+								utilizing port <strong>5001</strong> on your <strong>host</strong> this time:</p>
+							<p>
+								<code>docker run -d --rm -p 5001:5000 --name golangdocker02 --hostname golangdocker02 mattwiater/golangdocker</code>
+							</p>
+							<p>Again, not the change of the <code>--name</code> and <code>--hostname</code> (to: <stromng>
+									golangdocker02</stromng>) in the command above. These must be unique values or Docker will complain.
+								Issue <code>docker ps</code> again:</p>
+
+							<pre><code>docker ps
+
+CONTAINER ID   IMAGE                     COMMAND           CREATED          STATUS          PORTS                                       NAMES
+d7574bd0ff3c   mattwiater/golangdocker   "/golangdocker"   5 seconds ago    Up 4 seconds    0.0.0.0:5001->5000/tcp, :::5001->5000/tcp   golangdocker02
+ce6ce3cf3907   mattwiater/golangdocker   "/golangdocker"   9 minutes ago    Up 9 minutes    0.0.0.0:5000->5000/tcp, :::5000->5000/tcp   golangdocker01</code></pre>
+
+							<div class="callout-block callout-block-info">
+								<div class="content">
+									<h4 class="callout-title">
+										<span class="callout-icon-holder me-1">
+											<svg class="svg-inline--fa fa-circle-info" aria-hidden="true" focusable="false" data-prefix="fas"
+												data-icon="circle-info" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+												data-fa-i2svg="">
+												<path fill="currentColor"
+													d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z">
+												</path>
+											</svg>
+											<!-- <i class="fas fa-info-circle"></i> Font Awesome fontawesome.com -->
+										</span>
+										<!--//icon-holder-->
+										Note
+									</h4>
+									<p>In the last docker run command, the host port has also been set to 5001, but the container port
+										remains as 5000 (<code>:::5001->5000/tcp</code> in the output above). This is important, as the
+										Docker image we built compiled the Golang app to listen on port 5000, so the container port should
+										<strong>always</strong> be 5000. So the above out put tells you that your host is routing its own
+										port 5000 to one Docker container, and also routing its own port 5001 to the other Docker container.
+										Each Docker container recieves the request on that port, and routes it internally to the Golang app
+										listening on port 5000. Since there are no internal port collisions between containers, we could
+										spawn as many containers as we want, all listening internally on port 5000, <strong>as long as each
+											one is assigned a unique and available host port.</strong></p>
+								</div>
+								<!--//content-->
+							</div>
+
+							<p>Now, visit each container via a browser tab:</p>
+
+							<p><code>http://{your-host-ip-address}:5000</code></p>
+							<pre><code>{
+	hostInfo: {
+		hostname: "golangdocker01",
+		uptime: 148851,
+		bootTime: 1675121619,
+		procs: 1,
+		os: "linux",
+		platform: "",
+		platformFamily: "",
+		platformVersion: "",
+		kernelVersion: "5.4.0-110-generic",
+		kernelArch: "x86_64",
+		virtualizationSystem: "docker",
+		virtualizationRole: "guest",
+		hostId: "12345678-1234-5678-90ab-cddeefaabbcc"
+	}
+}</code></pre>
+
+							<p><code>http://{your-host-ip-address}:5001</code></p>
+							<pre><code>{
+	hostInfo: {
+		hostname: "golangdocker02",
+		uptime: 148853,
+		bootTime: 1675121619,
+		procs: 1,
+		os: "linux",
+		platform: "",
+		platformFamily: "",
+		platformVersion: "",
+		kernelVersion: "5.4.0-110-generic",
+		kernelArch: "x86_64",
+		virtualizationSystem: "docker",
+		virtualizationRole: "guest",
+		hostId: "12345678-1234-5678-90ab-cddeefaabbcc"
+	}
+}</code></pre>
+							<p>To stop the containers, issue the <code>docker stop</code> command: <code>docker stop golangdocker01 && docker stop golangdocker02</code></p>
+							<p>In the above example, we are not running the containers with enforced restrictions, like limiting the amount of memory or CPU they can use on the host machine. See these flags (those staring with <code>--cpu</code> and <code>--memory</code>) and more here: <a target="_blank" href="https://docs.docker.com/engine/reference/commandline/run/#options">Docker Run Options</a> Running unrestricted containers on the same host machine is not good practice. Over time, they'll consume as many host resources as possible. In the <a href="#kubernetes">Kubernetes</a> section below, you'll see a better proctice of how to use K8s to orchestrate replicated containers accross mutiple nodes (hosts).</p>
+						</section>
 				</article>
 				<article class="docs-article" id="tests">
 					<header class="docs-header">

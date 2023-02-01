@@ -36,32 +36,5 @@ if [ "$DOCKERPORT" = "" ]; then
   exit 0
 fi
 
-echo -e "${CYANBOLD}Building Swagger docs...${RESET}"
-swag init
-status=$?
-if test $status -ne 0
-then
-	echo -e "${REDBOLD}...Error: 'swag init' command failed:${RESET}"
-  echo ""
-  exit 1
-fi
-echo -e "${GREENBOLD}...Complete.${RESET}"
-echo ""
-
-echo -e "${CYANBOLD}Formatting *.go files...${RESET}"
-for i in *.go **/*.go ; do
-  gofmt -w "$i"
-  status=$?
-  if test $status -ne 0
-  then
-    echo -e "${REDBOLD}...Error: 'gofmt' command failed!${RESET}"
-    echo ""
-    exit 1
-  fi
-  echo "Formatted: $i"
-done;
-echo -e "${GREENBOLD}...Complete.${RESET}"
-echo ""
-
 echo -e "${CYANBOLD}Running Docker container:${RESET} ${DOCKERIMAGE}${RESET}"
-docker run -it -p $DOCKERPORT:$SERVERPORT --rm $DOCKERIMAGE
+docker run -it -p $DOCKERPORT:$SERVERPORT --rm --name golangdocker --hostname golangdocker $DOCKERIMAGE

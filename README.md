@@ -5,23 +5,67 @@
 
 ## Documentation
 
-[Extensive documentation is here.](https://mwiater.github.io/golangdocker/)
+**Start here:** [Extensive documentation is here.](https://mwiater.github.io/golangdocker/)
 
 <hr>
 
-## Application
+## Setup/Install
 
-**Or dive right into the code!**
+### Requirements
+
+* Go: https://go.dev/learn/
+* Docker: https://www.docker.com/get-started/
+
+#### My development environment:
+`more /etc/os-release`: <strong>Ubuntu 20.04.5 LTS</strong>
+`go version`: <strong>go1.18.5 linux/amd64</strong>
+`docker -v`: <strong>Docker version 20.10.12, build 20.10.12-0ubuntu2~20.04.1</strong>
+
+#### Simple
 
 ```
 git clone https://github.com/mwiater/golangdocker
 cd golangdocker
 go get
+go install github.com/swaggo/swag/cmd/swag@latest
 ```
+
+#### Preferred: Anaconda
+
+* Follow setup for your system here: https://docs.anaconda.com/anaconda/install/
+* Anaconda distributions: https://www.anaconda.com/products/distributio
+
+Once installed, you'll also need a compiler for your system, e.g. for Ubuntu: `conda install gxx_linux-64`
+
+Create the environment: `conda create -c conda-forge -n golangdocker go`
+
+Verify: `conda info --envs`
+
+```
+# conda environments:
+#
+base                     /home/matt/anaconda3
+golangdocker             /home/matt/anaconda3/envs/golangdocker
+```
+
+Activate: `conda activate golangdocker`
+
+```
+git clone https://github.com/mwiater/golangdocker
+cd golangdocker
+go get
+go install github.com/swaggo/swag/cmd/swag@latest
+```
+
+When you're finished with the environment, you can deactivate it: `conda deactivate`
+
+Or, remove it completely: `conda env remove -n golangdocker`
 
 <hr>
 
-### Golang App
+## Application
+
+### Basic run, without compilation
 
 Command line: `go run .`
 
@@ -92,3 +136,5 @@ You should see your new image in the list.
 #### Run
 
 `make docker-run`
+
+Same output as the App output above as you will be dropped into an interactive Docker shell...

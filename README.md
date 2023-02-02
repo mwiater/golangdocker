@@ -24,7 +24,7 @@
 #### Simple
 
 ```
-git clone https://github.com/mwiater/golangdocker
+git clone git@github.com:mwiater/golangdocker.git
 cd golangdocker
 go get
 go install github.com/swaggo/swag/cmd/swag@latest
@@ -51,7 +51,7 @@ golangdocker             /home/matt/anaconda3/envs/golangdocker
 Activate: `conda activate golangdocker`
 
 ```
-git clone https://github.com/mwiater/golangdocker
+git clone git@github.com:mwiater/golangdocker.git
 cd golangdocker
 go get
 go install github.com/swaggo/swag/cmd/swag@latest

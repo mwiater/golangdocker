@@ -65,6 +65,9 @@
 					</li>
 					<li class="nav-item"><a class="nav-link scrollto" href="#golang-application-topics">Project Topics</a></li>
 					<li class="nav-item"><a class="nav-link scrollto" href="#golang-application-assumptions">Assumptions</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#golang-application-installation">Installation</a>
+					</li>
+
 					<li class="nav-item"><a class="nav-link scrollto" href="#golang-application-prerequisites">Prerequisites</a>
 					</li>
 					<li class="nav-item"><a class="nav-link scrollto" href="#golang-application-makefile">Makefile</a></li>
@@ -293,13 +296,74 @@
 						<pre><code>Linux mjw-udoo-01 5.4.0-110-generic 124-Ubuntu SMP Thu Apr 14 19:46:19 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux</code></pre>
 					</section>
 					<!--//section-->
-					<section class="docs-section" id="golang-application-prerequisites">
-						<h2 class="section-heading">Prerequisites</h2>
+
+					<section class="docs-section" id="golang-application-installation">
+						<h2 class="section-heading">Installation</h2>
 						<p>The following programs will need to be installed:</p>
 						<ul>
 							<li><a href="https://go.dev/learn/">Go</a></li>
 							<li><a href="https://www.docker.com/get-started/">Docker</a></li>
 						</ul>
+
+						<h4>My development environment</h4>
+
+						<p><code>more /etc/os-release</code>: Ubuntu 20.04.5 LTS</p>
+						<p><code>go version</code>: go1.18.5 linux/amd64</p>
+						<p><code>docker -v</code>: Docker version 20.10.12, build 20.10.12-0ubuntu2~20.04.1</p>
+
+						<h4>Simple Setup:</h4>
+
+						<p>
+						<pre><code>git clone git@github.com:mwiater/golangdocker.git
+cd golangdocker
+go get
+go install github.com/swaggo/swag/cmd/swag@latest</code></pre>
+						</p>
+
+						<h4>Preferred Setup: Anaconda</h4>
+						<p>
+						<ul>
+							<li>Follow setup for your system here: <a target="_blank"
+									href="https://docs.anaconda.com/anaconda/install/">https://docs.anaconda.com/anaconda/install/</a>
+							</li>
+							<li>Anaconda distributions: <a target="_blank"
+									href="https://www.anaconda.com/products/distribution">https://www.anaconda.com/products/distribution</a>
+							</li>
+						</ul>
+						</p>
+						<p>Once installed, you'll also need a compiler for your system, e.g. for Ubuntu:
+							<code>conda install gxx_linux-64</code></p>
+
+						<p>Create the environment: <code>conda create -c conda-forge -n golangdocker go</code></p>
+
+						<p>Verify: <code>conda info --envs</code></p>
+
+						<p>
+						<pre><code># conda environments:
+#
+base                     /home/matt/anaconda3
+golangdocker             /home/matt/anaconda3/envs/golangdocker</code></pre>
+						</p>
+
+						<p>Activate: <code>conda activate golangdocker</code></p>
+
+						<p>
+						<pre><code>git clone git@github.com:mwiater/golangdocker.git
+						cd golangdocker
+						go get
+						go install github.com/swaggo/swag/cmd/swag@latest</code></pre>
+						</p>
+
+						<p></p>
+						When you're finished with the environment, you can deactivate it: <code>conda deactivate</code></p>
+
+						<p>
+							Or, remove it completely: <code>conda env remove -n golangdocker</code></p>
+
+					</section>
+
+					<section class="docs-section" id="golang-application-prerequisites">
+						<h2 class="section-heading">Prerequisites</h2>
 						<h4><code>.env</code> file:</h4>
 						<p>The <code>.env</code> file contains the configuration for your app, and is used in the Docker build and
 							run
@@ -796,7 +860,8 @@ DOCKERIMAGE=mattwiater/golangdocker</code></pre>
 							<p>Once you execute the command above, the only thnig you'll see this time is a hash (e.g.:
 								<code>ce6ce3cf3907e15238e34a397ff1b30b53decfae491a1a37d2be41d08598a7d1</code>) before you are dropped
 								back into your main shell. This hash is the container id. You can see this by issuing the
-								<code>docker ps</code> command.</p>
+								<code>docker ps</code> command.
+							</p>
 							<pre><code>docker ps
 
 CONTAINER ID   IMAGE                     COMMAND           CREATED          STATUS          PORTS                                       NAMES
@@ -841,7 +906,8 @@ ce6ce3cf3907   mattwiater/golangdocker   "/golangdocker"   9 minutes ago    Up 9
 										Each Docker container recieves the request on that port, and routes it internally to the Golang app
 										listening on port 5000. Since there are no internal port collisions between containers, we could
 										spawn as many containers as we want, all listening internally on port 5000, <strong>as long as each
-											one is assigned a unique and available host port.</strong></p>
+											one is assigned a unique and available host port.</strong>
+									</p>
 								</div>
 								<!--//content-->
 							</div>
@@ -885,8 +951,16 @@ ce6ce3cf3907   mattwiater/golangdocker   "/golangdocker"   9 minutes ago    Up 9
 		hostId: "12345678-1234-5678-90ab-cddeefaabbcc"
 	}
 }</code></pre>
-							<p>To stop the containers, issue the <code>docker stop</code> command: <code>docker stop golangdocker01 && docker stop golangdocker02</code></p>
-							<p>In the above example, we are not running the containers with enforced restrictions, like limiting the amount of memory or CPU they can use on the host machine. See these flags (those staring with <code>--cpu</code> and <code>--memory</code>) and more here: <a target="_blank" href="https://docs.docker.com/engine/reference/commandline/run/#options">Docker Run Options</a> Running unrestricted containers on the same host machine is not good practice. Over time, they'll consume as many host resources as possible. In the <a href="#kubernetes">Kubernetes</a> section below, you'll see a better proctice of how to use K8s to orchestrate replicated containers accross mutiple nodes (hosts).</p>
+							<p>To stop the containers, issue the <code>docker stop</code> command:
+								<code>docker stop golangdocker01 && docker stop golangdocker02</code></p>
+							<p>In the above example, we are not running the containers with enforced restrictions, like limiting the
+								amount of memory or CPU they can use on the host machine. See these flags (those staring with
+								<code>--cpu</code> and <code>--memory</code>) and more here: <a target="_blank"
+									href="https://docs.docker.com/engine/reference/commandline/run/#options">Docker Run Options</a>
+								Running unrestricted containers on the same host machine is not good practice. Over time, they'll
+								consume as many host resources as possible. In the <a href="#kubernetes">Kubernetes</a> section below,
+								you'll see a better proctice of how to use K8s to orchestrate replicated containers accross mutiple
+								nodes (hosts).</p>
 						</section>
 				</article>
 				<article class="docs-article" id="tests">

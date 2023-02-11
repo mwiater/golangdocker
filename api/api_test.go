@@ -1,7 +1,6 @@
 package api_test
 
 import (
-	"fmt"
 	"io"
 	"log"
 	"net"
@@ -136,7 +135,6 @@ func TestAPIRoutes(t *testing.T) {
 		}
 
 		if res.StatusCode != test.expectedCode {
-			fmt.Println(test)
 			t.Errorf("Status Code: %#v != http.StatusOK: %#v\n", res.StatusCode, http.StatusOK)
 		}
 

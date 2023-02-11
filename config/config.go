@@ -2,9 +2,10 @@
 package config
 
 import (
-	"bufio"
 	"embed"
 	"strings"
+
+	"github.com/mattwiater/golangdocker/common"
 )
 
 var EnvVarsFile embed.FS
@@ -13,7 +14,7 @@ var EnvVarsFile embed.FS
 func AppConfig() (map[string]string, error) {
 	envVars, _ := EnvVarsFile.ReadFile(".env")
 
-	lines := splitLines(string(envVars))
+	lines := common.SplitStringLines(string(envVars))
 
 	var envs = make(map[string]string)
 	for _, line := range lines {
@@ -21,13 +22,4 @@ func AppConfig() (map[string]string, error) {
 		envs[keyValuePair[0]] = keyValuePair[1]
 	}
 	return envs, nil
-}
-
-func splitLines(s string) []string {
-	var lines []string
-	sc := bufio.NewScanner(strings.NewReader(s))
-	for sc.Scan() {
-		lines = append(lines, sc.Text())
-	}
-	return lines
 }

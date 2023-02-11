@@ -5,6 +5,7 @@ go 1.18
 require (
 	github.com/fatih/color v1.13.0
 	github.com/gofiber/fiber/v2 v2.40.1
+	github.com/joho/godotenv v1.5.1
 	github.com/shirou/gopsutil/v3 v3.22.10
 	github.com/stretchr/testify v1.8.1
 	github.com/swaggo/fiber-swagger v1.3.0
@@ -20,7 +21,6 @@ require (
 	github.com/go-openapi/jsonreference v0.20.0 // indirect
 	github.com/go-openapi/spec v0.20.7 // indirect
 	github.com/go-openapi/swag v0.22.3 // indirect
-	github.com/joho/godotenv v1.5.1 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/klauspost/compress v1.15.12 // indirect
 	github.com/kr/pretty v0.2.1 // indirect
@@ -38,7 +38,6 @@ require (
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.43.0 // indirect
 	github.com/valyala/tcplisten v1.0.0 // indirect
-	github.com/yuin/goldmark v1.4.13 // indirect
 	github.com/yusufpapurcu/wmi v1.2.2 // indirect
 	golang.org/x/net v0.2.0 // indirect
 	golang.org/x/sys v0.2.0 // indirect

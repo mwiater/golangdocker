@@ -11,16 +11,16 @@ GREENBOLD='\033[1;32m'    # Green (Bold)
 YELLOWBOLD='\033[1;33m'   # Yellow (Bold)
 CYANBOLD='\033[1;36m'     # Cyan (Bold)
 
-echo -e "${CYANBOLD}Running: go generate${RESET}"
-go generate ./...
-status=$?
-if test $status -ne 0
-then
-  echo -e "${REDBOLD}...Error: 'go generate' command failed!${RESET}"
-  echo ""
-  exit 1
-fi
-echo -e "${GREENBOLD}...Complete.${RESET}"
+# echo -e "${CYANBOLD}Running: go generate${RESET}"
+# go generate ./...
+# status=$?
+# if test $status -ne 0
+# then
+#   echo -e "${REDBOLD}...Error: 'go generate' command failed!${RESET}"
+#   echo ""
+#   exit 1
+# fi
+# echo -e "${GREENBOLD}...Complete.${RESET}"
 
 echo -e "${CYANBOLD}Running tests...${RESET}"
 go clean -testcache

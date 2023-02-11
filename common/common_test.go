@@ -26,3 +26,10 @@ func ExampleUniqueSlice() {
 	// Output:
 	// [one two three]
 }
+
+func ExampleSplitStringLines() {
+	testString := "line 01\nline 02\nline 03"
+	fmt.Println(common.SplitStringLines(testString))
+	// Output:
+	// [line 01 line 02 line 03]
+}

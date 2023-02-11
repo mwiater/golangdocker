@@ -29,6 +29,7 @@ cd golangdocker
 go get
 go install github.com/swaggo/swag/cmd/swag@latest
 go install golang.org/x/tools/cmd/godoc
+go install gotest.tools/gotestsum@latest
 ```
 
 #### Preferred: Anaconda

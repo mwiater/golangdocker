@@ -32,7 +32,8 @@ then
   exit 1
 fi
 
-go test -v $(go list ./... | grep -v /docs)
+#go test -v $(go list ./... | grep -v /docs)
+gotestsum --format testname
 status=$?
 if test $status -ne 0
 then

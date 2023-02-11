@@ -21,16 +21,16 @@ import (
 // @BasePath /
 
 //go:embed .env
-var fs embed.FS
+var envVarsFile embed.FS
 
 func main() {
+	config.EnvVarsFile = envVarsFile
 
-	cfg, err := config.AppConfig(fs)
+	cfg, err := config.AppConfig()
 	if err != nil {
 		log.Fatal("Error: config.AppConfig()")
 	}
 
-	app := api.SetupRoute(cfg)
-
-	log.Fatal(app.Listen(":" + cfg["SERVERPORT"]))
+	app := api.SetupApi()
+	log.Fatal(app.Listen(cfg["SERVERIP"] + ":" + cfg["SERVERPORT"]))
 }

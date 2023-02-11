@@ -28,6 +28,7 @@ git clone git@github.com:mwiater/golangdocker.git
 cd golangdocker
 go get
 go install github.com/swaggo/swag/cmd/swag@latest
+go install golang.org/x/tools/cmd/godoc
 ```
 
 #### Preferred: Anaconda

@@ -1,7 +1,6 @@
 package api_test
 
 import (
-	"embed"
 	"fmt"
 	"io"
 	"log"
@@ -10,21 +9,16 @@ import (
 	"testing"
 	"time"
 
+	"github.com/joho/godotenv"
 	"github.com/mattwiater/golangdocker/api"
-	"github.com/mattwiater/golangdocker/config"
 	"github.com/stretchr/testify/assert"
 )
 
-//go:generate bash copy_env_file.sh
-
-//go:embed .env
-var fs embed.FS
-
-func waitForServer(port string) {
+func waitForServer(ip string, port string) {
 	backoff := 50 * time.Millisecond
 
 	for i := 0; i < 10; i++ {
-		conn, err := net.DialTimeout("tcp", ":"+port, 1*time.Second)
+		conn, err := net.DialTimeout("tcp", ip+":"+port, 1*time.Second)
 		if err != nil {
 			time.Sleep(backoff)
 			continue
@@ -118,16 +112,16 @@ func TestAPIRoutes(t *testing.T) {
 		},
 	}
 
-	cfg, err := config.AppConfig(fs)
+	cfg, err := godotenv.Read("../.env")
 	if err != nil {
-		log.Fatal("Error: config.AppConfig()")
+		log.Fatal("Error loading .env file.", err)
 	}
 
-	app := api.SetupRoute(cfg)
+	app := api.SetupApi()
 
-	go app.Listen(":" + cfg["SERVERPORT"]) //nolint
+	go app.Listen(cfg["SERVERIP"] + ":" + cfg["SERVERPORT"]) //nolint
 
-	waitForServer(cfg["SERVERPORT"])
+	waitForServer(cfg["SERVERIP"], cfg["SERVERPORT"])
 
 	for _, test := range tests {
 		req, _ := http.NewRequest(

@@ -8,12 +8,14 @@ package api
 
 import (
 	"fmt"
+	"log"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/monitor"
 	"github.com/mattwiater/golangdocker/common"
+	"github.com/mattwiater/golangdocker/config"
 	"github.com/mattwiater/golangdocker/sysinfo"
 	"github.com/shirou/gopsutil/v3/host"
 	fiberSwagger "github.com/swaggo/fiber-swagger"
@@ -221,8 +223,13 @@ func customHeaders(c *fiber.Ctx) error {
 	return c.Next()
 }
 
-// SetupRoute creates Fiber API routes and middleware
-func SetupRoute(cfg map[string]string) *fiber.App {
+// SetupApi creates Fiber API routes and middleware
+func SetupApi() *fiber.App {
+	cfg, err := config.AppConfig()
+	if err != nil {
+		log.Fatal("Error: config.AppConfig()")
+	}
+
 	if cfg["DEBUG"] == "true" {
 		fmt.Println(common.ConsoleInfo("Multi-stage image build tests:"))
 		sysinfo.TestTZ()

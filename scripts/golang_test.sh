@@ -22,7 +22,7 @@ CYANBOLD='\033[1;36m'     # Cyan (Bold)
 # fi
 # echo -e "${GREENBOLD}...Complete.${RESET}"
 
-echo -e "${CYANBOLD}Running tests...${RESET}"
+echo -e "${CYANBOLD}Clearing test cache...${RESET}"
 go clean -testcache
 status=$?
 if test $status -ne 0
@@ -31,8 +31,10 @@ then
   echo ""
   exit 1
 fi
+echo -e "${GREENBOLD}...Complete.${RESET}"
+echo ""
 
-#go test -v $(go list ./... | grep -v /docs)
+echo -e "${CYANBOLD}Running tests...${RESET}"
 gotestsum --format testname
 status=$?
 if test $status -ne 0
@@ -41,6 +43,5 @@ then
   echo ""
   exit 1
 fi
-
 echo -e "${GREENBOLD}...Complete.${RESET}"
 echo ""

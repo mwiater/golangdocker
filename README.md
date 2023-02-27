@@ -30,6 +30,7 @@ go get
 go install github.com/swaggo/swag/cmd/swag@latest
 go install golang.org/x/tools/cmd/godoc
 go install gotest.tools/gotestsum@latest
+curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.51.2
 ```
 
 #### Preferred: Anaconda

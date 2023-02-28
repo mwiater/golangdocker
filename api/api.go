@@ -56,6 +56,14 @@ func readAPIIndex(c *fiber.Ctx) error {
 	return nil
 }
 
+func apiSwaggerDocs(c *fiber.Ctx) error {
+	err := c.Redirect("/api/v1/docs/index.html")
+	if err != nil {
+		return fiber.NewError(fiber.StatusServiceUnavailable, err.Error())
+	}
+	return nil
+}
+
 // readMemInfo ... Get system memory info
 // @Summary Get system memory info
 // @Description Get system memory info
@@ -200,7 +208,7 @@ func readAllResourceInfo(c *fiber.Ctx) error {
 	return nil
 }
 
-// Creates a new middleware handler that wraps all other middleware. This is implemented so that middleware timing is caputed and set as a "Server-timing" response header.
+// routeTimerHandler creates a new middleware handler that wraps all other middleware. This is implemented so that middleware timing is caputed and set as a "Server-timing" response header.
 func routeTimerHandler() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		start := time.Now()
@@ -215,7 +223,7 @@ func routeTimerHandler() fiber.Handler {
 	}
 }
 
-// Middleware to add custom headers to all responses
+// customHeaders adds middleware to include custom headers to all responses
 func customHeaders(c *fiber.Ctx) error {
 	hostInfo, _ := host.Info()
 	c.Append("Hostname", fmt.Sprintf("%v", hostInfo.Hostname))
@@ -224,6 +232,8 @@ func customHeaders(c *fiber.Ctx) error {
 }
 
 // SetupApi creates Fiber API routes and middleware
+//
+// Returns: *fiber.App
 func SetupApi() *fiber.App {
 	cfg, err := config.AppConfig()
 	if err != nil {
@@ -251,14 +261,26 @@ func SetupApi() *fiber.App {
 		TimeZone:   "America/Los_Angeles",
 	}))
 
+	// Metrics plugin
+	app.Get("/api/v1/metrics", monitor.New(monitor.Config{Title: "golangdocker Metrics Page"}))
+
 	// Redirect to next route
 	app.Get("/", apiFalseRoot)
 	// List of endpoints
 	app.Get("/api/v1", readAPIIndex)
-	// Metrics plugin
-	app.Get("/api/v1/metrics", monitor.New(monitor.Config{Title: "golangdocker Metrics Page"}))
+
 	// Routes for Swagger API Docs
+	app.Get("/api/v1/index.html", apiSwaggerDocs)
+	app.Get("/api/v1/docs", apiSwaggerDocs)
 	app.Get("/api/v1/docs/*", fiberSwagger.WrapHandler)
+
+	// SysInfo Routes
+
+	// Redirect to next route
+	app.Get("/", apiFalseRoot)
+	// List of endpoints
+	app.Get("/api/v1", readAPIIndex)
+
 	app.Get("/api/v1/resource/memory", readMemInfo)
 	app.Get("/api/v1/resource/cpu", readCPUInfo)
 	app.Get("/api/v1/resource/host", readHostInfo)

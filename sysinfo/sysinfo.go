@@ -48,7 +48,7 @@ func TestTLS() (errors int) {
 	return
 }
 
-// GetAPIRoutes collects active Fiber routes, parses them, and returns the data or an error.
+// GetAPIRoutes collects active Fiber routes, parses them, and returns the data or as JSON or error.
 //
 // Returned data example:
 //
@@ -87,7 +87,7 @@ func GetAPIRoutes(c *fiber.Ctx) ([]string, error) {
 	return routePaths, nil
 }
 
-// GetMemInfo collects local system memory info, parses it, and returns the data or an error.
+// GetMemInfo collects local system memory info, parses it, and returns the data as JSON or an error.
 //
 // Returned data example (truncated ...):
 //
@@ -117,7 +117,7 @@ func GetMemInfo(debug bool) (*mem.VirtualMemoryStat, error) {
 	return memInfo, nil
 }
 
-// GetCPUInfo collects local system cpu info, parses it, and returns the data or an error.
+// GetCPUInfo collects local system cpu info, parses it, and returns the data as JSON or an error.
 //
 // Returned data example (truncated ...):
 //
@@ -174,7 +174,7 @@ func GetCPUInfo(debug bool) ([]cpu.InfoStat, error) {
 	return cpuInfo, nil
 }
 
-// GetHostInfo collects local system host info, parses it, and returns the data or an error.
+// GetHostInfo collects local system host info, parses it, and returns the data as JSON or an error.
 //
 // Returned data example:
 //
@@ -212,7 +212,7 @@ func GetHostInfo(debug bool) (*host.InfoStat, error) {
 	return hostInfo, nil
 }
 
-// GetNetInfo collects local system network info, parses it, and returns the data or an error.
+// GetNetInfo collects local system network info, parses it, and returns the data as JSON or an error.
 //
 // Returned data example (truncated ...):
 //
@@ -257,7 +257,7 @@ func GetNetInfo(debug bool) ([]net.InterfaceStat, error) {
 	return netInfo, nil
 }
 
-// GetLoadInfo collects local system load info, parses it, and returns the data or an error.
+// GetLoadInfo collects local system load info, parses it, and returns the data as JSON or an error.
 //
 // Returned data example:
 //

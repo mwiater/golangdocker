@@ -32,5 +32,5 @@ func main() {
 	}
 
 	app := api.SetupApi()
-	log.Fatal(app.Listen(cfg["SERVERIP"] + ":" + cfg["SERVERPORT"]))
+	log.Fatal(app.Listen(":" + cfg["SERVERPORT"]))
 }

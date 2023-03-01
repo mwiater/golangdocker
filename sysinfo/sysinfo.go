@@ -52,23 +52,29 @@ func TestTLS() (errors int) {
 //
 // Returned data example:
 //
-//	[
-//		"/",
-//		"/api/v1",
-//		"/api/v1/cpu",
-//		"/api/v1/docs/*",
-//		"/api/v1/host",
-//		"/api/v1/load",
-//		"/api/v1/mem",
-//		"/api/v1/metrics",
-//		"/api/v1/net"
-//	]
+//  {
+//    "apiRoutes": [
+//      "/",
+//      "/api/v1",
+//      "/api/v1/docs",
+//      "/api/v1/metrics",
+//      "/api/v1/resource/",
+//      "/api/v1/resource/all",
+//      "/api/v1/resource/cpu",
+//      "/api/v1/resource/host",
+//      "/api/v1/resource/load",
+//      "/api/v1/resource/memory",
+//      "/api/v1/resource/network"
+//    ]
+//  }
 func GetAPIRoutes(c *fiber.Ctx) ([]string, error) {
 	app := c.App()
 	routes := app.GetRoutes()
 	routePaths := []string{}
 	for _, route := range routes {
-		routePaths = append(routePaths, route.Path)
+		if route.Path != "/api/v1/index.html" && route.Path != "/api/v1/docs/*" {
+			routePaths = append(routePaths, route.Path)
+		}
 	}
 	routePaths = common.UniqueSlice(routePaths)
 	sort.Slice(routePaths, func(i, j int) bool {
@@ -91,15 +97,15 @@ func GetAPIRoutes(c *fiber.Ctx) ([]string, error) {
 //
 // Returned data example (truncated ...):
 //
-//	{
-//		memInfo: {
-//			total: 8247103488,
-//			available: 5860028416,
-//			used: 2075901952,
-//			usedPercent: 25.171285349099282,
-//			...
-//		}
-//	}
+//  {
+//    memInfo: {
+//    total: 8247103488,
+//    available: 5860028416,
+//    used: 2075901952,
+//    usedPercent: 25.171285349099282,
+//    ...
+//    }
+//  }
 func GetMemInfo(debug bool) (*mem.VirtualMemoryStat, error) {
 	memInfo, err := mem.VirtualMemory()
 	if err != nil {
@@ -121,41 +127,31 @@ func GetMemInfo(debug bool) (*mem.VirtualMemoryStat, error) {
 //
 // Returned data example (truncated ...):
 //
-//	{
-//		memInfo: {
-//			total: 8247103488,
-//			available: 5860028416,
-//			used: 2075901952,
-//			usedPercent: 25.171285349099282,
-//			...
-//		}
-//	}
-
-//	{
-//		cpuInfo: {
-//			[
-//				{
-//					"cpu": 0,
-//					"vendorId": "GenuineIntel",
-//					"family": "6",
-//					"model": "76",
-//					"stepping": 4,
-//					"physicalId": "0",
-//					 "coreId": "0",
-//					"cores": 1,
-//					"modelName": "Intel(R) Pentium(R) CPU  N3710  @ 1.60GHz",
-//					"mhz": 2560,
-//					"cacheSize": 1024,
-//					"flags": [
-//						"fpu",
-//						"vme",
-//						"de",
-//						...
-//					],
-//				}
-//			]
-//		}
-//	}
+//  {
+//    cpuInfo: {
+//      [
+//        {
+//          "cpu": 0,
+//          "vendorId": "GenuineIntel",
+//          "family": "6",
+//          "model": "76",
+//          "stepping": 4,
+//          "physicalId": "0",
+//          "coreId": "0",
+//          "cores": 1,
+//          "modelName": "Intel(R) Pentium(R) CPU  N3710  @ 1.60GHz",
+//          "mhz": 2560,
+//          "cacheSize": 1024,
+//          "flags": [
+//            "fpu",
+//            "vme",
+//            "de",
+//            ...
+//          ],
+//        }
+//      ]
+//    }
+//  }
 func GetCPUInfo(debug bool) ([]cpu.InfoStat, error) {
 	cpuInfo, err := cpu.Info()
 	if err != nil {
@@ -178,22 +174,22 @@ func GetCPUInfo(debug bool) ([]cpu.InfoStat, error) {
 //
 // Returned data example:
 //
-//	{
-//		hostInfo: {
-//			uptime: 1386790,
-//			bootTime: 1669484114,
-//			procs: 193,
-//			os: "linux",
-//			platform: "ubuntu",
-//			platformFamily: "debian",
-//			platformVersion: "20.04",
-//			kernelVersion: "5.4.0-110-generic",
-//			kernelArch: "x86_64",
-//			virtualizationSystem: "kvm",
-//			virtualizationRole: "host",
-//			hostId: "3a114467-105a-48a5-9419-32654a9b2076"
-//		}
-//	}
+//  {
+//    hostInfo: {
+//      uptime: 1386790,
+//      bootTime: 1669484114,
+//      procs: 193,
+//      os: "linux",
+//      platform: "ubuntu",
+//      platformFamily: "debian",
+//      platformVersion: "20.04",
+//      kernelVersion: "5.4.0-110-generic",
+//      kernelArch: "x86_64",
+//      virtualizationSystem: "kvm",
+//      virtualizationRole: "host",
+//      hostId: "3a114467-105a-48a5-9419-32654a9b2076"
+//    }
+//  }
 func GetHostInfo(debug bool) (*host.InfoStat, error) {
 	hostInfo, err := host.Info()
 	if err != nil {
@@ -216,29 +212,29 @@ func GetHostInfo(debug bool) (*host.InfoStat, error) {
 //
 // Returned data example (truncated ...):
 //
-//	{
-//		netInfo: [
-//			{
-//				index: 1,
-//				mtu: 65536,
-//				name: "lo",
-//				hardwareAddr: "",
-//				flags: [
-//					"up",
-//					"loopback"
-//				],
-//				addrs: [
-//					{
-//						addr: "127.0.0.1/8"
-//					},
-//					{
-//						addr: "::1/128"
-//					}
-//				]
-//			},
-//			...
-//		]
-//	}
+//  {
+//    netInfo: [
+//      {
+//        index: 1,
+//        mtu: 65536,
+//        name: "lo",
+//        hardwareAddr: "",
+//        flags: [
+//          "up",
+//          "loopback"
+//        ],
+//        addrs: [
+//          {
+//            addr: "127.0.0.1/8"
+//          },
+//          {
+//            addr: "::1/128"
+//          }
+//        ]
+//      },
+//      ...
+//    ]
+//  }
 func GetNetInfo(debug bool) ([]net.InterfaceStat, error) {
 	netInfo, err := net.Interfaces()
 	if err != nil {
@@ -261,13 +257,13 @@ func GetNetInfo(debug bool) ([]net.InterfaceStat, error) {
 //
 // Returned data example:
 //
-//	{
-//		loadInfo: {
-//			load1: 0.58,
-//			load5: 0.87,
-//			load15: 0.9
-//		}
-//	}
+//  {
+//    loadInfo: {
+//      load1: 0.58,
+//      load5: 0.87,
+//      load15: 0.9
+//    }
+//  }
 func GetLoadInfo(debug bool) (*load.AvgStat, error) {
 	loadInfo, err := load.Avg()
 	if err != nil {

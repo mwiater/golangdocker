@@ -17,7 +17,7 @@ func waitForServer(ip string, port string) {
 	backoff := 50 * time.Millisecond
 
 	for i := 0; i < 10; i++ {
-		conn, err := net.DialTimeout("tcp", ip+":"+port, 1*time.Second)
+		conn, err := net.DialTimeout("tcp", ":"+port, 1*time.Second)
 		if err != nil {
 			time.Sleep(backoff)
 			continue
@@ -51,7 +51,7 @@ func TestAPIRoutes(t *testing.T) {
 			route:               "/api/v1",
 			expectedCode:        200,
 			expectedContentType: "application/json",
-			expectedBody:        "{\"apiRoutes\":[\"/\",\"/api/v1\",\"/api/v1/docs\",\"/api/v1/docs/*\",\"/api/v1/index.html\",\"/api/v1/metrics\",\"/api/v1/resource/\",\"/api/v1/resource/all\",\"/api/v1/resource/cpu\",\"/api/v1/resource/host\",\"/api/v1/resource/load\",\"/api/v1/resource/memory\",\"/api/v1/resource/network\"]}",
+			expectedBody:         "{\"apiRoutes\":[\"/\",\"/api/v1\",\"/api/v1/docs\",\"/api/v1/metrics\",\"/api/v1/resource/\",\"/api/v1/resource/all\",\"/api/v1/resource/cpu\",\"/api/v1/resource/host\",\"/api/v1/resource/load\",\"/api/v1/resource/memory\",\"/api/v1/resource/network\"]}",
 		},
 		{
 			description:         "cpu route",
@@ -118,7 +118,7 @@ func TestAPIRoutes(t *testing.T) {
 
 	app := api.SetupApi()
 
-	go app.Listen(cfg["SERVERIP"] + ":" + cfg["SERVERPORT"]) //nolint
+	go app.Listen(":" + cfg["SERVERPORT"]) //nolint
 
 	waitForServer(cfg["SERVERIP"], cfg["SERVERPORT"])
 

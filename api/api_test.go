@@ -51,7 +51,7 @@ func TestAPIRoutes(t *testing.T) {
 			route:               "/api/v1",
 			expectedCode:        200,
 			expectedContentType: "application/json",
-			expectedBody:         "{\"apiRoutes\":[\"/\",\"/api/v1\",\"/api/v1/docs\",\"/api/v1/metrics\",\"/api/v1/resource/\",\"/api/v1/resource/all\",\"/api/v1/resource/cpu\",\"/api/v1/resource/host\",\"/api/v1/resource/load\",\"/api/v1/resource/memory\",\"/api/v1/resource/network\"]}",
+			expectedBody:        "{\"apiRoutes\":[\"/\",\"/api/v1\",\"/api/v1/docs\",\"/api/v1/metrics\",\"/api/v1/resource/\",\"/api/v1/resource/all\",\"/api/v1/resource/cpu\",\"/api/v1/resource/host\",\"/api/v1/resource/load\",\"/api/v1/resource/memory\",\"/api/v1/resource/network\"]}",
 		},
 		{
 			description:         "cpu route",

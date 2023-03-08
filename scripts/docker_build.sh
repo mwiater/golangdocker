@@ -24,11 +24,12 @@ if [ "$DOCKERIMAGE" = "" ]; then
 fi
 
 echo -e "${CYANBOLD}Building Swagger docs...${RESET}"
-swag init
+ERROR=$(swag init 2>&1 1>/dev/null)
 status=$?
 if test $status -ne 0
 then
 	echo -e "${REDBOLD}...Error: 'swag init' command failed:${RESET}"
+  echo -e "${REDBOLD}ERROR: ${ERROR}${RESET}"
   echo ""
   exit 1
 fi
@@ -37,25 +38,27 @@ echo ""
 
 echo -e "${CYANBOLD}Formatting *.go files...${RESET}"
 for i in *.go **/*.go ; do
-  gofmt -w "$i"
+  ERROR=$(gofmt -w "$i" 2>&1 1>/dev/null)
   status=$?
   if test $status -ne 0
   then
     echo -e "${REDBOLD}...Error: 'gofmt' command failed!${RESET}"
+    echo -e "${REDBOLD}ERROR: ${ERROR}${RESET}"
     echo ""
     exit 1
   fi
-  echo "Formatted: $i"
+  echo "  Formatted: $i"
 done;
 echo -e "${GREENBOLD}...Complete.${RESET}"
 echo ""
 
 echo -e "${CYANBOLD}Building Docker container:${RESET} ${DOCKERIMAGE}${RESET}"
-docker build -t $DOCKERIMAGE .
+ERROR=$(docker build -t $DOCKERIMAGE . 2>&1 1>/dev/null)
 status=$?
 if test $status -ne 0
 then
 	echo -e "${REDBOLD}...Error: 'docker build' command failed!${RESET}"
+  echo -e "${REDBOLD}ERROR: ${ERROR}${RESET}"
   echo ""
   exit 1
 fi

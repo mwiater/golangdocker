@@ -41,3 +41,6 @@ docker-build:
 
 docker-run:
 	scripts/docker_run.sh
+
+docker-run-multi:
+	scripts/docker_run_multi.sh

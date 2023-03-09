@@ -3,7 +3,6 @@ RUN addgroup -S golangdocker \
   && adduser -S -u 10000 -g golangdocker golangdocker
 WORKDIR /go/src/app
 COPY . .
-RUN apk add git
 RUN CGO_ENABLED=0 go install -ldflags '-extldflags "-static"' -tags timetzdata
 
 FROM scratch

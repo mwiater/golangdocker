@@ -53,12 +53,14 @@ echo -e "${GREENBOLD}...Complete.${RESET}"
 echo ""
 
 echo -e "${CYANBOLD}Building Docker container:${RESET} ${DOCKERIMAGE}${RESET}"
-ERROR=$(docker build -t $DOCKERIMAGE . 2>&1 1>/dev/null)
+docker build -t $DOCKERIMAGE .
+
+echo -e "${CYANBOLD}${ERROR}${RESET}"
+
 status=$?
 if test $status -ne 0
 then
 	echo -e "${REDBOLD}...Error: 'docker build' command failed!${RESET}"
-  echo -e "${REDBOLD}ERROR: ${ERROR}${RESET}"
   echo ""
   exit 1
 fi

@@ -696,56 +696,35 @@ mattwiater/golangdocker   latest    053f21052659   10 minutes ago   26.4MB
 						<section class="docs-section" id="docker-docker-build-notes">
 							<h2 class="section-heading">Docker Build notes</h2>
 							<p>Using <a href="https://docs.docker.com/build/building/multi-stage/#use-multi-stage-builds">multi-stage
-									builds</a>, we will use a very simple <code>Dockerfile</code> to containerize our app.
+									builds</a>, we will use a very simple <code>Dockerfile</code> to containerize our app. Notes have been
+								added here for context, the <a href="https://github.com/mwiater/golangdocker/blob/main/Dockerfile"
+									target="_blank">original Dockerfile file is here</a>.
 							</p>
-							<pre><code>FROM golang:alpine as app
+							<pre><code># Stage 1: Use base Alpine image to prepare our binary, label it 'app'
+FROM golang:alpine as app
+# Add golangdocker user and group so that the Docker process in Scratch doesn't run as root
+RUN addgroup -S golangdocker \
+	&& adduser -S -u 10000 -g golangdocker golangdocker
+# Change to the correct directory to hold our application source code
 WORKDIR /go/src/app
+# Copy all the files from the base of our repository to the current directory defined above
 COPY . .
-RUN apk add git
+# Compile the application to a single statically-linked binary file
 RUN CGO_ENABLED=0 go install -ldflags '-extldflags "-static"' -tags timetzdata
-    
+
+# Stage 2: Use the Docker Scratch image to copy our previous stage into
 FROM scratch
-COPY --from=app /go/bin/golangdocker /golangdocker
+# Grab necessary certificates as Scratch has none
 COPY --from=alpine:latest /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+# Copy our binary to the root of the Scratch image (note: --from=app, the name we gave our first stage)
+COPY --from=app /go/bin/golangdocker /golangdocker
+# Copy the user that we created in the first stage so that we don't run the process as root
+COPY --from=app /etc/passwd /etc/passwd
+# Change to the non-root user
+USER golangdocker
+# Run our app
 ENTRYPOINT ["/golangdocker"]</code></pre>
-							<p>The above represents a multi-stage build Dockerfile. The <strong>top</strong> section uses the base
-								Golang Alpine image to copy
-								the app files and install required packages, like <code>timetzdata</code>. Using the <code>Alpine</code>
-								image for the initial stage ensure that the image is built on a full working OS. This is important as
-								were
-								using the Docker <code>scratch</code> image in the subsequent step, which contains no OS, toolchains,
-								etc.
-								In this step, all of the toolchains required to build a go app are in the base <code>Alpine</code>
-								image.
-								Note the <strong>last</strong> line of the <strong>top</strong> section:
-								<code>RUN CGO_ENABLED=0 go install -ldflags '-extldflags "-static"' -tags timetzdata</code>
-								Here we are <strong>disabling CGO</strong> and using the <code>-static</code> flag. This enables Go to
-								build a statically compiled binary, with no required additional linked files needed, and very few OS
-								resources required to execute it.
-							</p>
-							<p>The <strong>bottom</strong> section uses the Docker <code>scratch</code> image (a completely empty
-								image). It includes the top
-								<code>app</code> section into the image (all of the minimal artifacts used to generate the app binary),
-								as
-								well as installing some fundamentals, like the certs from the <code>Alpine</code> image.
-							</p>
-							<p>The app could certainly be built on top of the <code>Alpine</code> image and used from that point,
-								rather
-								than re-building it on <code>scratch</code>. But, for this project, we only need to run a single go
-								binary, we don't need all of the superfluous Alpine OS tools, allowing us to keep this image as small as
-								possible by only including the <strong>bare minimum</strong> dependencies to run the binary in the
-								container. If it was built upon the full <code>Alpine</code> image, the container would have access to
-								common Linux commands like <code>ls</code>, <code>bash</code>, etc. This is often nice to have for
-								testing, but does create minimal, unneeded overhead.
-							</p>
-							<p>When interactively executed with the multi-stage build, all of the common Linux OS commands are not
-								required, or included. in fact, just trying to run the <code>ls</code> command on our image results in
-								an error:
-							</p>
-							<p><code>docker run -it -p 5000:5000 --entrypoint ls -laF --rm mattwiater/golangdocker`</code></p>
-							<p>
-								<code>docker: Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: "ls": executable file not found in $PATH: unknown.</code>
-							</p>
+
 
 							<div class="callout-block callout-block-info">
 								<div class="content">
@@ -761,7 +740,76 @@ ENTRYPOINT ["/golangdocker"]</code></pre>
 											<!-- <i class="fas fa-info-circle"></i> Font Awesome fontawesome.com -->
 										</span>
 										<!--//icon-holder-->
-										Note
+										Note: Golang compilation flags
+									</h4>
+									<p>Note the <strong>last</strong> line of the <strong>top</strong> section:
+										<code>RUN CGO_ENABLED=0 go install -ldflags '-extldflags "-static"' -tags timetzdata</code>
+										Here we are <strong>disabling CGO</strong> and using the <code>-static</code> flag. This enables Go
+										to
+										build a statically compiled binary, with no required additional linked files needed, and very few OS
+										resources required to execute it.
+									</p>
+								</div>
+								<!--//content-->
+							</div>
+
+
+							<div class="callout-block callout-block-info">
+								<div class="content">
+									<h4 class="callout-title">
+										<span class="callout-icon-holder me-1">
+											<svg class="svg-inline--fa fa-circle-info" aria-hidden="true" focusable="false" data-prefix="fas"
+												data-icon="circle-info" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+												data-fa-i2svg="">
+												<path fill="currentColor"
+													d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z">
+												</path>
+											</svg>
+											<!-- <i class="fas fa-info-circle"></i> Font Awesome fontawesome.com -->
+										</span>
+										<!--//icon-holder-->
+										Note: Scratch is bare
+									</h4>
+									<p>The app could certainly be built on top of the <code>Alpine</code> image and used from that point,
+										rather
+										than re-building it on <code>scratch</code>. But, for this project, we only need to run a single go
+										binary, we don't need all of the superfluous Alpine OS tools, allowing us to keep this image as
+										small as
+										possible by only including the <strong>bare minimum</strong> dependencies to run the binary in the
+										container. If it was built upon the full <code>Alpine</code> image, the container would have access
+										to
+										common Linux commands like <code>ls</code>, <code>bash</code>, etc. This is often nice to have for
+										testing, but does create minimal, unneeded overhead.
+									</p>
+									<p>When interactively executed with the multi-stage build, all of the common Linux OS commands are not
+										required, or included. in fact, just trying to run the <code>ls</code> command on our image results
+										in
+										an error:
+									</p>
+									<p><code>docker run -it -p 5000:5000 --entrypoint ls -laF --rm mattwiater/golangdocker</code></p>
+									<p>
+										<code>docker: Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: "ls": executable file not found in $PATH: unknown.</code>
+									</p>
+								</div>
+								<!--//content-->
+							</div>
+
+
+							<div class="callout-block callout-block-info">
+								<div class="content">
+									<h4 class="callout-title">
+										<span class="callout-icon-holder me-1">
+											<svg class="svg-inline--fa fa-circle-info" aria-hidden="true" focusable="false" data-prefix="fas"
+												data-icon="circle-info" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+												data-fa-i2svg="">
+												<path fill="currentColor"
+													d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z">
+												</path>
+											</svg>
+											<!-- <i class="fas fa-info-circle"></i> Font Awesome fontawesome.com -->
+										</span>
+										<!--//icon-holder-->
+										Note: Lightweight Scratch container 
 									</h4>
 									<p>By using the <code>scratch</code> image in a multi-stage build the Docker container is as
 										lightweight as possible. As of this writing, the docker binary built with the make
@@ -773,8 +821,10 @@ ENTRYPOINT ["/golangdocker"]</code></pre>
 										overhead!
 									</p>
 
-									<pre><code>REPOSITORY                TAG       IMAGE ID       CREATED          SIZE
-mattwiater/golangdocker   latest    ecfe34d443c4   23 seconds ago   26.6MB</code></pre>
+									<pre><code>docker images
+
+REPOSITORY                TAG       IMAGE ID       CREATED          SIZE
+mattwiater/golangdocker   latest    ecfe34d443c4   23 seconds ago   <strong>26.6MB</strong></code></pre>
 								</div>
 								<!--//content-->
 							</div>

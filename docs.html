@@ -97,6 +97,8 @@
 					<li class="nav-item"><a class="nav-link scrollto" href="#docker-running-the-docker-container">Running the
 							Docker container</a>
 					</li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#docker-container-resource-constraints">Docker container resource constraints</a>
+					</li>
 					<li class="nav-item"><a class="nav-link scrollto"
 							href="#docker-breakdown-running-multiple-docker-containers">Breakdown: Running Multiple Docker
 							Containers</a>
@@ -809,7 +811,7 @@ ENTRYPOINT ["/golangdocker"]</code></pre>
 											<!-- <i class="fas fa-info-circle"></i> Font Awesome fontawesome.com -->
 										</span>
 										<!--//icon-holder-->
-										Note: Lightweight Scratch container 
+										Note: Lightweight Scratch container
 									</h4>
 									<p>By using the <code>scratch</code> image in a multi-stage build the Docker container is as
 										lightweight as possible. As of this writing, the docker binary built with the make
@@ -898,7 +900,86 @@ DOCKERIMAGE=mattwiater/golangdocker</code></pre>
 							<p>Then, when you run the application, docs are avaialble at:</p>
 							<p><code>/api/v1/docs/index.html</code></p>
 						</section>
-						<!--//section-->
+
+						<section class="docs-section" id="docker-container-resource-constraints">
+							<h2 class="section-heading">Docker container resource constraints</h2>
+							<p>There is an important piece missing in steps above: container resource constraints. In the repository docs and scripts, we are issuing the <code>docker run</code> command without the <code>--cpus</code> or <code>--memory</code> flags. Without these flags, your container will simply try and grab as muach of the host resources as it needs. As most applications make use of multiple containers, you'll likely have multiple containers running on the same host. These containers are likely doing different tasks and requesting host resources at differing rates, so containers should be tested and constrained appropriately.</p>
+
+							<p>For this app, I used <a href="https://github.com/ddosify/ddosify"
+								target="_blank">ddosify</a> to pummel it with traffic  while testing different constraint values.</p>
+
+							<p><code>docker run -d -p 5000:5000 --rm <strong>--cpus=1</strong> <strong>--memory=100m</strong> --name golangdocker --hostname golangdocker mattwiater/golangdocker</code></p>
+
+							<p>My development VM has 15Gb of ram, and an 8 core processor. The CPU flag above tells the container to limit itself to 1/8 of the total CPU availability. Since I have 8 cores, I can go as high as <code>--cpus=8</code>. The memory flag is straightforward: limit the container to 100Mb of host Ram.</p>
+
+							<p>While testing, I started these values low, and gradually increased them until the app was able to succesfully fulfill 10,000 API requests from ddosify.</p>
+
+							<div class="callout-block callout-block-info">
+								<div class="content">
+									<h4 class="callout-title">
+										<span class="callout-icon-holder me-1">
+											<svg class="svg-inline--fa fa-circle-info" aria-hidden="true" focusable="false" data-prefix="fas"
+												data-icon="circle-info" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+												data-fa-i2svg="">
+												<path fill="currentColor"
+													d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z">
+												</path>
+											</svg>
+											<!-- <i class="fas fa-info-circle"></i> Font Awesome fontawesome.com -->
+										</span>
+										<!--//icon-holder-->
+										Note: Load testing
+									</h4>
+									<p>While I'm runnnig this load test from a different host, all of this is on my local network--which is far from a real world environment. Likely, you'll have to continuously tune these values until you better understand the total load and capacity of your host system.</p>
+									<p>As these values hardly work the accross all systems (bare metal, VMs, cloud services--all with different capacities), it's hard to predict what values you'll need to set, so I've left them out of my scripts.</p>
+								</div>
+								<!--//content-->
+							</div>
+
+							<p><code>docker run -it --rm ddosify/ddosify</code></p>
+
+							<pre><code>       __     __              _  ____
+  ____/ /____/ /____   _____ (_)/ __/__  __
+ / __  // __  // __ \ / ___// // /_ / / / /
+/ /_/ // /_/ // /_/ /(__  )/ // __// /_/ /
+\__,_/ \__,_/ \____//____//_//_/   \__, /
+                                  /____/
+
+Simple usage: ddosify -t targetsite.com
+
+~ #  ddosify -t http://192.168.0.99:5000/api/v1/resource/cpu -n 10000
+⚙️  Initializing...
+🔥 Engine fired.
+
+🛑 CTRL+C to gracefully stop.
+✔️  Successful Run: 1400   100%       ❌ Failed Run: 0        0%       ⏱️  Avg. Duration: 0.00432s
+✔️  Successful Run: 2900   100%       ❌ Failed Run: 0        0%       ⏱️  Avg. Duration: 0.00468s
+✔️  Successful Run: 4400   100%       ❌ Failed Run: 0        0%       ⏱️  Avg. Duration: 0.00464s
+✔️  Successful Run: 5900   100%       ❌ Failed Run: 0        0%       ⏱️  Avg. Duration: 0.00469s
+✔️  Successful Run: 7400   100%       ❌ Failed Run: 0        0%       ⏱️  Avg. Duration: 0.00445s
+✔️  Successful Run: 8901   100%       ❌ Failed Run: 0        0%       ⏱️  Avg. Duration: 0.00445s
+✔️  Successful Run: 10000  100%       ❌ Failed Run: 0        0%       ⏱️  Avg. Duration: 0.00450s
+
+
+RESULT
+-------------------------------------
+Success Count:    10000 (100%)
+Failed Count:     0     (0%)
+
+Durations (Avg):
+  DNS                  :0.0000s
+  Connection           :0.0000s
+  Request Write        :0.0002s
+  Server Processing    :0.0041s
+  Response Read        :0.0002s
+  Total                :0.0045s
+
+Status Code (Message) :Count
+  200 (OK)    :10000
+</code></pre>
+			 
+						</section>
+						
 						<section class="docs-section" id="docker-breakdown-running-multiple-docker-containers">
 							<h2 class="section-heading">Breakdown: Running Multiple Docker Containers</h2>
 							<p>As we saw above, the <code>make docker-run</code> command executes a Docker command like this:</p>
@@ -1052,53 +1133,37 @@ ce6ce3cf3907   mattwiater/golangdocker   "/golangdocker"   9 minutes ago    Up 9
 								href="https://github.com/mwiater/golangdocker/blob/main/scripts/golang_test.sh">scripts/golang_test.sh</a>
 							script)
 						</p>
-						<pre><code>=== RUN   TestAPIRoutes
+						<pre><code>Clearing test cache...
+...Complete.
 
-	┌───────────────────────────────────────────────────┐
-	│                   Fiber v2.40.1                   │
-	│               http://127.0.0.1:5000               │
-	│       (bound on host 0.0.0.0 and port 5000)       │
-	│                                                   │
-	│ Handlers ............ 26  Processes ........... 1 │
-	│ Prefork ....... Disabled  PID ........... 1192946 │
-	└───────────────────────────────────────────────────┘
+Running tests...
+PASS common.ExamplePrettyPrintJSONToConsole (0.00s)
+PASS common.ExampleUniqueSlice (0.00s)
+PASS common.ExampleSplitStringLines (0.00s)
+PASS common
+EMPTY .
+PASS config.TestAppConfig (0.00s)
+PASS config
+PASS sysinfo.TestGetMemInfo (0.00s)
+PASS sysinfo.TestGetCPUInfo (0.00s)
+PASS sysinfo.TestGetHostInfo (0.00s)
+PASS sysinfo.TestGetNetInfo (0.00s)
+PASS sysinfo.TestGetLoadInfo (0.00s)
+PASS sysinfo.ExampleTestTZ (0.00s)
+PASS sysinfo.ExampleTestTLS (0.28s)
+PASS sysinfo
+PASS api.TestAPIRoutes (0.07s)
+PASS api                                           
+EMPTY docs
 
-[2023-01-09T09:35:06] GET:/: 302 (     0s) | Bytes In: 0 Bytes Out: 0
-[2023-01-09T09:35:06] GET:/api/v1: 200 (     0s) | Bytes In: 0 Bytes Out: 231
-[2023-01-09T09:35:06] GET:/api/v1/resource/cpu: 200 (    1ms) | Bytes In: 0 Bytes Out: 3593
-[2023-01-09T09:35:06] GET:/api/v1/resource/host: 200 (    1ms) | Bytes In: 0 Bytes Out: 338
-[2023-01-09T09:35:06] GET:/api/v1/resource/load: 200 (     0s) | Bytes In: 0 Bytes Out: 54
-[2023-01-09T09:35:06] GET:/api/v1/resource/memory: 200 (     0s) | Bytes In: 0 Bytes Out: 707
-[2023-01-09T09:35:06] GET:/api/v1/resource/network: 200 (    1ms) | Bytes In: 0 Bytes Out: 1402
-[2023-01-09T09:35:06] GET:/api/v1/metrics: 200 (     0s) | Bytes In: 0 Bytes Out: 6186
-[2023-01-09T09:35:06] GET:/api/v1/docs/index.html: 200 (     0s) | Bytes In: 0 Bytes Out: 3519
-[2023-01-09T09:35:06] GET:/api/v1/404: 404 (     0s) | Bytes In: 0 Bytes Out: 22
---- PASS: TestAPIRoutes (0.11s)
-PASS
-ok      github.com/mattwiater/golangdocker/api  0.158s
-=== RUN   ExamplePrettyPrintJSONToConsole
---- PASS: ExamplePrettyPrintJSONToConsole (0.00s)
-=== RUN   ExampleUniqueSlice
---- PASS: ExampleUniqueSlice (0.00s)
-PASS
-ok      github.com/mattwiater/golangdocker/common       0.028s
-=== RUN   ExampleAppConfig
---- PASS: ExampleAppConfig (0.00s)
-PASS
-ok      github.com/mattwiater/golangdocker/config       0.028s
-=== RUN   ExampleTestTZ
---- PASS: ExampleTestTZ (0.00s)
-=== RUN   ExampleTestTLS
---- PASS: ExampleTestTLS (0.31s)
-PASS
-ok      github.com/mattwiater/golangdocker/sysinfo      0.327s
-...Complete.	
-      </code></pre>
+DONE 12 tests in 0.824s
+...Complete.</code></pre>
 					</section>
 					<!--//section-->
 					<section class="docs-section" id="tests-clear-test-cache">
 						<h2 class="section-heading">Clear Test Cache</h2>
-						<p>To clear the test cache, run: <code>go clean -testcache</code> <i
+						<p>While the bash script automatically clears the test cache, if you run the tests manually, you can clear
+							the test cache via: <code>go clean -testcache</code> <i
 								class="fa-duotone fa-copy fa-fw code-copy-button"></i> </p>
 					</section>
 					<!--//section-->
@@ -1231,6 +1296,11 @@ ok      github.com/mattwiater/golangdocker/sysinfo      0.327s
 									href="https://www.artillery.io/">Artillery</a>.</p>
 							<p><b>To Do</b></p>
 							<ul class="list-group">
+								<li class="list-group-item">
+									<input class="form-check-input me-1" type="checkbox" value="" id="todo01">
+									<label class="form-check-label" for="todo01">Switch to <a href="https://github.com/ddosify/ddosify"
+											target="_blank">ddosify</a>?</label>
+								</li>
 								<li class="list-group-item">
 									<input class="form-check-input me-1" type="checkbox" value="" id="todo02">
 									<label class="form-check-label" for="todo02">Explore custom metrics options in more depth.</label>

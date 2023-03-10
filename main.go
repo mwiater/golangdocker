@@ -2,7 +2,11 @@ package main
 
 import (
 	"embed"
+	"fmt"
 	"log"
+	"os"
+	"os/signal"
+	"syscall"
 
 	"github.com/mattwiater/golangdocker/api"
 	"github.com/mattwiater/golangdocker/config"
@@ -32,5 +36,19 @@ func main() {
 	}
 
 	app := api.SetupApi()
-	log.Fatal(app.Listen(":" + cfg["SERVERPORT"]))
+
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, syscall.SIGINT, syscall.SIGTERM, syscall.SIGKILL)
+	go func() {
+		_ = <-c
+		fmt.Println("Gracefully shutting down...")
+		_ = app.Shutdown()
+	}()
+
+	if err := app.Listen(":" + cfg["SERVERPORT"]); err != nil {
+		log.Panic(err)
+	}
+
+	fmt.Println("Running cleanup tasks...")
+	// Complete any cleanup tasks here...
 }

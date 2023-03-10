@@ -38,7 +38,7 @@ func main() {
 	app := api.SetupApi()
 
 	c := make(chan os.Signal, 1)
-	signal.Notify(c, syscall.SIGINT, syscall.SIGTERM, syscall.SIGKILL)
+	signal.Notify(c, syscall.SIGINT, syscall.SIGTERM)
 	go func() {
 		_ = <-c
 		fmt.Println("Gracefully shutting down...")

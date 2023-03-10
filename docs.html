@@ -1607,9 +1607,13 @@ mattwiater/golangdocker   v1        e9b376df3a3f   <span class="hljs-number">4</
 							single external endpoint, we'll need to setup a load balancer.
 						</p>
 						<p>The basic traffic path is for our setup is:</p>
-						<p>Ingress: Our domain maps to an exposed service so that we can reach the Service Service: The load
-							balancer which will route traffic from a singular endpoint to multiple Pods containers via internal
-							Endpoints Endpoints: Defines which target Pods to route traffic to: internal IP Address and Port
+						<p>
+							<ul>
+								<li><strong>Ingress:</strong> Our domain maps to an exposed service so that we can reach the <strong>Service</strong> <i class="fa-duotone fa-angles-right"></i></li>
+								<li><strong>Service:</strong> The load balancer which will route traffic from a singular endpoint to multiple Pods containers via internal
+									<strong>Endpoints</strong> <i class="fa-duotone fa-angles-right"></i></li>
+								<li><strong>Endpoints:</strong> Defines which target Pods to route traffic to: internal IP Address and Port</li>
+							</ul>
 						</p>
 						<p>For this example, we'll use Metal-LB to do the heavy lifting.</p>
 					</section>

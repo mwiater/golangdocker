@@ -5,7 +5,10 @@
 
 ## Documentation
 
-**Start here:** [Extensive documentation is here.](https://mwiater.github.io/golangdocker/)
+**Start here:** [Extensive project documentation is here.](https://mwiater.github.io/golangdocker/)
+
+**Bonus:** For information on how this project relates to the <strong>12-factor-app methodology</strong>, see my article: [Creating a compiled Golang binary for use in a minimal Docker container as defined by the 12 Factor App methodology](https://medium.com/dev-genius/creating-a-compiled-golang-binary-for-use-in-a-minimal-docker-container-ae1c5a720aab)
+			</div>
 
 <hr>
 

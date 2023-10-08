@@ -20,9 +20,10 @@
 * Docker: https://www.docker.com/get-started/
 
 #### My development environment:
-`more /etc/os-release`: <strong>Ubuntu 20.04.5 LTS</strong>
-`go version`: <strong>go1.18.5 linux/amd64</strong>
-`docker -v`: <strong>Docker version 24.0.6, build ed223bc</strong>
+
+* `more /etc/os-release`: <strong>Ubuntu 20.04.5 LTS</strong>
+* `go version`: <strong>go1.18.5 linux/amd64</strong>
+* `docker -v`: <strong>Docker version 24.0.6, build ed223bc</strong>
 
 #### Simple
 
@@ -74,22 +75,55 @@ Or, remove it completely: `conda env remove -n golangdocker`
 
 ## Application
 
-For convenience, I've included a makefile. Just type `make` to see all of the targets:
+For convenience, I've included a makefile. Just type `make` to see all of the targets (comments added for clarity):
 
 ```
 Targets in this Makefile:
 
-make docker-build
-make docker-run
-make docker-run-multi
-make golang-build
-make golang-build-arm64
-make golang-godoc
-make golang-lint
-make golang-run
-make golang-test
+make docker-build          // Build the golang binary in the docker container
+make docker-run            // Run the docker container
+make docker-run-multi      // Run 2 instances of the docker container on different ports
+make golang-build          // Build the golang binary into: ./bin
+make golang-build-arm64    // Build an example golang binary in a different architecture into: ./bin
+make golang-godoc          // Generate and run GoDoc server, port 6060
+make golang-lint           // Lint the application
+make golang-run            // Run the application, no compilation
+make golang-test           // Run the tests
 
 For details on these commands, see the bash scripts in the 'scripts/' directory.
+```
+
+**NOTE:** Many of the bash scripts execute helpers before the main command, e.g.: `swag init`, `gofmt`, etc. There are exit status checks in place so that, for example, if `gofmt` fails prior to the build (usually because of a syntax error), the script will report the error and exit before trying to build the go binary--which would likely fail due to theerror found via `gofmt`. Here is an example of the script pattern:
+
+```
+...
+echo -e "${CYANBOLD}Building Swagger docs...${RESET}"
+swag init
+status=$?
+if test $status -ne 0
+then
+	echo -e "${REDBOLD}...Error: 'swag init' command failed:${RESET}"
+	echo ""
+	exit 1
+fi
+echo -e "${GREENBOLD}...Complete.${RESET}"
+echo ""
+
+echo -e "${CYANBOLD}Formatting *.go files...${RESET}"
+for i in *.go **/*.go ; do
+	gofmt -w "$i"
+	status=$?
+	if test $status -ne 0
+	then
+		echo -e "${REDBOLD}...Error: 'gofmt' command failed!${RESET}"
+		echo ""
+		exit 1
+	fi
+	echo "Formatted: $i"
+done;
+echo -e "${GREENBOLD}...Complete${RESET}"
+echo ""
+...
 ```
 
 ### Basic run, without compilation

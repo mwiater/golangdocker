@@ -3,7 +3,7 @@ package sysinfo_test
 import (
 	"testing"
 
-	"github.com/mattwiater/golangdocker/sysinfo"
+	"github.com/mwiater/golangdocker/sysinfo"
 	"github.com/shirou/gopsutil/v3/cpu"
 	"github.com/shirou/gopsutil/v3/host"
 	"github.com/shirou/gopsutil/v3/load"

@@ -22,14 +22,14 @@
 #### My development environment:
 `more /etc/os-release`: <strong>Ubuntu 20.04.5 LTS</strong>
 `go version`: <strong>go1.18.5 linux/amd64</strong>
-`docker -v`: <strong>Docker version 20.10.12, build 20.10.12-0ubuntu2~20.04.1</strong>
+`docker -v`: <strong>Docker version 24.0.6, build ed223bc</strong>
 
 #### Simple
 
 ```
 git clone git@github.com:mwiater/golangdocker.git
 cd golangdocker
-go get
+go mod tidy
 go install github.com/swaggo/swag/cmd/swag@latest
 go install golang.org/x/tools/cmd/godoc
 go install gotest.tools/gotestsum@latest
@@ -59,8 +59,11 @@ Activate: `conda activate golangdocker`
 ```
 git clone git@github.com:mwiater/golangdocker.git
 cd golangdocker
-go get
+go mod tidy
 go install github.com/swaggo/swag/cmd/swag@latest
+go install golang.org/x/tools/cmd/godoc
+go install gotest.tools/gotestsum@latest
+curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.51.2
 ```
 
 When you're finished with the environment, you can deactivate it: `conda deactivate`
@@ -70,6 +73,24 @@ Or, remove it completely: `conda env remove -n golangdocker`
 <hr>
 
 ## Application
+
+For convenience, I've included a makefile. Just type `make` to see all of the targets:
+
+```
+Targets in this Makefile:
+
+make docker-build
+make docker-run
+make docker-run-multi
+make golang-build
+make golang-build-arm64
+make golang-godoc
+make golang-lint
+make golang-run
+make golang-test
+
+For details on these commands, see the bash scripts in the 'scripts/' directory.
+```
 
 ### Basic run, without compilation
 

@@ -8,8 +8,8 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/mattwiater/golangdocker/api"
-	"github.com/mattwiater/golangdocker/config"
+	"github.com/mwiater/golangdocker/api"
+	"github.com/mwiater/golangdocker/config"
 )
 
 // @title Golang Docker

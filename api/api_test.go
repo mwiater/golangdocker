@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/joho/godotenv"
-	"github.com/mattwiater/golangdocker/api"
+	"github.com/mwiater/golangdocker/api"
 	"github.com/stretchr/testify/assert"
 )
 

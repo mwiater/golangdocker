@@ -14,13 +14,13 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/monitor"
-	"github.com/mattwiater/golangdocker/common"
-	"github.com/mattwiater/golangdocker/config"
-	"github.com/mattwiater/golangdocker/sysinfo"
+	"github.com/mwiater/golangdocker/common"
+	"github.com/mwiater/golangdocker/config"
+	"github.com/mwiater/golangdocker/sysinfo"
 	"github.com/shirou/gopsutil/v3/host"
 	fiberSwagger "github.com/swaggo/fiber-swagger"
 
-	_ "github.com/mattwiater/golangdocker/docs"
+	_ "github.com/mwiater/golangdocker/docs"
 )
 
 // apiFalseRoot ... Redirect root of API server to "/api/v1"

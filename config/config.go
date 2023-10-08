@@ -5,7 +5,7 @@ import (
 	"embed"
 	"strings"
 
-	"github.com/mattwiater/golangdocker/common"
+	"github.com/mwiater/golangdocker/common"
 )
 
 var EnvVarsFile embed.FS

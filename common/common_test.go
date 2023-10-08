@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/mattwiater/golangdocker/common"
+	"github.com/mwiater/golangdocker/common"
 )
 
 func ExamplePrettyPrintJSONToConsole() {

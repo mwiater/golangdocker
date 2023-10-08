@@ -444,15 +444,18 @@ DOCKERIMAGE=mattwiater/golangdocker</code></pre>
 
 						<p><code>more /etc/os-release</code>: Ubuntu 20.04.5 LTS</p>
 						<p><code>go version</code>: go1.18.5 linux/amd64</p>
-						<p><code>docker -v</code>: Docker version 20.10.12, build 20.10.12-0ubuntu2~20.04.1</p>
+						<p><code>docker -v</code>: Docker version 24.0.6, build ed223bc</p>
 
 						<h4>Simple Setup:</h4>
 
 						<p>
 						<pre><code>git clone git@github.com:mwiater/golangdocker.git
 cd golangdocker
-go get
-go install github.com/swaggo/swag/cmd/swag@latest</code></pre>
+go mod tidy
+go install github.com/swaggo/swag/cmd/swag@latest
+go install golang.org/x/tools/cmd/godoc
+go install gotest.tools/gotestsum@latest
+curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.51.2</code></pre>
 						</p>
 
 						<h4>Preferred Setup: Anaconda</h4>
@@ -485,9 +488,12 @@ golangdocker             /home/matt/anaconda3/envs/golangdocker</code></pre>
 
 						<p>
 						<pre><code>git clone git@github.com:mwiater/golangdocker.git
-						cd golangdocker
-						go get
-						go install github.com/swaggo/swag/cmd/swag@latest</code></pre>
+cd golangdocker
+go mod tidy
+go install github.com/swaggo/swag/cmd/swag@latest
+go install golang.org/x/tools/cmd/godoc
+go install gotest.tools/gotestsum@latest
+curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.51.2</code></pre>
 						</p>
 
 						<p></p>

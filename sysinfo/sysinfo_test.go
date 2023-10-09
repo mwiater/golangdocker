@@ -43,9 +43,22 @@ func TestGetCPUInfo(t *testing.T) {
 		t.Fatal("GetCPUInfo() returned an empty []cpu.InfoStat slice")
 	}
 
+	if cpuInfo[0].VendorID == "" {
+		t.Error("Expected the first CPU's ModelName to be non-empty")
+	}
+
+	if cpuInfo[0].Family == "" {
+		t.Error("Expected the first CPU's ModelName to be non-empty")
+	}
+
+	if cpuInfo[0].Model == "" {
+		t.Error("Expected the first CPU's ModelName to be non-empty")
+	}
+
 	if cpuInfo[0].ModelName == "" {
 		t.Error("Expected the first CPU's ModelName to be non-empty")
 	}
+
 }
 
 func TestGetHostInfo(t *testing.T) {
@@ -60,6 +73,10 @@ func TestGetHostInfo(t *testing.T) {
 
 	if hostInfo.Hostname == "" {
 		t.Error("Expected Hostname to be non-empty")
+	}
+
+	if hostInfo.OS == "" {
+		t.Error("Expected OS to be non-empty")
 	}
 }
 

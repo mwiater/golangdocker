@@ -22,7 +22,7 @@
 #### My development environment:
 
 * `more /etc/os-release`: <strong>Ubuntu 20.04.5 LTS</strong>
-* `go version`: <strong>go1.18.5 linux/amd64</strong>
+* `go version`: <strong>go1.21.2 linux/amd64</strong>
 * `docker -v`: <strong>Docker version 24.0.6, build ed223bc</strong>
 
 #### Simple
